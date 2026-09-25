@@ -8,7 +8,7 @@ export type WhyStone = { src: string; name: string; href: string };
 
 /**
  * Why Sothis: a pinned stone on the left, the reasons on the right. The row at the reading line
- * (or the hovered/focused one) is active; its stone opens in a circle and its gold rule draws in.
+ * (or the hovered/focused one) is active; its stone fades in and its gold rule draws in.
  */
 export function WhyList({ items, stones, view }: { items: string[][]; stones: WhyStone[]; view: string }) {
   const [active, setActive] = useState(0);
