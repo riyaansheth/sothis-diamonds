@@ -93,7 +93,8 @@ export function ShopBrowser({ items, t, card }: { items: ShopItem[]; t: T; card:
       return true;
     });
     const by: Record<(typeof SORTS)[number], (a: Product, b: Product) => number> = {
-      default: () => 0,
+      // Jewellery first, then diamonds (the order of the Shop menu).
+      default: (a, b) => Number(a.categories.includes("Diamonds")) - Number(b.categories.includes("Diamonds")),
       popularity: (a, b) => (b.sales ?? 0) - (a.sales ?? 0),
       newest: (a, b) => b.created.localeCompare(a.created),
       "price-asc": (a, b) => (a.price ?? 0) - (b.price ?? 0),

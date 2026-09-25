@@ -101,7 +101,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               [t.paths.buy, "asscher", "#f5d44a", href("/shop/")],
             ] as const
           ).map(([[title, body, cta], cut, color, to]) => (
-            <Link key={title} href={to} className="group relative flex min-h-[70vh] flex-col justify-end border-line p-8 sm:p-12 md:border-l md:first:border-l-0">
+            <Link key={title} href={to} className="group relative flex min-h-[70vh] flex-col justify-end overflow-hidden border-line p-8 sm:p-12 md:border-l md:border-l-champagne/60 md:first:border-l-0">
+              <span aria-hidden className={`paths-bg ${cut === "round" ? "bg-[url(/brand/bg-sell.webp)]" : "bg-[url(/brand/bg-buy.webp)]"}`} />
+              <span aria-hidden className="paths-sheen" />
               <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
                 <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
                 <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
@@ -153,13 +155,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* 6. The collection */}
-      <section className="border-t border-line py-28 lg:py-36">
+      <section className="bg-[url(/brand/bg-collection.webp)] bg-cover bg-center py-28 lg:py-36">
         <div className="wrap text-center">
           <RevealHeading lines={[t.stones.title]} className="text-4xl sm:text-6xl" />
           <p className="mt-5 text-platinum-2">{t.stones.body}</p>
         </div>
-        <div className="wrap mt-16">
-          <Rail prev={t.stones.prev} next={t.stones.next}>
+        <div className="mt-16">
+          <Rail prev={t.stones.prev} next={t.stones.next} auto className="scroll-px-4 px-4 sm:scroll-px-8 sm:px-8">
             {collection.map((p) => (
               <li key={p.id} className="w-[78vw] shrink-0 snap-start sm:w-[22rem]">
                 <ProductCard product={p} href={productHref(p)} t={t.stones} />

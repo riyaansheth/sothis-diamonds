@@ -34,9 +34,19 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
             <svg viewBox="0 0 24 24" className={icon} aria-hidden><path d="M4 8h16M4 16h16" /></svg>
             <span className="sr-only sm:not-sr-only">{t.menu}</span>
           </button>
-          <Link href={href("/shop/")} className="hidden text-sm tracking-[0.04em] hover:text-burgundy md:block">
-            {t.shop}
-          </Link>
+          {/* Shop opens a small menu on hover or keyboard focus; clicking still goes to the whole shop. */}
+          <div className="group/shop relative hidden md:block">
+            <Link href={href("/shop/")} className="block py-2 text-sm tracking-[0.04em] hover:text-burgundy">
+              {t.shop}
+            </Link>
+            <ul className="invisible absolute left-0 top-full min-w-44 translate-y-1 border border-line bg-ivory py-2 opacity-0 shadow-[0_12px_30px_-18px_rgb(36_21_25/0.35)] transition-all duration-200 group-focus-within/shop:visible group-focus-within/shop:translate-y-0 group-focus-within/shop:opacity-100 group-hover/shop:visible group-hover/shop:translate-y-0 group-hover/shop:opacity-100">
+              {[t.buyLinks[1], t.buyLinks[0]].map(([label, path]) => (
+                <li key={path}>
+                  <Link href={href(path)} className="block px-4 py-2 text-sm hover:bg-ivory-deep hover:text-burgundy">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <Link href={href("/")} className="shrink-0" aria-label={site.name}>

@@ -23,6 +23,7 @@ export function ProductCard({ product: p, href, t }: { product: Product; href: s
         {p.video && (
           <StoneVideo src={mediaUrl(p.video)} playOnHover className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         )}
+        <Link href={href} tabIndex={-1} aria-hidden className="absolute inset-0" />
         <WishlistButton id={p.id} t={t} />
       </div>
 

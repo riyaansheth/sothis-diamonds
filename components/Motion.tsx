@@ -142,12 +142,34 @@ export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
 }
 
 /** Horizontal, swipeable row with previous/next buttons. */
-export function Rail({ children, prev, next }: { children: ReactNode; prev: string; next: string }) {
+export function Rail({ children, prev, next, auto = false, className = "" }: { children: ReactNode; prev: string; next: string; auto?: boolean; className?: string }) {
   const ref = useRef<HTMLUListElement>(null);
+  const paused = useRef(false);
   const move = (dir: 1 | -1) => ref.current?.scrollBy({ left: dir * ref.current.clientWidth * 0.8, behavior: "smooth" });
+
+  // Auto: one card forward every few seconds, back to the start at the end. Pauses while hovered,
+  // focused or touched, and never runs with reduced motion.
+  useEffect(() => {
+    const ul = ref.current;
+    if (!auto || !ul || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      if (paused.current || document.hidden) return;
+      const card = ul.firstElementChild?.getBoundingClientRect().width ?? 300;
+      const atEnd = ul.scrollLeft + ul.clientWidth >= ul.scrollWidth - 4;
+      ul.scrollTo({ left: atEnd ? 0 : ul.scrollLeft + card + 32, behavior: "smooth" });
+    }, 3500);
+    return () => clearInterval(id);
+  }, [auto]);
+  const pause = () => {
+    paused.current = true;
+  };
+  const resume = () => {
+    paused.current = false;
+  };
+
   return (
-    <div>
-      <ul ref={ref} className="rail flex snap-x snap-mandatory gap-8 overflow-x-auto pb-6">
+    <div onMouseEnter={pause} onMouseLeave={resume} onFocus={pause} onBlur={resume} onTouchStart={pause}>
+      <ul ref={ref} className={`rail flex snap-x snap-mandatory gap-8 overflow-x-auto pb-6 ${className}`}>
         {children}
       </ul>
       <div className="mt-4 flex justify-center gap-3">
