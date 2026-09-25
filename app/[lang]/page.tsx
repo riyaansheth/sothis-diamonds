@@ -190,18 +190,26 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {/* 8. Why Sothis */}
+      {/* 8. Why Sothis: numbered editorial list; hovering a row slides in a stone from the collection. */}
       <section className="border-t border-line">
-        <div className="wrap py-28 text-center lg:py-36">
+        <div className="wrap py-28 lg:py-36">
           <RevealHeading lines={[t.why.title]} className="text-4xl sm:text-6xl" />
-          <ul className="mx-auto mt-16 grid max-w-6xl gap-x-12 gap-y-12 text-left sm:grid-cols-2 lg:grid-cols-3">
-            {t.why.items.map(([title, body]) => (
-              <li key={title}>
-                <h3 className="text-2xl">{title}</h3>
-                <p className="mt-2 text-platinum-2">{body}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="why mt-16 grid gap-16 lg:grid-cols-[1fr_22rem] lg:gap-24">
+            <ol className="border-t border-line">
+              {t.why.items.map(([title, body], i) => (
+                <li key={title} tabIndex={0} className="why-row grid grid-cols-[3.5rem_1fr] items-baseline gap-x-6 border-b border-line py-8 outline-none sm:grid-cols-[5rem_1.3fr_1fr] sm:gap-x-10">
+                  <span aria-hidden className="why-num font-display text-4xl text-line sm:text-6xl">{i + 1}</span>
+                  <h3 className="text-2xl">{title}</h3>
+                  <p className="col-start-2 mt-2 text-platinum-2 sm:col-start-3 sm:mt-0">{body}</p>
+                </li>
+              ))}
+            </ol>
+            <div aria-hidden className="relative hidden aspect-[4/5] overflow-hidden bg-ivory-deep lg:sticky lg:top-28 lg:block">
+              {collection.slice(-6).map((p) => (
+                <Image key={p.id} src={mediaUrl(p.image!)} alt="" fill sizes="22rem" className="why-img object-cover" />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
