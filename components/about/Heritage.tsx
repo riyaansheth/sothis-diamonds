@@ -26,7 +26,7 @@ export function Heritage({ photo, t }: {
   });
 
   return (
-    <section ref={root} className="grain relative bg-ivory motion-safe:lg:h-[280vh]">
+    <section ref={root} className="grain relative bg-ivory bg-[url(/brand/bg-about-heritage.webp)] bg-[length:100%_auto] bg-top bg-no-repeat lg:bg-cover lg:bg-fixed lg:bg-center motion-safe:lg:h-[280vh]">
       <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)]">
         {/* Headline, centred, before the frame opens. */}
         <div aria-hidden className="pointer-events-none absolute inset-0 z-10 hidden items-center justify-center lg:flex" style={{ opacity: "var(--head, 0)" }}>
