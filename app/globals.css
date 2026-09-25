@@ -449,22 +449,9 @@
   transform: scale(1.08);
 }
 
-/* Why Sothis: the active stone fades in over the last one; the active row brightens and draws its gold rule. */
-.why-stone {
-  opacity: 0;
-  transition: opacity 1s ease 0.6s; /* the outgoing stone lingers while the next fades in over it */
-}
-.why-stone img {
-  transform: scale(1.04);
-  transition: transform 2.4s ease;
-}
-.why-stone[data-on] {
-  opacity: 1;
-  z-index: 1;
-  transition: opacity 1.2s ease;
-}
-.why-stone[data-on] img {
-  transform: scale(1);
+/* Why Sothis: the stones morph in WhyList (inline styles); here the rows and the caption. */
+.why-caption {
+  animation: fade-in 0.6s ease both;
 }
 .why-n {
   color: var(--color-line);
@@ -495,8 +482,6 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .why-stone,
-  .why-stone img,
   .why-rule {
     transition: none;
   }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import { CroppedImage, type Crop } from "./CroppedImage";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { displayName, keySpecs, mediaUrl, type Product } from "@/lib/products";
 import { Price, useStore } from "./Store";
@@ -10,16 +11,14 @@ import { StoneVideo } from "./StoneVideo";
 
 type T = Dictionary["stones"];
 
-export function ProductCard({ product: p, href, t }: { product: Product; href: string; t: T }) {
+export function ProductCard({ product: p, href, t, crop }: { product: Product; href: string; t: T; crop?: Crop }) {
   const quick = useRef<HTMLDialogElement>(null);
   const name = displayName(p);
 
   return (
     <article className="group flex flex-col">
       <div className="relative aspect-square overflow-hidden rounded-sm bg-ivory-deep ring-1 ring-line">
-        {p.image && (
-          <Image src={mediaUrl(p.image)} alt={name} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
-        )}
+        {p.image && <CroppedImage src={mediaUrl(p.image)} alt={name} crop={crop} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />}
         {p.video && (
           <StoneVideo src={mediaUrl(p.video)} playOnHover className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         )}

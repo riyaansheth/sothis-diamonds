@@ -5,6 +5,7 @@ import { Newsletter, QuickValuation } from "@/components/Forms";
 import { Loader } from "@/components/Loader";
 import { InView, Quotes, Rail, RevealHeading, StepsScroller } from "@/components/Motion";
 import { ProductCard } from "@/components/ProductCard";
+import { CroppedImage, type Crop } from "@/components/CroppedImage";
 import { StoneChoir, type ChoirStone } from "@/components/StoneChoir";
 import { Diamond3DLazy } from "@/components/Diamond3DLazy";
 import { WhyList } from "@/components/WhyList";
@@ -12,6 +13,22 @@ import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 import { diameterMm, displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 
 // The four hero stones, left to right. Transparent studio variants let them sit naturally on the page ground.
+// Homepage crops: a square around each stone that stops above its certificate card (and clear of the
+// filename and sparkle marks). Measured by eye from the photos; product pages show the full photo.
+// ponytail: hand-measured per SKU; a stone added to the homepage without an entry shows uncropped.
+const HOME_CROPS: Record<string, Crop> = {
+  "S-1880": { cx: 0.5, cy: 0.45, d: 0.44 },
+  "S-1695": { cx: 0.5, cy: 0.42, d: 0.72 },
+  "E-400-VN-4": { cx: 0.5, cy: 0.45, d: 0.8 },
+  "FCRA-PSTK-86": { cx: 0.5, cy: 0.45, d: 0.58 },
+  "S-1870": { cx: 0.5, cy: 0.5, d: 0.52 },
+  "S-2001": { cx: 0.5, cy: 0.47, d: 0.5 },
+  "S-1888": { cx: 0.445, cy: 0.5, d: 0.3 },
+  "S-1887": { cx: 0.45, cy: 0.46, d: 0.44 },
+  "E-397-244A-3A": { cx: 0.5, cy: 0.47, d: 0.8 },
+  "S-1865": { cx: 0.5, cy: 0.49, d: 0.6 },
+};
+
 const CHOIR = [
   { sku: "E-398-248F-1B", image: "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.64 }, shape: "round" },
   { sku: "FCHE-248E-1A", image: "media/2026/09/choir-studio/heart-5.01ct-fancy-light-yellow-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.69 }, shape: "heart" },
@@ -165,7 +182,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <Rail prev={t.stones.prev} next={t.stones.next} auto className="scroll-px-4 px-4 sm:scroll-px-8 sm:px-8">
             {collection.map((p) => (
               <li key={p.id} className="w-[78vw] shrink-0 snap-start sm:w-[22rem]">
-                <ProductCard product={p} href={productHref(p)} t={t.stones} />
+                <ProductCard product={p} href={productHref(p)} t={t.stones} crop={HOME_CROPS[p.sku]} />
               </li>
             ))}
           </Rail>
@@ -200,7 +217,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <WhyList
             items={t.why.items}
             view={t.stones.viewStone}
-            stones={collection.slice(-6).map((p) => ({ src: mediaUrl(p.image!), name: displayName(p), href: productHref(p) }))}
+            stones={collection.slice(-6).map((p) => ({ src: mediaUrl(p.image!), name: displayName(p), href: productHref(p), crop: HOME_CROPS[p.sku] }))}
           />
         </div>
       </section>
@@ -223,7 +240,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           {collection.slice(0, 6).map((p) => (
             <li key={p.id}>
               <Link href={productHref(p)} className="relative block aspect-square overflow-hidden bg-ivory-deep">
-                <Image src={mediaUrl(p.image!)} alt={displayName(p)} fill sizes="(min-width: 640px) 17vw, 33vw" className="object-cover transition-transform duration-[1.2s] hover:scale-110" />
+                <CroppedImage src={mediaUrl(p.image!)} alt={displayName(p)} crop={HOME_CROPS[p.sku]} sizes="(min-width: 640px) 17vw, 33vw" className="transition-transform duration-[1.2s] hover:scale-110" />
               </Link>
             </li>
           ))}
