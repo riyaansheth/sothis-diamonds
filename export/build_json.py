@@ -174,6 +174,7 @@ for r in rows:
         'sale_price': float(meta(r, '_sale_price') or 0) or None,
         'currency': 'USD',  # FOX base currency; EUR is a converted display currency
         'stock': int(float(meta(r, '_stock') or 0)), 'in_stock': meta(r, '_stock_status') == 'instock',
+        'sales': int(float(meta(r, 'total_sales') or 0)),  # for "sort by popularity"
         'categories': terms(r, 'product_cat'), 'tags': terms(r, 'product_tag'),
         'attributes': attrs, 'specs': spec_table(r['content']),
         'image': img(meta(r, '_thumbnail_id')), 'gallery': gallery, 'video': video(r),
