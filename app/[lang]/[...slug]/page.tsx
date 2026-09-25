@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { pageBySlug, postBySlug, seoForUrl, termBySlug, type Doc } from "@/lib/content";
 import { getDictionary, hasLocale, localePath, type Locale } from "@/lib/i18n";
 import { ProductPage } from "@/components/templates/ProductPage";
+import { SellPage } from "@/components/templates/SellPage";
 import { ShopPage } from "@/components/templates/ShopPage";
 import { allProducts, displayName } from "@/lib/products";
 import { allRoutes, alternates, href, resolve, type Route } from "@/lib/routes";
@@ -12,6 +13,16 @@ import { allRoutes, alternates, href, resolve, type Route } from "@/lib/routes";
 
 // Known URLs are pre-built; unknown ones reach the page and call notFound(), so the styled 404
 // renders inside the site layout (a router-level 404 would skip the layout).
+
+// Old sell URLs -> the item type their page and form are for.
+const SELL_PAGES: Record<string, "diamond" | "coloured" | "watch" | "antique" | "other" | "general"> = {
+  "sell-diamond": "diamond",
+  "sell-colored-stones": "coloured",
+  "sell-watches": "watch",
+  "antique-jewellery": "antique",
+  "sell-other-jewellery": "other",
+  "sell-your-diamond": "general",
+};
 
 export function generateStaticParams() {
   return allRoutes({ withAliases: true }).map(({ lang, path }) => ({ lang, slug: path.split("/").filter(Boolean) }));
@@ -80,6 +91,10 @@ export default async function CatchAll({ params }: PageProps<"/[lang]/[...slug]"
     const title = titleFor(route) ?? term.name;
     const inTerm = route.kind === "product_cat" ? (p: (typeof allProducts)[number]) => p.categories.includes(term.name) : (p: (typeof allProducts)[number]) => (p.tags ?? []).includes(term.name);
     return <ShopPage lang={found.lang} title={title} filter={inTerm} crumbs={[home, shop, { label: title, href: href(found.lang, route) }]} />;
+  }
+  if (route.kind === "page" && SELL_PAGES[route.slug]) {
+    const kind = SELL_PAGES[route.slug];
+    return <SellPage lang={found.lang} kind={kind} crumbs={[home, { label: t.sellPage.pages[kind].title, href: href(found.lang, route) }]} />;
   }
   if (route.kind === "page" && route.slug === "shop") {
     return <ShopPage lang={found.lang} title={t.shop.title} filter={() => true} crumbs={[home, { label: t.shop.title, href: href(found.lang, route) }]} />;
