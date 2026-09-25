@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { pageBySlug, postBySlug, seoForUrl, termBySlug, type Doc } from "@/lib/content";
 import { getDictionary, hasLocale, localePath, type Locale } from "@/lib/i18n";
 import { ProductPage } from "@/components/templates/ProductPage";
+import { CalculatorPage } from "@/components/templates/CalculatorPage";
 import { SellPage } from "@/components/templates/SellPage";
 import { ShopPage } from "@/components/templates/ShopPage";
 import { allProducts, displayName } from "@/lib/products";
@@ -95,6 +96,9 @@ export default async function CatchAll({ params }: PageProps<"/[lang]/[...slug]"
   if (route.kind === "page" && SELL_PAGES[route.slug]) {
     const kind = SELL_PAGES[route.slug];
     return <SellPage lang={found.lang} kind={kind} crumbs={[home, { label: t.sellPage.pages[kind].title, href: href(found.lang, route) }]} />;
+  }
+  if (route.kind === "page" && route.slug === "diamond-valuation-calculator") {
+    return <CalculatorPage lang={found.lang} crumbs={[home, { label: t.calculator.title, href: href(found.lang, route) }]} />;
   }
   if (route.kind === "page" && route.slug === "shop") {
     return <ShopPage lang={found.lang} title={t.shop.title} filter={() => true} crumbs={[home, { label: t.shop.title, href: href(found.lang, route) }]} />;

@@ -27,8 +27,16 @@ ALLOWED = {
     'a': ('href',), 'img': ('src', 'alt', 'width', 'height'),
 }
 VOID = {'br', 'hr', 'img'}
-DROP_WITH_CONTENT = {'script', 'style', 'iframe', 'object', 'noscript', 'svg', 'button', 'select', 'textarea', 'template'}
+DROP_WITH_CONTENT = {'script', 'style', 'iframe', 'object', 'noscript', 'svg', 'button', 'select', 'textarea', 'template', 'form'}
 DROP_VOID = {'input', 'embed', 'source', 'link', 'meta'}  # no closing tag: drop just the tag
+
+SIZED = re.compile(r'^(/media/.+)-\d+x\d+(\.\w+)$')
+def full_size(v):
+    # Only the originals were exported; point WordPress's resized copies (name-800x800.png) at them.
+    m = SIZED.match(v)
+    if m and not os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'media', v[len('/media/'):])):
+        return m[1] + m[2]
+    return v
 
 class Sanitiser(HTMLParser):
     def __init__(self):
@@ -53,7 +61,7 @@ class Sanitiser(HTMLParser):
                 v = v.strip()
                 if not re.match(r'^(https?:|/|#|mailto:|tel:)', v, re.I):
                     continue  # no javascript:, data: or relative oddities
-                v = UPLOADS.sub('/media/', v)
+                v = full_size(UPLOADS.sub('/media/', v))
             kept.append(f'{k}="{html.escape(v, quote=True)}"')
         self.out.append(f"<{tag}{' ' + ' '.join(kept) if kept else ''}>")
     def handle_startendtag(self, tag, attrs):

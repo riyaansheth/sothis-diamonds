@@ -7,6 +7,7 @@ import { site } from "@/lib/site";
 
 export type ItemType = "diamond" | "coloured" | "watch" | "antique" | "other";
 type T = Dictionary["form"];
+type C = Dictionary["calculator"];
 type Values = Record<string, string>;
 
 const MAX_PHOTOS = 7;
@@ -20,12 +21,25 @@ const CLARITY = ["FL", "IF", "VVS1", "VVS2", "VS1", "VS2", "SI1", "SI2", "I1", "
 // Europe first (where the buying happens), then a few major markets.
 const COUNTRIES = ["BE", "NL", "FR", "DE", "LU", "GB", "CH", "IT", "ES", "PT", "AT", "IE", "DK", "SE", "NO", "FI", "PL", "CZ", "GR", "MC", "US", "CA", "AE", "IN", "IL", "HK", "SG", "AU"];
 
-type Field = { name: string; kind: "text" | "number" | "select" | "textarea"; options?: string[]; required?: boolean };
+type Field = { name: string; kind: "text" | "number" | "select" | "textarea" | "chips"; options?: string[]; required?: boolean; label?: string };
 
 /** The details asked for each kind of item. Watches never ask for a carat weight. */
-function fieldsFor(type: ItemType, t: T): Field[] {
+function fieldsFor(type: ItemType, t: T, c?: C): Field[] {
   const f = t.fields;
   const withUnknown = (o: string[]) => [...o, f.unknown];
+  if (c) {
+    // The calculator: a guided, visual version of the diamond questions.
+    return [
+      { name: "carat", kind: "number", required: true },
+      { name: "origin", kind: "chips", options: withUnknown(c.origins), label: c.origin },
+      { name: "shape", kind: "chips", options: SHAPES },
+      { name: "colour", kind: "chips", options: withUnknown(COLOURS) },
+      { name: "clarity", kind: "chips", options: withUnknown(CLARITY) },
+      { name: "cut", kind: "select", options: withUnknown(c.cuts), label: c.cut },
+      { name: "condition", kind: "select", options: c.conditions, label: c.condition },
+      { name: "report", kind: "select", options: t.choices.report },
+    ];
+  }
   switch (type) {
     case "diamond":
       return [
@@ -92,7 +106,7 @@ function fromQuick(item: string | null): { type?: ItemType; piece?: string } {
  * Four-step valuation request: item, type-specific details, up to 7 photos, contact details.
  * Draft (not photos) is kept in sessionStorage; posts multipart to /api/valuation/.
  */
-export function ValuationForm({ t, lang, fixedType }: { t: T; lang: string; fixedType?: ItemType }) {
+export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lang: string; fixedType?: ItemType; calculator?: C }) {
   const params = useSearchParams();
   const [step, setStep] = useState(fixedType ? 1 : 0);
   const [values, setValues] = useState<Values>({});
@@ -104,7 +118,8 @@ export function ValuationForm({ t, lang, fixedType }: { t: T; lang: string; fixe
   const files = useRef<HTMLInputElement>(null);
 
   const type = (fixedType ?? values.type) as ItemType | undefined;
-  const fields = useMemo(() => (type ? fieldsFor(type, t) : []), [type, t]);
+  const fields = useMemo(() => (type ? fieldsFor(type, t, c) : []), [type, t, c]);
+  const labelOf = (f: Field) => f.label ?? t.fields[f.name as keyof T["fields"]];
   const regionName = useMemo(() => {
     try {
       return new Intl.DisplayNames([lang], { type: "region" });
@@ -146,7 +161,7 @@ export function ValuationForm({ t, lang, fixedType }: { t: T; lang: string; fixe
 
   const validate = (): string[] => {
     if (step === 0 && !type) return [t.itemType];
-    if (step === 1) return fields.filter((f) => f.required && !values[f.name]?.trim()).map((f) => t.fields[f.name as keyof T["fields"]]);
+    if (step === 1) return fields.filter((f) => f.required && !values[f.name]?.trim()).map(labelOf);
     if (step === 3) {
       const miss = (["name", "email", "phone"] as const).filter((k) => !values[k]?.trim()).map((k) => t[k]);
       if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) miss.push(t.invalidEmail);
@@ -179,6 +194,7 @@ export function ValuationForm({ t, lang, fixedType }: { t: T; lang: string; fixe
     for (const f of fields) if (values[f.name]) body.set(f.name, values[f.name]);
     for (const k of ["notes", "name", "email", "phone", "country", "contactBy"]) if (values[k]) body.set(k, values[k]);
     body.set("lang", lang);
+    if (c) body.set("calculator", "yes");
     photos.forEach((p) => body.append("photos", p));
     try {
       const res = await fetch("/api/valuation/", { method: "POST", body });
@@ -246,32 +262,78 @@ export function ValuationForm({ t, lang, fixedType }: { t: T; lang: string; fixe
         )}
 
         {step === 1 && type && (
-          <div className="grid gap-5 sm:grid-cols-2">
-            {fields.map((f) => (
-              <Labeled key={f.name} label={t.fields[f.name as keyof T["fields"]]} required={f.required} t={t}>
-                {f.kind === "select" ? (
-                  <select className="field" value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} required={f.required}>
-                    <option value="">—</option>
-                    {f.options!.map((o) => <option key={o}>{o}</option>)}
-                  </select>
+          <div className={c ? "grid gap-10 xl:grid-cols-[1fr_15rem]" : ""}>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {fields.map((f) =>
+                f.kind === "chips" ? (
+                  <fieldset key={f.name} className="sm:col-span-2">
+                    <legend className="mb-2 text-sm text-platinum-2">{labelOf(f)}</legend>
+                    {f.name === "colour" && c && (
+                      <p className="mb-2 flex flex-wrap gap-x-4 text-xs text-platinum-2">
+                        {c.colourGroups.map(([range, name]) => <span key={range}>{range}: {name}</span>)}
+                      </p>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                      {f.options!.map((o, i) => (
+                        <label key={o} title={f.name === "clarity" && c ? c.clarityHelp[o as keyof C["clarityHelp"]] : undefined} className="flex cursor-pointer items-center gap-2 border border-line px-3 py-2 text-sm has-[:checked]:border-wine has-[:checked]:bg-wine has-[:checked]:text-on-accent">
+                          <input type="radio" name={f.name} value={o} checked={values[f.name] === o} onChange={() => set(f.name, o)} className="sr-only" />
+                          {f.name === "colour" && i < 11 && (
+                            // D (white) to N–Z (light yellow), as the grades read to the eye.
+                            <span aria-hidden className="size-3 rounded-full ring-1 ring-line" style={{ background: `hsl(48 ${Math.round((i / 10) * 70)}% ${97 - i * 2}%)` }} />
+                          )}
+                          {o}
+                        </label>
+                      ))}
+                    </div>
+                    {f.name === "clarity" && c && values.clarity && c.clarityHelp[values.clarity as keyof C["clarityHelp"]] && (
+                      <p className="mt-2 text-xs text-platinum-2">{values.clarity}: {c.clarityHelp[values.clarity as keyof C["clarityHelp"]]}</p>
+                    )}
+                  </fieldset>
                 ) : (
-                  <input
-                    className="field"
-                    type={f.kind === "number" ? "text" : "text"}
-                    inputMode={f.kind === "number" ? "decimal" : undefined}
-                    value={values[f.name] ?? ""}
-                    onChange={(e) => set(f.name, e.target.value)}
-                    required={f.required}
-                    maxLength={120}
-                  />
-                )}
-              </Labeled>
-            ))}
-            <div className="sm:col-span-2">
-              <Labeled label={t.fields.notes} t={t}>
-                <textarea className="field min-h-28 py-3" value={values.notes ?? ""} onChange={(e) => set("notes", e.target.value)} maxLength={2000} />
-              </Labeled>
+                  <Labeled key={f.name} label={labelOf(f)} required={f.required} t={t}>
+                    {f.kind === "select" ? (
+                      <select className="field" value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} required={f.required}>
+                        <option value="">—</option>
+                        {f.options!.map((o) => <option key={o}>{o}</option>)}
+                      </select>
+                    ) : (
+                      <input
+                        className="field"
+                        type="text"
+                        inputMode={f.kind === "number" ? "decimal" : undefined}
+                        value={values[f.name] ?? ""}
+                        onChange={(e) => set(f.name, e.target.value)}
+                        required={f.required}
+                        maxLength={120}
+                      />
+                    )}
+                  </Labeled>
+                ),
+              )}
+              <div className="sm:col-span-2">
+                <Labeled label={t.fields.notes} t={t}>
+                  <textarea className="field min-h-28 py-3" value={values.notes ?? ""} onChange={(e) => set("notes", e.target.value)} maxLength={2000} />
+                </Labeled>
+              </div>
             </div>
+
+            {c && (
+              <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
+                <p className="font-display text-xl">{c.summary}</p>
+                {fields.some((f) => values[f.name]) ? (
+                  <dl className="mt-4 space-y-2 text-sm">
+                    {fields.filter((f) => values[f.name]).map((f) => (
+                      <div key={f.name} className="flex justify-between gap-4 border-b border-line pb-2">
+                        <dt className="text-platinum-2">{labelOf(f)}</dt>
+                        <dd className="text-right">{f.name === "carat" ? `${values[f.name]} ct` : values[f.name]}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : (
+                  <p className="mt-3 text-sm text-platinum-2">{c.summaryEmpty}</p>
+                )}
+              </aside>
+            )}
           </div>
         )}
 
@@ -345,7 +407,7 @@ export function ValuationForm({ t, lang, fixedType }: { t: T; lang: string; fixe
             <button type="button" onClick={() => goTo(step - 1)} className="btn btn-secondary">{t.back}</button>
           )}
           <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
-            {step < 3 ? t.next : status === "sending" ? t.sending : t.submit}
+            {step < 3 ? t.next : status === "sending" ? t.sending : (c?.submit ?? t.submit)}
           </button>
         </div>
       </form>
