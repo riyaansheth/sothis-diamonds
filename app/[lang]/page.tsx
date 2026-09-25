@@ -8,7 +8,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { StoneChoir, type ChoirStone } from "@/components/StoneChoir";
 import { Diamond3DLazy } from "@/components/Diamond3DLazy";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
-import { diameterMm, displayName, inStockDiamonds, mediaUrl, productBySku } from "@/lib/products";
+import { diameterMm, displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 
 // The four hero stones, left to right. Transparent studio variants let them sit naturally on the page ground.
 const CHOIR = [
@@ -25,13 +25,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   if (!hasLocale(lang)) notFound();
   const t = getDictionary(lang);
   const href = (path: string) => localePath(lang, path);
-  const productHref = (slug: string) => href(`/product/${slug}/`);
+  const productHref = (p: Product) => productPath(p, lang);
 
   const choir: ChoirStone[] = CHOIR.map(({ sku, image, crop, shape }) => {
     const p = productBySku(sku);
     return {
       id: p.id,
-      href: productHref(p.slug),
+      href: productHref(p),
       name: displayName(p),
       details: [p.attributes.color, p.attributes.clarity, p.attributes.lab].filter(Boolean).join(", "),
       priceUsd: p.price,
@@ -162,7 +162,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <Rail prev={t.stones.prev} next={t.stones.next}>
             {collection.map((p) => (
               <li key={p.id} className="w-[78vw] shrink-0 snap-start sm:w-[22rem]">
-                <ProductCard product={p} href={productHref(p.slug)} t={t.stones} />
+                <ProductCard product={p} href={productHref(p)} t={t.stones} />
               </li>
             ))}
           </Rail>
@@ -220,7 +220,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <ul className="mt-14 grid grid-cols-3 gap-1 sm:grid-cols-6">
           {collection.slice(0, 6).map((p) => (
             <li key={p.id}>
-              <Link href={productHref(p.slug)} className="relative block aspect-square overflow-hidden bg-ivory-deep">
+              <Link href={productHref(p)} className="relative block aspect-square overflow-hidden bg-ivory-deep">
                 <Image src={mediaUrl(p.image!)} alt={displayName(p)} fill sizes="(min-width: 640px) 17vw, 33vw" className="object-cover transition-transform duration-[1.2s] hover:scale-110" />
               </Link>
             </li>

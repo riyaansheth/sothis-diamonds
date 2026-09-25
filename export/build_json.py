@@ -16,10 +16,76 @@ def save(name, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f'{name}.json: {len(data)}')
 
+from html.parser import HTMLParser
+
+# Allow-list sanitiser: the old site was compromised once (spam injection), so exported HTML is
+# rebuilt from content tags only. Anything not listed is dropped; unlisted wrapper tags keep their text.
+ALLOWED = {
+    'p': (), 'br': (), 'h2': (), 'h3': (), 'h4': (), 'h5': (), 'h6': (), 'ul': (), 'ol': (), 'li': (),
+    'strong': (), 'b': (), 'em': (), 'i': (), 'blockquote': (), 'hr': (), 'figure': (), 'figcaption': (),
+    'table': (), 'thead': (), 'tbody': (), 'tr': (), 'th': ('colspan', 'rowspan'), 'td': ('colspan', 'rowspan'),
+    'a': ('href',), 'img': ('src', 'alt', 'width', 'height'),
+}
+VOID = {'br', 'hr', 'img'}
+DROP_WITH_CONTENT = {'script', 'style', 'iframe', 'object', 'noscript', 'svg', 'button', 'select', 'textarea', 'template'}
+DROP_VOID = {'input', 'embed', 'source', 'link', 'meta'}  # no closing tag: drop just the tag
+
+class Sanitiser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=False)
+        self.out, self.skip = [], 0
+    def handle_starttag(self, tag, attrs):
+        if tag in DROP_VOID:
+            return
+        if tag in DROP_WITH_CONTENT:
+            self.skip += 1
+            return
+        if self.skip:
+            return
+        tag = 'h2' if tag == 'h1' else tag  # the page template owns the single h1
+        if tag not in ALLOWED:
+            return
+        kept = []
+        for k, v in attrs:
+            if k not in ALLOWED[tag] or v is None:
+                continue
+            if k in ('href', 'src'):
+                v = v.strip()
+                if not re.match(r'^(https?:|/|#|mailto:|tel:)', v, re.I):
+                    continue  # no javascript:, data: or relative oddities
+                v = UPLOADS.sub('/media/', v)
+            kept.append(f'{k}="{html.escape(v, quote=True)}"')
+        self.out.append(f"<{tag}{' ' + ' '.join(kept) if kept else ''}>")
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag in DROP_WITH_CONTENT and self.skip:
+            self.skip -= 1
+    def handle_endtag(self, tag):
+        if tag in DROP_WITH_CONTENT:
+            self.skip = max(0, self.skip - 1)
+            return
+        tag = 'h2' if tag == 'h1' else tag
+        if not self.skip and tag in ALLOWED and tag not in VOID:
+            self.out.append(f'</{tag}>')
+    def handle_data(self, data):
+        if not self.skip:
+            self.out.append(html.escape(data, quote=False))
+    def handle_entityref(self, name):
+        if not self.skip:
+            self.out.append(f'&{name};')
+    def handle_charref(self, name):
+        if not self.skip:
+            self.out.append(f'&#{name};')
+
 def clean_html(s):
-    s = re.sub(r'<!--\s*/?wp:.*?-->', '', s or '', flags=re.S)  # block editor comments
-    s = UPLOADS.sub('/media/', s)
-    return s.strip()
+    s = re.sub(r'<!--.*?-->', '', s or '', flags=re.S)  # comments, incl. block-editor markers
+    p = Sanitiser()
+    p.feed(s)
+    p.close()
+    out = ''.join(p.out)
+    out = re.sub(r'<(p|li|h[2-6]|strong|em|b|i)>\s*</\1>', '', out)  # empty leftovers
+    out = re.sub(r'\n{3,}', '\n\n', out)
+    return out.strip()
 
 def text(s):
     return ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', s or '')).split())
@@ -174,3 +240,18 @@ for code, short in LANGS.items():
 save('seo_by_url', seo_by_url)
 save('search_pages', jl('gsc_pages'))
 save('search_queries', jl('gsc_queries'))
+
+# Small map of translated page/category paths ({"/sell-diamond/": {"fr": "/fr/vendre-du-diamant/", ...}}),
+# used by localePath() so menus and links point at each language's real URL. Tiny enough for the browser.
+def _paths():
+    langs = ['fr', 'nl', 'de', 'it', 'es']
+    out = {}
+    for d in json.load(open(f'{OUT}/pages.json', encoding='utf8')):
+        if d['status'] != 'publish' or not d['slug'] or d['slug'] == 'home-jewellery':
+            continue
+        out[f"/{d['slug']}/"] = {l: f"/{l}/{d['slugs'].get(l) or d['slug']}/" for l in langs}
+    for t in json.load(open(f'{OUT}/taxonomies.json', encoding='utf8')):
+        if t['taxonomy'] == 'product_cat':
+            out[f"/product-category/{t['slug']}/"] = {l: f"/{l}/product-category/{t['slugs'].get(l) or t['slug']}/" for l in langs}
+    return out
+save('page_paths', _paths())

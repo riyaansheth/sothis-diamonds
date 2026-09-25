@@ -15,9 +15,20 @@ export type Product = {
   gallery: string[];
   video: string | null;
   created: string;
+  slugs?: Partial<Record<"en" | "fr" | "nl" | "de" | "it" | "es", string>>;
+  tags?: string[];
+  short_description?: string;
+  seo?: { title?: string; description?: string };
 };
 
 const products = (data as unknown as Product[]).filter((p) => p.status === "publish");
+
+/** Localised product URL (the old site translated product slugs too). */
+export const productPath = (p: Product, lang: "en" | "fr" | "nl" | "de" | "it" | "es") =>
+  lang === "en" ? `/product/${p.slug}/` : `/${lang}/product/${p.slugs?.[lang] || p.slug}/`;
+
+/** Every published product. */
+export const allProducts = products;
 
 const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_URL ?? "";
 /** Old-site media path ("media/2025/09/x.png") -> URL. Local: /media/..., later a CDN via NEXT_PUBLIC_MEDIA_URL. */
