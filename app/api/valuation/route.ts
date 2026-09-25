@@ -8,7 +8,7 @@ const TYPES = new Set(["diamond", "coloured", "watch", "antique", "other"]);
 const MAX_PHOTOS = 7;
 const MAX_BYTES = 10 * 1024 * 1024;
 const PHOTO = /\.(jpe?g|png|heic|heif|webp)$/i;
-const TEXT_FIELDS = ["carat", "shape", "colour", "clarity", "report", "stone", "origin", "brand", "model", "reference", "year", "boxPapers", "piece", "era", "mainStones", "hallmarks", "metal", "notes", "name", "email", "phone", "country", "contactBy", "lang", "calculator"];
+const TEXT_FIELDS = ["carat", "shape", "colour", "clarity", "report", "stone", "origin", "brand", "model", "reference", "year", "boxPapers", "piece", "era", "mainStones", "hallmarks", "metal", "cut", "condition", "notes", "name", "email", "phone", "country", "contactBy", "lang", "calculator"];
 
 export async function POST(request: Request) {
   let form: FormData;
