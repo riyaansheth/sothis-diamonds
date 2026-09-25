@@ -1,6 +1,6 @@
 "use client";
 
-import { MeshRefractionMaterial, PresentationControls, RoundedBox } from "@react-three/drei";
+import { MeshRefractionMaterial, PresentationControls, RoundedBox, useFBO } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState, type MutableRefObject, type RefObject } from "react";
 import * as THREE from "three";
@@ -37,6 +37,11 @@ const seg = (p: number, i: number, a: number, b: number) => ease(clamp01((p - i 
 const STILL = [0.9, 0.85, 0.75, 0.72, 0.9, 0.8];
 
 const INK = "#241519";
+const LENS_R = 0.67; // glass radius inside the rim
+const ZOOM = 2.2; // how much the loupe magnifies
+// Scratch objects for the lens pass (there's only ever one stage on a page).
+const lensCam = new THREE.PerspectiveCamera(10, 1, 0.1, 50);
+const lensAt = new THREE.Vector3();
 const IVORY = "#f7f2ea";
 const BURGUNDY = "#511f2a";
 
@@ -61,6 +66,8 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
   const lid = useRef<THREE.Group>(null);
   const turntable = useRef<THREE.Mesh>(null);
   const shown = useRef(progress.current);
+  // The loupe's glass shows the scene re-rendered through a narrower camera aimed where the glass is.
+  const lensView = useFBO(768, 768, { samples: 4 });
 
   useFrame((state, dt) => {
     // Ease towards the scroll position so fast scrolling still reads as motion, not jumps.
@@ -169,6 +176,25 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
     // drei keeps its own ref on the material, so reach it through the mesh rather than passing a ref.
     const mat = gem.current?.material as (THREE.Material & { aberrationStrength?: number }) | undefined;
     if (mat && "aberrationStrength" in mat) mat.aberrationStrength = 0.012 + sparkle * 0.05 + (hovered.current ? 0.01 : 0);
+
+    // Magnify: from the main camera, aim through the lens centre at the stone's plane (z = 0) with a
+    // field of view ZOOM times narrower than the lens covers on screen, and paint that onto the glass.
+    if (loupeOn && loupe.current) {
+      const cam = state.camera;
+      loupe.current.getWorldPosition(lensAt);
+      const dist = cam.position.distanceTo(lensAt);
+      lensCam.position.copy(cam.position);
+      lensCam.fov = THREE.MathUtils.radToDeg((2 * Math.atan(LENS_R / dist)) / ZOOM);
+      lensCam.updateProjectionMatrix();
+      lensAt.sub(cam.position).multiplyScalar(-cam.position.z / (lensAt.z - cam.position.z)).add(cam.position);
+      lensCam.lookAt(lensAt);
+      loupe.current.visible = false; // the loupe mustn't see itself
+      state.gl.setRenderTarget(lensView);
+      state.gl.clear();
+      state.gl.render(state.scene, lensCam);
+      state.gl.setRenderTarget(null);
+      loupe.current.visible = true;
+    }
   });
 
   const ivory = useMemo(() => new THREE.MeshPhysicalMaterial({
@@ -217,8 +243,17 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
           <meshStandardMaterial color={INK} metalness={0.7} roughness={0.3} />
         </mesh>
         <mesh position={[0, 0, -0.01]}>
-          <circleGeometry args={[0.67, 64]} />
-          <meshBasicMaterial color="#f4f0e8" transparent opacity={0.08} depthWrite={false} />
+          <circleGeometry args={[LENS_R, 64]} />
+          <meshBasicMaterial map={lensView.texture} transparent toneMapped={false} depthWrite={false} />
+        </mesh>
+        {/* Faint glass tint and a soft reflection over the magnified view. */}
+        <mesh position={[0, 0, -0.005]}>
+          <circleGeometry args={[LENS_R, 64]} />
+          <meshBasicMaterial color="#f4f0e8" transparent opacity={0.06} depthWrite={false} />
+        </mesh>
+        <mesh position={[-0.2, 0.24, 0]} rotation={[0, 0, 0.7]} scale={[1, 0.35, 1]}>
+          <circleGeometry args={[0.3, 48]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.12} depthWrite={false} />
         </mesh>
         <mesh position={[0.62, -0.62, 0]} rotation={[0, 0, Math.PI / 4]}>
           <cylinderGeometry args={[0.05, 0.05, 0.7, 12]} />
