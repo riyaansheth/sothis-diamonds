@@ -16,10 +16,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     // Leftovers from the old theme (demo portfolio, internal slider/CMS blocks): gone for good.
     const junk = ["portfolio", "woodmart_slider", "cms_block_cat"];
-    return junk.flatMap((base) => [
-      { source: `/${base}/:path*`, destination: "/", permanent: true },
-      { source: `/:lang(fr|nl|de|it|es)/${base}/:path*`, destination: "/:lang/", permanent: true },
-    ]);
+    return [
+      ...junk.flatMap((base) => [
+        { source: `/${base}/:path*`, destination: "/", permanent: true },
+        { source: `/:lang(fr|nl|de|it|es)/${base}/:path*`, destination: "/:lang/", permanent: true },
+      ]),
+      // Linked from the old guides but never existed; the text means the calculator.
+      { source: "/diamond-valuation/", destination: "/diamond-valuation-calculator/", permanent: true },
+    ];
   },
   async headers() {
     return [

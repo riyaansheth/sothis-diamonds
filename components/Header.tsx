@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
@@ -140,12 +141,20 @@ function MenuGroup({ title, links, href, large }: { title: string; links: string
 }
 
 export function LanguageLinks({ lang, label }: { lang: Locale; label: string }) {
+  const router = useRouter();
   return (
     <nav aria-label={label} className="flex flex-wrap gap-1">
       {locales.map((l) => (
         <Link
           key={l}
           href={localePath(l, "/")}
+          onClick={(e) => {
+            // Same page in the other language, from the page's hreflang alternates; home is the fallback.
+            const alt = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${l}"]`);
+            if (!alt || e.metaKey || e.ctrlKey) return;
+            e.preventDefault();
+            router.push(new URL(alt.href).pathname);
+          }}
           hrefLang={l}
           lang={l}
           aria-current={l === lang ? "true" : undefined}

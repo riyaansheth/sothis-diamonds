@@ -4,6 +4,9 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { pageBySlug, postBySlug, posts, seoForUrl, termBySlug, type Doc } from "@/lib/content";
 import { getDictionary, hasLocale, localePath, type Locale } from "@/lib/i18n";
 import { ProductPage } from "@/components/templates/ProductPage";
+import { AboutPage } from "@/components/templates/AboutPage";
+import { ContactPage } from "@/components/templates/ContactPage";
+import { LEGAL, LegalPage } from "@/components/templates/LegalPage";
 import { ArticlePage, GUIDES } from "@/components/templates/ArticlePage";
 import { BlogPage } from "@/components/templates/BlogPage";
 import { CalculatorPage } from "@/components/templates/CalculatorPage";
@@ -128,9 +131,17 @@ export default async function CatchAll({ params }: PageProps<"/[lang]/[...slug]"
     return <ArticlePage doc={doc} lang={found.lang} kind="guide" crumbs={[home, { label: doc.title, href: href(found.lang, route) }]} />;
   }
 
+  if (route.kind === "page" && route.slug === "about-sothis-diamonds") {
+    return <AboutPage lang={found.lang} crumbs={[home, { label: t.nav.about, href: href(found.lang, route) }]} />;
+  }
+  if (route.kind === "page" && route.slug === "contact-us") {
+    return <ContactPage lang={found.lang} crumbs={[home, { label: t.contact.title, href: href(found.lang, route) }]} />;
+  }
+
   if (route.kind === "page") {
     const doc = pageBySlug(route.slug);
     if (!doc) notFound();
+    if (LEGAL.includes(route.slug)) return <LegalPage doc={doc} lang={found.lang} crumbs={[home, { label: doc.title, href: href(found.lang, route) }]} />;
     return <ContentPage doc={doc} />;
   }
   return <Interim title={titleFor(route) ?? ""} lang={found.lang} />;
