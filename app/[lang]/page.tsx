@@ -69,7 +69,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const pct = (k: string) => Number.parseFloat(stepsStone.specs[k] ?? "");
   const sc = t.steps.scene;
   const stage = {
-    image: mediaUrl(stepsStone.image!),
+    image: `/_next/image/?url=${encodeURIComponent(mediaUrl(stepsStone.image!))}&w=640&q=75`,
     proportions: { table: pct("Table %"), crown: pct("Crown Height"), pavilion: pct("Pavilion Depth") },
     readouts: [
       [sc.carat, `${stepsStone.attributes.carat} ct`],
