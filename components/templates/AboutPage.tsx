@@ -37,7 +37,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
   const [colourName, clarityName] = [a.factors[1][0], a.factors[2][0]];
 
   return (
-    <>
+    <div data-header="clear">
       <Opening cutout={mediaUrl(CUTOUT)} title={a.title} line={a.line} scroll={a.scroll} crumbs={<Breadcrumbs items={crumbs} />} />
       <Heritage
         photo={mediaUrl(STUDIO)}
@@ -90,6 +90,6 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
         </div>
       </section>
 
-    </>
+    </div>
   );
 }

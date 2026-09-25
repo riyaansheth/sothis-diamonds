@@ -11,25 +11,30 @@ import { CurrencySwitch, useStore } from "./Store";
 const icon = "size-5 stroke-current fill-none [stroke-width:1.5]";
 
 export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
-  const [solid, setSolid] = useState(false);
   const menu = useRef<HTMLDialogElement>(null);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
   const pathname = usePathname();
+  // Pages can ask for a fully transparent header ([data-header="clear"]); while an element marked
+  // [data-header-dark] is behind it, its text and logo turn ivory.
+  const [mode, setMode] = useState<"glass" | "clear" | "clear-dark">("glass");
 
   useEffect(() => {
-    // Pages that open on a dark image (e.g. about) mark it, so the ivory header stays readable.
-    const onScroll = () => setSolid(window.scrollY > 24 || !!document.querySelector("[data-solid-header]"));
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const clear = document.querySelector("[data-header='clear']");
+    const dark = document.querySelector<HTMLElement>("[data-header-dark]");
+    const update = () => setMode(!clear ? "glass" : dark && dark.getBoundingClientRect().bottom > 40 ? "clear-dark" : "clear");
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
   }, [pathname]);
 
   const close = () => menu.current?.close();
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${solid ? "border-b border-line bg-ivory/92 backdrop-blur" : "bg-transparent"}`}
+      // Frosted ivory glass on every page, so each page's colours show through it; fully clear where asked.
+      data-mode={mode}
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-500 ${mode === "glass" ? "border-b border-ivory/40 bg-ivory/55 backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-transparent"} ${mode === "clear-dark" ? "text-on-accent [&_.nav-cta]:text-on-accent" : ""}`}
     >
       <div className="wrap grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-2">
         <div className="flex items-center gap-4 sm:gap-6">
@@ -56,11 +61,11 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </div>
 
         <Link href={href("/")} className="shrink-0" aria-label={site.name}>
-          <Logo className="h-8 w-auto sm:h-11" />
+          <Logo className="h-8 w-auto sm:h-11" light={mode === "clear-dark"} />
         </Link>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
-          <Link href={href("/sell-diamond/")} className="hidden border-b border-champagne pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
+          <Link href={href("/sell-diamond/")} className="nav-cta hidden border-b border-champagne pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
             {t.sell}
           </Link>
           <nav aria-label={t.account} className="flex items-center">
@@ -174,7 +179,7 @@ export function LanguageLinks({ lang, label }: { lang: Locale; label: string }) 
 }
 
 /** The Sothis logo (burgundy lettering, gold mark). */
-export function Logo({ className, alt = "" }: { className: string; alt?: string }) {
-  // eslint-disable-next-line @next/next/no-img-element -- vector logo from the old site
-  return <img src="/brand/logo-burgundy.svg" alt={alt} width={170} height={45} className={className} />;
+export function Logo({ className, alt = "", light = false }: { className: string; alt?: string; light?: boolean }) {
+  // eslint-disable-next-line @next/next/no-img-element -- vector logo from the old site; `light` = white lettering for dark backgrounds
+  return <img src={light ? "/brand/logo.svg" : "/brand/logo-burgundy.svg"} alt={alt} width={170} height={45} className={className} />;
 }
