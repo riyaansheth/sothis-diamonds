@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Newsletter, QuickValuation } from "@/components/Forms";
 import { Loader } from "@/components/Loader";
-import { Loupe } from "@/components/Loupe";
 import { InView, Quotes, Rail, RevealHeading, StepsScroller } from "@/components/Motion";
 import { ProductCard } from "@/components/ProductCard";
 import { StoneChoir, type ChoirStone } from "@/components/StoneChoir";
@@ -11,12 +10,12 @@ import { Diamond3DLazy } from "@/components/Diamond3DLazy";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 import { diameterMm, displayName, inStockDiamonds, mediaUrl, productBySku } from "@/lib/products";
 
-// The four hero stones, left to right. crop = where the stone sits in its product photo (measured from the image).
+// The four hero stones, left to right. Transparent studio variants let them sit naturally on the page ground.
 const CHOIR = [
-  { sku: "E-398-248F-1B", crop: { cx: 0.5, cy: 0.488, d: 0.315 }, shape: "round" },
-  { sku: "FCHE-248E-1A", crop: { cx: 0.498, cy: 0.468, d: 0.467 }, shape: "heart" },
-  { sku: "FCRA-243E-5A", crop: { cx: 0.498, cy: 0.498, d: 0.47 }, shape: "square" },
-  { sku: "S-1889", crop: { cx: 0.49, cy: 0.5, d: 0.48 }, shape: "round" },
+  { sku: "E-398-248F-1B", image: "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.64 }, shape: "round" },
+  { sku: "FCHE-248E-1A", image: "media/2026/09/choir-studio/heart-5.01ct-fancy-light-yellow-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.69 }, shape: "heart" },
+  { sku: "FCRA-243E-5A", image: "media/2026/09/choir-studio/radiant-1.09ct-fancy-intense-yellow-VVS1-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.63 }, shape: "square" },
+  { sku: "S-1889", image: "media/2026/09/choir-studio/round-5.02ct-J-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.62 }, shape: "round" },
 ] as const;
 const STEPS_STONE = "S-1976"; // RD 1.09ct F IF (IGI): the stone that acts out "How selling works"
 const STORY_PIECE = "SCP01"; // Cushion yellow diamond ring, photographed on white
@@ -28,7 +27,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const href = (path: string) => localePath(lang, path);
   const productHref = (slug: string) => href(`/product/${slug}/`);
 
-  const choir: ChoirStone[] = CHOIR.map(({ sku, crop, shape }) => {
+  const choir: ChoirStone[] = CHOIR.map(({ sku, image, crop, shape }) => {
     const p = productBySku(sku);
     return {
       id: p.id,
@@ -36,7 +35,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       name: displayName(p),
       details: [p.attributes.color, p.attributes.clarity, p.attributes.lab].filter(Boolean).join(", "),
       priceUsd: p.price,
-      image: mediaUrl(p.image!),
+      image: mediaUrl(image),
       crop,
       shape,
       mm: diameterMm(p),
@@ -66,8 +65,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <Loader t={t.loader} />
-      <Loupe />
-
       {/* 1. Two ways in: sell or buy (opens the page). One reveal canvas for the whole section, so widening a panel
           on hover never resizes a canvas; the 3D stones are sized by the viewport for the same reason. */}
       <section className="pt-20">
@@ -79,9 +76,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             ] as const
           ).map(([[title, body, cta], cut, color, to]) => (
             <Link key={title} href={to} className="group relative flex min-h-[70vh] flex-col justify-end border-line p-8 sm:p-12 md:border-l md:first:border-l-0">
-              <div aria-hidden data-loupe className="paths-window pointer-events-none absolute left-1/2 top-[6%] aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-                <div className="absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
-                <Diamond3DLazy cut={cut} color={color} className="absolute inset-0" />
+              <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
+                <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
+                <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
+                <Diamond3DLazy cut={cut} color={color} className="pointer-events-none absolute inset-0" />
               </div>
               <h2 className="relative text-6xl sm:text-8xl">{title}</h2>
               <p className="relative mt-4 max-w-sm text-ink/80">{body}</p>
@@ -92,7 +90,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* 2. The stones, to scale */}
-      <section>
+      <section className="choir-section">
         <div className="flex min-h-dvh flex-col items-center justify-center overflow-hidden border-t border-line px-4 py-24">
           <InView className="flex flex-col items-center">
             <StoneChoir stones={choir} intro={t.hero.choirIntro} />
@@ -134,7 +132,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* 4. How selling works: pinned numeral, steps scroll past */}
-      <section className="border-y border-line bg-ivory-deep">
+      <section className="steps-section border-y border-line">
         <div className="wrap">
           <StepsScroller
             steps={t.steps.items}
@@ -223,7 +221,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <ul className="mt-14 grid grid-cols-3 gap-1 sm:grid-cols-6">
           {collection.slice(0, 6).map((p) => (
             <li key={p.id}>
-              <Link href={productHref(p.slug)} data-loupe className="relative block aspect-square overflow-hidden bg-ivory-deep">
+              <Link href={productHref(p.slug)} className="relative block aspect-square overflow-hidden bg-ivory-deep">
                 <Image src={mediaUrl(p.image!)} alt={displayName(p)} fill sizes="(min-width: 640px) 17vw, 33vw" className="object-cover transition-transform duration-[1.2s] hover:scale-110" />
               </Link>
             </li>

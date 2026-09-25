@@ -117,7 +117,7 @@ export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: 
         frameloop={visible && spin ? "always" : "demand"}
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5.6], fov: 32 }}
-        gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} // readable by the loupe
+        gl={{ antialias: true, alpha: true }}
         aria-hidden
       >
         <Stone cut={cut} color={color} spin={spin} />

@@ -3,16 +3,16 @@
 @theme {
   /* Client palette: Warm Ivory, Champagne Gold, Deep Burgundy, Soft Platinum (+ ink and a readable platinum) */
   --color-ivory: #f4f0e8; /* page ground, product + editorial sections */
-  --color-ivory-deep: #eae3d6; /* raised sections; the cursor reveal's damp paper */
+  --color-ivory-deep: #eae3d6; /* raised sections */
   --color-burgundy: #511f2a; /* signature accent for text: links, italic hero words, outlines */
   --color-burgundy-2: #6b2a38; /* burgundy hover / pressed */
   --color-wine: #511f2a; /* burgundy as a fill: primary buttons, badges, the closing block */
   --color-wine-2: #6b2a38; /* wine hover */
   --color-on-accent: #f4f0e8; /* text on wine: always ivory, in both themes */
   --color-champagne: #b8a27a; /* decorative only: hairlines, numerals, loader bar, stamp. Never text. */
-  --color-platinum: #a5a29d; /* non-text only: dividers, details (2.2:1 on ivory fails even large-text contrast) */
-  --color-platinum-2: #63605b; /* small secondary text (5.5:1 on ivory) */
-  --color-ink: #241519; /* body text + headings (15.4:1 on ivory) */
+  --color-platinum: #a5a29d; /* non-text only: dividers, details */
+  --color-platinum-2: #63605b; /* small secondary text */
+  --color-ink: #241519; /* body text + headings */
   --color-line: #ddd5c7; /* default borders */
 
   --font-display: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
@@ -135,6 +135,13 @@
 /* Everything below is switched off for prefers-reduced-motion at the end of the file. */
 
 /* Hero: four stones shown to scale. --k is px per millimetre. */
+.choir-section {
+  background-image:
+    linear-gradient(rgb(244 240 232 / 0.2), rgb(244 240 232 / 0.2)),
+    url("/media/2026/09/ivory-satin-background.png");
+  background-position: center;
+  background-size: cover;
+}
 .choir {
   --k: clamp(5.4px, 1.05vw, 14px);
 }
@@ -272,9 +279,40 @@
 .paths-window {
   transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+.paths-spotlight {
+  background:
+    radial-gradient(ellipse at 50% 54%, rgb(255 252 240 / 0.88) 0 17%, rgb(213 187 116 / 0.3) 36%, transparent 69%),
+    linear-gradient(165deg, transparent 13%, rgb(255 250 232 / 0.26) 47%, transparent 72%);
+  filter: blur(18px);
+  opacity: 0;
+  transform: scale(0.78);
+  transition:
+    opacity 0.45s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.paths-window:hover .paths-spotlight,
+.paths > a:focus-visible .paths-spotlight {
+  opacity: 1;
+  transform: scale(1);
+}
 .paths > a:hover .paths-window,
 .paths > a:focus-visible .paths-window {
   transform: scale(1.08);
+}
+
+/* The selling journey stays pinned over a quiet field of ivory silk. */
+.steps-section {
+  background-color: var(--color-ivory-deep);
+  background-image:
+    linear-gradient(rgb(244 240 232 / 0.12), rgb(244 240 232 / 0.12)),
+    url("/media/2026/09/ivory-satin-steps-background.png");
+  background-position: center bottom;
+  background-size: cover;
+}
+@media (min-width: 768px) {
+  .steps-section {
+    background-attachment: fixed;
+  }
 }
 
 /* How selling works: the active step reads in ink, the rest step back. */
@@ -337,30 +375,6 @@ html:not([data-loaded]) :is(.choir-rise, .choir-intro, .hero-title .reveal-line 
 .loader-sparkle {
   transform-origin: 88% 22%;
   animation: twinkle 1.8s ease-in-out infinite;
-}
-
-/* Loupe cursor: a jeweller's lens over stones. */
-.loupe {
-  opacity: 0;
-  scale: 0.6;
-  transition:
-    opacity 0.25s,
-    scale 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: transform;
-}
-.loupe[data-on] {
-  opacity: 1;
-  scale: 1;
-}
-.loupe-glass {
-  /* the ring: dark lacquer with a thin champagne inner edge */
-  box-shadow:
-    0 0 0 5px #241519,
-    0 0 0 6px var(--color-champagne),
-    0 14px 30px -8px rgb(36 21 25 / 0.45);
-}
-html[data-loupe] :is([data-loupe], [data-loupe] *) {
-  cursor: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

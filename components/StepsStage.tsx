@@ -1,6 +1,6 @@
 "use client";
 
-import { MeshRefractionMaterial, PresentationControls } from "@react-three/drei";
+import { MeshRefractionMaterial, PresentationControls, RoundedBox } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState, type MutableRefObject, type RefObject } from "react";
 import * as THREE from "three";
@@ -40,8 +40,7 @@ const INK = "#241519";
 const IVORY = "#f7f2ea";
 const BURGUNDY = "#511f2a";
 
-function Scene({ data, progress, overlayRoot, reduce, onGrab, background }: {
-  background: string;
+function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
   data: StageData;
   progress: MutableRefObject<number>;
   overlayRoot: RefObject<HTMLDivElement | null>;
@@ -171,14 +170,25 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab, background }: {
     if (mat && "aberrationStrength" in mat) mat.aberrationStrength = 0.012 + sparkle * 0.05 + (hovered.current ? 0.01 : 0);
   });
 
-  const ivory = useMemo(() => new THREE.MeshStandardMaterial({ color: IVORY, roughness: 0.7, emissive: IVORY, emissiveIntensity: 0.18 }), []);
-  const lining = useMemo(() => new THREE.MeshStandardMaterial({ color: BURGUNDY, roughness: 0.85 }), []);
+  const ivory = useMemo(() => new THREE.MeshPhysicalMaterial({
+    color: IVORY,
+    roughness: 0.58,
+    clearcoat: 0.16,
+    clearcoatRoughness: 0.72,
+  }), []);
+  const lining = useMemo(() => new THREE.MeshPhysicalMaterial({
+    color: BURGUNDY,
+    roughness: 0.92,
+    sheen: 0.7,
+    sheenColor: new THREE.Color("#8a4555"),
+    sheenRoughness: 0.86,
+  }), []);
+  const liningDark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#351018", roughness: 1 }), []);
+  const hardware = useMemo(() => new THREE.MeshStandardMaterial({ color: "#aa8a50", metalness: 0.82, roughness: 0.3 }), []);
 
   return (
     <>
       <primitive object={env} attach="environment" />
-      {/* An opaque background in the section's colour, so the loupe's glass has something real to refract. */}
-      <color attach="background" args={[background]} />
       <ambientLight intensity={0.8} />
       <directionalLight position={[2, 4, 3]} intensity={1.8} />
 
@@ -215,31 +225,29 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab, background }: {
         </mesh>
       </group>
 
-      {/* Presentation box: ivory outside, burgundy lining, hinged lid. */}
+      {/* Presentation box: softly rounded leather shell, velvet bed and visible brass hinges. */}
       <group ref={box} visible={false} scale={0.72}>
-        <mesh position={[0, -0.02, 0]} material={ivory}>
-          <boxGeometry args={[2.4, 0.08, 2.0]} />
-        </mesh>
+        <RoundedBox args={[2.54, 0.14, 2.14]} radius={0.07} smoothness={5} position={[0, -0.07, 0]} material={ivory} />
         {[
-          [0, 0.3, 0.98, 2.4, 0.64, 0.06],
-          [0, 0.3, -0.98, 2.4, 0.64, 0.06],
-          [1.18, 0.3, 0, 0.06, 0.64, 2.0],
-          [-1.18, 0.3, 0, 0.06, 0.64, 2.0],
+          [0, 0.18, 1.02, 2.54, 0.42, 0.12],
+          [0, 0.28, -1.02, 2.54, 0.62, 0.12],
+          [1.21, 0.28, 0, 0.12, 0.62, 2.02],
+          [-1.21, 0.28, 0, 0.12, 0.62, 2.02],
         ].map(([px, py, pz, w, h, d], i) => (
-          <mesh key={i} position={[px, py, pz]} material={ivory}>
-            <boxGeometry args={[w, h, d]} />
-          </mesh>
+          <RoundedBox key={i} args={[w, h, d]} radius={0.045} smoothness={4} position={[px, py, pz]} material={ivory} />
         ))}
-        <mesh position={[0, 0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} material={lining}>
-          <planeGeometry args={[2.3, 1.9]} />
+        <RoundedBox args={[2.3, 0.11, 1.9]} radius={0.12} smoothness={5} position={[0, 0.035, 0]} material={lining} />
+        <mesh position={[0, 0.098, 0.04]} rotation={[Math.PI / 2, 0, 0]} material={liningDark}>
+          <torusGeometry args={[0.42, 0.028, 12, 64]} />
         </mesh>
-        <group ref={lid} position={[0, 0.62, -1.0]}>
-          <mesh position={[0, 0.04, 1.0]} material={ivory}>
-            <boxGeometry args={[2.46, 0.08, 2.06]} />
-          </mesh>
-          <mesh position={[0, -0.01, 1.0]} rotation={[Math.PI / 2, 0, 0]} material={lining}>
-            <planeGeometry args={[2.3, 1.9]} />
-          </mesh>
+        <group ref={lid} position={[0, 0.61, -1.02]}>
+          <RoundedBox args={[2.58, 0.15, 2.16]} radius={0.08} smoothness={5} position={[0, 0.04, 1.02]} material={ivory} />
+          <RoundedBox args={[2.34, 0.055, 1.92]} radius={0.08} smoothness={5} position={[0, -0.055, 1.02]} material={lining} />
+          {[-0.76, 0.76].map((hx) => (
+            <mesh key={hx} position={[hx, 0, 0.02]} rotation={[0, 0, Math.PI / 2]} material={hardware}>
+              <cylinderGeometry args={[0.055, 0.055, 0.42, 20]} />
+            </mesh>
+          ))}
         </group>
       </group>
 
@@ -267,7 +275,6 @@ export default function StepsStage({ data, progress }: { data: StageData; progre
   const [reduce] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const box = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
-  const background = "#eae3d6"; // ivory-deep, the section ground: what the loupe glass refracts
 
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: "100px" });
@@ -289,7 +296,7 @@ export default function StepsStage({ data, progress }: { data: StageData; progre
           className="!absolute inset-0 touch-pan-y"
           aria-hidden
         >
-          <Scene data={data} progress={progress} overlayRoot={overlayRoot} reduce={reduce} onGrab={() => setHint(false)} background={background} />
+          <Scene data={data} progress={progress} overlayRoot={overlayRoot} reduce={reduce} onGrab={() => setHint(false)} />
         </Canvas>
       ) : (
         // eslint-disable-next-line @next/next/no-img-element -- still of the stone when 3D isn't available
@@ -353,4 +360,3 @@ export default function StepsStage({ data, progress }: { data: StageData; progre
     </div>
   );
 }
-

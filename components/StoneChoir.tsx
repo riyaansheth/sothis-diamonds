@@ -29,7 +29,7 @@ export function StoneChoir({ stones, intro }: { stones: ChoirStone[]; intro: str
 
   return (
     <div className="flex flex-col items-center">
-      <ul data-loupe className="choir flex items-center justify-center gap-[clamp(0.75rem,3.5vw,4rem)]" onMouseLeave={() => setActive(null)}>
+      <ul className="choir flex items-center justify-center gap-[clamp(0.75rem,3.5vw,4rem)]" onMouseLeave={() => setActive(null)}>
         {stones.map((s, i) => (
           <li key={s.id} className="choir-rise" style={{ "--i": i } as CSSProperties}>
             <Link
@@ -68,13 +68,13 @@ export function StoneChoir({ stones, intro }: { stones: ChoirStone[]; intro: str
   );
 }
 
-/** Crops the stone out of its product photo; a soft mask fades the photo's backdrop into the page. */
+/** Crops around each transparent studio stone. */
 function StoneCutout({ stone }: { stone: ChoirStone }) {
   const { cx, cy, d } = stone.crop;
   const pad = stone.shape === "square" ? 1.06 : 1.04; // box around the stone, as a multiple of its size
   const photo = 1 / (pad * d); // photo width relative to the box
   return (
-    <span className={`choir-cut relative block overflow-hidden mask-${stone.shape}`} style={{ "--pad": pad } as CSSProperties}>
+    <span className="choir-cut relative block overflow-hidden" style={{ "--pad": pad } as CSSProperties}>
       <Image
         src={stone.image}
         alt=""

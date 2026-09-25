@@ -16,7 +16,7 @@ export function ProductCard({ product: p, href, t }: { product: Product; href: s
 
   return (
     <article className="group flex flex-col">
-      <div data-loupe className="relative aspect-square overflow-hidden rounded-sm bg-ivory-deep ring-1 ring-line">
+      <div className="relative aspect-square overflow-hidden rounded-sm bg-ivory-deep ring-1 ring-line">
         {p.image && (
           <Image src={mediaUrl(p.image)} alt={name} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
         )}
