@@ -65,32 +65,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <Loader t={t.loader} />
-      {/* 1. Two ways in: sell or buy (opens the page). One reveal canvas for the whole section, so widening a panel
-          on hover never resizes a canvas; the 3D stones are sized by the viewport for the same reason. */}
-      <section className="pt-20">
-        <div className="paths flex min-h-[calc(100dvh-5rem)] flex-col md:flex-row">
-          {(
-            [
-              [t.paths.sell, "round", "#ffffff", href("/sell-diamond/")],
-              [t.paths.buy, "asscher", "#f5d44a", href("/shop/")],
-            ] as const
-          ).map(([[title, body, cta], cut, color, to]) => (
-            <Link key={title} href={to} className="group relative flex min-h-[70vh] flex-col justify-end border-line p-8 sm:p-12 md:border-l md:first:border-l-0">
-              <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-                <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
-                <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
-                <Diamond3DLazy cut={cut} color={color} className="pointer-events-none absolute inset-0" />
-              </div>
-              <h2 className="relative text-6xl sm:text-8xl">{title}</h2>
-              <p className="relative mt-4 max-w-sm text-ink/80">{body}</p>
-              <span className="relative mt-8 inline-block self-start border-b border-champagne pb-1 text-sm tracking-[0.04em] text-burgundy">{cta}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* 2. The stones, to scale */}
-      <section className="choir-section">
+      {/* 1. The stones, to scale */}
+      <section className="choir-section pt-20">
         <div className="flex min-h-dvh flex-col items-center justify-center overflow-hidden border-t border-line px-4 py-24">
           <InView className="flex flex-col items-center">
             <StoneChoir stones={choir} intro={t.hero.choirIntro} />
@@ -113,6 +89,29 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </div>
             </div>
           </InView>
+        </div>
+      </section>
+
+      {/* 2. Two ways in: sell or buy. Widening a panel never resizes its 3D canvas. */}
+      <section>
+        <div className="paths flex min-h-[calc(100dvh-5rem)] flex-col md:flex-row">
+          {(
+            [
+              [t.paths.sell, "round", "#ffffff", href("/sell-diamond/")],
+              [t.paths.buy, "asscher", "#f5d44a", href("/shop/")],
+            ] as const
+          ).map(([[title, body, cta], cut, color, to]) => (
+            <Link key={title} href={to} className="group relative flex min-h-[70vh] flex-col justify-end border-line p-8 sm:p-12 md:border-l md:first:border-l-0">
+              <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
+                <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
+                <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
+                <Diamond3DLazy cut={cut} color={color} className="pointer-events-none absolute inset-0" />
+              </div>
+              <h2 className="relative text-6xl sm:text-8xl">{title}</h2>
+              <p className="relative mt-4 max-w-sm text-ink/80">{body}</p>
+              <span className="relative mt-8 inline-block self-start border-b border-champagne pb-1 text-sm tracking-[0.04em] text-burgundy">{cta}</span>
+            </Link>
+          ))}
         </div>
       </section>
 

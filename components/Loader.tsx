@@ -18,6 +18,8 @@ let played = false;
 // The mark's sparkle sits in the top-right corner of mark.svg; the diamond is everything else.
 const DIAMOND_CLIP = "polygon(0 0, 79% 0, 79% 44%, 100% 44%, 100% 100%, 0 100%)";
 const SPARKLE_CLIP = "inset(0 0 56% 79%)";
+// The sparkle extends the SVG canvas to the right, so 50% of the file is not the diamond's centre.
+const DIAMOND_CENTER_X = "39.5%";
 
 const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
@@ -189,7 +191,11 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
         <div aria-hidden className="flex flex-col items-center">
           <div ref={flyer} className="w-[88px] sm:w-[120px]" style={{ aspectRatio: "49.5 / 32.3" }}>
             <div className="relative size-full [perspective:600px]">
-              <div ref={spinner} className="absolute inset-0 [transform-style:preserve-3d]">
+              <div
+                ref={spinner}
+                className="absolute inset-0 [transform-style:preserve-3d]"
+                style={{ transformOrigin: `${DIAMOND_CENTER_X} 50%` }}
+              >
                 <MarkFace clip={DIAMOND_CLIP} />
                 <MarkFace clip={DIAMOND_CLIP} back />
                 <div
@@ -233,6 +239,7 @@ function MarkFace({ clip, back }: { clip: string; back?: boolean }) {
       className="absolute inset-0 size-full [backface-visibility:hidden]"
       style={{
         clipPath: clip,
+        transformOrigin: `${DIAMOND_CENTER_X} 50%`,
         // The reverse of the piece: darker, flatter gold rather than a mirrored copy.
         transform: back ? "rotateY(180deg) scaleX(-1)" : undefined,
         filter: back ? "brightness(0.72) saturate(0.8) contrast(0.9)" : undefined,
