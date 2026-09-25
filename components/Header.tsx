@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
@@ -15,13 +15,15 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   const menu = useRef<HTMLDialogElement>(null);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 24);
+    // Pages that open on a dark image (e.g. about) mark it, so the ivory header stays readable.
+    const onScroll = () => setSolid(window.scrollY > 24 || !!document.querySelector("[data-solid-header]"));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   const close = () => menu.current?.close();
 
