@@ -1,0 +1,219 @@
+{
+  "/privacy-policy/": {
+    "fr": "/fr/politique-de-confidentialite/",
+    "nl": "/nl/privacybeleid/",
+    "de": "/de/datenschutzbestimmungen/",
+    "it": "/it/informativa-sulla-privacy/",
+    "es": "/es/politica-de-privacidad/"
+  },
+  "/cart/": {
+    "fr": "/fr/chariot/",
+    "nl": "/nl/wagen/",
+    "de": "/de/wagen/",
+    "it": "/it/carrello/",
+    "es": "/es/carro/"
+  },
+  "/checkout/": {
+    "fr": "/fr/caisse/",
+    "nl": "/nl/kassa/",
+    "de": "/de/checkout/",
+    "it": "/it/checkout/",
+    "es": "/es/checkout/"
+  },
+  "/my-account/": {
+    "fr": "/fr/mon-compte/",
+    "nl": "/nl/mijn-rekening/",
+    "de": "/de/mein-konto/",
+    "it": "/it/il-mio-conto/",
+    "es": "/es/mi-cuenta/"
+  },
+  "/refund_returns/": {
+    "fr": "/fr/remboursements/",
+    "nl": "/nl/refund_returns/",
+    "de": "/de/ruckerstattung_ruckgaben/",
+    "it": "/it/rimborso_rimborsi/",
+    "es": "/es/devoluciones_devolucion/"
+  },
+  "/blog/": {
+    "fr": "/fr/blog/",
+    "nl": "/nl/blog/",
+    "de": "/de/blog/",
+    "it": "/it/blog/",
+    "es": "/es/blog/"
+  },
+  "/compare/": {
+    "fr": "/fr/comparer/",
+    "nl": "/nl/vergelijken/",
+    "de": "/de/vergleichen/",
+    "it": "/it/confrontare/",
+    "es": "/es/compare/"
+  },
+  "/shop/": {
+    "fr": "/fr/boutique/",
+    "nl": "/nl/winkelen/",
+    "de": "/de/shop/",
+    "it": "/it/negozio/",
+    "es": "/es/tienda/"
+  },
+  "/wishlist/": {
+    "fr": "/fr/liste-de-souhaits/",
+    "nl": "/nl/verlanglijst/",
+    "de": "/de/wunschzettel/",
+    "it": "/it/desiderio/",
+    "es": "/es/lista-de-deseos/"
+  },
+  "/about-sothis-diamonds/": {
+    "fr": "/fr/a-propos-de-sothis-diamonds/",
+    "nl": "/nl/over-sothis-diamonds/",
+    "de": "/de/uber-sothis-diamonds/",
+    "it": "/it/sui-diamanti-sothis/",
+    "es": "/es/sobre-sothis-diamonds/"
+  },
+  "/contact-us/": {
+    "fr": "/fr/nous-contacter/",
+    "nl": "/nl/contact-met-ons-opnemen/",
+    "de": "/de/kontaktieren-sie-uns/",
+    "it": "/it/contattateci/",
+    "es": "/es/contacto/"
+  },
+  "/terms-conditions/": {
+    "fr": "/fr/conditions-generales/",
+    "nl": "/nl/voorwaarden/",
+    "de": "/de/bedingungen/",
+    "it": "/it/termini-e-condizioni/",
+    "es": "/es/condiciones/"
+  },
+  "/shipping-policy/": {
+    "fr": "/fr/politique-dexpedition/",
+    "nl": "/nl/scheepvaartbeleid/",
+    "de": "/de/schifffahrtspolitik/",
+    "it": "/it/politica-di-spedizione/",
+    "es": "/es/politica-de-envios/"
+  },
+  "/sell-your-diamond/": {
+    "fr": "/fr/vendre-votre-diamant/",
+    "nl": "/nl/uw-diamant-verkopen/",
+    "de": "/de/verkaufen-sie-ihren-diamanten/",
+    "it": "/it/vendi-il-tuo-diamante/",
+    "es": "/es/venda-su-diamante/"
+  },
+  "/sell-diamond/": {
+    "fr": "/fr/vendre-du-diamant/",
+    "nl": "/nl/diamant-verkopen/",
+    "de": "/de/diamant-verkaufen/",
+    "it": "/it/vendere-diamanti/",
+    "es": "/es/vender-diamante/"
+  },
+  "/antique-jewellery/": {
+    "fr": "/fr/bijoux-anciens/",
+    "nl": "/nl/antieke-juwelen/",
+    "de": "/de/antiker-schmuck/",
+    "it": "/it/gioielli-antichi/",
+    "es": "/es/joyas-antiguas/"
+  },
+  "/sell-watches/": {
+    "fr": "/fr/vendre-des-montres/",
+    "nl": "/nl/horloges-verkopen/",
+    "de": "/de/uhren-verkaufen/",
+    "it": "/it/vendere-orologi/",
+    "es": "/es/vender-relojes/"
+  },
+  "/sell-colored-stones/": {
+    "fr": "/fr/vendre-des-pierres-de-couleur/",
+    "nl": "/nl/gekleurde-stenen-verkopen/",
+    "de": "/de/farbige-steine-verkaufen/",
+    "it": "/it/vendere-pietre-colorate/",
+    "es": "/es/vender-piedras-de-colores/"
+  },
+  "/sell-other-jewellery/": {
+    "fr": "/fr/vendre-dautres-bijoux/",
+    "nl": "/nl/andere-sieraden-verkopen/",
+    "de": "/de/anderen-schmuck-verkaufen/",
+    "it": "/it/vendere-altri-gioielli/",
+    "es": "/es/vender-otras-joyas/"
+  },
+  "/cookie-policy-sothis-diamonds/": {
+    "fr": "/fr/politique-en-matiere-de-cookies-sothis-diamonds/",
+    "nl": "/nl/cookiebeleid-sothis-diamonds/",
+    "de": "/de/cookie-richtlinie-sothis-diamonds/",
+    "it": "/it/politica-dei-cookie-sothis-diamonds/",
+    "es": "/es/politica-de-cookies-sothis-diamonds/"
+  },
+  "/sell-your-diamond-belgium/": {
+    "fr": "/fr/sell-your-diamond-belgium/",
+    "nl": "/nl/sell-your-diamond-belgium/",
+    "de": "/de/sell-your-diamond-belgium/",
+    "it": "/it/sell-your-diamond-belgium/",
+    "es": "/es/sell-your-diamond-belgium/"
+  },
+  "/diamond-valuation-calculator/": {
+    "fr": "/fr/diamond-valuation-calculator/",
+    "nl": "/nl/diamond-valuation-calculator/",
+    "de": "/de/diamond-valuation-calculator/",
+    "it": "/it/diamond-valuation-calculator/",
+    "es": "/es/diamond-valuation-calculator/"
+  },
+  "/free-diamond-valuation-belgium/": {
+    "fr": "/fr/free-diamond-valuation-belgium/",
+    "nl": "/nl/free-diamond-valuation-belgium/",
+    "de": "/de/free-diamond-valuation-belgium/",
+    "it": "/it/free-diamond-valuation-belgium/",
+    "es": "/es/free-diamond-valuation-belgium/"
+  },
+  "/sell-your-diamond-ring/": {
+    "fr": "/fr/sell-your-diamond-ring/",
+    "nl": "/nl/sell-your-diamond-ring/",
+    "de": "/de/sell-your-diamond-ring/",
+    "it": "/it/sell-your-diamond-ring/",
+    "es": "/es/sell-your-diamond-ring/"
+  },
+  "/sell-your-engagement-ring/": {
+    "fr": "/fr/sell-your-engagement-ring/",
+    "nl": "/nl/sell-your-engagement-ring/",
+    "de": "/de/sell-your-engagement-ring/",
+    "it": "/it/sell-your-engagement-ring/",
+    "es": "/es/sell-your-engagement-ring/"
+  },
+  "/sell-loose-diamond/": {
+    "fr": "/fr/sell-loose-diamond/",
+    "nl": "/nl/sell-loose-diamond/",
+    "de": "/de/sell-loose-diamond/",
+    "it": "/it/sell-loose-diamond/",
+    "es": "/es/sell-loose-diamond/"
+  },
+  "/sell-diamond-without-certificate/": {
+    "fr": "/fr/sell-diamond-without-certificate/",
+    "nl": "/nl/sell-diamond-without-certificate/",
+    "de": "/de/sell-diamond-without-certificate/",
+    "it": "/it/sell-diamond-without-certificate/",
+    "es": "/es/sell-diamond-without-certificate/"
+  },
+  "/sell-diamond-jewellery/": {
+    "fr": "/fr/sell-diamond-jewellery/",
+    "nl": "/nl/sell-diamond-jewellery/",
+    "de": "/de/sell-diamond-jewellery/",
+    "it": "/it/sell-diamond-jewellery/",
+    "es": "/es/sell-diamond-jewellery/"
+  },
+  "/product-category/diamonds/": {
+    "fr": "/fr/product-category/diamants/",
+    "nl": "/nl/product-category/diamanten/",
+    "de": "/de/product-category/diamanten/",
+    "it": "/it/product-category/diamanti/",
+    "es": "/es/product-category/diamantes/"
+  },
+  "/product-category/jewelery/": {
+    "fr": "/fr/product-category/bijoux/",
+    "nl": "/nl/product-category/sieraden/",
+    "de": "/de/product-category/juwelen/",
+    "it": "/it/product-category/gioielli/",
+    "es": "/es/product-category/joyeria/"
+  },
+  "/product-category/other-gemstone/": {
+    "fr": "/fr/product-category/autre-pierre-precieuse/",
+    "nl": "/nl/product-category/andere-edelsteen/",
+    "de": "/de/product-category/anderer-edelstein/",
+    "it": "/it/product-category/altra-pietra-preziosa/",
+    "es": "/es/product-category/otra-piedra-preciosa/"
+  }
+}

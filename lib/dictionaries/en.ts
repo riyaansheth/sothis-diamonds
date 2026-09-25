@@ -195,6 +195,14 @@ export const en = {
       ["Cookie policy", "/cookie-policy-sothis-diamonds/"],
     ],
   },
+  notFound: {
+    title: "This page isn’t here",
+    body: "The link may be old or mistyped. These are good places to continue:",
+    home: "Back to the homepage",
+    sell: "Get a free valuation",
+    shop: "Explore the collection",
+    building: "This page is being rebuilt and will be back shortly.",
+  },
   loader: {
     place: "Sothis Diamonds, Antwerp",
     status: "Loading Sothis Diamonds, {n}%",

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { localePath, type Locale } from "@/lib/i18n";
-import { displayName, mediaUrl, newestProducts } from "@/lib/products";
+import { displayName, mediaUrl, newestProducts, productPath } from "@/lib/products";
 import { site, telHref } from "@/lib/site";
 import { LanguageLinks, Logo } from "./Header";
 import { CurrencySwitch, Price } from "./Store";
@@ -54,7 +54,7 @@ export function Footer({ lang, t }: { lang: Locale; t: Dictionary }) {
         <ul className="grid gap-6 sm:grid-cols-3">
           {newestProducts(3).map((p) => (
             <li key={p.id}>
-              <Link href={href(`/product/${p.slug}/`)} className="flex items-center gap-4 hover:text-burgundy">
+              <Link href={productPath(p, lang)} className="flex items-center gap-4 hover:text-burgundy">
                 {p.image && <Image src={mediaUrl(p.image)} alt="" width={64} height={64} className="size-16 rounded-sm bg-ivory-deep object-cover" />}
                 <span>
                   <span className="block">{displayName(p)}</span>
