@@ -95,7 +95,14 @@ export function WhyList({ items, stones, view }: { items: string[][]; stones: Wh
                 className="absolute inset-0 mix-blend-plus-lighter will-change-[opacity,filter,transform]"
                 style={{ opacity: i === 0 ? 1 : 0, visibility: i === 0 ? "visible" : "hidden" }}
               >
-                <CroppedImage src={s.src} crop={s.crop} sizes="60vw" />
+                {/* The photos are only 1024 px, so the stone is shown near its real size (sharp), feathered
+                    into a deliberately blurred, colour-matched backdrop made from the same photo. */}
+                <div aria-hidden className="absolute inset-0 scale-110 blur-2xl">
+                  <CroppedImage src={s.src} crop={s.crop} sizes="20vw" />
+                </div>
+                <div className="absolute left-1/2 top-1/2 aspect-square w-[min(78%,34rem)] -translate-x-1/2 -translate-y-1/2 [mask-image:radial-gradient(closest-side,#000_72%,transparent)]">
+                  <CroppedImage src={s.src} crop={s.crop} sizes="34rem" />
+                </div>
               </div>
             ))}
           </div>
