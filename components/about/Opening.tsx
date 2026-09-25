@@ -24,7 +24,7 @@ export function Opening({ cutout, title, line, scroll, crumbs }: { cutout: strin
   });
 
   return (
-    <section ref={root} data-solid-header className="relative bg-ink bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center lg:bg-fixed pt-20 text-on-accent motion-safe:lg:h-[260vh]">
+    <section ref={root} data-header-dark className="relative bg-ink bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center lg:bg-fixed pt-20 text-on-accent motion-safe:lg:h-[260vh]">
       <div className="relative flex h-[calc(100svh-5rem)] min-h-[34rem] items-center justify-center overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20">
         <div className="wrap absolute inset-x-0 top-6 z-10 text-on-accent/70 [&_*]:!text-on-accent/70" style={{ opacity: "var(--copy, 1)" }}>{crumbs}</div>
 
@@ -40,9 +40,6 @@ export function Opening({ cutout, title, line, scroll, crumbs }: { cutout: strin
           </div>
           <span aria-hidden className="opening-light pointer-events-none absolute -inset-[20%]" />
         </div>
-
-        {/* Shadow that conceals the stone's edges, then lifts as the camera moves in. */}
-        <span aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,transparent_45%,rgb(36_21_25/0.45)_100%)]" style={{ opacity: "var(--copy, 1)" }} />
 
         <div className="absolute inset-x-0 bottom-0" style={{ opacity: "var(--copy, 1)" }}>
           <div className="wrap flex flex-col gap-6 pb-12 sm:pb-16 lg:flex-row lg:items-end lg:justify-between">
