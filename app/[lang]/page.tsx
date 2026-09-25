@@ -143,7 +143,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           {t.sell.categories.map(([name, desc, path]) => (
             <li key={path}>
               <Link href={href(path)} className="group block" title={desc}>
-                <span className="font-display text-2xl transition-colors group-hover:text-burgundy sm:text-3xl">{name}</span>
+                <span className="inline-block origin-center font-display text-2xl transition-[color,transform] duration-300 ease-out group-hover:scale-110 group-hover:text-burgundy group-focus-visible:scale-110 group-focus-visible:text-burgundy motion-reduce:transition-colors motion-reduce:group-hover:scale-100 sm:text-3xl">{name}</span>
               </Link>
             </li>
           ))}
