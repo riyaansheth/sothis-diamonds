@@ -211,6 +211,32 @@
   }
 }
 
+/* Two-handle range slider: only the thumbs take pointer input, so both handles stay grabbable. */
+.range-thumb {
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+.range-thumb::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--color-ivory);
+  border: 1px solid var(--color-burgundy);
+  cursor: grab;
+}
+.range-thumb::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--color-ivory);
+  border: 1px solid var(--color-burgundy);
+  cursor: grab;
+}
+
 /* ---------- Motion ---------- */
 /* Everything below is switched off for prefers-reduced-motion at the end of the file. */
 

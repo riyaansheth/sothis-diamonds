@@ -18,6 +18,8 @@ public/media
 *.mkv
 # Small brand assets (logo, icons) are allowed here
 !public/brand/**
+!app/icon.png
+!app/apple-icon.png
 
 # --- Old-site export: raw database data stays local ---
 export/raw/

@@ -85,7 +85,7 @@ function Specs({ product, t }: { product: Product; t: T }) {
   );
 }
 
-function CartButton({ product, t, solid }: { product: Product; t: T; solid?: boolean }) {
+export function CartButton({ product, t, solid }: { product: Product; t: T; solid?: boolean }) {
   const { cart, toggle } = useStore();
   if (!product.in_stock) return <span className="text-platinum-2">{t.outOfStock}</span>;
   const inCart = cart.includes(product.id);
@@ -101,7 +101,7 @@ function CartButton({ product, t, solid }: { product: Product; t: T; solid?: boo
   );
 }
 
-function CompareButton({ id, t }: { id: number; t: T }) {
+export function CompareButton({ id, t }: { id: number; t: T }) {
   const { compare, toggle } = useStore();
   const on = compare.includes(id);
   return (
@@ -111,7 +111,7 @@ function CompareButton({ id, t }: { id: number; t: T }) {
   );
 }
 
-function WishlistButton({ id, t }: { id: number; t: T }) {
+export function WishlistButton({ id, t }: { id: number; t: T }) {
   const { wishlist, toggle } = useStore();
   const on = wishlist.includes(id);
   return (

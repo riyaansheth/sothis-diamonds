@@ -17,6 +17,7 @@ export type Product = {
   created: string;
   slugs?: Partial<Record<"en" | "fr" | "nl" | "de" | "it" | "es", string>>;
   tags?: string[];
+  sales?: number;
   short_description?: string;
   seo?: { title?: string; description?: string };
 };

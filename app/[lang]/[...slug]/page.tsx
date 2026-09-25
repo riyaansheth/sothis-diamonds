@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { pageBySlug, postBySlug, seoForUrl, termBySlug, type Doc } from "@/lib/content";
 import { getDictionary, hasLocale, localePath, type Locale } from "@/lib/i18n";
+import { ProductPage } from "@/components/templates/ProductPage";
+import { ShopPage } from "@/components/templates/ShopPage";
 import { allProducts, displayName } from "@/lib/products";
 import { allRoutes, alternates, href, resolve, type Route } from "@/lib/routes";
 
@@ -62,6 +64,26 @@ export default async function CatchAll({ params }: PageProps<"/[lang]/[...slug]"
   if (!found) notFound();
   if (found.redirect) permanentRedirect(found.redirect);
   const { route } = found;
+
+  const t = getDictionary(found.lang);
+  const home = { label: t.product.breadcrumbHome, href: localePath(found.lang, "/") };
+  const shop = { label: t.product.breadcrumbShop, href: localePath(found.lang, "/shop/") };
+
+  if (route.kind === "product") {
+    const product = allProducts.find((p) => p.slug === route.slug);
+    if (!product) notFound();
+    return <ProductPage product={product} lang={found.lang} />;
+  }
+  if (route.kind === "product_cat" || route.kind === "product_tag") {
+    const term = termBySlug(route.kind, route.slug);
+    if (!term) notFound();
+    const title = titleFor(route) ?? term.name;
+    const inTerm = route.kind === "product_cat" ? (p: (typeof allProducts)[number]) => p.categories.includes(term.name) : (p: (typeof allProducts)[number]) => (p.tags ?? []).includes(term.name);
+    return <ShopPage lang={found.lang} title={title} filter={inTerm} crumbs={[home, shop, { label: title, href: href(found.lang, route) }]} />;
+  }
+  if (route.kind === "page" && route.slug === "shop") {
+    return <ShopPage lang={found.lang} title={t.shop.title} filter={() => true} crumbs={[home, { label: t.shop.title, href: href(found.lang, route) }]} />;
+  }
 
   if (route.kind === "page" || route.kind === "post") {
     const doc = route.kind === "page" ? pageBySlug(route.slug) : postBySlug(route.slug);
