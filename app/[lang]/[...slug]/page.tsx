@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
-import { pageBySlug, postBySlug, seoForUrl, termBySlug, type Doc } from "@/lib/content";
+import { pageBySlug, postBySlug, posts, seoForUrl, termBySlug, type Doc } from "@/lib/content";
 import { getDictionary, hasLocale, localePath, type Locale } from "@/lib/i18n";
 import { ProductPage } from "@/components/templates/ProductPage";
+import { ArticlePage, GUIDES } from "@/components/templates/ArticlePage";
+import { BlogPage } from "@/components/templates/BlogPage";
 import { CalculatorPage } from "@/components/templates/CalculatorPage";
 import { SellPage } from "@/components/templates/SellPage";
 import { ShopPage } from "@/components/templates/ShopPage";
@@ -104,24 +106,37 @@ export default async function CatchAll({ params }: PageProps<"/[lang]/[...slug]"
     return <ShopPage lang={found.lang} title={t.shop.title} filter={() => true} crumbs={[home, { label: t.shop.title, href: href(found.lang, route) }]} />;
   }
 
-  if (route.kind === "page" || route.kind === "post") {
-    const doc = route.kind === "page" ? pageBySlug(route.slug) : postBySlug(route.slug);
+  const blog = { label: t.blog.title, href: localePath(found.lang, "/blog/") };
+  if (route.kind === "page" && route.slug === "blog") return <BlogPage lang={found.lang} crumbs={[home, blog]} />;
+  if (route.kind === "category") {
+    const name = titleFor(route);
+    // Categories without posts are leftovers from the old site's spam; send them to the blog.
+    if (!name || !posts.some((p) => p.categories.includes(name))) permanentRedirect(localePath(found.lang, "/blog/"));
+    return <BlogPage lang={found.lang} category={name} crumbs={[home, blog, { label: name, href: href(found.lang, route) }]} />;
+  }
+  if (route.kind === "post") {
+    const doc = postBySlug(route.slug);
     if (!doc) notFound();
-    return <ContentPage doc={doc} lang={found.lang} isPost={route.kind === "post"} />;
+    return <ArticlePage doc={doc} lang={found.lang} kind="post" crumbs={[home, blog, { label: doc.title, href: href(found.lang, route) }]} />;
+  }
+  if (route.kind === "page" && GUIDES.includes(route.slug)) {
+    const doc = pageBySlug(route.slug)!;
+    return <ArticlePage doc={doc} lang={found.lang} kind="guide" crumbs={[home, { label: doc.title, href: href(found.lang, route) }]} />;
+  }
+
+  if (route.kind === "page") {
+    const doc = pageBySlug(route.slug);
+    if (!doc) notFound();
+    return <ContentPage doc={doc} />;
   }
   return <Interim title={titleFor(route) ?? ""} lang={found.lang} />;
 }
 
-/** Long-form content (legal pages, articles) until each page type gets its own template. */
-function ContentPage({ doc, lang, isPost }: { doc: Doc; lang: Locale; isPost: boolean }) {
+/** Long-form pages (legal and the rest) until each page type gets its own template. */
+function ContentPage({ doc }: { doc: Doc }) {
   return (
     <article className="wrap pb-28 pt-36">
       <header className="mx-auto max-w-3xl">
-        {isPost && (
-          <p className="text-sm text-platinum-2">
-            <time dateTime={doc.date}>{new Date(doc.date).toLocaleDateString(lang, { day: "numeric", month: "long", year: "numeric" })}</time>
-          </p>
-        )}
         <h1 className="mt-3 text-4xl sm:text-5xl">{doc.title}</h1>
       </header>
       <div className="prose mx-auto mt-12 max-w-3xl" dangerouslySetInnerHTML={{ __html: doc.content_html }} />

@@ -24,7 +24,7 @@ ALLOWED = {
     'p': (), 'br': (), 'h2': (), 'h3': (), 'h4': (), 'h5': (), 'h6': (), 'ul': (), 'ol': (), 'li': (),
     'strong': (), 'b': (), 'em': (), 'i': (), 'blockquote': (), 'hr': (), 'figure': (), 'figcaption': (),
     'table': (), 'thead': (), 'tbody': (), 'tr': (), 'th': ('colspan', 'rowspan'), 'td': ('colspan', 'rowspan'),
-    'a': ('href',), 'img': ('src', 'alt', 'width', 'height'),
+    'a': ('href',), 'img': ('src', 'alt', 'width', 'height'), 'details': (), 'summary': (),
 }
 VOID = {'br', 'hr', 'img'}
 DROP_WITH_CONTENT = {'script', 'style', 'iframe', 'object', 'noscript', 'svg', 'button', 'select', 'textarea', 'template', 'form'}
@@ -93,6 +93,9 @@ def clean_html(s):
     out = ''.join(p.out)
     out = re.sub(r'<(p|li|h[2-6]|strong|em|b|i)>\s*</\1>', '', out)  # empty leftovers
     out = re.sub(r'\n{3,}', '\n\n', out)
+    if '<p>' not in out:  # classic-editor posts: paragraphs are blank-line separated (WordPress's autop)
+        out = '\n\n'.join(c if re.match(r'\s*</?(p|h\d|ul|ol|li|table|figure|blockquote|details|summary|img|hr)\b', c) else f'<p>{c.strip()}</p>'
+                            for c in re.split(r'\n\s*\n|\n(?=<(?:h\d|ul|ol|table|details|figure|blockquote)\b)', out) if c and c.strip())
     return out.strip()
 
 def text(s):
