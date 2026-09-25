@@ -93,7 +93,8 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
     const loupeOn = p > 0.95 && p < 2.05;
     if (loupe.current) {
       loupe.current.visible = loupeOn;
-      loupe.current.position.x = mix(-2.6, 2.6, clamp01((p - 1.02) / 0.9));
+      // Keep the entire loupe inside the canvas so its edge never exposes the stage boundary.
+      loupe.current.position.x = mix(-1.55, 1.55, clamp01((p - 1.02) / 0.9));
     }
     o.readouts?.querySelectorAll<HTMLElement>("[data-row]").forEach((row, i) => {
       const v = seg(p, 1, 0.25 + i * 0.12, 0.37 + i * 0.12) * (1 - seg(p, 2, 0, 0.15));
@@ -209,15 +210,15 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
         </group>
       </PresentationControls>
 
-      {/* Loupe: a real curved lens, so the facets underneath are genuinely magnified. */}
-      <group ref={loupe} position={[-2.6, 0.15, 1.6]} visible={false}>
+      {/* Loupe: transparent glass keeps the page ground continuous through the WebGL canvas. */}
+      <group ref={loupe} position={[-1.55, 0.15, 1.6]} visible={false}>
         <mesh>
           <torusGeometry args={[0.72, 0.06, 16, 64]} />
           <meshStandardMaterial color={INK} metalness={0.7} roughness={0.3} />
         </mesh>
-        <mesh scale={[0.7, 0.7, 0.22]}>
-          <sphereGeometry args={[1, 48, 24]} />
-          <meshPhysicalMaterial transmission={1} thickness={1.2} ior={1.5} roughness={0} metalness={0} />
+        <mesh position={[0, 0, -0.01]}>
+          <circleGeometry args={[0.67, 64]} />
+          <meshBasicMaterial color="#f4f0e8" transparent opacity={0.08} depthWrite={false} />
         </mesh>
         <mesh position={[0.62, -0.62, 0]} rotation={[0, 0, Math.PI / 4]}>
           <cylinderGeometry args={[0.05, 0.05, 0.7, 12]} />
