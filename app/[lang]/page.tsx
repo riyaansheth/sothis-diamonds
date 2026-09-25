@@ -240,7 +240,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* 12. Closing call to action: the page's one burgundy block */}
-      <section className="bg-wine text-on-accent">
+      <section className="bg-wine bg-[url(/brand/bg-closing.webp)] bg-cover bg-center text-on-accent">
         <div className="wrap py-32 text-center lg:py-44">
           <div aria-hidden className="mx-auto mb-12 h-px w-24 bg-champagne" />
           <RevealHeading lines={[t.closing.title]} className="mx-auto max-w-4xl text-4xl sm:text-5xl lg:text-6xl" />
