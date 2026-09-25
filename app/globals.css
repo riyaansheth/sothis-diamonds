@@ -382,6 +382,49 @@
     flex-grow: 1.55;
   }
 }
+/* Silk behind each side: drifts closer and brightens on hover, with one pass of light across it. */
+.paths-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  filter: saturate(0.9) brightness(0.98);
+  transition:
+    transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.9s ease;
+}
+.paths-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 250 235 / 0.55) 50%, transparent 65%);
+  transform: translateX(-110%);
+  pointer-events: none;
+}
+.paths > a {
+  isolation: isolate;
+}
+.paths > a:hover .paths-bg,
+.paths > a:focus-visible .paths-bg {
+  transform: scale(1.1);
+  filter: saturate(1.1) brightness(1.04);
+}
+.paths > a:hover .paths-sheen,
+.paths > a:focus-visible .paths-sheen {
+  transform: translateX(110%);
+  transition: transform 1.4s cubic-bezier(0.3, 0.6, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .paths-bg,
+  .paths-sheen {
+    transition: none !important;
+  }
+  .paths-sheen {
+    display: none;
+  }
+}
 .paths-window {
   transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
