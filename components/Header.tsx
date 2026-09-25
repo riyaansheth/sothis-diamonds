@@ -48,6 +48,9 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
               ))}
             </ul>
           </div>
+          <Link href={href("/about-sothis-diamonds/")} className="hidden py-2 text-sm tracking-[0.04em] hover:text-burgundy md:block">
+            {t.about}
+          </Link>
         </div>
 
         <Link href={href("/")} className="shrink-0" aria-label={site.name}>

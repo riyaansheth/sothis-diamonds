@@ -449,6 +449,42 @@
   transform: scale(1.08);
 }
 
+/* Why Sothis: the hovered row's number turns burgundy and its stone slides in (first stone by default). */
+.why-num,
+.why-row h3 {
+  transition: color 0.4s ease;
+}
+.why-row:is(:hover, :focus-visible) .why-num,
+.why-row:is(:hover, :focus-visible) h3 {
+  color: var(--color-burgundy);
+}
+.why-img {
+  opacity: 0;
+  transform: translateX(8%) scale(1.04);
+  transition:
+    opacity 0.6s ease,
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.why:has(.why-row:nth-child(1):is(:hover, :focus-visible)) .why-img:nth-child(1),
+.why:has(.why-row:nth-child(2):is(:hover, :focus-visible)) .why-img:nth-child(2),
+.why:has(.why-row:nth-child(3):is(:hover, :focus-visible)) .why-img:nth-child(3),
+.why:has(.why-row:nth-child(4):is(:hover, :focus-visible)) .why-img:nth-child(4),
+.why:has(.why-row:nth-child(5):is(:hover, :focus-visible)) .why-img:nth-child(5),
+.why:has(.why-row:nth-child(6):is(:hover, :focus-visible)) .why-img:nth-child(6) {
+  opacity: 1;
+  transform: none;
+}
+.why:not(:has(.why-row:is(:hover, :focus-visible))) .why-img:first-child {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .why-img {
+    transform: none;
+    transition: opacity 0.3s ease;
+  }
+}
+
 /* The selling journey stays pinned over a quiet field of ivory silk. */
 .steps-section {
   background-color: var(--color-ivory-deep);
