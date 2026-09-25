@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CroppedImage, type Crop } from "./CroppedImage";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { displayName, keySpecs, mediaUrl, type Product } from "@/lib/products";
@@ -13,6 +13,12 @@ type T = Dictionary["stones"];
 
 export function ProductCard({ product: p, href, t, crop }: { product: Product; href: string; t: T; crop?: Crop }) {
   const quick = useRef<HTMLDialogElement>(null);
+  // The quick view's video and photo only exist while it's open; otherwise every card on a page
+  // would download (and autoplay) its stone video in a hidden dialog.
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (open) quick.current?.showModal();
+  }, [open]);
   const name = displayName(p);
 
   return (
@@ -34,7 +40,7 @@ export function ProductCard({ product: p, href, t, crop }: { product: Product; h
 
       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <CartButton product={p} t={t} />
-        <button type="button" onClick={() => quick.current?.showModal()} className="text-platinum-2 underline-offset-4 hover:text-ink hover:underline">
+        <button type="button" onClick={() => setOpen(true)} className="text-platinum-2 underline-offset-4 hover:text-ink hover:underline">
           {t.quickView}
         </button>
         <CompareButton id={p.id} t={t} />
@@ -42,14 +48,16 @@ export function ProductCard({ product: p, href, t, crop }: { product: Product; h
 
       <dialog
         ref={quick}
+        onClose={() => setOpen(false)}
         aria-label={name}
         onClick={(e) => e.target === quick.current && quick.current.close()}
         className="m-auto w-[min(56rem,calc(100vw-2rem))] rounded-sm bg-ivory-deep p-0 text-ink ring-1 ring-line backdrop:bg-ivory/80"
       >
+        {open && (
         <div className="grid md:grid-cols-2">
           <div className="relative aspect-square bg-ivory-deep">
             {p.video ? (
-              <StoneVideo src={mediaUrl(p.video)} poster={p.image ? mediaUrl(p.image) : undefined} className="size-full object-cover" />
+              <StoneVideo src={mediaUrl(p.video)} poster={p.image ? `/_next/image/?url=${encodeURIComponent(mediaUrl(p.image))}&w=640&q=75` : undefined} className="size-full object-cover" />
             ) : (
               p.image && <Image src={mediaUrl(p.image)} alt={name} fill sizes="28rem" className="object-cover" />
             )}
@@ -67,6 +75,7 @@ export function ProductCard({ product: p, href, t, crop }: { product: Product; h
             </div>
           </div>
         </div>
+        )}
       </dialog>
     </article>
   );

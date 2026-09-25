@@ -244,7 +244,7 @@
 .choir-section {
   background-image:
     linear-gradient(rgb(244 240 232 / 0.2), rgb(244 240 232 / 0.2)),
-    url("/media/2026/09/ivory-satin-background.png");
+    url("/brand/bg-satin.webp");
   background-position: center;
   background-size: cover;
 }
@@ -492,7 +492,7 @@
   background-color: var(--color-ivory-deep);
   background-image:
     linear-gradient(rgb(244 240 232 / 0.12), rgb(244 240 232 / 0.12)),
-    url("/media/2026/09/ivory-satin-steps-background.png");
+    url("/brand/bg-satin-steps.webp");
   background-position: center bottom;
   background-size: cover;
 }

@@ -59,7 +59,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
   const catPath = localePath(lang, isDiamond ? "/product-category/diamonds/" : "/product-category/jewelery/");
 
   const slides: Slide[] = [
-    ...(p.video ? [{ kind: "video" as const, src: mediaUrl(p.video), poster: p.image ? mediaUrl(p.image) : undefined }] : []),
+    ...(p.video ? [{ kind: "video" as const, src: mediaUrl(p.video), poster: p.image ? `/_next/image/?url=${encodeURIComponent(mediaUrl(p.image))}&w=1080&q=75` : undefined }] : []),
     ...[p.image, ...p.gallery].filter((x): x is string => Boolean(x)).map((src) => ({ kind: "image" as const, src: mediaUrl(src) })),
   ];
 
