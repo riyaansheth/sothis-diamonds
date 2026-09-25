@@ -8,6 +8,7 @@ import { ArticlePage, GUIDES } from "@/components/templates/ArticlePage";
 import { BlogPage } from "@/components/templates/BlogPage";
 import { CalculatorPage } from "@/components/templates/CalculatorPage";
 import { SellPage } from "@/components/templates/SellPage";
+import { STORE_PAGES, StorePage } from "@/components/templates/StorePage";
 import { ShopPage } from "@/components/templates/ShopPage";
 import { allProducts, displayName } from "@/lib/products";
 import { allRoutes, alternates, href, resolve, type Route } from "@/lib/routes";
@@ -107,6 +108,9 @@ export default async function CatchAll({ params }: PageProps<"/[lang]/[...slug]"
   }
 
   const blog = { label: t.blog.title, href: localePath(found.lang, "/blog/") };
+  if (route.kind === "page" && Object.hasOwn(STORE_PAGES, route.slug)) {
+    return <StorePage lang={found.lang} kind={STORE_PAGES[route.slug as keyof typeof STORE_PAGES]} path={href(found.lang, route)} />;
+  }
   if (route.kind === "page" && route.slug === "blog") return <BlogPage lang={found.lang} crumbs={[home, blog]} />;
   if (route.kind === "category") {
     const name = titleFor(route);
