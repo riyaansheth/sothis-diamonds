@@ -64,21 +64,25 @@ export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
 }) {
   const [active, setActive] = useState(0);
   const [near, setNear] = useState(false);
+  const pin = useRef<HTMLDivElement>(null);
   const list = useRef<HTMLOListElement>(null);
   const root = useRef<HTMLDivElement>(null);
   const progress = useRef(0);
 
   useEffect(() => {
-    const ol = list.current!;
     let raf = 0;
     const update = () => {
       raf = 0;
-      // 0 when the list's top reaches mid-screen; 6 when its bottom reaches the bottom of the screen,
-      // so the last step completes while the stage is still pinned.
-      const r = ol.getBoundingClientRect();
+      // Each step's scene plays while its text crosses the reading line (mid-screen, or mid free space
+      // below the pinned stage on phones). Space above the first step means nothing starts until the
+      // section is pinned and fully in view; space after the last lets it finish while still pinned.
+      const items = list.current!.children;
+      const first = items[0].getBoundingClientRect();
+      const stickyBox = pin.current!.getBoundingClientRect();
       const vh = window.innerHeight;
-      const span = Math.max(1, r.height - vh * 0.5);
-      const p = Math.min(steps.length - 0.001, Math.max(0, ((vh * 0.5 - r.top) / span) * steps.length));
+      const sideBySide = stickyBox.height > vh * 0.8;
+      const line = sideBySide ? vh / 2 : (stickyBox.bottom + vh) / 2;
+      const p = Math.min(steps.length - 0.001, Math.max(0, (line - first.top) / first.height));
       progress.current = p;
       setActive(Math.floor(p));
     };
@@ -101,7 +105,7 @@ export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
 
   return (
     <div ref={root} className="grid gap-x-16 lg:grid-cols-[1fr_1fr]">
-      <div className="sticky top-20 z-10 -mx-4 bg-ivory-deep px-4 pb-4 pt-6 lg:top-0 lg:mx-0 lg:flex lg:h-dvh lg:flex-col lg:justify-center lg:bg-transparent lg:px-0 lg:pb-8 lg:pt-24">
+      <div ref={pin} className="sticky top-20 z-10 -mx-4 bg-ivory-deep px-4 pb-4 pt-6 lg:top-0 lg:mx-0 lg:flex lg:h-dvh lg:flex-col lg:justify-center lg:bg-transparent lg:px-0 lg:pb-8 lg:pt-24">
         <div className="hidden lg:block">{heading}</div>
         <div className="mx-auto aspect-square h-[36vh] max-w-full lg:mx-0 lg:mt-4 lg:h-auto lg:w-[min(32rem,36vw,52vh)]">
           {near && <StepsStage data={stage} progress={progress} />}
@@ -119,7 +123,7 @@ export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
 
       <div>
         <div className="pt-16 lg:hidden">{heading}</div>
-        <ol ref={list}>
+        <ol ref={list} className="pb-[35vh] pt-[30vh] lg:pb-[50vh] lg:pt-[50vh]">
           {steps.map(([title, body], i) => (
             <li
               key={title}

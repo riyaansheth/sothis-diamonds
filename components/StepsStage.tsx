@@ -80,7 +80,7 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
     };
 
     // 1. Submit: the stone drops in, the viewfinder closes, a shutter flash, the captured photo.
-    let y = mix(2.4, 0.15, seg(p, 0, 0, 0.3));
+    let y = mix(3.6, 0.15, seg(p, 0, 0, 0.3)); // starts fully above the stage, drops in once the section is pinned
     let x = 0;
     let scale = 1;
     let tilt = 0.5;
