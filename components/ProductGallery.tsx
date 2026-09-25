@@ -15,7 +15,7 @@ export function ProductGallery({ slides, name, t }: { slides: Slide[]; name: str
 
   const view = (s: Slide, large = false) =>
     s.kind === "video" ? (
-      <StoneVideo src={s.src} poster={s.poster} className="size-full object-cover" />
+      <StoneVideo src={s.src} poster={s.poster && `/_next/image/?url=${encodeURIComponent(s.poster)}&w=1080&q=75`} className="size-full object-cover" />
     ) : (
       <Image src={s.src} alt={name} fill priority={!large} sizes={large ? "90vw" : "(min-width: 1024px) 50vw, 100vw"} className={large ? "object-contain" : "object-cover"} />
     );
