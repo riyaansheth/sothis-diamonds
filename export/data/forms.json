@@ -1,0 +1,192 @@
+[
+  {
+    "id": 29421,
+    "title": "Sell Now",
+    "fields": [
+      {
+        "id": "1",
+        "type": "name",
+        "label": "Your Name",
+        "description": "",
+        "required": "1",
+        "size": "medium"
+      },
+      {
+        "label": "Layout",
+        "description": "",
+        "size": "large",
+        "id": "33",
+        "type": "layout"
+      },
+      {
+        "id": "31",
+        "type": "address",
+        "label": "Address",
+        "description": "",
+        "size": "large"
+      },
+      {
+        "id": "2",
+        "type": "email",
+        "label": "Email",
+        "description": "",
+        "required": "1",
+        "size": "medium",
+        "placeholder": ""
+      },
+      {
+        "id": "34",
+        "type": "phone",
+        "label": "Phone",
+        "description": "",
+        "required": "1",
+        "size": "medium",
+        "placeholder": ""
+      },
+      {
+        "label": "Layout",
+        "description": "",
+        "size": "large",
+        "id": "35",
+        "type": "layout"
+      },
+      {
+        "id": "37",
+        "type": "select",
+        "label": "Type of Item",
+        "choices": {
+          "1": {
+            "label": "Diamond",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          },
+          "7": {
+            "label": "Colored Diamonds",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          },
+          "2": {
+            "label": "Ring",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          },
+          "3": {
+            "label": "Third Necklace",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          },
+          "4": {
+            "label": "Bracelet",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          },
+          "5": {
+            "label": "Earrings",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          },
+          "6": {
+            "label": "Other",
+            "value": "",
+            "image": "",
+            "icon": "face-smile",
+            "icon_style": "regular"
+          }
+        },
+        "description": "",
+        "size": "medium",
+        "placeholder": ""
+      },
+      {
+        "id": "36",
+        "type": "number",
+        "label": "Carat / Weight",
+        "description": "",
+        "size": "medium",
+        "placeholder": ""
+      },
+      {
+        "id": "15",
+        "type": "file-upload",
+        "label": "Upload Photos",
+        "description": "",
+        "required": "1"
+      },
+      {
+        "id": "16",
+        "type": "textarea",
+        "label": "Additional Notes",
+        "description": "",
+        "size": "medium",
+        "placeholder": ""
+      }
+    ]
+  },
+  {
+    "id": 30705,
+    "title": "Contact Form",
+    "fields": [
+      {
+        "id": "1",
+        "type": "name",
+        "label": "Name",
+        "description": "",
+        "required": "1",
+        "size": "medium"
+      },
+      {
+        "id": "4",
+        "type": "phone",
+        "label": "Phone",
+        "description": "",
+        "required": "1",
+        "size": "medium",
+        "placeholder": ""
+      },
+      {
+        "id": "2",
+        "type": "email",
+        "label": "Email",
+        "description": "",
+        "required": "1",
+        "size": "medium",
+        "placeholder": ""
+      },
+      {
+        "id": "3",
+        "type": "textarea",
+        "label": "Comment or Message",
+        "description": "",
+        "size": "medium",
+        "placeholder": ""
+      }
+    ]
+  },
+  {
+    "id": 30712,
+    "title": "Inline Newsletter Signup Form",
+    "fields": [
+      {
+        "id": "2",
+        "type": "email",
+        "label": "12",
+        "description": "",
+        "required": "1",
+        "size": "medium",
+        "placeholder": "Enter your mail"
+      }
+    ]
+  }
+]

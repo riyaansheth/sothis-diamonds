@@ -1,0 +1,537 @@
+[
+  {
+    "id": 724,
+    "slug": "promo-popup",
+    "title": "Promo popup",
+    "status": "publish",
+    "date": "2021-08-30 15:39:28",
+    "modified": "2021-08-30 15:39:28",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-section-title-css\" href=\"https://dummy.xtemos.com/woodmart2/elementor/wp-content/themes/woodmart/css/parts/el-section-title.min.css?ver=7.3.0\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t<h4>HEY YOU, SIGN UP AND CONNECT TO WOODMART!</h4> \n\t\t\t\t\tBe the first to learn about our latest trends and get exclusive offers\t\t\t\t\n\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-mc4wp-css\" href=\"https://dummy.xtemos.com/woodmart2/elementor/wp-content/themes/woodmart/css/parts/int-mc4wp.min.css?ver=7.3.0\" type=\"text/css\" media=\"all\" /> \t\t\t<!-- Mailchimp for WordPress v4.9.6 - https://wordpress.org/plugins/mailchimp-for-wp/ --><form id=\"mc4wp-form-1\" method=\"post\" data-id=\"594\" data-name=\"Newsletter form\" >\n  <p>\n    <input type=\"email\" name=\"EMAIL\" placeholder=\"Your email address\" required />\n  </p>\n  <p>\n     <input type=\"submit\" value=\"Sign up\"/>\n  </p>\n<label style=\"display: none !important;\">Leave this field empty if you're human: <input type=\"text\" name=\"_mc4wp_honeypot\" value=\"\" tabindex=\"-1\" autocomplete=\"off\" /></label><input type=\"hidden\" name=\"_mc4wp_timestamp\" value=\"1701960643\" /><input type=\"hidden\" name=\"_mc4wp_form_id\" value=\"594\" /><input type=\"hidden\" name=\"_mc4wp_form_element_id\" value=\"mc4wp-form-1\" /></form><!-- / Mailchimp for WordPress Plugin -->\t\t\n\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-text-block-css\" href=\"https://dummy.xtemos.com/woodmart2/elementor/wp-content/themes/woodmart/css/parts/el-text-block.min.css?ver=7.3.0\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<p>Will be used in accordance with our <strong><a href=\"#\">Privacy Policy</a></strong></p>",
+    "elementor_text": [
+      {
+        "widget": "wd_title",
+        "field": "title",
+        "text": "HEY YOU, SIGN UP AND CONNECT TO WOODMART!"
+      },
+      {
+        "widget": "wd_text_block",
+        "field": "text",
+        "text": "Will be used in accordance with our Privacy Policy"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "promo-popup"
+    },
+    "seo": {},
+    "type": "cms_block"
+  },
+  {
+    "id": 728,
+    "slug": "prefooter",
+    "title": "Prefooter",
+    "status": "publish",
+    "date": "2021-08-30 15:41:57",
+    "modified": "2021-08-30 15:41:57",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-swiper-css\" href=\"https://dummy.xtemos.com/woodmart2/elementor/wp-content/themes/woodmart/css/parts/lib-swiper.min.css?ver=7.3.0\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-brands-css\" href=\"https://dummy.xtemos.com/woodmart2/elementor/wp-content/themes/woodmart/css/parts/el-brand.min.css?ver=7.3.0\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Vitra\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=vitra\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/10/brand-witra.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/10/brand-witra.png 180w, /media/2021/10/brand-witra-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Magisso\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=magisso\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-Magisso.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-Magisso.png 180w, /media/2021/08/brand-Magisso-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Louis Poulsen\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=louis-poulsen\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-Louis-Poulsen.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-Louis-Poulsen.png 180w, /media/2021/08/brand-Louis-Poulsen-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"KLÖBER\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=klober\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-klober.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-klober.png 180w, /media/2021/08/brand-klober-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Joseph Joseph\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=joseph-joseph\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-Joseph-Joseph.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-Joseph-Joseph.png 180w, /media/2021/08/brand-Joseph-Joseph-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Hay\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=hay\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-hay.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-hay.png 180w, /media/2021/08/brand-hay-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Flos\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=flos\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-flos.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-flos.png 180w, /media/2021/08/brand-flos-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Eva Solo\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=eva-solo\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-Eva-Solo.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-Eva-Solo.png 180w, /media/2021/08/brand-Eva-Solo-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a title=\"Alessi\" href=\"https://dummy.xtemos.com/woodmart2/elementor/shop/?filter_brand=alessi\"></a>\n\t\t\t\t\t\t\t\t\t<img width=\"180\" height=\"100\" src=\"/media/2021/08/brand-alessi.png\" alt=\"\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2021/08/brand-alessi.png 180w, /media/2021/08/brand-alessi-130x72.png 130w\" sizes=\"(max-width: 180px) 100vw, 180px\" />",
+    "elementor_text": [],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "prefooter"
+    },
+    "seo": {
+      "og_image": "https://sothisdiamonds.com/wp-content/uploads/2021/10/brand-witra.png"
+    },
+    "type": "cms_block"
+  },
+  {
+    "id": 818,
+    "slug": "footer-1-column-darck",
+    "title": "Footer 1 column Dark",
+    "status": "publish",
+    "date": "2021-08-31 13:41:48",
+    "modified": "2025-09-05 19:42:45",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<a  href=\"#\" aria-label=\"Image link\">\n\t\t\t\t\t\t\t\t<img width=\"220\" height=\"55\" src=\"/media/2025/09/Untitled-design-2025-09-05T164604.944-220x55.png\" alt=\"\" decoding=\"async\" />\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-text-block-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-text-block.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<p>With 55+ years of expertise, Sothis Diamonds is a trusted name in Diamonds, Pearls, Vintage &amp; Color Stones across Europe.</p>\n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-list-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-list.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-el-list-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-list-wpb-elem.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<img  src=\"/media/2021/08/wd-cursor-dark.svg\" title=\"wd-cursor-dark\" loading=\"lazy\" width=\"14\" height=\"14\">\t\t\t\t\t\n\t\t\t\t\t\tBelgium\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<img  src=\"/media/2021/08/wd-phone-dark.svg\" title=\"wd-phone-dark\" loading=\"lazy\" width=\"14\" height=\"14\">\t\t\t\t\t\n\t\t\t\t\t\tPhone: (064) 332-1233\t\t\t\t\t\n\t\t\t\t\t\t<a  href=\"tel:%20(064)%20332-1233\" aria-label=\"List item link\"></a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<img  src=\"/media/2021/08/wd-envelope-dark.svg\" title=\"wd-envelope-dark\" loading=\"lazy\" width=\"14\" height=\"14\">\t\t\t\t\t\n\t\t\t\t\t\tMail: info@sothisdiamonds.com\t\t\t\t\t\n\t\t\t\t\t\t<a  href=\"http://info@sothisdiamonds.com\" aria-label=\"List item link\"></a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>",
+    "elementor_text": [
+      {
+        "widget": "wd_text_block",
+        "field": "text",
+        "text": "With 55+ years of expertise, Sothis Diamonds is a trusted name in Diamonds, Pearls, Vintage & Color Stones across Europe."
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "footer-1-column-darck"
+    },
+    "seo": {
+      "og_image": "https://sothisdiamonds.com/wp-content/uploads/2025/09/Untitled-design-2025-09-05T164604.944-220x55.png"
+    },
+    "type": "cms_block"
+  },
+  {
+    "id": 4452,
+    "slug": "contact-us-infobox",
+    "title": "Contact us infobox",
+    "status": "publish",
+    "date": "2021-10-12 16:31:20",
+    "modified": "2025-09-05 19:20:44",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-info-box-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-info-box.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-el-subtitle-style-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-subtitle-style.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\n\t\t\t\t\t\t\tOUR STORE\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<h4\t\t\t\t\t\tclass=\"info-box-title title box-title-style-default wd-fontsize-m\" data-elementor-setting-key=\"title\">\n\t\t\t\t\t\t\t\tVISIT OUR NEW<br />\nSTORE IN Belgium\t\t\t\t\t\t</h4>\n\t\t\t\t\t<p>123456, complex, Belgium,</p>\n\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-button-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-button.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<a  href=\"https://sothisdiamonds.com/about-us-3/\">\n\t\t\t\t\tSee More About\t\t\t\t\n\t\t\t\t\t\t\t</a>",
+    "elementor_text": [
+      {
+        "widget": "wd_infobox",
+        "field": "title",
+        "text": "VISIT OUR NEW STORE IN Belgium"
+      },
+      {
+        "widget": "wd_infobox",
+        "field": "content",
+        "text": "123456, complex, Belgium,"
+      },
+      {
+        "widget": "wd_infobox",
+        "field": "subtitle",
+        "text": "OUR STORE"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "contact-us-infobox"
+    },
+    "seo": {},
+    "type": "cms_block"
+  },
+  {
+    "id": 29058,
+    "slug": "main-footer",
+    "title": "main footer",
+    "status": "publish",
+    "date": "2025-09-05 20:15:28",
+    "modified": "2026-01-18 13:02:45",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<a  href=\"https://sothisdiamonds.com/\" aria-label=\"Image link\">\n\t\t\t\t\t\t\t\t<img  alt=\"Sothis Diamonds | Trusted Jewellery Buyers &amp; Diamond Specialists in Europe\" src=\"/media/2025/09/SOTHIS-DIAMONDS-3.svg\" title=\"SOTHIS DIAMONDS (3)\" loading=\"lazy\" width=\"180\" height=\"40\">\t\t\t\t\t\t\t</a>\n\t\t\t<p>With 10+ years of expertise, Sothis Diamonds is a trusted name in Diamonds, Vintage &amp; Color Stones across Europe.</p>\n\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<img  src=\"/media/2025/09/wd-cursor-dark.svg\" title=\"wd-cursor-dark.svg\" loading=\"lazy\" width=\"14\" height=\"14\">\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tHoveniersstraat 2/Bus 210, 2018 Antwerpen\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<img  src=\"/media/2025/09/wd-phone-dark.svg\" title=\"wd-phone-dark.svg\" loading=\"lazy\" width=\"14\" height=\"14\">\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t<a  href=\"tel:%20+32470781219\">\n\t\t\t\t\t\t\t\tPhone: +32470781219\t\t\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<img  src=\"/media/2025/09/wd-envelope-dark.svg\" title=\"wd-envelope-dark.svg\" loading=\"lazy\" width=\"14\" height=\"14\">\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tMail: info@sothisdiamonds.com\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t<a rel=\"noopener noreferrer nofollow\" href=\"#\" target=\"_blank\" aria-label=\"Facebook social link\">\n\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<a rel=\"noopener noreferrer nofollow\" href=\"#\" target=\"_blank\" aria-label=\"Instagram social link\">\n\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<a rel=\"noopener noreferrer nofollow\" href=\"#\" target=\"_blank\" aria-label=\"YouTube social link\">\n\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<a >\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTop Categories\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/sell-diamond/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSell Diamonds\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/antique-jewellery/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSell Antique Jewellery\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/sell-watches/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSell Watches\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/sell-colored-stones/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSell Colored Stones\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/product-category/diamonds/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBuy Diamonds\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t\t<a >\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tUSEFUL LINKS\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/blog/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBlogs\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/about-us/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAbout Us\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/contact-us/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tContact Us\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/shipping-policy/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tShipping Policy\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/refund_returns/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tRefund &amp; Return Policy\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/terms-conditions/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTerms &amp; Conditions\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a  href=\"https://sothisdiamonds.com/privacy-policy/\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPrivacy Policy\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul><li>\n\t\t<a href=\"https://sothisdiamonds.com/product/exquisite-12ct-round-diamond/\" title=\"RD 12.39ct E SI1 Diamond\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-800x800.png\" alt=\"Premier 7.06ct Round Diamond F SI2 | Sothis Diamonds\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-800x800.png 800w, /media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-300x300.png 300w, /media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-150x150.png 150w, /media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-768x768.png 768w, /media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-430x430.png 430w, /media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako-700x700.png 700w, /media/2025/09/Gemini_Generated_Image_6akozw6akozw6ako.png 1024w\" sizes=\"auto, (max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/exquisite-12ct-round-diamond/\" title=\"RD 12.39ct E SI1 Diamond\">\n\t\t\t\tRD 12.39ct E SI1 Diamond\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&#36;&nbsp;382,702.00</bdi>PC\n\t</li>\n<li>\n\t\t<a href=\"https://sothisdiamonds.com/product/exquisite-diamond-7-06ct-f-si2-round/\" title=\"RD 7.06ct F SI2 Diamond\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-800x800.png\" alt=\"Exquisite Diamond 7.06ct F SI2 – Round Brilliant | Sothis Diamonds\" decoding=\"async\" loading=\"lazy\" srcset=\"/media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-800x800.png 800w, /media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-300x300.png 300w, /media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-150x150.png 150w, /media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-768x768.png 768w, /media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-430x430.png 430w, /media/2025/09/Gemini_Generated_Image_76afaw76afaw76af-700x700.png 700w, /media/2025/09/Gemini_Generated_Image_76afaw76afaw76af.png 1024w\" sizes=\"auto, (max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/exquisite-diamond-7-06ct-f-si2-round/\" title=\"RD 7.06ct F SI2 Diamond\">\n\t\t\t\tRD 7.06ct F SI2 Diamond\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&#36;&nbsp;71,758.00</bdi>PC\n\t</li>\n</ul>\t\t\n\t\t[language-switcher][woocs]",
+    "elementor_text": [
+      {
+        "widget": "wd_text_block",
+        "field": "text",
+        "text": "With 10+ years of expertise, Sothis Diamonds is a trusted name in Diamonds, Vintage & Color Stones across Europe."
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Top Categories"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Sell Diamonds"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Sell Antique Jewellery"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Sell Watches"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Sell Colored Stones"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Buy Diamonds"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "USEFUL LINKS"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Blogs"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "About Us"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Contact Us"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Shipping Policy"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Refund & Return Policy"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Terms & Conditions"
+      },
+      {
+        "widget": "wd_extra_menu_list",
+        "field": "title",
+        "text": "Privacy Policy"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "main-footer",
+      "fr": "pied-de-page-principal",
+      "nl": "hoofdvoettekst",
+      "de": "hauptfuszeile",
+      "it": "pie-di-pagina-principale",
+      "es": "pie-de-pagina-principal"
+    },
+    "seo": {
+      "og_image": "https://sothisdiamonds.com/wp-content/uploads/2025/09/SOTHIS-DIAMONDS-3.svg"
+    },
+    "type": "cms_block"
+  },
+  {
+    "id": 29099,
+    "slug": "currency-button",
+    "title": "currency button",
+    "status": "publish",
+    "date": "2025-09-08 16:34:20",
+    "modified": "2025-10-02 19:20:07",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "[woocs][language-switcher]",
+    "elementor_text": [],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "currency-button"
+    },
+    "seo": {},
+    "type": "cms_block"
+  },
+  {
+    "id": 30175,
+    "slug": "elementor-30175",
+    "title": "Elementor #30175",
+    "status": "publish",
+    "date": "2025-10-02 14:55:40",
+    "modified": "2025-12-02 10:52:03",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "✉️ <a href=\"mailto:info@sothisdiamonds.com\">info@sothisdiamonds.com</a>\n  &nbsp;&nbsp; | &nbsp;&nbsp;\n    📱 <a href=\"tel:+32470781219\">+32470781219</a>\n<style>\n.header-info {\n  color: #ffffff;\n  font-size: 14px;\n  font-weight: 500;\n  text-align: center;\n  background: transparent;\n  padding: 5px 0;\n}\n.header-info a {\n  color: #ffffff;\n  text-decoration: none;\n}\n.header-info a:hover {\n  text-decoration: underline;\n}\n</style>",
+    "elementor_text": [],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "elementor-30175",
+      "fr": "elementaire-30175",
+      "nl": "elementor-30175",
+      "de": "elementor-30175",
+      "it": "elementare-30175",
+      "es": "elementor-30175"
+    },
+    "seo": {},
+    "type": "cms_block"
+  },
+  {
+    "id": 30182,
+    "slug": "mobile-top-header",
+    "title": "Mobile top header",
+    "status": "publish",
+    "date": "2025-10-02 15:06:46",
+    "modified": "2025-10-02 17:50:43",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<style>\n.top-bar-slider {\n  background: transparent;\n  color: #fff;\n  font-size: 13px;\n  height: 35px;\n  display: flex;\n  align-items: center;\n  overflow: hidden;\n  white-space: nowrap;\n  position: relative;\n}\n.slider-track {\n  display: inline-block;\n  padding-left: 10%;\n  animation: scroll 20s linear infinite;\n}\n.slider-track span {\n  display: inline-block;\n  padding: 0 20px;\n}\n.slider-track a {\n  color: #fff;\n  text-decoration: none;\n}\n.slider-track a:hover {\n  text-decoration: underline;\n}\n@keyframes scroll {\n  0% { transform: translateX(0%); }\n  100% { transform: translateX(-100%); }\n}\n</style>\n    ✉️ <a href=\"mailto:info@sothisdiamonds.com\">info@sothisdiamonds.com</a>\n    📱 \n      <a href=\"tel:+32477418568\">+32 477 41 85 68</a> / \n      <a href=\"tel:+919892356236\">+91 98923 56236</a>",
+    "elementor_text": [],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "mobile-top-header"
+    },
+    "seo": {},
+    "type": "cms_block"
+  },
+  {
+    "id": 6,
+    "slug": "default-kit",
+    "title": "Default Kit",
+    "status": "publish",
+    "date": "2025-09-05 10:19:40",
+    "modified": "2025-09-05 20:00:41",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "",
+    "elementor_text": [],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "default-kit"
+    },
+    "seo": {},
+    "type": "elementor_library"
+  },
+  {
+    "id": 29535,
+    "slug": "products-sections",
+    "title": "products sections",
+    "status": "publish",
+    "date": "2025-09-21 10:56:00",
+    "modified": "2025-09-21 10:56:00",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-banner-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-banner.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img width=\"860\" height=\"492\" src=\"/media/2021/09/jewellery-banner-img-1.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/09/jewellery-banner-img-1.jpg 860w, /media/2021/09/jewellery-banner-img-1-430x246.jpg 430w, /media/2021/09/jewellery-banner-img-1-150x86.jpg 150w, /media/2021/09/jewellery-banner-img-1-700x400.jpg 700w\" sizes=\"(max-width: 860px) 100vw, 860px\" />\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-el-subtitle-style-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-subtitle-style.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\n\t\t\t\t\t\t\t\tSpecial offer\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t<h4 data-elementor-setting-key=\"title\">\n\t\t\t\t\t\t\t\tStatement Pieces\t\t\t\t\t\t\t</h4>\n\t\t\t\t\t\t\t\t<p data-start=\"88\" data-end=\"140\">Designs to Shine Every Occasion</p>\n<p data-start=\"142\" data-end=\"163\"> </p>\n\t\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-button-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-button.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<a  href=\"#\">\n\t\t\t\t\tVIEW MORE\t\t\t\t\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<a href=\"#\" aria-label=\"Banner link\"></a>\n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-widget-product-list-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/woo-widget-product-list.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<h2>FEATURED PRODUCTS</h2><ul><li>\n\t\t<a href=\"https://sothisdiamonds.com/product/diamond-ring/\" title=\"Diamond Ring\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2021/10/jewellery-product-7.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-product-7.jpg 968w, /media/2021/10/jewellery-product-7-430x430.jpg 430w, /media/2021/10/jewellery-product-7-150x150.jpg 150w, /media/2021/10/jewellery-product-7-700x700.jpg 700w\" sizes=\"(max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/diamond-ring/\" title=\"Diamond Ring\">\n\t\t\t\tDiamond Ring\t\t\t</a>\n\t\t\t\t\t\t\tRated <strong>4.00</strong> out of 5\t\t\t\t\t\t<bdi>&euro;&nbsp;399.00</bdi>\n\t</li>\n<li>\n\t\t<a href=\"https://sothisdiamonds.com/product/antique-diamonds/\" title=\"Antique Diamonds\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2021/10/jewellery-product-3.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-product-3.jpg 968w, /media/2021/10/jewellery-product-3-430x430.jpg 430w, /media/2021/10/jewellery-product-3-150x150.jpg 150w, /media/2021/10/jewellery-product-3-700x700.jpg 700w\" sizes=\"(max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/antique-diamonds/\" title=\"Antique Diamonds\">\n\t\t\t\tAntique Diamonds\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&euro;&nbsp;299.00</bdi>\n\t</li>\n<li>\n\t\t<a href=\"https://sothisdiamonds.com/product/diamond-jewelry/\" title=\"Diamond Jewelry\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2021/10/jewellery-product-8.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-product-8.jpg 968w, /media/2021/10/jewellery-product-8-430x430.jpg 430w, /media/2021/10/jewellery-product-8-150x150.jpg 150w, /media/2021/10/jewellery-product-8-700x700.jpg 700w\" sizes=\"(max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/diamond-jewelry/\" title=\"Diamond Jewelry\">\n\t\t\t\tDiamond Jewelry\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&euro;&nbsp;199.00</bdi>\n\t</li>\n</ul>\t\t\n\t\t\t<h2>NEW PRODUCTS</h2><ul><li>\n\t\t<a href=\"https://sothisdiamonds.com/product/lab-grown-diamond-ring/\" title=\"Lab Grown Diamond Ring\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2021/10/jewellery-product-10.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-product-10.jpg 968w, /media/2021/10/jewellery-product-10-430x430.jpg 430w, /media/2021/10/jewellery-product-10-150x150.jpg 150w, /media/2021/10/jewellery-product-10-700x700.jpg 700w\" sizes=\"(max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/lab-grown-diamond-ring/\" title=\"Lab Grown Diamond Ring\">\n\t\t\t\tLab Grown Diamond Ring\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&euro;&nbsp;429.00</bdi>\n\t</li>\n<li>\n\t\t<a href=\"https://sothisdiamonds.com/product/antique-diamonds/\" title=\"Antique Diamonds\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2021/10/jewellery-product-3.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-product-3.jpg 968w, /media/2021/10/jewellery-product-3-430x430.jpg 430w, /media/2021/10/jewellery-product-3-150x150.jpg 150w, /media/2021/10/jewellery-product-3-700x700.jpg 700w\" sizes=\"(max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/antique-diamonds/\" title=\"Antique Diamonds\">\n\t\t\t\tAntique Diamonds\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&euro;&nbsp;299.00</bdi>\n\t</li>\n<li>\n\t\t<a href=\"https://sothisdiamonds.com/product/diamond-jewelry/\" title=\"Diamond Jewelry\">\n\t\t\t<img width=\"800\" height=\"800\" src=\"/media/2021/10/jewellery-product-8.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-product-8.jpg 968w, /media/2021/10/jewellery-product-8-430x430.jpg 430w, /media/2021/10/jewellery-product-8-150x150.jpg 150w, /media/2021/10/jewellery-product-8-700x700.jpg 700w\" sizes=\"(max-width: 800px) 100vw, 800px\" />\t\t</a>\n\t\t\t<a href=\"https://sothisdiamonds.com/product/diamond-jewelry/\" title=\"Diamond Jewelry\">\n\t\t\t\tDiamond Jewelry\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<bdi>&euro;&nbsp;199.00</bdi>\n\t</li>\n</ul>",
+    "elementor_text": [
+      {
+        "widget": "wd_banner",
+        "field": "title",
+        "text": "Statement Pieces"
+      },
+      {
+        "widget": "wd_banner",
+        "field": "content",
+        "text": "Designs to Shine Every Occasion"
+      },
+      {
+        "widget": "wd_banner",
+        "field": "subtitle",
+        "text": "Special offer"
+      },
+      {
+        "widget": "wd_products_widget",
+        "field": "title",
+        "text": "FEATURED PRODUCTS"
+      },
+      {
+        "widget": "wd_products_widget",
+        "field": "title",
+        "text": "NEW PRODUCTS"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "products-sections"
+    },
+    "seo": {},
+    "type": "elementor_library"
+  },
+  {
+    "id": 29538,
+    "slug": "banner",
+    "title": "banner",
+    "status": "publish",
+    "date": "2025-09-21 11:00:35",
+    "modified": "2025-09-21 11:00:35",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-el-video-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-video.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-mfp-popup-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/lib-magnific-popup.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\n\t\t\t\t\t<img width=\"586\" height=\"360\" src=\"/media/2021/09/jewellery-video-img.jpg\" alt=\"\" srcset=\"/media/2021/09/jewellery-video-img.jpg 586w, /media/2021/09/jewellery-video-img-430x264.jpg 430w, /media/2021/09/jewellery-video-img-150x92.jpg 150w\" sizes=\"(max-width: 586px) 100vw, 586px\" />\t\t\t\t\n\t\t\t\t<a href=\"https://www.youtube.com/watch?v=XHOmBV4js_E\"></a>\n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-section-title-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-section-title.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-el-subtitle-style-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-subtitle-style.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t\t\n\t\t\t\t\tSpecial Picks\t\t\t\t\n\t\t\t\t<h4>Premium Diamonds</h4> \n\t\t\t\t<h4>Exclusive Savings</h4> \n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-button-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-button.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<a  href=\"#\">\n\t\t\t\t\tCHECK NOW\t\t\t\t\n\t\t\t\t\t\t\t</a>",
+    "elementor_text": [
+      {
+        "widget": "wd_video",
+        "field": "text",
+        "text": "Play video"
+      },
+      {
+        "widget": "wd_title",
+        "field": "title",
+        "text": "Premium Diamonds"
+      },
+      {
+        "widget": "wd_title",
+        "field": "subtitle",
+        "text": "Special Picks"
+      },
+      {
+        "widget": "wd_title",
+        "field": "title",
+        "text": "Exclusive Savings"
+      },
+      {
+        "widget": "wd_button",
+        "field": "text",
+        "text": "CHECK NOW"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "banner"
+    },
+    "seo": {},
+    "type": "elementor_library"
+  },
+  {
+    "id": 30200,
+    "slug": "blog",
+    "title": "blog",
+    "status": "publish",
+    "date": "2025-10-02 17:47:47",
+    "modified": "2025-10-02 17:47:47",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-section-title-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-section-title.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-el-subtitle-style-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-subtitle-style.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t\t\n\t\t\t\t\tBlogs\t\t\t\t\n\t\t\t\t<h4>Diamond Diaries </h4> \n\t\t\t\t\t<p>Expert Advice and Stories from Sothis Diamonds</p>\t\t\t\t\n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-blog-loop-base-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/blog-loop-base.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-post-types-mod-predefined-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/post-types-mod-predefined.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-blog-loop-design-masonry-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/blog-loop-design-masonry.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-swiper-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/lib-swiper.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-post-types-mod-categories-style-bg-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/post-types-mod-categories-style-bg.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\n<article id=\"post-465\">\n\t\t\t\t\t\t<img width=\"1920\" height=\"520\" src=\"/media/2025/09/2.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2025/09/2.jpg 1920w, /media/2025/09/2-400x108.jpg 400w, /media/2025/09/2-1300x352.jpg 1300w, /media/2025/09/2-768x208.jpg 768w, /media/2025/09/2-1536x416.jpg 1536w, /media/2025/09/2-430x116.jpg 430w, /media/2025/09/2-700x190.jpg 700w, /media/2025/09/2-150x41.jpg 150w\" sizes=\"(max-width: 1920px) 100vw, 1920px\" />\t\t\t\t\t\n\t\t\t\t\t<a href=\"https://sothisdiamonds.com/diamond-rings/\"></a>\n\t\t\t\t\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-post-types-mod-date-style-bg-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/post-types-mod-date-style-bg.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\t\n\t\t\t\t\t27\t\t\t\t\n\t\t\t\t\tAug\t\t\t\t\n\t\t\t\t\t\t\t<h3>\n\t\t\t\t\t<a href=\"https://sothisdiamonds.com/diamond-rings/\" rel=\"bookmark\">\n\t\t\t\t\t\tHow to Choose the Perfect Diamond\t\t\t\t\t</a>\n\t\t\t\t</h3>\n\t\t\t\t\tBuying a diamond is one of the most meaningful purchases you can make. Whether you’re selecting an engagement ring, a tennis bracelet, ...\t\t\t\t\n\t\t\t\t\t\t<a href=\"https://sothisdiamonds.com/diamond-rings/\">Continue reading</a>\t\t\t\t\t\n</article>\n<article id=\"post-456\">\n\t\t\t\t\t\t<img width=\"1200\" height=\"742\" src=\"/media/2021/10/jewellery-blog-img-2.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-blog-img-2.jpg 1200w, /media/2021/10/jewellery-blog-img-2-400x247.jpg 400w, /media/2021/10/jewellery-blog-img-2-768x475.jpg 768w, /media/2021/10/jewellery-blog-img-2-430x266.jpg 430w, /media/2021/10/jewellery-blog-img-2-700x433.jpg 700w, /media/2021/10/jewellery-blog-img-2-150x93.jpg 150w\" sizes=\"(max-width: 1200px) 100vw, 1200px\" />\t\t\t\t\t\n\t\t\t\t\t<a href=\"https://sothisdiamonds.com/lab-grown-diamonds/\"></a>\n\t\t\t\t\t27\t\t\t\t\n\t\t\t\t\tAug\t\t\t\t\n\t\t\t\t\t\t\t<h3>\n\t\t\t\t\t<a href=\"https://sothisdiamonds.com/lab-grown-diamonds/\" rel=\"bookmark\">\n\t\t\t\t\t\tAntwerp’s Legacy: A Diamond Powerhouse\t\t\t\t\t</a>\n\t\t\t\t</h3>\n\t\t\t\t\tA Rich Historical FoundationSince as early as the 15th century, Antwerp sprang up as a key hub for diamond trade, owing to its strategi...\t\t\t\t\n\t\t\t\t\t\t<a href=\"https://sothisdiamonds.com/lab-grown-diamonds/\">Continue reading</a>\t\t\t\t\t\n</article>\n<article id=\"post-447\">\n\t\t\t\t\t\t<img width=\"1200\" height=\"742\" src=\"/media/2021/10/jewellery-blog-img-3.jpg\" alt=\"\" decoding=\"async\" srcset=\"/media/2021/10/jewellery-blog-img-3.jpg 1200w, /media/2021/10/jewellery-blog-img-3-400x247.jpg 400w, /media/2021/10/jewellery-blog-img-3-768x475.jpg 768w, /media/2021/10/jewellery-blog-img-3-430x266.jpg 430w, /media/2021/10/jewellery-blog-img-3-700x433.jpg 700w, /media/2021/10/jewellery-blog-img-3-150x93.jpg 150w\" sizes=\"(max-width: 1200px) 100vw, 1200px\" />\t\t\t\t\t\n\t\t\t\t\t<a href=\"https://sothisdiamonds.com/natural-diamonds/\"></a>\n\t\t\t\t\t27\t\t\t\t\n\t\t\t\t\tAug\t\t\t\t\n\t\t\t\t\t\t\t<h3>\n\t\t\t\t\t<a href=\"https://sothisdiamonds.com/natural-diamonds/\" rel=\"bookmark\">\n\t\t\t\t\t\tNatural Diamonds\t\t\t\t\t</a>\n\t\t\t\t</h3>\n\t\t\t\t\tWhen it's about controlling hundreds of articles, product pages for web shops, or user profiles in social networks, all\t\t\t\t\n\t\t\t\t\t\t<a href=\"https://sothisdiamonds.com/natural-diamonds/\">Continue reading</a>\t\t\t\t\t\n</article>\n\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-swiper-arrows-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/lib-swiper-arrows.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" />",
+    "elementor_text": [
+      {
+        "widget": "wd_title",
+        "field": "title",
+        "text": "Diamond Diaries"
+      },
+      {
+        "widget": "wd_title",
+        "field": "subtitle",
+        "text": "Blogs"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "blog",
+      "nl": "blog",
+      "fr": "blog",
+      "de": "blog",
+      "it": "blog",
+      "es": "blog"
+    },
+    "seo": {},
+    "type": "elementor_library"
+  },
+  {
+    "id": 838,
+    "slug": "size-and-packaging-guidelines",
+    "title": "Size and packaging guidelines",
+    "status": "publish",
+    "date": "2021-08-31 14:01:10",
+    "modified": "2021-08-31 14:01:10",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "[html_block id=\"827\"]",
+    "elementor_text": [],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "size-and-packaging-guidelines"
+    },
+    "seo": {},
+    "type": "woodmart_size_guide"
+  },
+  {
+    "id": 26993,
+    "slug": "jewellery-slide-1",
+    "title": "Jewellery slide 1",
+    "status": "publish",
+    "date": "2024-02-12 12:57:17",
+    "modified": "2025-09-23 13:24:32",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "&nbsp;\r\n<h4>Europe’s Trusted Jewellery Buyers</h4>\r\nDiscover Europe’s most trusted destination for diamonds, vintage masterpieces, and rare gemstone\r\n\r\n<a href=\"https://sothisdiamonds.com/sell-your-diamond/\">\r\nSell now\r\n</a>\r\n<a href=\"https://sothisdiamonds.com/about-us/\">\r\nView more\r\n</a>",
+    "elementor_text": [
+      {
+        "widget": "wd_title",
+        "field": "title",
+        "text": "Europe’s Trusted Jewellery Buyers"
+      },
+      {
+        "widget": "wd_text_block",
+        "field": "text",
+        "text": "Discover Europe’s most trusted destination for diamonds, vintage masterpieces, and rare gemstone"
+      },
+      {
+        "widget": "wd_button",
+        "field": "text",
+        "text": "Sell now"
+      },
+      {
+        "widget": "wd_button",
+        "field": "text",
+        "text": "View more"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "jewellery-slide-1"
+    },
+    "seo": {},
+    "type": "woodmart_slide"
+  },
+  {
+    "id": 26999,
+    "slug": "jewellery-slide-1-2",
+    "title": "Jewellery slide 2",
+    "status": "publish",
+    "date": "2024-02-12 13:04:05",
+    "modified": "2025-09-21 10:18:51",
+    "parent": null,
+    "excerpt": "",
+    "content_html": "<link rel=\"stylesheet\" id=\"wd-text-block-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-text-block.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<p>Your Trusted Partner in Luxury Jewellery</p>\n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-section-title-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-section-title.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t\t<h4>Shop Diamonds &amp; Fine Jewellery</h4> \n\t\t\t\t\t\t\t\t<link rel=\"stylesheet\" id=\"wd-button-css\" href=\"https://sothisdiamonds.com/wp-content/themes/woodmart/css/parts/el-button.min.css?ver=8.2.7\" type=\"text/css\" media=\"all\" /> \t\t\t\t\t\n\t\t\t<a  href=\"https://sothisdiamonds.com/shop/\">\n\t\t\t\t\tShop now\t\t\t\t\n\t\t\t\t\t\t\t</a>\n\t\t\t<a  href=\"https://sothisdiamonds.com/sell-your-diamond/\">\n\t\t\t\t\tSell Now\t\t\t\t\n\t\t\t\t\t\t\t</a>",
+    "elementor_text": [
+      {
+        "widget": "wd_text_block",
+        "field": "text",
+        "text": "Your Trusted Partner in Luxury Jewellery"
+      },
+      {
+        "widget": "wd_title",
+        "field": "title",
+        "text": "Shop Diamonds & Fine Jewellery"
+      },
+      {
+        "widget": "wd_button",
+        "field": "text",
+        "text": "Shop now"
+      },
+      {
+        "widget": "wd_button",
+        "field": "text",
+        "text": "Sell Now"
+      }
+    ],
+    "featured_image": null,
+    "categories": [],
+    "tags": [],
+    "slugs": {
+      "en": "jewellery-slide-1-2"
+    },
+    "seo": {},
+    "type": "woodmart_slide"
+  }
+]

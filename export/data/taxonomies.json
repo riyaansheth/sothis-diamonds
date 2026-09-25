@@ -1,0 +1,3249 @@
+[
+  {
+    "taxonomy": "category",
+    "slug": "diamonds",
+    "name": "Diamonds",
+    "description": "Your blog category",
+    "parent": null,
+    "count": 39,
+    "slugs": {
+      "en": "diamonds",
+      "fr": "diamants",
+      "it": "diamanti",
+      "de": "diamanten",
+      "es": "diamantes",
+      "nl": "diamanten"
+    }
+  },
+  {
+    "taxonomy": "product_cat",
+    "slug": "diamonds",
+    "name": "Diamonds",
+    "description": "",
+    "parent": null,
+    "count": 79,
+    "slugs": {
+      "en": "diamonds",
+      "fr": "diamants",
+      "it": "diamanti",
+      "de": "diamanten",
+      "es": "diamantes",
+      "nl": "diamanten"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "chair",
+    "name": "Chair",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "chair"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "furniture",
+    "name": "Furniture",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "furniture"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "guide",
+    "name": "Guide",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "guide"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "inspiratio",
+    "name": "Inspiratio",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "inspiratio"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "news",
+    "name": "News",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "news"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "sofa",
+    "name": "Sofa",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "sofa"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "style",
+    "name": "Style",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "style"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "table",
+    "name": "Table",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "table"
+    }
+  },
+  {
+    "taxonomy": "post_tag",
+    "slug": "trends",
+    "name": "Trends",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "trends"
+    }
+  },
+  {
+    "taxonomy": "category",
+    "slug": "natural-diamonds",
+    "name": "Natural Diamonds",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "natural-diamonds",
+      "nl": "natuurlijke-diamanten",
+      "fr": "diamants-naturels",
+      "de": "naturliche-diamanten",
+      "it": "diamanti-naturali",
+      "es": "diamantes-naturales"
+    }
+  },
+  {
+    "taxonomy": "category",
+    "slug": "lab-grown-diamonds",
+    "name": "Lab Grown Diamonds",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "lab-grown-diamonds",
+      "de": "im-labor-gezuchtete-diamanten",
+      "fr": "diamants-cultives-en-laboratoire",
+      "it": "diamanti-coltivati-in-laboratorio",
+      "nl": "laboratorium-diamanten"
+    }
+  },
+  {
+    "taxonomy": "category",
+    "slug": "diamond-rings",
+    "name": "Diamond Rings",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "diamond-rings",
+      "de": "diamantringe",
+      "fr": "bagues-en-diamant",
+      "es": "anillos-de-diamantes",
+      "it": "anelli-con-diamante"
+    }
+  },
+  {
+    "taxonomy": "category",
+    "slug": "color-diamonds",
+    "name": "Color Diamonds",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "color-diamonds"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "round",
+    "name": "Round",
+    "description": "",
+    "parent": null,
+    "count": 28,
+    "slugs": {
+      "en": "round",
+      "de": "rund",
+      "nl": "rond",
+      "fr": "ronde",
+      "it": "rotondo",
+      "es": "redondo"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "princess",
+    "name": "Princess",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "princess"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "oval",
+    "name": "Oval",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "oval",
+      "de": "oval"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "cushion",
+    "name": "Cushion",
+    "description": "",
+    "parent": null,
+    "count": 10,
+    "slugs": {
+      "en": "cushion",
+      "it": "cuscino",
+      "nl": "kussen"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "pear",
+    "name": "Pear",
+    "description": "",
+    "parent": null,
+    "count": 12,
+    "slugs": {
+      "en": "pear",
+      "es": "pera",
+      "it": "pera",
+      "nl": "peer",
+      "fr": "poire"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "emerald",
+    "name": "Emerald",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "emerald",
+      "es": "esmeralda"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "radiant",
+    "name": "Radiant",
+    "description": "",
+    "parent": null,
+    "count": 11,
+    "slugs": {
+      "en": "radiant",
+      "fr": "radieux",
+      "de": "strahlend",
+      "nl": "stralend",
+      "es": "radiante"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "heart",
+    "name": "Heart",
+    "description": "",
+    "parent": null,
+    "count": 8,
+    "slugs": {
+      "en": "heart",
+      "de": "herz"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "asscher",
+    "name": "Asscher",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "asscher",
+      "nl": "asscher",
+      "fr": "asscher"
+    }
+  },
+  {
+    "taxonomy": "pa_shape",
+    "slug": "marquise",
+    "name": "Marquise",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "marquise"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "0-30",
+    "name": "0.30",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "0-30"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "0-50",
+    "name": "0.50",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "0-50"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-00",
+    "name": "1.00",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "1-00"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-00",
+    "name": "2.00",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "2-00"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "d",
+    "name": "D",
+    "description": "",
+    "parent": null,
+    "count": 14,
+    "slugs": {
+      "en": "d",
+      "de": "d",
+      "fr": "d",
+      "it": "d",
+      "es": "d",
+      "nl": "d"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "e",
+    "name": "E",
+    "description": "",
+    "parent": null,
+    "count": 9,
+    "slugs": {
+      "en": "e",
+      "de": "e",
+      "fr": "e",
+      "it": "e",
+      "nl": "e",
+      "es": "e"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "f",
+    "name": "F",
+    "description": "",
+    "parent": null,
+    "count": 11,
+    "slugs": {
+      "en": "f",
+      "de": "f",
+      "fr": "f",
+      "it": "f",
+      "nl": "f",
+      "es": "f"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "g",
+    "name": "G",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "g",
+      "it": "g",
+      "de": "g",
+      "nl": "g",
+      "es": "g",
+      "fr": "g"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "h",
+    "name": "H",
+    "description": "",
+    "parent": null,
+    "count": 5,
+    "slugs": {
+      "en": "h",
+      "fr": "h",
+      "de": "h",
+      "nl": "h",
+      "it": "h",
+      "es": "h"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "i",
+    "name": "I",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "i",
+      "es": "i",
+      "nl": "i",
+      "it": "i",
+      "de": "i",
+      "fr": "i"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "j",
+    "name": "J",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "j",
+      "de": "j",
+      "fr": "j",
+      "es": "j",
+      "nl": "j",
+      "it": "j"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "k",
+    "name": "K",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "k",
+      "es": "k",
+      "fr": "k",
+      "it": "k",
+      "nl": "k",
+      "de": "k"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "l",
+    "name": "L",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "l",
+      "de": "l",
+      "it": "l",
+      "fr": "l",
+      "nl": "l",
+      "es": "l"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "m",
+    "name": "M",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "m"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "n",
+    "name": "N",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "n"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "o",
+    "name": "O",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "o"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "p",
+    "name": "P",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "p"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "q",
+    "name": "Q",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "q"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "r",
+    "name": "R",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "r"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "s",
+    "name": "S",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "s"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "t",
+    "name": "T",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "t"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "u",
+    "name": "U",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "u"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "v",
+    "name": "V",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "v"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "w",
+    "name": "W",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "w"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "x",
+    "name": "X",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "x"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "y",
+    "name": "Y",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "y",
+      "es": "y",
+      "it": "y",
+      "fr": "y",
+      "nl": "y",
+      "de": "y"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "z",
+    "name": "Z",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "z"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "if",
+    "name": "IF",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "if",
+      "it": "se"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "vvs1",
+    "name": "VVS1",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "vvs1",
+      "fr": "vvs1",
+      "it": "vvs1"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "vvs2",
+    "name": "VVS2",
+    "description": "",
+    "parent": null,
+    "count": 5,
+    "slugs": {
+      "en": "vvs2",
+      "it": "vvs2",
+      "es": "vvs2"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "vs1",
+    "name": "VS1",
+    "description": "",
+    "parent": null,
+    "count": 13,
+    "slugs": {
+      "en": "vs1",
+      "de": "vs1",
+      "es": "vs1",
+      "fr": "vs1",
+      "it": "vs1",
+      "nl": "vs1"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "vs2",
+    "name": "VS2",
+    "description": "",
+    "parent": null,
+    "count": 14,
+    "slugs": {
+      "en": "vs2",
+      "it": "vs2",
+      "fr": "vs2",
+      "nl": "vs2",
+      "es": "vs2"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "si1",
+    "name": "SI1",
+    "description": "",
+    "parent": null,
+    "count": 22,
+    "slugs": {
+      "en": "si1",
+      "de": "si1",
+      "fr": "si1",
+      "nl": "si1",
+      "es": "si1",
+      "it": "si1"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "si2",
+    "name": "SI2",
+    "description": "",
+    "parent": null,
+    "count": 13,
+    "slugs": {
+      "en": "si2",
+      "nl": "si2",
+      "it": "si2",
+      "es": "si2",
+      "fr": "si2"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "i1",
+    "name": "I1",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "i1",
+      "it": "i1",
+      "es": "i1"
+    }
+  },
+  {
+    "taxonomy": "pa_cut",
+    "slug": "excellent",
+    "name": "Excellent",
+    "description": "",
+    "parent": null,
+    "count": 22,
+    "slugs": {
+      "en": "excellent",
+      "de": "ausgezeichnet",
+      "it": "eccellente",
+      "fr": "excellent",
+      "es": "excelente",
+      "nl": "uitstekend"
+    }
+  },
+  {
+    "taxonomy": "pa_cut",
+    "slug": "very-good",
+    "name": "Very Good",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "very-good",
+      "nl": "zeer-goed"
+    }
+  },
+  {
+    "taxonomy": "pa_cut",
+    "slug": "good",
+    "name": "Good",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "good"
+    }
+  },
+  {
+    "taxonomy": "pa_cut",
+    "slug": "fair",
+    "name": "Fair",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "fair"
+    }
+  },
+  {
+    "taxonomy": "pa_cut",
+    "slug": "poor",
+    "name": "Poor",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "poor"
+    }
+  },
+  {
+    "taxonomy": "pa_polish",
+    "slug": "ex",
+    "name": "EX",
+    "description": "",
+    "parent": null,
+    "count": 64,
+    "slugs": {
+      "en": "ex",
+      "de": "ex",
+      "it": "ex",
+      "nl": "ex",
+      "es": "ex",
+      "fr": "ex"
+    }
+  },
+  {
+    "taxonomy": "pa_polish",
+    "slug": "vg",
+    "name": "VG",
+    "description": "",
+    "parent": null,
+    "count": 13,
+    "slugs": {
+      "en": "vg",
+      "de": "vg",
+      "es": "vg",
+      "nl": "vg",
+      "fr": "vg",
+      "it": "vg"
+    }
+  },
+  {
+    "taxonomy": "pa_polish",
+    "slug": "g",
+    "name": "G",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "g",
+      "it": "g",
+      "de": "g",
+      "nl": "g",
+      "es": "g",
+      "fr": "g"
+    }
+  },
+  {
+    "taxonomy": "pa_polish",
+    "slug": "f",
+    "name": "F",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "f",
+      "de": "f",
+      "fr": "f",
+      "it": "f",
+      "nl": "f",
+      "es": "f"
+    }
+  },
+  {
+    "taxonomy": "pa_symmetry",
+    "slug": "ex",
+    "name": "EX",
+    "description": "",
+    "parent": null,
+    "count": 44,
+    "slugs": {
+      "en": "ex",
+      "de": "ex",
+      "it": "ex",
+      "nl": "ex",
+      "es": "ex",
+      "fr": "ex"
+    }
+  },
+  {
+    "taxonomy": "pa_symmetry",
+    "slug": "vg",
+    "name": "VG",
+    "description": "",
+    "parent": null,
+    "count": 28,
+    "slugs": {
+      "en": "vg",
+      "de": "vg",
+      "es": "vg",
+      "nl": "vg",
+      "fr": "vg",
+      "it": "vg"
+    }
+  },
+  {
+    "taxonomy": "pa_symmetry",
+    "slug": "g",
+    "name": "G",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "g",
+      "it": "g",
+      "de": "g",
+      "nl": "g",
+      "es": "g",
+      "fr": "g"
+    }
+  },
+  {
+    "taxonomy": "pa_symmetry",
+    "slug": "f",
+    "name": "F",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "f",
+      "de": "f",
+      "fr": "f",
+      "it": "f",
+      "nl": "f",
+      "es": "f"
+    }
+  },
+  {
+    "taxonomy": "pa_fluorescence",
+    "slug": "none",
+    "name": "None",
+    "description": "",
+    "parent": null,
+    "count": 47,
+    "slugs": {
+      "en": "none",
+      "fr": "aucun",
+      "nl": "geen",
+      "es": "ninguno",
+      "it": "nessuno",
+      "de": "keine"
+    }
+  },
+  {
+    "taxonomy": "pa_fluorescence",
+    "slug": "faint",
+    "name": "Faint",
+    "description": "",
+    "parent": null,
+    "count": 23,
+    "slugs": {
+      "en": "faint",
+      "de": "schwache",
+      "nl": "vaag",
+      "fr": "faible",
+      "it": "debole",
+      "es": "tenue"
+    }
+  },
+  {
+    "taxonomy": "pa_fluorescence",
+    "slug": "medium",
+    "name": "Medium",
+    "description": "",
+    "parent": null,
+    "count": 8,
+    "slugs": {
+      "en": "medium",
+      "es": "medio",
+      "it": "medio",
+      "nl": "medium"
+    }
+  },
+  {
+    "taxonomy": "pa_fluorescence",
+    "slug": "strong",
+    "name": "Strong",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "strong"
+    }
+  },
+  {
+    "taxonomy": "pa_fluorescence",
+    "slug": "very-strong",
+    "name": "Very Strong",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "very-strong",
+      "nl": "heel-sterk",
+      "it": "molto-forte"
+    }
+  },
+  {
+    "taxonomy": "pa_lab",
+    "slug": "gia",
+    "name": "GIA",
+    "description": "",
+    "parent": null,
+    "count": 56,
+    "slugs": {
+      "en": "gia",
+      "de": "gia",
+      "es": "gia",
+      "fr": "gia",
+      "it": "gia",
+      "nl": "gia"
+    }
+  },
+  {
+    "taxonomy": "pa_lab",
+    "slug": "igi",
+    "name": "IGI",
+    "description": "",
+    "parent": null,
+    "count": 11,
+    "slugs": {
+      "en": "igi",
+      "de": "igi",
+      "fr": "igi",
+      "it": "igi"
+    }
+  },
+  {
+    "taxonomy": "pa_lab",
+    "slug": "hrd",
+    "name": "HRD",
+    "description": "",
+    "parent": null,
+    "count": 12,
+    "slugs": {
+      "en": "hrd",
+      "nl": "hrd",
+      "fr": "hrd",
+      "it": "hrd"
+    }
+  },
+  {
+    "taxonomy": "pa_lab",
+    "slug": "egl",
+    "name": "EGL",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "egl"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "rd",
+    "name": "RD",
+    "description": "",
+    "parent": null,
+    "count": 28,
+    "slugs": {
+      "en": "rd",
+      "de": "rd",
+      "nl": "rd",
+      "it": "rd",
+      "fr": "rd",
+      "es": "rd"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "12-39-carat",
+    "name": "12.39 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "12-39-carat",
+      "de": "12-39-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "e-color",
+    "name": "E Color",
+    "description": "",
+    "parent": null,
+    "count": 9,
+    "slugs": {
+      "en": "e-color",
+      "de": "e-farbe"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "si1-clarity",
+    "name": "SI1 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 22,
+    "slugs": {
+      "en": "si1-clarity",
+      "it": "si1-chiarezza",
+      "es": "si1-claridad",
+      "de": "si1-klarheit",
+      "fr": "si1-clarte"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "ex-cut",
+    "name": "EX Cut",
+    "description": "",
+    "parent": null,
+    "count": 22,
+    "slugs": {
+      "en": "ex-cut",
+      "de": "ab-schnitt",
+      "fr": "ex-coupure",
+      "es": "ex-corte",
+      "nl": "ex-snee",
+      "it": "ex-taglio"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "gia-certified",
+    "name": "GIA Certified",
+    "description": "",
+    "parent": null,
+    "count": 56,
+    "slugs": {
+      "en": "gia-certified",
+      "fr": "certifie-gia",
+      "it": "certificato-gia",
+      "de": "gia-zertifiziert",
+      "nl": "gia-gecertificeerd",
+      "es": "certificado-gia"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-06-carat",
+    "name": "7.06 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-06-carat",
+      "de": "7-06-karat",
+      "it": "7-06-carati",
+      "es": "7-06-quilates",
+      "fr": "7-06-carats"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "f-color",
+    "name": "F Color",
+    "description": "",
+    "parent": null,
+    "count": 11,
+    "slugs": {
+      "en": "f-color",
+      "it": "f-colore",
+      "es": "f-color"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "si2-clarity",
+    "name": "SI2 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 13,
+    "slugs": {
+      "en": "si2-clarity",
+      "de": "si2-klarheit",
+      "es": "si2-claridad",
+      "fr": "si2-clarte",
+      "it": "chiarezza-si2"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "vg-cut",
+    "name": "VG Cut",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "vg-cut",
+      "de": "vg-schnitt",
+      "it": "taglio-vg"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "igi-certified",
+    "name": "IGI Certified",
+    "description": "",
+    "parent": null,
+    "count": 11,
+    "slugs": {
+      "en": "igi-certified",
+      "fr": "certifie-igi",
+      "es": "certificado-igi"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "5-02-carat",
+    "name": "5.02 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-02-carat",
+      "it": "5-02-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "j-color",
+    "name": "J Color",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "j-color",
+      "es": "j-color",
+      "nl": "j-kleur",
+      "fr": "j-couleur",
+      "it": "j-colore"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-0-carat",
+    "name": "3.0 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "3-0-carat",
+      "es": "3-0-quilates",
+      "it": "3-0-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "d-color",
+    "name": "D Color",
+    "description": "",
+    "parent": null,
+    "count": 14,
+    "slugs": {
+      "en": "d-color",
+      "es": "d-color",
+      "it": "d-colore",
+      "nl": "d-kleur",
+      "fr": "d-couleur",
+      "de": "d-farbe"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-01-carat",
+    "name": "3.01 Carat",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "3-01-carat",
+      "es": "3-01-quilates",
+      "nl": "3-01-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-09-carat",
+    "name": "3.09 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-09-carat",
+      "es": "3-09-quilates",
+      "de": "3-09-karat",
+      "it": "3-09-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "h-color",
+    "name": "H Color",
+    "description": "",
+    "parent": null,
+    "count": 5,
+    "slugs": {
+      "en": "h-color",
+      "fr": "h-couleur"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-0-carat",
+    "name": "2.0 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "2-0-carat",
+      "de": "2-0-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "g-color",
+    "name": "G Color",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "g-color"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "vs1-clarity",
+    "name": "VS1 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 13,
+    "slugs": {
+      "en": "vs1-clarity",
+      "fr": "vs1-clarte",
+      "it": "chiarezza-vs1",
+      "de": "vs1-klarheit",
+      "nl": "vs1-duidelijkheid",
+      "es": "vs1-claridad"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-5-carat",
+    "name": "1.5 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "1-5-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-25-carat",
+    "name": "1.25 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-25-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "vs2-clarity",
+    "name": "VS2 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 14,
+    "slugs": {
+      "en": "vs2-clarity",
+      "it": "chiarezza-vs2",
+      "nl": "vs2-duidelijkheid",
+      "es": "vs2-claridad",
+      "fr": "vs2-clarte",
+      "de": "vs2-klarheit"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-2-carat",
+    "name": "1.2 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-2-carat",
+      "nl": "1-2-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-1-carat",
+    "name": "1.1 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-1-carat",
+      "fr": "1-1-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-12-carat",
+    "name": "1.12 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-12-carat",
+      "fr": "1-12-carats",
+      "it": "1-12-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-01-carat",
+    "name": "1.01 Carat",
+    "description": "",
+    "parent": null,
+    "count": 4,
+    "slugs": {
+      "en": "1-01-carat",
+      "de": "1-01-karat",
+      "nl": "1-01-karaat",
+      "it": "1-01-carato"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "if-clarity",
+    "name": "IF Clarity",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "if-clarity"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-09-carat",
+    "name": "1.09 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "1-09-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-0-carat",
+    "name": "1.0 Carat",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "1-0-carat",
+      "nl": "1-0-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "hrd-certified",
+    "name": "HRD Certified",
+    "description": "",
+    "parent": null,
+    "count": 12,
+    "slugs": {
+      "en": "hrd-certified",
+      "nl": "hrd-gecertificeerd",
+      "es": "certificado-hrd",
+      "fr": "certifie-hrd"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "vvs1-clarity",
+    "name": "VVS1 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "vvs1-clarity",
+      "de": "vvs1-klarheit",
+      "es": "vvs1-claridad"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-02-carat",
+    "name": "1.02 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-02-carat",
+      "it": "1-02-carati",
+      "de": "1-02-karat",
+      "nl": "1-02-karaat",
+      "fr": "1-02-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-04-carat",
+    "name": "1.04 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-04-carat",
+      "fr": "1-04-carat",
+      "de": "1-04-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "0-9-carat",
+    "name": "0.9 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "0-9-carat",
+      "de": "0-9-karat",
+      "nl": "0-9-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "0-57-carat",
+    "name": "0.57 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "0-57-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "pear",
+    "name": "PEAR",
+    "description": "",
+    "parent": null,
+    "count": 12,
+    "slugs": {
+      "en": "pear",
+      "es": "pera",
+      "it": "pera",
+      "nl": "peer",
+      "fr": "poire"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-11-carat",
+    "name": "7.11 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-11-carat",
+      "nl": "7-11-karaat",
+      "it": "7-11-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "k-color",
+    "name": "K Color",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "k-color",
+      "it": "k-colore"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "vvs2-clarity",
+    "name": "VVS2 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 5,
+    "slugs": {
+      "en": "vvs2-clarity"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-08-carat",
+    "name": "3.08 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-08-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fl-clarity",
+    "name": "FL Clarity",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fl-clarity",
+      "de": "fl-klarheit",
+      "es": "fl-claridad",
+      "fr": "fl-clarte"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-21-carat",
+    "name": "3.21 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-21-carat",
+      "fr": "3-21-carats",
+      "nl": "3-21-karaat",
+      "it": "3-21-carati",
+      "es": "3-21-quilates"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-light-brownish-greenish-yellow-color",
+    "name": "Fancy Light Brownish-Greenish Yellow Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-light-brownish-greenish-yellow-color",
+      "it": "colore-marrone-chiaro-giallo-verdastro"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-02-carat",
+    "name": "2.02 Carat",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "2-02-carat",
+      "es": "2-02-quilates",
+      "de": "2-02-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-intense-yellow-color",
+    "name": "Fancy Intense Yellow Color",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fancy-intense-yellow-color",
+      "it": "colore-giallo-intenso-di-fantasia"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-74-carat",
+    "name": "1.74 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-74-carat",
+      "es": "1-74-quilates"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "cushion",
+    "name": "CUSHION",
+    "description": "",
+    "parent": null,
+    "count": 9,
+    "slugs": {
+      "en": "cushion",
+      "it": "cuscino",
+      "nl": "kussen"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-23-carat",
+    "name": "7.23 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-23-carat",
+      "de": "7-23-karat",
+      "fr": "7-23-carats"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-yellow-grayish-greenish-color",
+    "name": "Fancy Yellow Grayish-Greenish Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-yellow-grayish-greenish-color",
+      "fr": "jaune-fantaisie-couleur-grisatre-verdatre"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "5-54-carat",
+    "name": "5.54 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-54-carat",
+      "nl": "5-54-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "w-x-color",
+    "name": "W-X Color",
+    "description": "",
+    "parent": null,
+    "count": 4,
+    "slugs": {
+      "en": "w-x-color",
+      "es": "w-x-color",
+      "fr": "w-x-couleur",
+      "it": "w-x-colore"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "5-53-carat",
+    "name": "5.53 Carat",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "5-53-carat",
+      "it": "5-53-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "y-z-color",
+    "name": "Y-Z Color",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "y-z-color",
+      "de": "y-z-farbe"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "5-05-carat",
+    "name": "5.05 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-05-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-light-yellow-even-color",
+    "name": "Fancy Light Yellow Even Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-light-yellow-even-color",
+      "fr": "fantaisie-jaune-clair-couleur-uniforme"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-5-carat",
+    "name": "3.5 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "3-5-carat",
+      "es": "3-5-quilates",
+      "it": "3-5-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-01-carat",
+    "name": "2.01 Carat",
+    "description": "",
+    "parent": null,
+    "count": 7,
+    "slugs": {
+      "en": "2-01-carat",
+      "nl": "2-01-karaat",
+      "es": "2-01-quilates"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-intense-yellow-even-color",
+    "name": "Fancy Intense Yellow Even Color",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fancy-intense-yellow-even-color",
+      "it": "colore-giallo-intenso-e-uniforme",
+      "fr": "fantaisie-jaune-intense-couleur-uniforme",
+      "es": "color-amarillo-intenso-y-uniforme"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "y-color",
+    "name": "Y Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "y-color",
+      "es": "y-color",
+      "it": "y-colore"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "i1-clarity",
+    "name": "I1 Clarity",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "i1-clarity",
+      "nl": "i1-duidelijkheid"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "1-51-carat",
+    "name": "1.51 Carat",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "1-51-carat",
+      "nl": "1-51-karaat",
+      "es": "1-51-quilates"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "heart",
+    "name": "HEART",
+    "description": "",
+    "parent": null,
+    "count": 8,
+    "slugs": {
+      "en": "heart",
+      "de": "herz"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "5-06-carat",
+    "name": "5.06 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-06-carat",
+      "es": "5-06-quilates",
+      "nl": "5-06-karaat",
+      "it": "5-06-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-3-carat",
+    "name": "3.3 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-3-carat",
+      "de": "3-3-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-03-carat",
+    "name": "2.03 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-03-carat",
+      "fr": "2-03-carats",
+      "it": "2-03-carati",
+      "nl": "2-03-karaat",
+      "es": "2-03-quilates"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "emerald",
+    "name": "EMERALD",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "emerald",
+      "es": "esmeralda"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "20-06-carat",
+    "name": "20.06 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "20-06-carat",
+      "fr": "20-06-carats",
+      "es": "20-06-quilates",
+      "it": "20-06-carati",
+      "de": "20-06-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "i-color",
+    "name": "I Color",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "i-color"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "10-07-carat",
+    "name": "10.07 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "10-07-carat",
+      "nl": "10-07-karaat",
+      "de": "10-07-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-deep-yellow-brownish-greenish-color",
+    "name": "Fancy Deep Yellow Brownish-Greenish Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-deep-yellow-brownish-greenish-color",
+      "es": "color-amarillo-oscuro-pardo-verdoso"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "oval",
+    "name": "OVAL",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "oval",
+      "de": "oval"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-05-carat",
+    "name": "7.05 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-05-carat",
+      "de": "7-05-karat",
+      "nl": "7-05-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "6-37-carat",
+    "name": "6.37 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "6-37-carat",
+      "es": "6-37-quilates",
+      "it": "6-37-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "l-color",
+    "name": "L Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "l-color",
+      "fr": "l-couleur",
+      "it": "l-colore"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "3-02-carat",
+    "name": "3.02 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "3-02-carat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-yellow-even-color",
+    "name": "Fancy Yellow Even Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-yellow-even-color",
+      "de": "schicke-gelbe-gleichmasige-farbe",
+      "es": "amarillo-fantasia-color-uniforme"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-69-carat",
+    "name": "2.69 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-69-carat",
+      "es": "2-69-quilates",
+      "fr": "2-69-carats",
+      "nl": "2-69-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-yellow-brownish-color",
+    "name": "Fancy Yellow Brownish Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-yellow-brownish-color",
+      "es": "color-amarillo-parduzco-fantasia",
+      "nl": "mooie-geelbruine-kleur",
+      "fr": "jaune-fantaisie-couleur-brunatre",
+      "de": "schicke-gelb-braunliche-farbe"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-brown-yellow-color",
+    "name": "Fancy Brown-Yellow Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-brown-yellow-color",
+      "es": "color-amarillo-marron-fantasia",
+      "it": "colore-giallo-marrone-fantasia"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "radiant",
+    "name": "RADIANT",
+    "description": "",
+    "parent": null,
+    "count": 11,
+    "slugs": {
+      "en": "radiant",
+      "fr": "radieux",
+      "de": "strahlend",
+      "nl": "stralend",
+      "es": "radiante"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "10-0-carat",
+    "name": "10.0 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "10-0-carat",
+      "de": "10-0-karat",
+      "fr": "10-0-carats",
+      "nl": "10-0-karaat",
+      "es": "10-0-quilates"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-yellow-color",
+    "name": "Fancy Yellow Color",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "fancy-yellow-color"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-17-carat",
+    "name": "7.17 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-17-carat",
+      "nl": "7-17-karaat",
+      "fr": "7-17-carats",
+      "de": "7-17-karat",
+      "es": "7-17-quilates",
+      "it": "7-17-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-01-carat",
+    "name": "7.01 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "7-01-carat",
+      "de": "7-01-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-51-carat",
+    "name": "2.51 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-51-carat",
+      "it": "2-51-carati",
+      "es": "2-51-quilates",
+      "nl": "2-51-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-light-yellow-color",
+    "name": "Fancy Light Yellow Color",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fancy-light-yellow-color",
+      "it": "colore-giallo-chiaro-fantasia",
+      "fr": "couleur-jaune-clair-fantaisie",
+      "de": "schicke-hellgelbe-farbe",
+      "nl": "mooie-lichtgele-kleur"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "asscher",
+    "name": "ASSCHER",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "asscher",
+      "nl": "asscher",
+      "fr": "asscher"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-79-carat",
+    "name": "7.79 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-79-carat",
+      "nl": "7-79-karaat",
+      "es": "7-79-quilates",
+      "fr": "7-79-carats"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "fancy-vivid-yellow-even-color",
+    "name": "Fancy Vivid Yellow Even Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-vivid-yellow-even-color",
+      "it": "colore-giallo-vivo-e-uniforme"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "cushion-brilliant",
+    "name": "CUSHION BRILLIANT",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "cushion-brilliant",
+      "nl": "kussen-briljant",
+      "es": "cojin-brillante"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "4-05-carat",
+    "name": "4.05 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "4-05-carat",
+      "es": "4-05-quilates",
+      "it": "4-05-carati",
+      "fr": "4-05-carats"
+    }
+  },
+  {
+    "taxonomy": "product_cat",
+    "slug": "jewelery",
+    "name": "Jewelery",
+    "description": "",
+    "parent": null,
+    "count": 4,
+    "slugs": {
+      "en": "jewelery",
+      "nl": "sieraden",
+      "fr": "bijoux",
+      "it": "gioielli",
+      "es": "joyeria",
+      "de": "juwelen"
+    }
+  },
+  {
+    "taxonomy": "product_cat",
+    "slug": "other-gemstone",
+    "name": "Other Gemstone",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "other-gemstone",
+      "fr": "autre-pierre-precieuse",
+      "nl": "andere-edelsteen",
+      "de": "anderer-edelstein",
+      "it": "altra-pietra-preziosa",
+      "es": "otra-piedra-preciosa"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "5-01-carat",
+    "name": "5.01 Carat",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "5-01-carat",
+      "de": "5-01-karat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "2-08-carat",
+    "name": "2.08 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-08-carat",
+      "es": "2-08-quilates",
+      "nl": "2-08-karaat",
+      "fr": "2-08-carats"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "cut",
+    "name": "- Cut",
+    "description": "",
+    "parent": null,
+    "count": 4,
+    "slugs": {
+      "en": "cut",
+      "de": "schneiden",
+      "nl": "gesneden",
+      "it": "taglio",
+      "fr": "couper",
+      "es": "corte"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "7-08-carat",
+    "name": "7.08 Carat",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "7-08-carat",
+      "nl": "7-08-karaat",
+      "fr": "7-08-carats",
+      "es": "7-08-quilates",
+      "it": "7-08-carati"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "4-02-carat",
+    "name": "4.02 Carat",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "4-02-carat",
+      "it": "4-02-carati",
+      "nl": "4-02-karaat"
+    }
+  },
+  {
+    "taxonomy": "product_tag",
+    "slug": "u-v-color",
+    "name": "U-V Color",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "u-v-color",
+      "nl": "u-v-kleur",
+      "fr": "u-v-couleur",
+      "it": "u-v-colore"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "12-39",
+    "name": "12.39",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "12-39"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-06",
+    "name": "7.06",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-06"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "5-02",
+    "name": "5.02",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-02"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-0",
+    "name": "3.0",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "3-0"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-01",
+    "name": "3.01",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "3-01"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-09",
+    "name": "3.09",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-09"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-0",
+    "name": "2.0",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "2-0"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-5",
+    "name": "1.5",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "1-5"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-25",
+    "name": "1.25",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-25"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-2",
+    "name": "1.2",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-2"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-1",
+    "name": "1.1",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-1"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-12",
+    "name": "1.12",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-12"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-01",
+    "name": "1.01",
+    "description": "",
+    "parent": null,
+    "count": 4,
+    "slugs": {
+      "en": "1-01"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-09",
+    "name": "1.09",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "1-09"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-0",
+    "name": "1.0",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "1-0"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-02",
+    "name": "1.02",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-02"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-04",
+    "name": "1.04",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-04"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "0-9",
+    "name": "0.9",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "0-9"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "0-57",
+    "name": "0.57",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "0-57"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-11",
+    "name": "7.11",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-11"
+    }
+  },
+  {
+    "taxonomy": "pa_clarity",
+    "slug": "fl",
+    "name": "FL",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fl",
+      "it": "fl"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-08",
+    "name": "3.08",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-08"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-light-brownish-greenish-yellow",
+    "name": "Fancy Light Brownish-Greenish Yellow",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-light-brownish-greenish-yellow",
+      "fr": "fantaisie-brun-clair-verdatre-jaune"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-21",
+    "name": "3.21",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-21"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-02",
+    "name": "2.02",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "2-02"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-intense-yellow",
+    "name": "Fancy Intense Yellow",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fancy-intense-yellow",
+      "nl": "mooi-intens-geel",
+      "fr": "jaune-intense-fantaisie",
+      "it": "giallo-intenso-fantasia"
+    }
+  },
+  {
+    "taxonomy": "pa_symmetry",
+    "slug": "gd",
+    "name": "GD",
+    "description": "",
+    "parent": null,
+    "count": 6,
+    "slugs": {
+      "en": "gd",
+      "es": "gd",
+      "nl": "gd",
+      "fr": "gd",
+      "it": "gd"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-74",
+    "name": "1.74",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "1-74"
+    }
+  },
+  {
+    "taxonomy": "pa_polish",
+    "slug": "gd",
+    "name": "GD",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "gd",
+      "es": "gd",
+      "nl": "gd",
+      "fr": "gd",
+      "it": "gd"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-yellow-grayish-greenish",
+    "name": "Fancy Yellow Grayish-Greenish",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-yellow-grayish-greenish",
+      "de": "schick-gelb-graulich-grunlich",
+      "fr": "fantaisie-jaune-grisatre-verdatre",
+      "es": "fantasia-amarillo-grisaceo-verdoso"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-23",
+    "name": "7.23",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-23"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "w-x",
+    "name": "W-X",
+    "description": "",
+    "parent": null,
+    "count": 4,
+    "slugs": {
+      "en": "w-x",
+      "nl": "w-x",
+      "es": "w-x"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "5-54",
+    "name": "5.54",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-54"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "y-z",
+    "name": "Y-Z",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "y-z",
+      "es": "y-z",
+      "it": "y-z"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "5-53",
+    "name": "5.53",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "5-53"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-light-yellow-even",
+    "name": "Fancy Light Yellow Even",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-light-yellow-even",
+      "fr": "fantaisie-jaune-clair-pair",
+      "it": "giallo-chiaro-uniforme"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "5-05",
+    "name": "5.05",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-05"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-5",
+    "name": "3.5",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "3-5"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-01",
+    "name": "2.01",
+    "description": "",
+    "parent": null,
+    "count": 7,
+    "slugs": {
+      "en": "2-01"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-intense-yellow-even",
+    "name": "Fancy Intense Yellow Even",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fancy-intense-yellow-even",
+      "fr": "jaune-intense-fantaisie-meme",
+      "es": "amarillo-intenso-incluso",
+      "it": "giallo-intenso-e-uniforme"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "1-51",
+    "name": "1.51",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "1-51"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "5-06",
+    "name": "5.06",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "5-06"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-3",
+    "name": "3.3",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "3-3"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-03",
+    "name": "2.03",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-03"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "20-06",
+    "name": "20.06",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "20-06"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-deep-yellow-brownish-greenish",
+    "name": "Fancy Deep Yellow Brownish-Greenish",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-deep-yellow-brownish-greenish"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "10-07",
+    "name": "10.07",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "10-07"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-05",
+    "name": "7.05",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-05"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "6-37",
+    "name": "6.37",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "6-37"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-yellow-even",
+    "name": "Fancy Yellow Even",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-yellow-even",
+      "de": "fancy-yellow-even"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "3-02",
+    "name": "3.02",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "3-02"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-yellow-brownish",
+    "name": "Fancy Yellow Brownish",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-yellow-brownish",
+      "fr": "fantaisie-jaune-brunatre",
+      "nl": "deftig-geelbruin",
+      "es": "amarillo-fantasia-parduzco",
+      "it": "giallo-fantasia-brunastra"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-69",
+    "name": "2.69",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-69"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-brown-yellow",
+    "name": "Fancy Brown-Yellow",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-brown-yellow",
+      "it": "marrone-fantasia-giallo"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-yellow",
+    "name": "Fancy Yellow",
+    "description": "",
+    "parent": null,
+    "count": 3,
+    "slugs": {
+      "en": "fancy-yellow",
+      "fr": "jaune-fantaisie",
+      "it": "giallo-fantasia",
+      "es": "amarillo-fantasia"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "10-0",
+    "name": "10.0",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "10-0"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-17",
+    "name": "7.17",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-17"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-01",
+    "name": "7.01",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "7-01"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-51",
+    "name": "2.51",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-51"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-light-yellow",
+    "name": "Fancy Light Yellow",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "fancy-light-yellow",
+      "es": "amarillo-claro-fantasia"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "fancy-vivid-yellow-even",
+    "name": "Fancy Vivid Yellow Even",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "fancy-vivid-yellow-even",
+      "nl": "mooi-levendig-geel-zelfs",
+      "es": "amarillo-vivo-incluso"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-79",
+    "name": "7.79",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "7-79"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "4-05",
+    "name": "4.05",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "4-05"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "5-01",
+    "name": "5.01",
+    "description": "",
+    "parent": null,
+    "count": 2,
+    "slugs": {
+      "en": "5-01"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "2-08",
+    "name": "2.08",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "2-08"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "7-08",
+    "name": "7.08",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "7-08"
+    }
+  },
+  {
+    "taxonomy": "pa_color",
+    "slug": "u-v",
+    "name": "U-V",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "u-v",
+      "de": "u-v",
+      "it": "u-v",
+      "es": "u-v"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "4-02",
+    "name": "4.02",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "4-02"
+    }
+  },
+  {
+    "taxonomy": "pa_carat",
+    "slug": "12-38",
+    "name": "12.38",
+    "description": "",
+    "parent": null,
+    "count": 1,
+    "slugs": {
+      "en": "12-38"
+    }
+  },
+  {
+    "taxonomy": "category",
+    "slug": "computers-games",
+    "name": "Computers, Games",
+    "description": "Computers, Games",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "computers-games"
+    }
+  },
+  {
+    "taxonomy": "category",
+    "slug": "casino",
+    "name": "casino",
+    "description": "",
+    "parent": null,
+    "count": 0,
+    "slugs": {
+      "en": "casino"
+    }
+  }
+]
