@@ -148,7 +148,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <RevealHeading lines={[t.quick.title]} className="text-4xl sm:text-5xl" />
         <p className="mx-auto mt-5 max-w-xl text-platinum-2">{t.quick.body}</p>
         <div className="mx-auto mt-12 max-w-5xl text-left">
-          <QuickValuation t={t.quick} action={href("/diamond-valuation-calculator/")} />
+          <QuickValuation t={t.quick} action={href("/sell-your-diamond/")} />
         </div>
       </section>
 
