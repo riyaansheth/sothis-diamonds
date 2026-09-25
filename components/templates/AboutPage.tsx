@@ -26,7 +26,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
         </div>
       </section>
 
-      <section className="border-y border-line bg-ivory-deep">
+      <section className="border-y border-line bg-ivory-deep bg-[url(/brand/bg-legacy.webp)] bg-cover bg-center">
         <div className="wrap grid gap-12 py-20 lg:grid-cols-[1fr_1.4fr] lg:py-28">
           <h2 className="text-4xl sm:text-5xl">{a.storyTitle}</h2>
           <div className="max-w-[62ch] space-y-5 text-lg">
@@ -76,7 +76,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
 
       {/* TODO(client): team photos and names, if the client wants them. Don't invent anyone. */}
 
-      <section className="bg-wine text-on-accent">
+      <section className="bg-wine bg-[url(/brand/bg-closing.webp)] bg-cover bg-center text-on-accent">
         <div className="wrap grid gap-12 py-24 md:grid-cols-2">
           {[[a.missionTitle, a.mission], [a.visionTitle, a.vision]].map(([h, p]) => (
             <div key={h}>
