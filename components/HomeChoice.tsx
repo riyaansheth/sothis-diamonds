@@ -95,7 +95,7 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
         </div>
         {/* Once Sell is chosen, the band keeps a way back to buying. */}
         {open && (
-          <div className="home-instead absolute bottom-6 right-6 z-10 flex flex-wrap items-center justify-end gap-x-6 gap-y-2 text-sm text-ink/75 sm:bottom-10 sm:right-12 md:left-12 md:right-auto md:justify-start">
+          <div className="home-instead absolute bottom-8 left-8 right-8 z-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink/75 sm:left-12 sm:right-12">
             <p>
               {buyInstead[0]}{" "}
               <Link href={shopHref} className="border-b border-white/70 pb-0.5 text-burgundy hover:border-burgundy">{buyInstead[1]}</Link>

@@ -79,19 +79,29 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         change={t.home.change}
         shopHref={href("/shop/")}
       >
-        {/* 3. Sell with confidence: what we buy */}
-        <section className="wrap py-28 text-center lg:py-40">
-          <RevealHeading lines={[t.sell.title]} className="text-4xl sm:text-6xl" />
-          <p className="mx-auto mt-6 max-w-xl text-platinum-2">{t.sell.body}</p>
-          <ul className="mx-auto mt-16 flex max-w-5xl flex-wrap justify-center gap-x-10 gap-y-6">
-            {t.sell.categories.map(([name, desc, path]) => (
-              <li key={path}>
-                <Link href={href(path)} className="group block" title={desc}>
-                  <span className="inline-block origin-center font-display text-2xl transition-[color,transform] duration-300 ease-out group-hover:scale-110 group-hover:text-burgundy group-focus-visible:scale-110 group-focus-visible:text-burgundy motion-reduce:transition-colors motion-reduce:group-hover:scale-100 sm:text-3xl">{name}</span>
+        {/* 3. Sell with confidence: what we buy. Heading pinned on the left, numbered categories on the right. */}
+        <section className="wrap grid gap-14 py-28 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-36">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <RevealHeading lines={[t.sell.title]} className="text-4xl sm:text-6xl" />
+            <p className="mt-6 max-w-md text-platinum-2">{t.sell.body}</p>
+            <Link href={href("/sell-your-diamond/")} className="btn btn-primary mt-10">{t.hero.primary}</Link>
+          </div>
+          <ol className="sell-list border-t border-line">
+            {t.sell.categories.map(([name, desc, path], i) => (
+              <li key={path} className="border-b border-line">
+                <Link href={href(path)} className="sell-row group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 py-7 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-x-6 sm:py-8">
+                  <span className="font-display text-lg text-platinum-2 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span>
+                    <span className="sell-name block font-display text-3xl sm:text-4xl">{name}</span>
+                    <span className="mt-2 block max-w-md text-sm text-platinum-2">{desc}</span>
+                  </span>
+                  <svg viewBox="0 0 24 24" aria-hidden className="sell-arrow size-6 self-center fill-none stroke-current [stroke-width:1.2]">
+                    <path d="M4 12h15M13 6l6 6-6 6" />
+                  </svg>
                 </Link>
               </li>
             ))}
-          </ul>
+          </ol>
         </section>
 
         {/* 4. How selling works: pinned numeral, steps scroll past */}

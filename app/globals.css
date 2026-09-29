@@ -423,8 +423,8 @@
 /* The selling journey stays pinned over a quiet field of ivory silk. */
 .steps-section {
   --color-line: rgb(244 240 232 / 0.18);
-  background-color: #3a0d18;
-  background-image: url("/brand/bg-steps-burgundy.webp");
+  background-color: #1e0509;
+  background-image: url("/brand/bg-steps-velvet-dark.webp");
   background-position: center bottom;
   background-size: cover;
   color: var(--color-on-accent);
@@ -747,7 +747,7 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
 }
 /* Chosen: Sell takes the width, Buy folds away, the band settles to 45vh. */
 .home-choice[data-open] .paths {
-  min-height: 45vh;
+  min-height: max(16rem, 32vh);
 }
 .home-choice[data-open] .home-sell {
   flex-grow: 1;
@@ -799,20 +799,72 @@ html.js .home-journey:not([data-open]) {
     animation: none;
   }
 }
-/* In the collapsed band the stone moves to the right and shrinks, clear of the heading. */
+/* Collapsed band: a clean strip of black silk. The stone fades out (it only floated oddly there);
+   a high-quality copy of the silk and a whisper of grain remove the banding the stretched photo
+   showed, and the band fades into the page below. */
 .home-choice .home-sell .paths-window {
-  transition: all 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition:
+    opacity 0.5s ease,
+    scale 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .home-choice[data-open] .home-sell .paths-window {
-  left: 58%;
-  top: 50%;
-  /* Tailwind positions it with `translate`, so override that; scale rather than resize, because the
-     3D canvas keeps its size when its box changes. */
-  translate: -50% -50%;
-  scale: 0.6;
+  opacity: 0;
+  scale: 0.8;
+  pointer-events: none;
 }
-@media (max-width: 767px) {
-  .home-choice[data-open] .home-sell .paths-window {
-    opacity: 0; /* too narrow for stone and heading side by side */
+.home-choice[data-open] .home-sell {
+  justify-content: center;
+  padding-top: 7rem; /* clears the header, which sits over the band */
+  padding-bottom: 6rem;
+}
+.home-choice[data-open] .home-sell .paths-bg {
+  background-image: url("/brand/bg-sell-black-hq.webp");
+  background-position: center 78%;
+  transform: none;
+}
+.home-choice[data-open] .home-sell .paths-sheen {
+  display: none;
+}
+.home-choice[data-open] .home-sell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, transparent 55%, var(--color-ivory)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.09'/></svg>");
+}
+
+/* Sell with confidence: the hovered or focused category comes forward, the others step back. */
+.sell-name,
+.sell-arrow {
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.4s ease,
+    color 0.4s ease;
+}
+.sell-arrow {
+  opacity: 0.35;
+  transform: translateX(-8px);
+}
+.sell-row {
+  transition: opacity 0.4s ease;
+}
+.sell-list:has(.sell-row:is(:hover, :focus-visible)) .sell-row:not(:is(:hover, :focus-visible)) {
+  opacity: 0.4;
+}
+.sell-row:is(:hover, :focus-visible) .sell-name {
+  color: #ffffff;
+  transform: translateX(8px);
+}
+.sell-row:is(:hover, :focus-visible) .sell-arrow {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sell-name,
+  .sell-arrow {
+    transform: none !important;
   }
 }
