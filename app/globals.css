@@ -803,8 +803,9 @@ html[data-loader] .opening-light {
   }
 }
 
-/* Homepage choice. The Sell journey is hidden until chosen, but only once JS has marked the page
-   (html.js, set before paint), so without JS everything shows. */
+/* Homepage choice. The journeys are hidden until chosen, but only once JS has marked the page
+   (html.js, set before paint), so without JS everything shows. The chosen half takes the width and
+   collapses into its band; the other folds away. */
 .home-choice .paths {
   min-height: 100dvh;
   transition: min-height 1s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -821,19 +822,22 @@ html[data-loader] .opening-light {
   opacity: 0;
   transition: opacity 0.5s ease;
 }
-.home-before {
+.home-before,
+.home-cta {
   transition: opacity 0.4s ease;
 }
-/* Chosen: Sell takes the width, Buy folds away, the band settles to 45vh. */
 .home-choice[data-open] .paths {
   min-height: max(16rem, 32vh);
 }
-.home-choice[data-open] .home-sell {
+.home-choice [data-role="chosen"] {
   flex-grow: 1;
   border-left-color: transparent;
   cursor: default;
+  justify-content: center;
+  padding-top: 7rem; /* clears the header, which sits over the band */
+  padding-bottom: 6rem;
 }
-.home-choice[data-open] .home-buy {
+.home-choice [data-role="other"] {
   flex-grow: 0;
   flex-basis: 0;
   min-height: 0;
@@ -845,19 +849,15 @@ html[data-loader] .opening-light {
     flex-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
     opacity 0.5s ease;
 }
-.home-choice[data-open] .home-before,
-.home-choice[data-open] .home-cta {
+.home-choice [data-role="chosen"] :is(.home-before, .home-cta) {
   opacity: 0;
 }
-.home-choice[data-open] .home-after {
+.home-choice [data-role="chosen"] .home-after {
   opacity: 1;
   transition-delay: 0.3s;
 }
-.home-cta {
-  transition: opacity 0.4s ease;
-}
 .home-instead {
-  animation: fade-in 0.6s ease 0.6s both;
+  animation: fade-in 0.6s ease 0.4s both;
 }
 html.js .home-journey:not([data-open]) {
   display: none;
@@ -865,9 +865,47 @@ html.js .home-journey:not([data-open]) {
 .home-journey[data-open] {
   animation: fade-in 0.8s ease both;
 }
+/* The band: a clean strip of silk. The stone lifts, then fades (it only floats oddly in a band); a
+   high-quality copy of the silk and a whisper of grain avoid banding; the band fades into the page. */
+.home-choice .paths-window {
+  transition:
+    opacity 0.5s ease 0.15s,
+    scale 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-choice [data-role="chosen"] .paths-window {
+  opacity: 0;
+  scale: 0.8;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+.home-choice .home-sell[data-role="chosen"] .paths-bg {
+  background-image: url("/brand/bg-sell-black-hq.webp");
+}
+.home-choice .home-buy[data-role="chosen"] .paths-bg {
+  background-image: url("/brand/bg-buy-burgundy-hq.webp");
+}
+.home-choice [data-role="chosen"] .paths-bg {
+  background-position: center 78%;
+  transform: none;
+}
+.home-choice [data-role="chosen"] .paths-sheen {
+  display: none;
+}
+.home-choice [data-role="chosen"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, transparent 55%, var(--color-ivory)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.09'/></svg>");
+}
 @media (prefers-reduced-motion: reduce) {
   .home-choice .paths,
   .home-choice .paths > *,
+  .home-choice .paths-window,
   .home-after,
   .home-before,
   .home-cta {
@@ -877,42 +915,6 @@ html.js .home-journey:not([data-open]) {
   .home-instead {
     animation: none;
   }
-}
-/* Collapsed band: a clean strip of black silk. The stone fades out (it only floated oddly there);
-   a high-quality copy of the silk and a whisper of grain remove the banding the stretched photo
-   showed, and the band fades into the page below. */
-.home-choice .home-sell .paths-window {
-  transition:
-    opacity 0.5s ease,
-    scale 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.home-choice[data-open] .home-sell .paths-window {
-  opacity: 0;
-  scale: 0.8;
-  pointer-events: none;
-}
-.home-choice[data-open] .home-sell {
-  justify-content: center;
-  padding-top: 7rem; /* clears the header, which sits over the band */
-  padding-bottom: 6rem;
-}
-.home-choice[data-open] .home-sell .paths-bg {
-  background-image: url("/brand/bg-sell-black-hq.webp");
-  background-position: center 78%;
-  transform: none;
-}
-.home-choice[data-open] .home-sell .paths-sheen {
-  display: none;
-}
-.home-choice[data-open] .home-sell::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(to bottom, transparent 55%, var(--color-ivory)),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.09'/></svg>");
 }
 
 /* Sell with confidence: the hovered or focused category comes forward, the others step back. */
@@ -945,5 +947,137 @@ html.js .home-journey:not([data-open]) {
   .sell-name,
   .sell-arrow {
     transform: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Buy journey (homepage)
+   --------------------------------------------------------------------------------------------- */
+
+/* The collection: burgundy velvet at the top melting into obsidian; it settles as it comes in. */
+.buy-collection-bg {
+  background:
+    linear-gradient(to bottom, transparent 30%, var(--color-ivory) 92%),
+    url("/brand/bg-steps-velvet-dark.webp") center top / cover;
+  transform: scale(1.08);
+  transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.buy-collection[data-shown] .buy-collection-bg {
+  transform: none;
+}
+/* Cards rise in, one after another (the first six), on first view and after each filter change. */
+.buy-card {
+  animation: buy-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+  animation-play-state: paused;
+}
+.buy-collection[data-shown] .buy-card {
+  animation-play-state: running;
+}
+@keyframes buy-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+/* Shop by shape: each outline draws itself in, left to right; hover turns it and brightens it. */
+.shape-draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+.shape-draw .shape-inner {
+  opacity: 0.45;
+  transition:
+    stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1) calc(var(--i, 0) * 60ms + 0.15s),
+    opacity 0.4s ease;
+}
+.shape-tiles[data-shown] .shape-draw path {
+  stroke-dashoffset: 0;
+}
+.shape-label {
+  opacity: 0;
+  transition: opacity 0.6s ease calc(var(--i, 0) * 60ms + 0.6s);
+}
+.shape-tiles[data-shown] .shape-label {
+  opacity: 1;
+}
+.shape-draw {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.shape-tile:is(:hover, :focus-visible) .shape-draw {
+  transform: rotate(12deg);
+}
+.shape-tile:is(:hover, :focus-visible) .shape-inner {
+  opacity: 1;
+}
+/* Viewfinder corners close in on hover (the Sell journey's first step, echoed). */
+.shape-corners {
+  background:
+    linear-gradient(currentColor, currentColor) left top / 12px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) left top / 1px 12px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 12px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 1px 12px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 12px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 1px 12px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 12px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 1px 12px no-repeat;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.shape-tile:is(:hover, :focus-visible) .shape-corners {
+  opacity: 0.8;
+  transform: none;
+}
+
+/* How buying works: obsidian with a burgundy glow behind the stone (Sell has the velvet). */
+.buy-steps {
+  --color-line: rgb(244 240 232 / 0.16);
+  background:
+    radial-gradient(ellipse 45% 55% at 25% 55%, rgb(84 23 43 / 0.45), transparent 70%),
+    #0b0709;
+}
+.buy-steps .steps-pin {
+  background-color: #0b0709;
+}
+@media (min-width: 1024px) {
+  .buy-steps .steps-pin {
+    background-color: transparent;
+  }
+}
+
+/* Closing: the hairline draws from the centre out. */
+.buy-rule {
+  transform: scaleX(0);
+  animation: buy-rule 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards;
+}
+@keyframes buy-rule {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buy-collection-bg {
+    transform: none;
+    transition: none;
+  }
+  .buy-card,
+  .buy-rule {
+    animation: none;
+    transform: none;
+  }
+  .shape-draw path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .shape-label {
+    opacity: 1;
+    transition: none;
   }
 }

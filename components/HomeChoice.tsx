@@ -1,30 +1,29 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Diamond3DLazy } from "./Diamond3DLazy";
 
-type Side = { title: string; body: string; cta: string };
+type Side = { title: string; body: string; cta: string; after: string };
+type Open = null | "buy" | "sell";
 
 /**
- * The homepage opens on the Buy / Sell choice (Buy left, Sell right). Buy navigates to the shop.
- * Sell widens its half, reveals the selling journey (server-rendered below, hidden until chosen) and
- * glides into it. The reveal is in-page state only: every visit starts at the choice, and the
- * collapsed band has a "Change" control to bring the choice back.
+ * The homepage opens on the Buy / Sell choice (Buy left, Sell right). Choosing a side widens its
+ * half, collapses the choice into that side's band and reveals its journey (both journeys are
+ * server-rendered below and hidden until chosen), then glides into it. In-page state only: every
+ * visit starts at the choice; the band switches to the other journey or restores the choice.
  */
-export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref, children }: {
+export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney }: {
   sell: Side;
   buy: Side;
-  sellAfter: string; // Sell's line once chosen
-  buyInstead: [string, string]; // ["Buying instead?", "Explore the collection"]
-  change: string; // label of the control that restores the choice
-  shopHref: string;
-  children: ReactNode; // the selling journey
+  instead: { buy: [string, string]; sell: [string, string] }; // shown on the Buy band / Sell band
+  change: string;
+  buyJourney: ReactNode;
+  sellJourney: ReactNode;
 }) {
-  const [open, setOpen] = useState(false);
-  const journey = useRef<HTMLDivElement>(null);
-
+  const [open, setOpen] = useState<Open>(null);
   const choice = useRef<HTMLElement>(null);
+  const buyRef = useRef<HTMLDivElement>(null);
+  const sellRef = useRef<HTMLDivElement>(null);
 
   // Old links may still carry #sell (it used to hold this state): drop it so a visit starts fresh.
   useEffect(() => {
@@ -36,67 +35,76 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
     if (open) window.dispatchEvent(new Event("resize"));
   }, [open]);
 
-  const choose = () => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setOpen(true);
-    // Let the Sell half widen first, then glide into the journey and hand focus to its first heading.
+  const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const choose = (side: "buy" | "sell") => {
+    const switching = open !== null;
+    setOpen(side);
+    // Let the half widen first (or the band swap), then glide into the journey and focus its heading.
     window.setTimeout(
       () => {
-        const first = journey.current?.querySelector<HTMLElement>("h2");
-        journey.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        const el = (side === "buy" ? buyRef : sellRef).current;
+        const first = el?.querySelector<HTMLElement>("h2");
+        el?.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "start" });
         first?.setAttribute("tabindex", "-1");
         first?.focus({ preventScroll: true });
       },
-      reduce ? 0 : 650,
+      reduce() ? 0 : switching ? 350 : 650,
     );
   };
 
   const reset = () => {
-    setOpen(false);
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    requestAnimationFrame(() => choice.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }));
+    setOpen(null);
+    requestAnimationFrame(() => choice.current?.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "start" }));
   };
 
   const panel = "group relative flex flex-col justify-end overflow-hidden border-line p-8 text-left sm:p-12";
+  const other = open === "buy" ? "sell" : "buy";
+
+  const half = (side: "buy" | "sell", s: Side, bg: string, stone: { cut: "asscher" | "round"; color: string }) => {
+    const hidden = open !== null && open !== side;
+    return (
+      <button
+        type="button"
+        onClick={() => choose(side)}
+        aria-expanded={open === side}
+        aria-controls={`${side}-journey`}
+        disabled={open === side}
+        tabIndex={hidden ? -1 : undefined}
+        aria-hidden={hidden || undefined}
+        data-role={open === side ? "chosen" : hidden ? "other" : undefined}
+        className={`${panel} home-${side} ${side === "sell" ? "md:border-l md:border-l-champagne/60" : ""}`}
+      >
+        <span aria-hidden className={`paths-bg ${bg}`} />
+        <span aria-hidden className="paths-sheen" />
+        <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
+          <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
+          <Diamond3DLazy cut={stone.cut} color={stone.color} className="pointer-events-none absolute inset-0" />
+        </div>
+        <span className="relative font-display text-6xl leading-none sm:text-8xl">{s.title}</span>
+        <span className="relative mt-4 grid max-w-sm text-ink/80">
+          <span className="home-before col-start-1 row-start-1">{s.body}</span>
+          <span className="home-after col-start-1 row-start-1">{s.after}</span>
+        </span>
+        <span className="home-cta relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{s.cta}</span>
+      </button>
+    );
+  };
 
   return (
     <>
       {/* Pulled up under the opening's last (pinned) screen, which fades away to reveal it (desktop). */}
-      <section ref={choice} data-open={open ? "" : undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
+      <section ref={choice} data-open={open ?? undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
         <div className="paths flex flex-col md:flex-row">
-          <Link href={shopHref} className={`${panel} home-buy`} tabIndex={open ? -1 : undefined} aria-hidden={open}>
-            <span aria-hidden className="paths-bg bg-[url(/brand/bg-buy-burgundy.webp)]" />
-            <span aria-hidden className="paths-sheen" />
-            <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-              <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
-              <Diamond3DLazy cut="asscher" color="#d4b9cb" className="pointer-events-none absolute inset-0" />
-            </div>
-            <span className="relative font-display text-6xl leading-none sm:text-8xl">{buy.title}</span>
-            <span className="relative mt-4 max-w-sm text-ink/80">{buy.body}</span>
-            <span className="relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{buy.cta}</span>
-          </Link>
-
-          <button type="button" onClick={choose} aria-expanded={open} aria-controls="sell-journey" className={`${panel} home-sell md:border-l md:border-l-champagne/60`} disabled={open}>
-            <span aria-hidden className="paths-bg bg-[url(/brand/bg-sell-black.webp)]" />
-            <span aria-hidden className="paths-sheen" />
-            <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-              <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
-              <Diamond3DLazy cut="round" color="#ffffff" className="pointer-events-none absolute inset-0" />
-            </div>
-            <span className="relative font-display text-6xl leading-none sm:text-8xl">{sell.title}</span>
-            <span className="relative mt-4 grid max-w-sm text-ink/80">
-              <span className="home-before col-start-1 row-start-1">{sell.body}</span>
-              <span className="home-after col-start-1 row-start-1">{sellAfter}</span>
-            </span>
-            <span className="home-cta relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{sell.cta}</span>
-          </button>
+          {half("buy", buy, "bg-[url(/brand/bg-buy-burgundy.webp)]", { cut: "asscher", color: "#d4b9cb" })}
+          {half("sell", sell, "bg-[url(/brand/bg-sell-black.webp)]", { cut: "round", color: "#ffffff" })}
         </div>
-        {/* Once Sell is chosen, the band keeps a way back to buying. */}
+        {/* The band keeps a way to the other journey, and back to the choice. */}
         {open && (
-          <div className="home-instead absolute bottom-8 left-8 right-8 z-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink/75 sm:left-12 sm:right-12">
+          <div key={open} className="home-instead absolute bottom-8 left-8 right-8 z-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink/75 sm:left-12 sm:right-12">
             <p>
-              {buyInstead[0]}{" "}
-              <Link href={shopHref} className="border-b border-white/70 pb-0.5 text-burgundy hover:border-burgundy">{buyInstead[1]}</Link>
+              {instead[open][0]}{" "}
+              <button type="button" onClick={() => choose(other)} className="border-b border-white/70 pb-0.5 text-burgundy hover:border-burgundy">{instead[open][1]}</button>
             </p>
             <button type="button" onClick={reset} className="flex items-center gap-1.5 text-ink/70 hover:text-burgundy">
               <svg viewBox="0 0 24 24" className="size-4 fill-none stroke-current [stroke-width:1.5]" aria-hidden><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" /></svg>
@@ -106,8 +114,11 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
         )}
       </section>
 
-      <div ref={journey} id="sell-journey" className="home-journey scroll-mt-20" data-open={open ? "" : undefined}>
-        <div className="min-h-0">{children}</div>
+      <div ref={buyRef} id="buy-journey" className="home-journey scroll-mt-20" data-open={open === "buy" ? "" : undefined}>
+        <div className="min-h-0">{buyJourney}</div>
+      </div>
+      <div ref={sellRef} id="sell-journey" className="home-journey scroll-mt-20" data-open={open === "sell" ? "" : undefined}>
+        <div className="min-h-0">{sellJourney}</div>
       </div>
     </>
   );

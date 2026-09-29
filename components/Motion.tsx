@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { StageData } from "./StepsStage";
+import type { BuyStageData } from "./buy/BuyStage";
 
 /** Adds data-shown once the element scrolls into view; CSS ([data-reveal]) does the wipe. */
 function useShown<T extends HTMLElement>() {
@@ -50,16 +51,18 @@ export function RevealHeading({ lines, as: Tag = "h2", className = "" }: { lines
 }
 
 const StepsStage = dynamic(() => import("./StepsStage"), { ssr: false });
+const BuyStage = dynamic(() => import("./buy/BuyStage"), { ssr: false });
 
 /**
  * "How selling works": a pinned 3D stage that acts out each step, scrubbed by scroll, beside the step
  * texts. Progress (0..6) lives in a ref so scrolling never re-renders React; only the active step does.
  */
-export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
+export function StepsScroller({ steps, heading, action, stage, buyStage, stepLabel }: {
   steps: string[][];
   heading: ReactNode;
   action: ReactNode;
-  stage: StageData;
+  stage?: StageData; // "How selling works"
+  buyStage?: BuyStageData; // "How buying works"
   stepLabel: string;
 }) {
   const [active, setActive] = useState(0);
@@ -108,7 +111,7 @@ export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
       <div ref={pin} className="steps-pin sticky top-20 z-10 -mx-4 bg-[#1e0509] px-4 pb-4 pt-6 lg:top-0 lg:mx-0 lg:flex lg:h-dvh lg:flex-col lg:justify-center lg:bg-transparent lg:px-0 lg:pb-8 lg:pt-24">
         <div className="hidden lg:block">{heading}</div>
         <div className="mx-auto aspect-square h-[36vh] max-w-full lg:mx-0 lg:mt-4 lg:h-auto lg:w-[min(32rem,36vw,52vh)]">
-          {near && <StepsStage data={stage} progress={progress} />}
+          {near && (buyStage ? <BuyStage data={buyStage} progress={progress} /> : stage && <StepsStage data={stage} progress={progress} />)}
         </div>
         <div className="mt-3 flex items-center gap-4 lg:mt-8">
           <span className="font-display text-lg tabular-nums">{stepLabel.replace("{n}", String(active + 1))}</span>
