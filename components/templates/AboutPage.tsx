@@ -70,12 +70,12 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
       <NewChapter inspected={mediaUrl(ring.image!)} worn={mediaUrl(ring.gallery[0])} t={{ title: a.chapterTitle, body: a.chapterBody, inspection: a.inspection }} />
 
       {/* Two paths, in the language of the homepage's Sell / Buy split. */}
-      <section aria-label={`${a.sellTitle}, ${a.buyTitle}`} className="theme-light">
+      <section aria-label={`${a.sellTitle}, ${a.buyTitle}`}>
         <div className="paths flex min-h-[70vh] flex-col md:flex-row">
           {(
             [
-              [a.sellTitle, a.sellBody, a.sellCta, localePath(lang, "/sell-your-diamond/"), "bg-[url(/brand/bg-sell.webp)]"],
-              [a.buyTitle, a.buyBody, a.buyCta, localePath(lang, "/shop/"), "bg-[url(/brand/bg-buy.webp)]"],
+              [a.sellTitle, a.sellBody, a.sellCta, localePath(lang, "/sell-your-diamond/"), "bg-[url(/brand/bg-sell-black.webp)]"],
+              [a.buyTitle, a.buyBody, a.buyCta, localePath(lang, "/shop/"), "bg-[url(/brand/bg-buy-burgundy.webp)]"],
             ] as const
           ).map(([title, body, cta, to, bg]) => (
             <Link key={title} href={to} className="group relative flex min-h-[50vh] flex-col justify-end overflow-hidden border-line p-8 sm:p-12 md:border-l md:border-l-champagne/60 md:first:border-l-0">

@@ -62,10 +62,10 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
   return (
     <>
       {/* Pulled up under the opening's last (pinned) screen, which fades away to reveal it (desktop). */}
-      <section ref={choice} data-open={open ? "" : undefined} className="home-choice theme-light relative motion-safe:lg:-mt-[100svh]">
+      <section ref={choice} data-open={open ? "" : undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
         <div className="paths flex flex-col md:flex-row">
           <Link href={shopHref} className={`${panel} home-buy`} tabIndex={open ? -1 : undefined} aria-hidden={open}>
-            <span aria-hidden className="paths-bg bg-[url(/brand/bg-buy.webp)]" />
+            <span aria-hidden className="paths-bg bg-[url(/brand/bg-buy-burgundy.webp)]" />
             <span aria-hidden className="paths-sheen" />
             <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
               <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
@@ -78,7 +78,7 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
           </Link>
 
           <button type="button" onClick={choose} aria-expanded={open} aria-controls="sell-journey" className={`${panel} home-sell md:border-l md:border-l-champagne/60`} disabled={open}>
-            <span aria-hidden className="paths-bg bg-[url(/brand/bg-sell.webp)]" />
+            <span aria-hidden className="paths-bg bg-[url(/brand/bg-sell-black.webp)]" />
             <span aria-hidden className="paths-sheen" />
             <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
               <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
