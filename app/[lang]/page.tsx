@@ -3,15 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Newsletter, QuickValuation } from "@/components/Forms";
 import { Loader } from "@/components/Loader";
-import { InView, Quotes, Rail, RevealHeading, StepsScroller } from "@/components/Motion";
-import { ProductCard } from "@/components/ProductCard";
-import { CroppedImage, type Crop } from "@/components/CroppedImage";
-import { Diamond3DLazy } from "@/components/Diamond3DLazy";
+import { Quotes, RevealHeading, StepsScroller } from "@/components/Motion";
+import type { Crop } from "@/components/CroppedImage";
+import { HomeChoice } from "@/components/HomeChoice";
 import { WhyList } from "@/components/WhyList";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 import { displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 
-// The four hero stones, left to right. Transparent studio variants let them sit naturally on the page ground.
 // Homepage crops: a square around each stone that stops above its certificate card (and clear of the
 // filename and sparkle marks). Measured by eye from the photos; product pages show the full photo.
 // ponytail: hand-measured per SKU; a stone added to the homepage without an entry shows uncropped.
@@ -61,188 +59,112 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <Loader t={t.loader} />
-      {/* 1. Hero */}
-      <section className="choir-section pt-20">
-        <div className="flex min-h-dvh flex-col items-center justify-center overflow-hidden border-t border-line px-4 py-24">
-          <InView className="flex flex-col items-center">
-            <h1 className="hero-title text-center text-[2.75rem] leading-[1.02] sm:mt-16 sm:text-6xl lg:text-7xl" aria-label={t.hero.title}>
-              {t.hero.titleLines.map(([small, caps], i) => (
-                <span key={caps} aria-hidden className={`reveal-line ${i === 0 ? "sm:-translate-x-[12%]" : "sm:translate-x-[12%]"}`}>
-                  <span>
-                    <em className="font-display text-[0.62em] font-normal italic text-burgundy">{small}</em> <span className="uppercase tracking-[0.02em]">{caps}</span>
-                  </span>
-                </span>
-              ))}
-            </h1>
-
-            <div className="hero-after mt-10 flex flex-col items-center gap-8 text-center">
-              <p className="max-w-lg text-platinum-2">{t.hero.intro}</p>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Link href={href("/sell-diamond/")} className="btn btn-primary">{t.hero.primary}</Link>
-                <Link href={href("/shop/")} className="btn btn-secondary">{t.hero.secondary}</Link>
-              </div>
-            </div>
-          </InView>
-        </div>
-      </section>
-
-      {/* 2. Two ways in: sell or buy. Widening a panel never resizes its 3D canvas. */}
-      <section>
-        <div className="paths flex min-h-[calc(100dvh-5rem)] flex-col md:flex-row">
-          {(
-            [
-              [t.paths.sell, "round", "#ffffff", href("/sell-diamond/")],
-              [t.paths.buy, "asscher", "#f5d44a", href("/shop/")],
-            ] as const
-          ).map(([[title, body, cta], cut, color, to]) => (
-            <Link key={title} href={to} className="group relative flex min-h-[70vh] flex-col justify-end overflow-hidden border-line p-8 sm:p-12 md:border-l md:border-l-champagne/60 md:first:border-l-0">
-              <span aria-hidden className={`paths-bg ${cut === "round" ? "bg-[url(/brand/bg-sell.webp)]" : "bg-[url(/brand/bg-buy.webp)]"}`} />
-              <span aria-hidden className="paths-sheen" />
-              <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-                <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
-                <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
-                <Diamond3DLazy cut={cut} color={color} className="pointer-events-none absolute inset-0" />
-              </div>
-              <h2 className="relative text-6xl sm:text-8xl">{title}</h2>
-              <p className="relative mt-4 max-w-sm text-ink/80">{body}</p>
-              <span className="relative mt-8 inline-block self-start border-b border-champagne pb-1 text-sm tracking-[0.04em] text-burgundy">{cta}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Sell with confidence: what we buy */}
-      <section className="wrap py-28 text-center lg:py-40">
-        <RevealHeading lines={[t.sell.title]} className="text-4xl sm:text-6xl" />
-        <p className="mx-auto mt-6 max-w-xl text-platinum-2">{t.sell.body}</p>
-        <ul className="mx-auto mt-16 flex max-w-5xl flex-wrap justify-center gap-x-10 gap-y-6">
-          {t.sell.categories.map(([name, desc, path]) => (
-            <li key={path}>
-              <Link href={href(path)} className="group block" title={desc}>
-                <span className="inline-block origin-center font-display text-2xl transition-[color,transform] duration-300 ease-out group-hover:scale-110 group-hover:text-burgundy group-focus-visible:scale-110 group-focus-visible:text-burgundy motion-reduce:transition-colors motion-reduce:group-hover:scale-100 sm:text-3xl">{name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 4. How selling works: pinned numeral, steps scroll past */}
-      <section className="steps-section border-y border-line">
-        <div className="wrap">
-          <StepsScroller
-            steps={t.steps.items}
-            stage={stage}
-            stepLabel={t.steps.stepOf}
-            heading={<RevealHeading lines={[t.steps.title]} className="text-4xl sm:text-5xl" />}
-            action={<Link href={href("/sell-diamond/")} className="btn btn-primary">{t.steps.cta}</Link>}
-          />
-        </div>
-      </section>
-
-      {/* 5. Quick valuation */}
-      <section className="wrap py-28 text-center lg:py-36">
-        <RevealHeading lines={[t.quick.title]} className="text-4xl sm:text-5xl" />
-        <p className="mx-auto mt-5 max-w-xl text-platinum-2">{t.quick.body}</p>
-        <div className="mx-auto mt-12 max-w-5xl text-left">
-          <QuickValuation t={t.quick} action={href("/sell-your-diamond/")} />
-        </div>
-      </section>
-
-      {/* 6. The collection */}
-      <section className="bg-[url(/brand/bg-collection.webp)] bg-cover bg-center py-28 lg:py-36">
-        <div className="wrap text-center">
-          <RevealHeading lines={[t.stones.title]} className="text-4xl sm:text-6xl" />
-          <p className="mt-5 text-platinum-2">{t.stones.body}</p>
-        </div>
-        <div className="mt-16">
-          <Rail prev={t.stones.prev} next={t.stones.next} auto className="scroll-px-4 px-4 sm:scroll-px-8 sm:px-8">
-            {collection.map((p) => (
-              <li key={p.id} className="w-[78vw] shrink-0 snap-start sm:w-[22rem]">
-                <ProductCard product={p} href={productHref(p)} t={t.stones} crop={HOME_CROPS[p.sku]} />
+      {/* The homepage opens on the Sell / Buy choice; choosing Sell reveals the selling journey below.
+          The buying sections (collection rail, gallery) return with the buying journey. */}
+      <h1 className="sr-only">{t.hero.title}</h1>
+      <HomeChoice
+        sell={{ title: t.paths.sell[0], body: t.paths.sell[1], cta: t.home.sellCta }}
+        buy={{ title: t.paths.buy[0], body: t.paths.buy[1], cta: t.paths.buy[2] }}
+        sellAfter={t.home.sellAfter}
+        buyInstead={t.home.buyInstead}
+        shopHref={href("/shop/")}
+      >
+        {/* 3. Sell with confidence: what we buy */}
+        <section className="wrap py-28 text-center lg:py-40">
+          <RevealHeading lines={[t.sell.title]} className="text-4xl sm:text-6xl" />
+          <p className="mx-auto mt-6 max-w-xl text-platinum-2">{t.sell.body}</p>
+          <ul className="mx-auto mt-16 flex max-w-5xl flex-wrap justify-center gap-x-10 gap-y-6">
+            {t.sell.categories.map(([name, desc, path]) => (
+              <li key={path}>
+                <Link href={href(path)} className="group block" title={desc}>
+                  <span className="inline-block origin-center font-display text-2xl transition-[color,transform] duration-300 ease-out group-hover:scale-110 group-hover:text-burgundy group-focus-visible:scale-110 group-focus-visible:text-burgundy motion-reduce:transition-colors motion-reduce:group-hover:scale-100 sm:text-3xl">{name}</span>
+                </Link>
               </li>
             ))}
-          </Rail>
-          <div className="mt-10 text-center">
-            <Link href={href("/product-category/diamonds/")} className="btn btn-secondary">{t.stones.all}</Link>
+          </ul>
+        </section>
+
+        {/* 4. How selling works: pinned numeral, steps scroll past */}
+        <section className="steps-section border-y border-line">
+          <div className="wrap">
+            <StepsScroller
+              steps={t.steps.items}
+              stage={stage}
+              stepLabel={t.steps.stepOf}
+              heading={<RevealHeading lines={[t.steps.title]} className="text-4xl sm:text-5xl" />}
+              action={<Link href={href("/sell-diamond/")} className="btn btn-primary">{t.steps.cta}</Link>}
+            />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 7. Our story */}
-      <section className="wrap grid items-center gap-14 py-28 lg:grid-cols-2 lg:gap-24 lg:py-40">
-        {story.image && (
-          <div className="relative aspect-[4/5] overflow-hidden bg-ivory-deep">
-            <Image src={mediaUrl(story.image)} alt={story.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-contain p-12" />
+        {/* 5. Quick valuation */}
+        <section className="wrap py-28 text-center lg:py-36">
+          <RevealHeading lines={[t.quick.title]} className="text-4xl sm:text-5xl" />
+          <p className="mx-auto mt-5 max-w-xl text-platinum-2">{t.quick.body}</p>
+          <div className="mx-auto mt-12 max-w-5xl text-left">
+            <QuickValuation t={t.quick} action={href("/sell-your-diamond/")} />
           </div>
-        )}
-        <div className="max-w-xl">
-          <RevealHeading lines={[t.story.title]} className="text-4xl sm:text-5xl" />
-          {t.story.body.map((p) => (
-            <p key={p} className="mt-6 text-lg text-platinum-2">{p}</p>
-          ))}
-          <Link href={href("/about-sothis-diamonds/")} className="btn btn-secondary mt-10">{t.story.cta}</Link>
-        </div>
-      </section>
+        </section>
 
-      {/* 8. Why Sothis: pinned stone, reasons scroll past (see WhyList). */}
-      <section className="border-t border-line">
-        <div className="wrap pt-28 lg:pt-36">
-          <RevealHeading lines={[t.why.title]} className="text-4xl sm:text-6xl" />
-        </div>
-        <div className="mt-12 lg:mt-16">
-          <WhyList
-            items={t.why.items}
-            view={t.stones.viewStone}
-            stones={collection.slice(-6).map((p) => ({ src: mediaUrl(p.image!), name: displayName(p), href: productHref(p), crop: HOME_CROPS[p.sku] }))}
-          />
-        </div>
-      </section>
-
-      {/* 9. Testimonials */}
-      <section className="border-y border-line bg-ivory-deep bg-[url(/brand/bg-quotes.webp)] bg-cover bg-center">
-        <div className="wrap py-28 lg:py-40">
-          <h2 className="sr-only">{t.reviews.title}</h2>
-          <Quotes items={t.reviews.items} label={t.reviews.choose} />
-        </div>
-      </section>
-
-      {/* 10. Gallery (becomes the Instagram feed once the account is connected) */}
-      <section className="py-28 lg:py-36">
-        <div className="wrap text-center">
-          <RevealHeading lines={[t.gallery.title]} className="text-[2.25rem] [overflow-wrap:anywhere] sm:text-5xl" />
-          <p className="mt-4 text-platinum-2">{t.gallery.body}</p>
-        </div>
-        <ul className="mt-14 grid grid-cols-3 gap-1 sm:grid-cols-6">
-          {collection.slice(0, 6).map((p) => (
-            <li key={p.id}>
-              <Link href={productHref(p)} className="relative block aspect-square overflow-hidden bg-ivory-deep">
-                <CroppedImage src={mediaUrl(p.image!)} alt={displayName(p)} crop={HOME_CROPS[p.sku]} sizes="(min-width: 640px) 17vw, 33vw" className="transition-transform duration-[1.2s] hover:scale-110" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 11. Newsletter */}
-      <section className="wrap grid gap-10 border-t border-line py-24 lg:grid-cols-2 lg:py-28">
-        <div>
-          <h2 className="text-3xl sm:text-4xl">{t.newsletter.title}</h2>
-          <p className="mt-4 text-platinum-2">{t.newsletter.body}</p>
-        </div>
-        <Newsletter t={t.newsletter} />
-      </section>
-
-      {/* 12. Closing call to action: the page's one burgundy block */}
-      <section className="bg-wine bg-[url(/brand/bg-closing.webp)] bg-cover bg-center text-on-accent">
-        <div className="wrap py-32 text-center lg:py-44">
-          <div aria-hidden className="mx-auto mb-12 h-px w-24 bg-champagne" />
-          <RevealHeading lines={[t.closing.title]} className="mx-auto max-w-4xl text-4xl sm:text-5xl lg:text-6xl" />
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
-            <Link href={href("/sell-diamond/")} className="btn btn-inverse">{t.closing.primary}</Link>
-            <Link href={href("/contact-us/")} className="btn border border-on-accent/60 text-on-accent hover:border-on-accent hover:bg-on-accent/10">{t.closing.secondary}</Link>
+        {/* 7. Our story */}
+        <section className="wrap grid items-center gap-14 py-28 lg:grid-cols-2 lg:gap-24 lg:py-40">
+          {story.image && (
+            <div className="relative aspect-[4/5] overflow-hidden bg-ivory-deep">
+              <Image src={mediaUrl(story.image)} alt={story.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-contain p-12" />
+            </div>
+          )}
+          <div className="max-w-xl">
+            <RevealHeading lines={[t.story.title]} className="text-4xl sm:text-5xl" />
+            {t.story.body.map((p) => (
+              <p key={p} className="mt-6 text-lg text-platinum-2">{p}</p>
+            ))}
+            <Link href={href("/about-sothis-diamonds/")} className="btn btn-secondary mt-10">{t.story.cta}</Link>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* 8. Why Sothis: pinned stone, reasons scroll past (see WhyList). */}
+        <section className="border-t border-line">
+          <div className="wrap pt-28 lg:pt-36">
+            <RevealHeading lines={[t.why.title]} className="text-4xl sm:text-6xl" />
+          </div>
+          <div className="mt-12 lg:mt-16">
+            <WhyList
+              items={t.why.items}
+              view={t.stones.viewStone}
+              stones={collection.slice(-6).map((p) => ({ src: mediaUrl(p.image!), name: displayName(p), href: productHref(p), crop: HOME_CROPS[p.sku] }))}
+            />
+          </div>
+        </section>
+
+        {/* 9. Testimonials */}
+        <section className="border-y border-line bg-ivory-deep bg-[url(/brand/bg-quotes.webp)] bg-cover bg-center">
+          <div className="wrap py-28 lg:py-40">
+            <h2 className="sr-only">{t.reviews.title}</h2>
+            <Quotes items={t.reviews.items} label={t.reviews.choose} />
+          </div>
+        </section>
+
+        {/* 11. Newsletter */}
+        <section className="wrap grid gap-10 border-t border-line py-24 lg:grid-cols-2 lg:py-28">
+          <div>
+            <h2 className="text-3xl sm:text-4xl">{t.newsletter.title}</h2>
+            <p className="mt-4 text-platinum-2">{t.newsletter.body}</p>
+          </div>
+          <Newsletter t={t.newsletter} />
+        </section>
+
+        {/* 12. Closing call to action: the page's one burgundy block */}
+        <section className="bg-wine bg-[url(/brand/bg-closing.webp)] bg-cover bg-center text-on-accent">
+          <div className="wrap py-32 text-center lg:py-44">
+            <div aria-hidden className="mx-auto mb-12 h-px w-24 bg-champagne" />
+            <RevealHeading lines={[t.closing.title]} className="mx-auto max-w-4xl text-4xl sm:text-5xl lg:text-6xl" />
+            <div className="mt-12 flex flex-wrap justify-center gap-3">
+              <Link href={href("/sell-diamond/")} className="btn btn-inverse">{t.closing.primary}</Link>
+              <Link href={href("/contact-us/")} className="btn border border-on-accent/60 text-on-accent hover:border-on-accent hover:bg-on-accent/10">{t.closing.secondary}</Link>
+            </div>
+          </div>
+        </section>
+      </HomeChoice>
     </>
   );
 }

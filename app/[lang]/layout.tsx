@@ -55,6 +55,8 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
   return (
     <html lang={lang} className={`${bodoni.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>
+        {/* Marks the page as JS-capable before paint, so JS-only hiding (e.g. the homepage's Sell journey) never flashes. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <Header lang={lang} t={t.nav} />
         <main>{children}</main>
         <Footer lang={lang} t={t} />

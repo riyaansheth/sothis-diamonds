@@ -57,6 +57,11 @@ export const en = {
     promises: ["Free valuation", "No commission", "Insured FedEx and DHL pickup", "Fast payment"],
     loupeLink: "View this stone",
   },
+  home: {
+    sellCta: "See how selling works",
+    sellAfter: "Here’s how selling to us works.",
+    buyInstead: ["Buying instead?", "Explore the collection"] as [string, string],
+  },
   paths: {
     sell: ["Sell", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],
     buy: ["Buy", "Certified diamonds and fine jewellery from our Antwerp inventory.", "Explore the collection"],

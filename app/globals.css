@@ -288,13 +288,13 @@
 }
 
 /* Buy / sell split: the hovered side widens. */
-.paths > a {
+.paths > :is(a, button) {
   flex: 1 1 0;
   transition: flex-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 @media (min-width: 768px) {
-  .paths > a:hover,
-  .paths > a:focus-visible {
+  .paths > :is(a, button):hover,
+  .paths > :is(a, button):focus-visible {
     flex-grow: 1.55;
   }
 }
@@ -319,16 +319,16 @@
   transform: translateX(-110%);
   pointer-events: none;
 }
-.paths > a {
+.paths > :is(a, button) {
   isolation: isolate;
 }
-.paths > a:hover .paths-bg,
-.paths > a:focus-visible .paths-bg {
+.paths > :is(a, button):hover .paths-bg,
+.paths > :is(a, button):focus-visible .paths-bg {
   transform: scale(1.1);
   filter: saturate(1.1) brightness(1.04);
 }
-.paths > a:hover .paths-sheen,
-.paths > a:focus-visible .paths-sheen {
+.paths > :is(a, button):hover .paths-sheen,
+.paths > :is(a, button):focus-visible .paths-sheen {
   transform: translateX(110%);
   transition: transform 1.4s cubic-bezier(0.3, 0.6, 0.2, 1);
 }
@@ -356,12 +356,12 @@
     transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .paths-window:hover .paths-spotlight,
-.paths > a:focus-visible .paths-spotlight {
+.paths > :is(a, button):focus-visible .paths-spotlight {
   opacity: 1;
   transform: scale(1);
 }
-.paths > a:hover .paths-window,
-.paths > a:focus-visible .paths-window {
+.paths > :is(a, button):hover .paths-window,
+.paths > :is(a, button):focus-visible .paths-window {
   transform: scale(1.08);
 }
 
@@ -702,5 +702,97 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
   }
   .opening-light {
     display: none;
+  }
+}
+
+/* Homepage choice. The Sell journey is hidden until chosen, but only once JS has marked the page
+   (html.js, set before paint), so without JS everything shows. */
+.home-choice .paths {
+  min-height: calc(100dvh - 5rem);
+  transition: min-height 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-choice .paths > :is(a, button) {
+  min-height: 50dvh;
+}
+@media (min-width: 768px) {
+  .home-choice .paths > :is(a, button) {
+    min-height: 0;
+  }
+}
+.home-after {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.home-before {
+  transition: opacity 0.4s ease;
+}
+/* Chosen: Sell takes the width, Buy folds away, the band settles to 45vh. */
+.home-choice[data-open] .paths {
+  min-height: 45vh;
+}
+.home-choice[data-open] .home-sell {
+  flex-grow: 1;
+  cursor: default;
+}
+.home-choice[data-open] .home-buy {
+  flex-grow: 0;
+  flex-basis: 0;
+  min-height: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  transition:
+    flex-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.5s ease;
+}
+.home-choice[data-open] .home-before,
+.home-choice[data-open] .home-cta {
+  opacity: 0;
+}
+.home-choice[data-open] .home-after {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+.home-cta {
+  transition: opacity 0.4s ease;
+}
+.home-instead {
+  animation: fade-in 0.6s ease 0.6s both;
+}
+html.js .home-journey:not([data-open]) {
+  display: none;
+}
+.home-journey[data-open] {
+  animation: fade-in 0.8s ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-choice .paths,
+  .home-choice .paths > *,
+  .home-after,
+  .home-before,
+  .home-cta {
+    transition: none !important;
+  }
+  .home-journey[data-open],
+  .home-instead {
+    animation: none;
+  }
+}
+/* In the collapsed band the stone moves to the right and shrinks, clear of the heading. */
+.home-choice .home-sell .paths-window {
+  transition: all 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-choice[data-open] .home-sell .paths-window {
+  left: 70%;
+  top: 50%;
+  /* Tailwind positions it with `translate`, so override that; scale rather than resize, because the
+     3D canvas keeps its size when its box changes. */
+  translate: -50% -50%;
+  scale: 0.6;
+}
+@media (max-width: 767px) {
+  .home-choice[data-open] .home-sell .paths-window {
+    opacity: 0; /* too narrow for stone and heading side by side */
   }
 }
