@@ -50,7 +50,6 @@ export const en = {
       ["Buy", "diamonds"],
       ["or", "sell yours"],
     ],
-    choirIntro: "Four stones from our Antwerp inventory, shown to scale.",
     intro:
       "Honest valuations, top market value and fully insured shipping, from the heart of Antwerp’s diamond district.",
     primary: "Get a free valuation",

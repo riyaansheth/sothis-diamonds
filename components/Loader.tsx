@@ -35,7 +35,6 @@ function trackProgress(onChange: (p: number) => void) {
         });
 
   parts.push([0.15, document.fonts?.ready ?? Promise.resolve()]);
-  document.querySelectorAll<HTMLImageElement>(".choir-stone img").forEach((img) => parts.push([0.15, settled(img)]));
   parts.push([0.05, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
   parts.push([0.2, document.readyState === "complete" ? Promise.resolve() : new Promise((r) => window.addEventListener("load", r, { once: true }))]);
   // The 3D stones in the first screen: each counts once it has drawn its first frame.
@@ -179,7 +178,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     <>
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <noscript>
-        <style>{".loader{display:none}.choir-rise,.choir-intro,.hero-title .reveal-line>span,.hero-after{animation-play-state:running!important}"}</style>
+        <style>{".loader{display:none}.hero-title .reveal-line>span,.hero-after{animation-play-state:running!important}"}</style>
       </noscript>
       <div
         ref={overlay}

@@ -240,7 +240,7 @@
 /* ---------- Motion ---------- */
 /* Everything below is switched off for prefers-reduced-motion at the end of the file. */
 
-/* Hero: four stones shown to scale. --k is px per millimetre. */
+/* Hero: satin backdrop. */
 .choir-section {
   background-image:
     linear-gradient(rgb(244 240 232 / 0.2), rgb(244 240 232 / 0.2)),
@@ -248,94 +248,10 @@
   background-position: center;
   background-size: cover;
 }
-.choir {
-  --k: clamp(5.4px, 1.05vw, 14px);
-}
-.choir-stone {
-  width: calc(var(--mm) * var(--k));
-  aspect-ratio: 1;
-  transition:
-    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
-    opacity 0.6s,
-    filter 0.6s;
-}
-.choir-cut {
-  position: absolute;
-  inset: calc((1 - var(--pad)) * 50%);
-}
-.mask-round {
-  mask-image: radial-gradient(closest-side, #000 91%, transparent 99%);
-}
-.mask-square {
-  mask-image:
-    linear-gradient(to right, transparent 1%, #000 4%, #000 96%, transparent 99%),
-    linear-gradient(to bottom, transparent 1%, #000 4%, #000 96%, transparent 99%);
-  mask-composite: intersect;
-}
-/* Heart outline (tip down), softened with a blur so the edge fades like the round mask. */
-.mask-heart {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-54 -54 108 108'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='1.6'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' d='M0 47C-30 26-50 6-50-15C-50-38-25-50 0-32C25-50 50-38 50-15C50 6 30 26 0 47Z'/%3E%3C/svg%3E");
-  mask-size: 100% 100%;
-}
-.choir-cut img {
-  filter: brightness(1.12) contrast(1.15);
-}
-.choir-glow {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -26%;
-  height: 22%;
-  border-radius: 999px;
-  background: radial-gradient(closest-side, rgb(81 31 42 / 0.22), transparent);
-  filter: blur(6px);
-  transition:
-    opacity 0.8s,
-    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.choir-stone[data-state="on"] {
-  transform: translateY(-14px) scale(1.07);
-}
-.choir-stone[data-state="on"] .choir-cut {
-  filter: drop-shadow(0 0 18px rgb(184 162 122 / 0.55));
-}
-.choir-stone[data-state="on"] .choir-glow {
-  opacity: 0.55;
-  transform: scale(0.8); /* the stone lifts, so its shadow shrinks */
-}
-.choir-stone[data-state="off"] {
-  opacity: 0.35;
-  filter: saturate(0.6);
-}
-@keyframes float {
-  50% {
-    transform: translateY(-9px);
-  }
-}
-.choir-float {
-  position: absolute;
-  inset: 0;
-  animation: float 6.5s ease-in-out infinite;
-  animation-delay: calc(var(--i) * -1.6s);
-}
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(60px) scale(0.92);
-    filter: blur(8px);
-  }
-}
-.choir-rise {
-  animation: rise 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  animation-delay: calc(0.2s + var(--i) * 0.16s);
-}
 @keyframes fade-in {
   from {
     opacity: 0;
   }
-}
-.choir-intro {
-  animation: fade-in 1s 1.6s both;
 }
 
 /* Headings whose lines wipe up into view. */
@@ -549,8 +465,8 @@
 .loader {
   animation: loader-bailout 0.5s 9s forwards;
 }
-html:not([data-loaded]) :is(.choir-rise, .choir-intro, .hero-title .reveal-line > span, .hero-after),
-[data-inview]:not([data-shown]) :is(.choir-rise, .choir-intro, .hero-title .reveal-line > span, .hero-after) {
+html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
+[data-inview]:not([data-shown]) :is(.hero-title .reveal-line > span, .hero-after) {
   animation-play-state: paused;
 }
 @keyframes twinkle {

@@ -6,11 +6,10 @@ import { Loader } from "@/components/Loader";
 import { InView, Quotes, Rail, RevealHeading, StepsScroller } from "@/components/Motion";
 import { ProductCard } from "@/components/ProductCard";
 import { CroppedImage, type Crop } from "@/components/CroppedImage";
-import { StoneChoir, type ChoirStone } from "@/components/StoneChoir";
 import { Diamond3DLazy } from "@/components/Diamond3DLazy";
 import { WhyList } from "@/components/WhyList";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
-import { diameterMm, displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
+import { displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 
 // The four hero stones, left to right. Transparent studio variants let them sit naturally on the page ground.
 // Homepage crops: a square around each stone that stops above its certificate card (and clear of the
@@ -29,12 +28,6 @@ const HOME_CROPS: Record<string, Crop> = {
   "S-1865": { cx: 0.5, cy: 0.49, d: 0.6 },
 };
 
-const CHOIR = [
-  { sku: "E-398-248F-1B", image: "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.64 }, shape: "round" },
-  { sku: "FCHE-248E-1A", image: "media/2026/09/choir-studio/heart-5.01ct-fancy-light-yellow-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.69 }, shape: "heart" },
-  { sku: "FCRA-243E-5A", image: "media/2026/09/choir-studio/radiant-1.09ct-fancy-intense-yellow-VVS1-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.63 }, shape: "square" },
-  { sku: "S-1889", image: "media/2026/09/choir-studio/round-5.02ct-J-SI2-transparent-v2.png", crop: { cx: 0.5, cy: 0.5, d: 0.62 }, shape: "round" },
-] as const;
 const STEPS_STONE = "S-1976"; // RD 1.09ct F IF (IGI): the stone that acts out "How selling works"
 const STORY_PIECE = "SCP01"; // Cushion yellow diamond ring, photographed on white
 
@@ -45,23 +38,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const href = (path: string) => localePath(lang, path);
   const productHref = (p: Product) => productPath(p, lang);
 
-  const choir: ChoirStone[] = CHOIR.map(({ sku, image, crop, shape }) => {
-    const p = productBySku(sku);
-    return {
-      id: p.id,
-      href: productHref(p),
-      name: displayName(p),
-      details: [p.attributes.color, p.attributes.clarity, p.attributes.lab].filter(Boolean).join(", "),
-      priceUsd: p.price,
-      image: mediaUrl(image),
-      crop,
-      shape,
-      mm: diameterMm(p),
-    };
-  });
-  const choirSkus: string[] = CHOIR.map((c) => c.sku);
   const collection = inStockDiamonds()
-    .filter((p) => !choirSkus.includes(p.sku) && p.image)
+    .filter((p) => p.image)
     .sort((a, b) => (b.price ?? 0) - (a.price ?? 0))
     .slice(0, 10);
   const story = productBySku(STORY_PIECE);
@@ -83,13 +61,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <Loader t={t.loader} />
-      {/* 1. The stones, to scale */}
+      {/* 1. Hero */}
       <section className="choir-section pt-20">
         <div className="flex min-h-dvh flex-col items-center justify-center overflow-hidden border-t border-line px-4 py-24">
           <InView className="flex flex-col items-center">
-            <StoneChoir stones={choir} intro={t.hero.choirIntro} />
-
-            <h1 className="hero-title mt-12 text-center text-[2.75rem] leading-[1.02] sm:mt-16 sm:text-6xl lg:text-7xl" aria-label={t.hero.title}>
+            <h1 className="hero-title text-center text-[2.75rem] leading-[1.02] sm:mt-16 sm:text-6xl lg:text-7xl" aria-label={t.hero.title}>
               {t.hero.titleLines.map(([small, caps], i) => (
                 <span key={caps} aria-hidden className={`reveal-line ${i === 0 ? "sm:-translate-x-[12%]" : "sm:translate-x-[12%]"}`}>
                   <span>
