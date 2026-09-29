@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
 import { site, telHref } from "@/lib/site";
@@ -14,25 +14,12 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   const menu = useRef<HTMLDialogElement>(null);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
-  const pathname = usePathname();
-  // Glass everywhere; fully clear with ivory text while a dark section ([data-header-dark]) is behind it.
-  const [mode, setMode] = useState<"glass" | "clear-dark">("glass");
-
-  useEffect(() => {
-    const dark = document.querySelector<HTMLElement>("[data-header-dark]");
-    const update = () => setMode(dark && dark.dataset.headerDark !== "off" && dark.getBoundingClientRect().bottom > 40 ? "clear-dark" : "glass");
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, [pathname]);
-
   const close = () => menu.current?.close();
 
   return (
     <header
-      // Frosted ivory glass on every page, so each page's colours show through it; fully clear where asked.
-      data-mode={mode}
-      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-500 ${mode === "glass" ? "border-b border-line/60 bg-ivory/80 backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-transparent"} ${mode === "clear-dark" ? "text-on-accent [&_.nav-cta]:text-on-accent" : ""}`}
+      // One header for every page: fully transparent, white text over the dark site. Same width as the page (wrap).
+      className="fixed inset-x-0 top-0 z-40 bg-transparent"
     >
       <div className="wrap grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-2">
         <div className="flex items-center gap-4 sm:gap-6">
@@ -63,7 +50,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </Link>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
-          <Link href={href("/sell-diamond/")} className="nav-cta hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
+          <Link href={href("/sell-diamond/")} className="hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
             {t.sell}
           </Link>
           <nav aria-label={t.account} className="flex items-center">

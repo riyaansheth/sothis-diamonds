@@ -1,29 +1,28 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 
-const MIN_MS = 1200;
-const MAX_MS = 8000;
-const TURN_S = 2.4; // one full turn
+// The homepage opening's stone: the loader reveals this exact image in the exact place the opening
+// shows it, then dissolves the dark around it, so the loader stone becomes the homepage stone.
+const STONE = "/media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
+const STONE_SIZES = "(min-width: 1024px) 60vw, 100vw"; // same as the opening, so it's the same file
 
-// Runs while the HTML is parsed: releases the page after 9 s on its own, in case the app's JavaScript
-// is slow or blocked. The loader itself plays on every full page load.
-const BOOT = `setTimeout(function(){document.documentElement.dataset.loaded=""},9000)`;
+const REVEAL_MS = 2300; // the choreography; exits as soon as both this and the real loading are done
+const MAX_MS = 8000; // never hold the page longer than this, even if an asset fails
+const SEGMENTS = 6;
 
-// Set once the loader has played in this page lifetime, so moving between pages without reloading
-// doesn't replay it. A reload resets it.
+// Runs while the HTML is parsed. Marks the page as having a loader (the opening then skips its own
+// stone reveal, so there's one opening, not two) and releases it after 9 s if the app's JS never runs.
+const BOOT = `window.__sothisBoot=1;document.documentElement.dataset.loader="";setTimeout(function(){document.documentElement.dataset.loaded=""},9000)`;
+
+// The loader plays once per full page load of the homepage. Its boot script only runs when it arrives
+// in server HTML (a real page load), never on client-side navigation, so its flag tells the two apart.
 let played = false;
+const arrivedByNavigation = () => typeof window !== "undefined" && !(window as { __sothisBoot?: number }).__sothisBoot;
 
-// The mark's sparkle sits in the top-right corner of mark.svg; the diamond is everything else.
-const DIAMOND_CLIP = "polygon(0 0, 79% 0, 79% 44%, 100% 44%, 100% 100%, 0 100%)";
-const SPARKLE_CLIP = "inset(0 0 56% 79%)";
-// The sparkle extends the SVG canvas to the right, so 50% of the file is not the diamond's centre.
-const DIAMOND_CENTER_X = "39.5%";
-
-const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
-
-/** Loaded-ness of what the homepage needs to look right, 0..1, from real events. */
+/** Loaded-ness of what the homepage's first screen needs, 0..1, from real events. */
 function trackProgress(onChange: (p: number) => void) {
   const parts: [number, Promise<unknown>][] = [];
   const settled = (el: HTMLImageElement | null) =>
@@ -33,217 +32,124 @@ function trackProgress(onChange: (p: number) => void) {
           el.addEventListener("load", r, { once: true });
           el.addEventListener("error", r, { once: true }); // a failed image counts as done
         });
-
-  parts.push([0.15, document.fonts?.ready ?? Promise.resolve()]);
-  parts.push([0.05, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
-  parts.push([0.2, document.readyState === "complete" ? Promise.resolve() : new Promise((r) => window.addEventListener("load", r, { once: true }))]);
-  // The opening stone, and any 3D stones in the first screen (each counts once it has drawn a frame).
-  const stones = [...document.querySelectorAll(".paths-window")].filter((el) => el.getBoundingClientRect().top < window.innerHeight).length;
-  parts.push([0.15, settled(document.querySelector<HTMLImageElement>(".opening-stone img"))]);
-  let ready = 0;
-  const allStones = new Promise<void>((r) => {
-    if (!stones) return r();
-    window.addEventListener("sothis:stone-ready", function on() {
-      if (++ready >= stones) {
-        window.removeEventListener("sothis:stone-ready", on);
-        r();
-      }
-    });
-  });
-  parts.push([0.25, allStones]);
-
-  const total = parts.reduce((s, [w]) => s + w, 0);
+  parts.push([0.2, document.fonts?.ready ?? Promise.resolve()]);
+  parts.push([0.1, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
+  parts.push([0.3, settled(document.querySelector<HTMLImageElement>(".opening-stone img"))]);
+  parts.push([0.4, document.readyState === "complete" ? Promise.resolve() : new Promise((r) => window.addEventListener("load", r, { once: true }))]);
   let done = 0;
   parts.forEach(([w, p]) =>
     p.then(() => {
       done += w;
-      onChange(done / total);
+      onChange(done);
     }),
   );
 }
 
 /**
- * First-visit loading screen for the homepage: the Sothis mark turning like a stone on a turntable,
- * a real loading percentage, then the mark flies into the header logo and the page's entrance plays.
+ * The homepage's opening frame: black, a burgundy glow, one brilliant revealed by a narrow light,
+ * the logo, and six segments that fill with real loading progress. On exit the dark dissolves and
+ * the stone stays put, handing over to the opening's own stone underneath.
  */
 export function Loader({ t }: { t: Dictionary["loader"] }) {
-  const [phase, setPhase] = useState<"loading" | "leaving" | "done">(() => (played ? "done" : "loading"));
-  const [announced, setAnnounced] = useState(0);
+  const [phase, setPhase] = useState<"loading" | "leaving" | "done">(() => (played || arrivedByNavigation() ? "done" : "loading"));
+  const [filled, setFilled] = useState(0);
   const overlay = useRef<HTMLDivElement>(null);
-  const flyer = useRef<HTMLDivElement>(null);
-  const spinner = useRef<HTMLDivElement>(null);
-  const sheen = useRef<HTMLDivElement>(null);
-  const number = useRef<HTMLSpanElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (played || arrivedByNavigation()) {
+      played = true;
+      document.documentElement.dataset.loaded = ""; // no loader this time: let the opening play now
+      return;
+    }
     const html = document.documentElement;
-    if (played) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Everything except the loader is inert while it shows.
+    // Put the loader's stone exactly over the opening's stone box.
+    const place = () => {
+      const target = document.querySelector<HTMLElement>(".opening-stone")?.parentElement;
+      const r = target?.getBoundingClientRect();
+      if (!r || !r.width || !stage.current) return;
+      Object.assign(stage.current.style, { left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px`, translate: "none" });
+    };
+    place();
+    window.addEventListener("resize", place);
+
     const blocked = [...document.querySelectorAll("header, footer, main > *")].filter((el) => !el.contains(overlay.current));
     blocked.forEach((el) => el.setAttribute("inert", ""));
 
     let real = 0;
-    let shown = 0;
-    let angle = 0;
-    let stopAt: number | null = null; // angle to settle on, once loading is finished
-    let finishedAt = 0;
+    let last = -1;
     let raf = 0;
-    let lastStep = 0;
+    let timer = 0;
     const start = performance.now();
     trackProgress((p) => (real = p));
 
-    const finish = () => {
+    const leave = () => {
       played = true;
       blocked.forEach((el) => el.removeAttribute("inert"));
-
-      const end = () => {
-        html.dataset.loaded = "";
-        setPhase("done");
-      };
-      if (reduce) {
-        overlay.current!.style.transition = "opacity 300ms";
-        overlay.current!.style.opacity = "0";
-        setTimeout(end, 300);
-        return;
-      }
-      // Fly the mark into the header logo's mark (the left 38.6% of the logo artwork).
-      const logo = [...document.querySelectorAll("header img[src*='logo']")].map((el) => el.getBoundingClientRect()).find((r) => r.width > 0);
-      const from = flyer.current!.getBoundingClientRect();
-      if (logo && logo.width) {
-        const tw = logo.width * 0.386;
-        const scale = tw / from.width;
-        const dx = logo.left + tw / 2 - (from.left + from.width / 2);
-        const dy = logo.top + logo.height * 0.48 - (from.top + from.height / 2);
-        flyer.current!.style.transition = "transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1)";
-        flyer.current!.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
-      }
+      html.dataset.loaded = ""; // the headline and the rest of the opening start now
       setPhase("leaving");
-      html.dataset.loaded = ""; // let the hero entrance start as the paper lifts
-      setTimeout(end, 800);
+      timer = window.setTimeout(() => setPhase("done"), reduce ? 300 : 1100);
     };
 
     const frame = (now: number) => {
       const elapsed = now - start;
-      if (elapsed > MAX_MS) real = 1; // never get stuck on a slow or failed asset
-      shown += (real * 100 - shown) * 0.08;
-      if (real === 1 && 100 - shown < 0.5) shown = 100;
-      const pct = elapsed < MIN_MS ? Math.min(shown, (elapsed / MIN_MS) * 100) : shown;
-
-      number.current!.textContent = String(Math.floor(pct));
-      bar.current!.style.transform = `scaleX(${pct / 100})`;
-      const step = Math.floor(pct / 25) * 25;
-      if (step !== lastStep) {
-        lastStep = step;
-        setAnnounced(step);
-      }
-
-      if (!reduce) {
-        // Half-turns with an ease, so the stone lingers face-on and face-down.
-        const u = (elapsed / 1000) / (TURN_S / 2);
-        const target = 180 * Math.floor(u) + 180 * easeInOut(u % 1);
-        angle = stopAt === null ? target : angle + (stopAt - angle) * 0.18;
-        spinner.current!.style.transform = `rotateY(${angle}deg)`;
-        // Light catches the facets as it turns face-on.
-        const sweep = ((angle % 180) + 180) % 180 / 180;
-        sheen.current!.style.backgroundPositionX = `${120 - sweep * 240}%`;
-      }
-
-      if (pct >= 100 && elapsed >= MIN_MS) {
-        if (stopAt === null) {
-          stopAt = reduce ? 0 : Math.ceil(angle / 360) * 360;
-          finishedAt = now;
-        }
-        const settled = reduce || Math.abs(stopAt - angle) < 0.5;
-        if (settled && now - finishedAt > 250) {
-          if (!reduce) spinner.current!.style.transform = "rotateY(0deg)";
-          finish();
-          return;
-        }
-      }
+      if (elapsed > MAX_MS) real = 1;
+      const n = Math.floor(Math.min(1, real) * SEGMENTS + 1e-6);
+      if (n !== last) setFilled((last = n));
+      if (real >= 1 && elapsed >= (reduce ? 400 : REVEAL_MS)) return leave();
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
 
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(timer);
+      window.removeEventListener("resize", place);
       blocked.forEach((el) => el.removeAttribute("inert"));
     };
   }, []);
 
   if (phase === "done") return null;
+  const leaving = phase === "leaving";
 
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <noscript>
-        <style>{".loader{display:none}.hero-title .reveal-line>span,.hero-after{animation-play-state:running!important}"}</style>
+        <style>{".loader{display:none}.hero-title .reveal-line>span,.hero-after,.opening-title span span,.opening-line,.opening-scroll{animation-play-state:running!important}"}</style>
       </noscript>
-      <div
-        ref={overlay}
-        role="status"
-        aria-live="polite"
-        className={`loader fixed inset-0 z-[100] grid place-items-center transition-[background-color] duration-700 ${phase === "leaving" ? "bg-transparent" : "bg-ivory"}`}
-      >
-        <span className="sr-only">{t.status.replace("{n}", String(announced))}</span>
-        <div aria-hidden className="flex flex-col items-center">
-          <div ref={flyer} className="w-[88px] sm:w-[120px]" style={{ aspectRatio: "49.5 / 32.3" }}>
-            <div className="relative size-full [perspective:600px]">
-              <div
-                ref={spinner}
-                className="absolute inset-0 [transform-style:preserve-3d]"
-                style={{ transformOrigin: `${DIAMOND_CENTER_X} 50%` }}
-              >
-                <MarkFace clip={DIAMOND_CLIP} />
-                <MarkFace clip={DIAMOND_CLIP} back />
-                <div
-                  ref={sheen}
-                  className="absolute inset-0 [backface-visibility:hidden]"
-                  style={{
-                    clipPath: DIAMOND_CLIP,
-                    maskImage: "url(/brand/mark.svg)",
-                    maskSize: "100% 100%",
-                    backgroundImage: "linear-gradient(105deg, transparent 40%, rgb(255 250 235 / 0.65) 50%, transparent 60%)",
-                    backgroundSize: "250% 100%",
-                    mixBlendMode: "screen",
-                  }}
-                />
-              </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/mark.svg" alt="" className="loader-sparkle absolute inset-0 size-full" style={{ clipPath: SPARKLE_CLIP }} />
-            </div>
+      <div ref={overlay} role="status" aria-live="polite" data-leaving={leaving ? "" : undefined} className="loader fixed inset-0 z-[100] overflow-hidden">
+        <span className="sr-only">{t.status.replace("{n}", String(Math.round((filled / SEGMENTS) * 100)))}</span>
+
+        {/* The dark: obsidian with a burgundy glow gathering at the centre. Dissolves on exit. */}
+        <div aria-hidden className="loader-dark absolute inset-0 bg-[#090709]">
+          <span className="loader-glow absolute inset-0" />
+        </div>
+
+        {/* The stone, over the opening's stone (positioned in JS; centred until then). */}
+        <div ref={stage} aria-hidden className="loader-stage absolute left-1/2 top-1/2 aspect-square w-[min(78vw,62vh,36rem)] -translate-x-1/2 -translate-y-1/2">
+          <div className="loader-stone absolute inset-0">
+            <Image src={STONE} alt="" fill priority sizes={STONE_SIZES} className="object-contain" />
           </div>
-          <div className={`mt-10 flex flex-col items-center transition-opacity duration-300 ${phase === "leaving" ? "opacity-0" : ""}`}>
-            <span className="font-display text-[2rem] leading-none tabular-nums">
-              <span ref={number}>0</span>%
-            </span>
-            <div className="mt-4 h-px w-40 bg-line">
-              <div ref={bar} className="h-full origin-left scale-x-0 bg-champagne" />
-            </div>
-            <p className="mt-4 text-xs text-platinum-2">{t.place}</p>
+          {/* A narrow studio light crossing the stone, clipped to the brilliant (18%–82% of the image). */}
+          <span className="loader-light absolute inset-[17.5%] overflow-hidden rounded-full">
+            <span className="absolute inset-y-0 -left-full w-[60%]" />
+          </span>
+        </div>
+
+        {/* Logo and progress, below the stone. */}
+        <div aria-hidden className="loader-foot absolute inset-x-0 bottom-[9vh] flex flex-col items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element -- vector logo, white lettering */}
+          <img src="/brand/logo.svg" alt="" width={170} height={45} className="loader-logo h-9 w-auto sm:h-11" />
+          <div className="loader-segments mt-7 flex gap-2">
+            {Array.from({ length: SEGMENTS }, (_, i) => (
+              <span key={i} data-on={i < filled ? "" : undefined} className="h-px w-7 sm:w-9" />
+            ))}
           </div>
         </div>
       </div>
     </>
-  );
-}
-
-function MarkFace({ clip, back }: { clip: string; back?: boolean }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element -- raster-in-SVG mark from the original logo
-    <img
-      src="/brand/mark.svg"
-      alt=""
-      className="absolute inset-0 size-full [backface-visibility:hidden]"
-      style={{
-        clipPath: clip,
-        transformOrigin: `${DIAMOND_CENTER_X} 50%`,
-        // The reverse of the piece: darker, flatter gold rather than a mirrored copy.
-        transform: back ? "rotateY(180deg) scaleX(-1)" : undefined,
-        filter: back ? "brightness(0.72) saturate(0.8) contrast(0.9)" : undefined,
-      }}
-    />
   );
 }

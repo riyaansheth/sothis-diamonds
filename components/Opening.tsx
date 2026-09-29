@@ -33,8 +33,6 @@ export function Opening({ cutout, title, line, scroll, crumbs, className = "" }:
     if (Math.abs(q - last.current) < 0.0005) return;
     last.current = q;
     const fade = seg(q, 0.72, 1);
-    // Once it has mostly faded, the header goes back to its dark-on-light look.
-    if (root.current) root.current.dataset.headerDark = fade > 0.4 ? "off" : "";
     setVars(root.current, {
       "--zoom": 1 + Math.pow(seg(q, 0.08, 0.85), 2) * 3.5, // approaches, then passes into the stone (up to 4.5x)
       "--turn": seg(q, 0, 0.9) * 28,
@@ -45,7 +43,7 @@ export function Opening({ cutout, title, line, scroll, crumbs, className = "" }:
   });
 
   return (
-    <section ref={root} data-header-dark className={`pointer-events-none relative z-10 text-on-accent ${className}`}>
+    <section ref={root} className={`pointer-events-none relative z-10 text-on-accent ${className}`}>
       {/* Full screen, behind the see-through header, so it dissolves straight into the full-screen choice. */}
       <div
         className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20 motion-safe:lg:sticky motion-safe:lg:top-0"

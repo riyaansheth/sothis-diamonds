@@ -68,7 +68,6 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
             <span aria-hidden className="paths-bg bg-[url(/brand/bg-buy-burgundy.webp)]" />
             <span aria-hidden className="paths-sheen" />
             <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-              <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
               <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
               <Diamond3DLazy cut="asscher" color="#d4b9cb" className="pointer-events-none absolute inset-0" />
             </div>
@@ -81,7 +80,6 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
             <span aria-hidden className="paths-bg bg-[url(/brand/bg-sell-black.webp)]" />
             <span aria-hidden className="paths-sheen" />
             <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
-              <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
               <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
               <Diamond3DLazy cut="round" color="#ffffff" className="pointer-events-none absolute inset-0" />
             </div>

@@ -361,22 +361,6 @@
 .paths-window {
   transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.paths-spotlight {
-  background:
-    radial-gradient(ellipse at 50% 54%, rgb(255 252 240 / 0.88) 0 17%, rgb(213 187 116 / 0.3) 36%, transparent 69%),
-    linear-gradient(165deg, transparent 13%, rgb(255 250 232 / 0.26) 47%, transparent 72%);
-  filter: blur(18px);
-  opacity: 0;
-  transform: scale(0.78);
-  transition:
-    opacity 0.45s ease,
-    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.paths-window:hover .paths-spotlight,
-.paths > :is(a, button):focus-visible .paths-spotlight {
-  opacity: 1;
-  transform: scale(1);
-}
 .paths > :is(a, button):hover .paths-window,
 .paths > :is(a, button):focus-visible .paths-window {
   transform: scale(1.08);
@@ -485,19 +469,105 @@
 .loader {
   animation: loader-bailout 0.5s 9s forwards;
 }
-html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
+/* The opening waits for the loader: its headline and line start when the page is released, and when
+   the loader has already revealed the stone, the opening doesn't reveal it a second time. */
+html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after, .opening-title span span, .opening-line, .opening-scroll),
 [data-inview]:not([data-shown]) :is(.hero-title .reveal-line > span, .hero-after) {
   animation-play-state: paused;
 }
-@keyframes twinkle {
-  50% {
-    transform: scale(0.85);
-    opacity: 0.6;
+html[data-loader] .opening-stone {
+  animation: none;
+}
+html[data-loader] .opening-light {
+  display: none;
+}
+
+/* Loader choreography (about 2.3 s): black, a burgundy glow, the stone lit by a narrow light and
+   turning 15 degrees to rest, then the logo and progress. */
+.loader-glow {
+  background:
+    radial-gradient(ellipse 45% 38% at 50% 46%, rgb(84 23 43 / 0.55), transparent 70%),
+    radial-gradient(ellipse 80% 70% at 50% 50%, rgb(49 9 18 / 0.7), transparent 75%);
+  animation: loader-fade 1.1s ease-out 0.15s both;
+}
+@keyframes loader-fade {
+  from {
+    opacity: 0;
   }
 }
-.loader-sparkle {
-  transform-origin: 88% 22%;
-  animation: twinkle 1.8s ease-in-out infinite;
+.loader-stone {
+  animation: loader-stone 2.1s cubic-bezier(0.3, 0.6, 0.2, 1) 0.35s both;
+}
+@keyframes loader-stone {
+  0% {
+    opacity: 0;
+    filter: brightness(0.05);
+    transform: rotate(-15deg) scale(0.97);
+  }
+  35% {
+    opacity: 1;
+    filter: brightness(0.35);
+  }
+  100% {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+.loader-light > span {
+  background: linear-gradient(100deg, transparent, rgb(244 240 236 / 0.55) 50%, transparent);
+  animation: loader-light 1.5s cubic-bezier(0.45, 0, 0.2, 1) 0.6s both;
+}
+@keyframes loader-light {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(340%);
+    opacity: 0;
+  }
+}
+.loader-logo {
+  animation: loader-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 1.35s both;
+}
+.loader-segments {
+  animation: loader-fade 0.6s ease 1.6s both;
+}
+@keyframes loader-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.loader-segments > span {
+  background: rgb(244 240 236 / 0.16);
+  transition: background-color 0.5s ease;
+}
+.loader-segments > span[data-on] {
+  background: rgb(244 240 236 / 0.9);
+}
+/* Exit: the dark, logo and progress dissolve; the stone stays until the opening's is visible under it. */
+.loader[data-leaving] {
+  pointer-events: none;
+}
+.loader[data-leaving] .loader-dark {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.loader[data-leaving] .loader-foot {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+.loader[data-leaving] .loader-stage {
+  opacity: 0;
+  transition: opacity 0.35s ease 0.7s;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -584,10 +654,10 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
 /* 02: the matted print opens past the edges of the screen (desktop only). */
 @media (min-width: 1024px) {
   .heritage-frame {
-    left: calc(38vw + (47vw - 38vw) * var(--e, 1));
-    top: calc(24% + (-6% - 24%) * var(--e, 1));
-    width: calc(24vw + (60vw - 24vw) * var(--e, 1));
-    height: calc(52% + (112% - 52%) * var(--e, 1));
+    left: calc(39vw + (47vw - 39vw) * var(--e, 1));
+    top: calc(31% + (-6% - 31%) * var(--e, 1));
+    width: calc(22vw + (60vw - 22vw) * var(--e, 1));
+    height: calc(50% + (112% - 50%) * var(--e, 1));
     padding: calc(14px * (1 - var(--e, 1)));
     background: var(--color-ivory);
     box-shadow: 0 0 0 calc(1px * (1 - var(--e, 1))) var(--color-champagne);
@@ -712,6 +782,15 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .loader-glow,
+  .loader-stone,
+  .loader-logo,
+  .loader-segments {
+    animation: none;
+  }
+  .loader-light {
+    display: none;
+  }
   .opening-stone,
   .opening-light,
   .opening-title span span,

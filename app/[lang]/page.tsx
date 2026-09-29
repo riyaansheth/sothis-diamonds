@@ -158,7 +158,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </section>
 
         {/* 9. Testimonials */}
-        <section className="theme-light border-y border-line bg-ivory-deep bg-[url(/brand/bg-quotes.webp)] bg-cover bg-center">
+        <section className="border-y border-line bg-[#4a1520] bg-[url(/brand/bg-quotes-burgundy.webp)] bg-cover bg-center">
           <div className="wrap py-28 lg:py-40">
             <h2 className="sr-only">{t.reviews.title}</h2>
             <Quotes items={t.reviews.items} label={t.reviews.choose} />
