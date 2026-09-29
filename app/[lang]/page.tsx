@@ -25,6 +25,7 @@ const HOME_CROPS: Record<string, Crop> = {
   "S-1887": { cx: 0.45, cy: 0.46, d: 0.44 },
   "E-397-244A-3A": { cx: 0.5, cy: 0.47, d: 0.8 },
   "S-1865": { cx: 0.5, cy: 0.49, d: 0.6 },
+  "E-398-248F-1B": { cx: 0.5, cy: 0.5, d: 0.34 }, // stops left of the IGI card (x 0.68)
 };
 
 // The opening stone: studio cut-out of the round 7.06 ct F SI2 (E-398-248F-1B), as on the About page.

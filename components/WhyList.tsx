@@ -76,44 +76,6 @@ export function WhyList({ items, stones, view }: { items: string[][]; stones: Wh
     };
   }, []);
 
-  // Desktop: one wheel / trackpad gesture moves exactly one reason (and so one stone). At the first
-  // and last reason the wheel passes through, so the page never gets stuck here.
-  useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1024px)");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let lockedUntil = 0;
-    let acc = 0;
-
-    const onWheel = (e: WheelEvent) => {
-      const el = root.current;
-      if (!wide.matches || !el || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
-      const mid = window.innerHeight / 2;
-      const centres = rows.current.map((r) => {
-        const b = r!.getBoundingClientRect();
-        return b.top + b.height / 2;
-      });
-      // Only act while the reasons span the middle of the screen.
-      if (centres[0] > mid + 40 || centres[centres.length - 1] < mid - 40) return;
-      const current = centres.reduce((best, c, i) => (Math.abs(c - mid) < Math.abs(centres[best] - mid) ? i : best), 0);
-      const dir = Math.sign(e.deltaY);
-      const next = current + dir;
-      if (next < 0 || next >= centres.length) return; // at an end: let the page scroll on
-      e.preventDefault();
-      const now = performance.now();
-      if (now < lockedUntil) {
-        lockedUntil = Math.max(lockedUntil, now + 220); // swallow the rest of this gesture, momentum included
-        return;
-      }
-      acc += e.deltaY;
-      if (Math.abs(acc) < 12) return; // ignore tiny trackpad jitter
-      acc = 0;
-      lockedUntil = now + (reduce ? 250 : 700);
-      window.scrollBy({ top: centres[next] - mid, behavior: reduce ? "auto" : "smooth" });
-    };
-    window.addEventListener("wheel", onWheel, { passive: false });
-    return () => window.removeEventListener("wheel", onWheel);
-  }, []);
-
   const pin = (i: number | null) => {
     pinned.current = i;
   };
