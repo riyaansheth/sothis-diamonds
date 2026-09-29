@@ -70,13 +70,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         line={t.home.openingLine}
         scroll={t.about.scroll}
         className="motion-safe:lg:h-[200vh]"
-        fadeTo={
-          // The two halves of the choice that comes next, so the stone dissolves straight into it.
-          <div className="flex size-full flex-col md:flex-row">
-            <span className="flex-1 bg-[url(/brand/bg-sell.webp)] bg-cover bg-center" />
-            <span className="flex-1 bg-[url(/brand/bg-buy.webp)] bg-cover bg-center" />
-          </div>
-        }
       />
       <HomeChoice
         sell={{ title: t.paths.sell[0], body: t.paths.sell[1], cta: t.home.sellCta }}

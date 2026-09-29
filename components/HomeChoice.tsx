@@ -59,7 +59,8 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, shopHref, childre
 
   return (
     <>
-      <section data-open={open ? "" : undefined} className="home-choice relative">
+      {/* Pulled up under the opening's last (pinned) screen, which fades away to reveal it (desktop). */}
+      <section data-open={open ? "" : undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
         <div className="paths flex flex-col md:flex-row">
           <button type="button" onClick={choose} aria-expanded={open} aria-controls="sell-journey" className={`${panel} home-sell`} disabled={open}>
             <span aria-hidden className="paths-bg bg-[url(/brand/bg-sell.webp)]" />
