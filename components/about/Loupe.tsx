@@ -115,7 +115,7 @@ export function Loupe({ src, t }: {
                     aria-pressed={active === i}
                     className="flex items-baseline gap-3 border border-line px-3 py-1.5 text-sm transition-colors hover:text-burgundy aria-pressed:border-burgundy aria-pressed:text-burgundy lg:border-0 lg:px-0"
                   >
-                    <span className="font-display text-champagne">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-display text-white">{String(i + 1).padStart(2, "0")}</span>
                     {name}
                   </button>
                 </li>

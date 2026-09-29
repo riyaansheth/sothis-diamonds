@@ -83,7 +83,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
               <span aria-hidden className="paths-sheen" />
               <h2 className="relative max-w-md text-[2.75rem] leading-[1.05] sm:text-6xl">{title}</h2>
               <p className="relative mt-4 max-w-sm text-ink/80">{body}</p>
-              <span className="relative mt-8 inline-block self-start border-b border-champagne pb-1 text-sm tracking-[0.04em] text-burgundy">{cta}</span>
+              <span className="relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{cta}</span>
             </Link>
           ))}
         </div>

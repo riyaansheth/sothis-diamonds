@@ -63,7 +63,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </Link>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
-          <Link href={href("/sell-diamond/")} className="nav-cta hidden border-b border-champagne pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
+          <Link href={href("/sell-diamond/")} className="nav-cta hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
             {t.sell}
           </Link>
           <nav aria-label={t.account} className="flex items-center">

@@ -70,11 +70,11 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
             <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
               <span className="paths-spotlight pointer-events-none absolute inset-[5%] -z-10 rounded-full" />
               <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(81_31_42/0.18),transparent)] blur-md" />
-              <Diamond3DLazy cut="asscher" color="#f5d44a" className="pointer-events-none absolute inset-0" />
+              <Diamond3DLazy cut="asscher" color="#d4b9cb" className="pointer-events-none absolute inset-0" />
             </div>
             <span className="relative font-display text-6xl leading-none sm:text-8xl">{buy.title}</span>
             <span className="relative mt-4 max-w-sm text-ink/80">{buy.body}</span>
-            <span className="relative mt-8 inline-block self-start border-b border-champagne pb-1 text-sm tracking-[0.04em] text-burgundy">{buy.cta}</span>
+            <span className="relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{buy.cta}</span>
           </Link>
 
           <button type="button" onClick={choose} aria-expanded={open} aria-controls="sell-journey" className={`${panel} home-sell md:border-l md:border-l-champagne/60`} disabled={open}>
@@ -90,7 +90,7 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
               <span className="home-before col-start-1 row-start-1">{sell.body}</span>
               <span className="home-after col-start-1 row-start-1">{sellAfter}</span>
             </span>
-            <span className="home-cta relative mt-8 inline-block self-start border-b border-champagne pb-1 text-sm tracking-[0.04em] text-burgundy">{sell.cta}</span>
+            <span className="home-cta relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{sell.cta}</span>
           </button>
         </div>
         {/* Once Sell is chosen, the band keeps a way back to buying. */}
@@ -98,7 +98,7 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
           <div className="home-instead absolute bottom-6 right-6 z-10 flex flex-wrap items-center justify-end gap-x-6 gap-y-2 text-sm text-ink/75 sm:bottom-10 sm:right-12 md:left-12 md:right-auto md:justify-start">
             <p>
               {buyInstead[0]}{" "}
-              <Link href={shopHref} className="border-b border-champagne pb-0.5 text-burgundy hover:border-burgundy">{buyInstead[1]}</Link>
+              <Link href={shopHref} className="border-b border-white/70 pb-0.5 text-burgundy hover:border-burgundy">{buyInstead[1]}</Link>
             </p>
             <button type="button" onClick={reset} className="flex items-center gap-1.5 text-ink/70 hover:text-burgundy">
               <svg viewBox="0 0 24 24" className="size-4 fill-none stroke-current [stroke-width:1.5]" aria-hidden><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" /></svg>

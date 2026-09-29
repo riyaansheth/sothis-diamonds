@@ -188,7 +188,7 @@ export function ArticleBody({ article: a, lang }: { article: Article; lang: Loca
                 <details key={q} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg">
                     {q}
-                    <span aria-hidden className="text-champagne transition-transform group-open:rotate-45">+</span>
+                    <span aria-hidden className="text-white transition-transform group-open:rotate-45">+</span>
                   </summary>
                   <div className="prose mt-3 text-platinum-2" dangerouslySetInnerHTML={{ __html: ans }} />
                 </details>

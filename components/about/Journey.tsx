@@ -172,7 +172,7 @@ export function Journey({ media, t }: { media: JourneyMedia; t: T }) {
             <div className="relative mt-8 min-h-[20rem]">
               {t.stages.map(([title, body], i) => (
                 <div key={title} aria-hidden={active !== i} data-on={active === i ? "" : undefined} className="journey-copy absolute inset-x-0 top-0">
-                  <p className="font-display text-7xl text-champagne">{String(i + 1).padStart(2, "0")}</p>
+                  <p className="font-display text-7xl text-white">{String(i + 1).padStart(2, "0")}</p>
                   <h3 className="mt-4 text-4xl">{title}</h3>
                   <p className="mt-4 max-w-sm text-lg text-platinum-2">{body}</p>
                 </div>
@@ -200,7 +200,7 @@ export function Journey({ media, t }: { media: JourneyMedia; t: T }) {
                 <Visual i={i} m={media} t={t} />
               </div>
               <div>
-                <p className="font-display text-5xl text-champagne">{String(i + 1).padStart(2, "0")}</p>
+                <p className="font-display text-5xl text-white">{String(i + 1).padStart(2, "0")}</p>
                 <h3 className="mt-3 text-3xl">{title}</h3>
                 <p className="mt-3 text-platinum-2">{body}</p>
               </div>

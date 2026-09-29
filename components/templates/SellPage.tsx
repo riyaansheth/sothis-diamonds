@@ -49,7 +49,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
           <ol className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {t.steps.items.map(([title, body], i) => (
               <li key={title} className="border-t border-line pt-5">
-                <span className="font-display text-2xl text-champagne">{i + 1}</span>
+                <span className="font-display text-2xl text-white">{i + 1}</span>
                 <h3 className="mt-2 text-xl">{title}</h3>
                 <p className="mt-2 max-w-xs text-platinum-2">{body}</p>
               </li>
@@ -88,7 +88,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
               <details key={q} className="group py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-xl">
                   {q}
-                  <span aria-hidden className="text-champagne transition-transform group-open:rotate-45">+</span>
+                  <span aria-hidden className="text-white transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p className="mt-3 max-w-2xl text-platinum-2">{a}</p>
               </details>
