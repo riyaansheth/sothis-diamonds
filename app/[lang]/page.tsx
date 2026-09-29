@@ -76,6 +76,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         buy={{ title: t.paths.buy[0], body: t.paths.buy[1], cta: t.paths.buy[2] }}
         sellAfter={t.home.sellAfter}
         buyInstead={t.home.buyInstead}
+        change={t.home.change}
         shopHref={href("/shop/")}
       >
         {/* 3. Sell with confidence: what we buy */}

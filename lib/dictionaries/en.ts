@@ -62,6 +62,7 @@ export const en = {
     sellCta: "See how selling works",
     sellAfter: "Here’s how selling to us works.",
     buyInstead: ["Buying instead?", "Explore the collection"] as [string, string],
+    change: "Change",
   },
   paths: {
     sell: ["Sell", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],

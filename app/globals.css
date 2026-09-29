@@ -519,8 +519,7 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
   }
 }
 .opening-light {
-  background: linear-gradient(105deg, transparent 44%, rgb(255 246 228 / 0.5) 50%, transparent 56%);
-  mix-blend-mode: overlay;
+  background: linear-gradient(105deg, transparent 44%, rgb(255 246 228 / 0.28) 50%, transparent 56%);
   animation: light-pass 2.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
 }
 @keyframes light-pass {
@@ -732,6 +731,7 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
 }
 .home-choice[data-open] .home-sell {
   flex-grow: 1;
+  border-left-color: transparent;
   cursor: default;
 }
 .home-choice[data-open] .home-buy {
@@ -784,7 +784,7 @@ html.js .home-journey:not([data-open]) {
   transition: all 1s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .home-choice[data-open] .home-sell .paths-window {
-  left: 70%;
+  left: 58%;
   top: 50%;
   /* Tailwind positions it with `translate`, so override that; scale rather than resize, because the
      3D canvas keeps its size when its box changes. */

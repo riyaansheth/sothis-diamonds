@@ -97,24 +97,33 @@ function Stone({ cut, color, spin }: { cut: Cut; color: string; spin: boolean })
 }
 
 /**
- * A real-time rendered diamond that turns slowly. Only renders while on screen,
- * and stays still for visitors who prefer reduced motion.
+ * A real-time rendered diamond that turns slowly. Only renders while on screen and not covered
+ * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
+ * visitors who prefer reduced motion.
  */
 export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: Cut; color?: string; className?: string }) {
   const box = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [spin] = useState(() => typeof window === "undefined" || !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
+  const [covered, setCovered] = useState(() => typeof document !== "undefined" && document.documentElement.hasAttribute("data-covered"));
+
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: "100px" });
     if (box.current) io.observe(box.current);
-    return () => io.disconnect();
+    const html = document.documentElement;
+    const mo = new MutationObserver(() => setCovered(html.hasAttribute("data-covered")));
+    mo.observe(html, { attributes: true, attributeFilter: ["data-covered"] });
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   return (
     <div ref={box} className={className}>
       <Canvas
-        frameloop={visible && spin ? "always" : "demand"}
+        frameloop={visible && spin && !covered ? "always" : "demand"}
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5.6], fov: 32 }}
         gl={{ antialias: true, alpha: true }}

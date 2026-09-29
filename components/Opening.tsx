@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { seg, setVars, useScrub } from "./about/useScrub";
 
 /**
@@ -20,16 +20,26 @@ export function Opening({ cutout, title, line, scroll, crumbs, className = "" }:
 }) {
   const root = useRef<HTMLElement>(null);
 
+  const last = useRef(-1);
+  useEffect(() => () => document.documentElement.removeAttribute("data-covered"), []);
+
+  // Only transform and opacity change while scrolling (both GPU-composited), and only when the
+  // progress has actually moved, so each frame is cheap.
   useScrub(root, (p, pinned) => {
     const q = pinned ? p : 0;
-    const fade = seg(q, 0.78, 1);
+    // While the opening fully covers what's under it, pause the 3D stones there (they'd render unseen).
+    // Set every tick (cheap), so it can't be left stale.
+    document.documentElement.toggleAttribute("data-covered", pinned && q < 0.72);
+    if (Math.abs(q - last.current) < 0.0005) return;
+    last.current = q;
+    const fade = seg(q, 0.72, 1);
     // Once it has mostly faded, the header goes back to its dark-on-light look.
     if (root.current) root.current.dataset.headerDark = fade > 0.4 ? "off" : "";
     setVars(root.current, {
-      "--zoom": 1 + Math.pow(seg(q, 0.08, 0.92), 2.2) * 9, // approaches slowly, then passes into the stone
+      "--zoom": 1 + Math.pow(seg(q, 0.08, 0.85), 2) * 3.5, // approaches, then passes into the stone (up to 4.5x)
       "--turn": seg(q, 0, 0.9) * 28,
       "--copy": 1 - seg(q, 0.02, 0.22),
-      "--light": seg(q, 0.55, 0.9), // the stone brightens as the camera passes the table
+      "--light": seg(q, 0.45, 0.8), // the stone brightens as the camera passes the table
       "--ivory": fade,
     });
   });
@@ -39,20 +49,21 @@ export function Opening({ cutout, title, line, scroll, crumbs, className = "" }:
       {/* Full screen, behind the see-through header, so it dissolves straight into the full-screen choice. */}
       <div
         className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-ink bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20 motion-safe:lg:sticky motion-safe:lg:top-0"
-        style={{ opacity: "calc(1 - var(--ivory, 0))" }}
+        style={{ opacity: "calc(1 - var(--ivory, 0))", willChange: "opacity" }}
       >
         {crumbs && <div className="wrap absolute inset-x-0 top-26 z-10 text-on-accent/70 [&_*]:!text-on-accent/70" style={{ opacity: "var(--copy, 1)" }}>{crumbs}</div>}
 
         {/* The stone: revealed by the light on load; its scale and turn follow the scroll. */}
         <div
-          className="relative aspect-square w-[min(78vw,62vh,36rem)]"
+          className="relative aspect-square w-[min(78vw,62vh,36rem)] will-change-transform"
           style={{ transform: "scale(var(--zoom, 1)) rotate(calc(var(--turn, 0) * 1deg))" }}
         >
-          <div className="absolute inset-0" style={{ filter: "brightness(calc(1 + var(--light, 0) * 0.9))" }}>
-            <div className="opening-stone absolute inset-0">
-              <Image src={cutout} alt="" fill priority sizes="(min-width: 1024px) 40vw, 80vw" className="object-contain" />
-            </div>
+          <div className="opening-stone absolute inset-0">
+            {/* Larger source than it's shown at, so it stays crisp as the camera moves in. */}
+            <Image src={cutout} alt="" fill priority sizes="(min-width: 1024px) 60vw, 100vw" className="object-contain" />
           </div>
+          {/* Brightening as an opacity layer (cheap) rather than an animated filter on a scaled image. */}
+          <span aria-hidden className="pointer-events-none absolute inset-[2%] rounded-full bg-[radial-gradient(closest-side,rgb(255_252_244/0.9),rgb(255_252_244/0.35)_70%,transparent)]" style={{ opacity: "calc(var(--light, 0) * 0.8)" }} />
           <span aria-hidden className="opening-light pointer-events-none absolute -inset-[20%]" />
         </div>
 
