@@ -405,12 +405,12 @@
 
 /* The selling journey stays pinned over a quiet field of ivory silk. */
 .steps-section {
-  background-color: var(--color-ivory-deep);
-  background-image:
-    linear-gradient(rgb(244 240 232 / 0.12), rgb(244 240 232 / 0.12)),
-    url("/brand/bg-satin-steps.webp");
+  --color-line: rgb(244 240 232 / 0.18);
+  background-color: #3a0d18;
+  background-image: url("/brand/bg-steps-burgundy.webp");
   background-position: center bottom;
   background-size: cover;
+  color: var(--color-on-accent);
 }
 @media (min-width: 768px) {
   .steps-section {
@@ -420,17 +420,20 @@
 
 /* How selling works: the active step reads in ink, the rest step back. */
 .step-item {
-  color: var(--color-platinum-2);
+  color: rgb(244 240 232 / 0.4);
   transition: color 0.6s;
 }
 .step-item p {
   color: inherit;
 }
 .step-item[data-on] {
-  color: var(--color-ink);
+  color: var(--color-on-accent);
 }
 .step-item[data-on] p {
-  color: var(--color-platinum-2);
+  color: rgb(244 240 232 / 0.72);
+}
+.steps-section .text-platinum-2 {
+  color: rgb(244 240 232 / 0.62);
 }
 
 /* Collection rail */

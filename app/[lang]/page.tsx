@@ -102,7 +102,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               stage={stage}
               stepLabel={t.steps.stepOf}
               heading={<RevealHeading lines={[t.steps.title]} className="text-4xl sm:text-5xl" />}
-              action={<Link href={href("/sell-diamond/")} className="btn btn-primary">{t.steps.cta}</Link>}
+              action={<Link href={href("/sell-diamond/")} className="btn btn-inverse">{t.steps.cta}</Link>}
             />
           </div>
         </section>

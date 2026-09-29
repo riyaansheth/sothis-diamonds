@@ -105,7 +105,7 @@ export function StepsScroller({ steps, heading, action, stage, stepLabel }: {
 
   return (
     <div ref={root} className="grid gap-x-16 lg:grid-cols-[1fr_1fr]">
-      <div ref={pin} className="sticky top-20 z-10 -mx-4 bg-ivory-deep px-4 pb-4 pt-6 lg:top-0 lg:mx-0 lg:flex lg:h-dvh lg:flex-col lg:justify-center lg:bg-transparent lg:px-0 lg:pb-8 lg:pt-24">
+      <div ref={pin} className="steps-pin sticky top-20 z-10 -mx-4 bg-[#3a0d18] px-4 pb-4 pt-6 lg:top-0 lg:mx-0 lg:flex lg:h-dvh lg:flex-col lg:justify-center lg:bg-transparent lg:px-0 lg:pb-8 lg:pt-24">
         <div className="hidden lg:block">{heading}</div>
         <div className="mx-auto aspect-square h-[36vh] max-w-full lg:mx-0 lg:mt-4 lg:h-auto lg:w-[min(32rem,36vw,52vh)]">
           {near && <StepsStage data={stage} progress={progress} />}
