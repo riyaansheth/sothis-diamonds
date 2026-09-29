@@ -37,8 +37,9 @@ function trackProgress(onChange: (p: number) => void) {
   parts.push([0.15, document.fonts?.ready ?? Promise.resolve()]);
   parts.push([0.05, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
   parts.push([0.2, document.readyState === "complete" ? Promise.resolve() : new Promise((r) => window.addEventListener("load", r, { once: true }))]);
-  // The 3D stones in the first screen: each counts once it has drawn its first frame.
-  const stones = document.querySelectorAll(".paths-window").length;
+  // The opening stone, and any 3D stones in the first screen (each counts once it has drawn a frame).
+  const stones = [...document.querySelectorAll(".paths-window")].filter((el) => el.getBoundingClientRect().top < window.innerHeight).length;
+  parts.push([0.15, settled(document.querySelector<HTMLImageElement>(".opening-stone img"))]);
   let ready = 0;
   const allStones = new Promise<void>((r) => {
     if (!stones) return r();

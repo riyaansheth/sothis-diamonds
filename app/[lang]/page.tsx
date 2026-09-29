@@ -6,6 +6,7 @@ import { Loader } from "@/components/Loader";
 import { Quotes, RevealHeading, StepsScroller } from "@/components/Motion";
 import type { Crop } from "@/components/CroppedImage";
 import { HomeChoice } from "@/components/HomeChoice";
+import { Opening } from "@/components/Opening";
 import { WhyList } from "@/components/WhyList";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 import { displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
@@ -26,6 +27,8 @@ const HOME_CROPS: Record<string, Crop> = {
   "S-1865": { cx: 0.5, cy: 0.49, d: 0.6 },
 };
 
+// The opening stone: studio cut-out of the round 7.06 ct F SI2 (E-398-248F-1B), as on the About page.
+const OPENING_STONE = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
 const STEPS_STONE = "S-1976"; // RD 1.09ct F IF (IGI): the stone that acts out "How selling works"
 const STORY_PIECE = "SCP01"; // Cushion yellow diamond ring, photographed on white
 
@@ -61,7 +64,20 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <Loader t={t.loader} />
       {/* The homepage opens on the Sell / Buy choice; choosing Sell reveals the selling journey below.
           The buying sections (collection rail, gallery) return with the buying journey. */}
-      <h1 className="sr-only">{t.hero.title}</h1>
+      <Opening
+        cutout={mediaUrl(OPENING_STONE)}
+        title={t.about.title}
+        line={t.home.openingLine}
+        scroll={t.about.scroll}
+        className="motion-safe:lg:h-[200vh]"
+        fadeTo={
+          // The two halves of the choice that comes next, so the stone dissolves straight into it.
+          <div className="flex size-full flex-col md:flex-row">
+            <span className="flex-1 bg-[url(/brand/bg-sell.webp)] bg-cover bg-center" />
+            <span className="flex-1 bg-[url(/brand/bg-buy.webp)] bg-cover bg-center" />
+          </div>
+        }
+      />
       <HomeChoice
         sell={{ title: t.paths.sell[0], body: t.paths.sell[1], cta: t.home.sellCta }}
         buy={{ title: t.paths.buy[0], body: t.paths.buy[1], cta: t.paths.buy[2] }}

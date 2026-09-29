@@ -4,7 +4,6 @@ import { Heritage } from "@/components/about/Heritage";
 import { Journey } from "@/components/about/Journey";
 import { Loupe } from "@/components/about/Loupe";
 import { NewChapter } from "@/components/about/NewChapter";
-import { Opening } from "@/components/about/Opening";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { mediaUrl, productBySku } from "@/lib/products";
@@ -37,9 +36,9 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
   const [colourName, clarityName] = [a.factors[1][0], a.factors[2][0]];
 
   return (
-    <div data-header="clear">
-      <Opening cutout={mediaUrl(CUTOUT)} title={a.title} line={a.line} scroll={a.scroll} crumbs={<Breadcrumbs items={crumbs} />} />
+    <div>
       <Heritage
+        crumbs={<Breadcrumbs items={crumbs} />}
         photo={mediaUrl(STUDIO)}
         t={{ rooted: a.rooted, since: fill(a.since), heritage: a.heritage.map(fill), then: a.then, now: a.now, nowPlace: a.nowPlace, founded: String(site.founded), caption: fill(a.stoneCaption) }}
       />

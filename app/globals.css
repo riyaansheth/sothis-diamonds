@@ -708,7 +708,7 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after),
 /* Homepage choice. The Sell journey is hidden until chosen, but only once JS has marked the page
    (html.js, set before paint), so without JS everything shows. */
 .home-choice .paths {
-  min-height: calc(100dvh - 5rem);
+  min-height: 100dvh;
   transition: min-height 1s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .home-choice .paths > :is(a, button) {

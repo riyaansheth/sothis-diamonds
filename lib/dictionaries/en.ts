@@ -58,6 +58,7 @@ export const en = {
     loupeLink: "View this stone",
   },
   home: {
+    openingLine: "Antwerp diamonds, bought and sold with care.",
     sellCta: "See how selling works",
     sellAfter: "Here’s how selling to us works.",
     buyInstead: ["Buying instead?", "Explore the collection"] as [string, string],

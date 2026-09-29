@@ -15,14 +15,12 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
   const pathname = usePathname();
-  // Pages can ask for a fully transparent header ([data-header="clear"]); while an element marked
-  // [data-header-dark] is behind it, its text and logo turn ivory.
-  const [mode, setMode] = useState<"glass" | "clear" | "clear-dark">("glass");
+  // Glass everywhere; fully clear with ivory text while a dark section ([data-header-dark]) is behind it.
+  const [mode, setMode] = useState<"glass" | "clear-dark">("glass");
 
   useEffect(() => {
-    const clear = document.querySelector("[data-header='clear']");
     const dark = document.querySelector<HTMLElement>("[data-header-dark]");
-    const update = () => setMode(!clear ? "glass" : dark && dark.getBoundingClientRect().bottom > 40 ? "clear-dark" : "clear");
+    const update = () => setMode(dark && dark.dataset.headerDark !== "off" && dark.getBoundingClientRect().bottom > 40 ? "clear-dark" : "glass");
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);

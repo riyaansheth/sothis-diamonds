@@ -2,31 +2,43 @@
 
 import Image from "next/image";
 import { useRef, type ReactNode } from "react";
-import { seg, setVars, useScrub } from "./useScrub";
+import { seg, setVars, useScrub } from "./about/useScrub";
 
 /**
- * Chapter 01. The stone sits in shadow; a narrow studio light reveals it on load. Scrolling moves
- * the camera into the stone until its facets fill the screen and dissolve into the ivory of
- * chapter 02.
+ * The homepage opening. The stone sits in shadow; a narrow studio light reveals it on load. Scrolling
+ * moves the camera into the stone until its facets fill the screen and dissolve into `fadeTo`, the
+ * first screen of whatever follows. `className` sets the pinned scroll length (a literal Tailwind class).
  */
-export function Opening({ cutout, title, line, scroll, crumbs }: { cutout: string; title: string; line: string; scroll: string; crumbs: ReactNode }) {
+export function Opening({ cutout, title, line, scroll, crumbs, fadeTo, className = "" }: {
+  cutout: string;
+  title: string;
+  line: string;
+  scroll: string;
+  crumbs?: ReactNode;
+  fadeTo: ReactNode;
+  className?: string;
+}) {
   const root = useRef<HTMLElement>(null);
 
   useScrub(root, (p, pinned) => {
     const q = pinned ? p : 0;
+    const fade = seg(q, 0.78, 1);
+    // Once it has mostly dissolved into the light choice, the header goes back to its dark-on-light look.
+    if (root.current) root.current.dataset.headerDark = fade > 0.4 ? "off" : "";
     setVars(root.current, {
       "--zoom": 1 + Math.pow(seg(q, 0.08, 0.92), 2.2) * 9, // approaches slowly, then passes into the stone
       "--turn": seg(q, 0, 0.9) * 28,
       "--copy": 1 - seg(q, 0.02, 0.22),
       "--light": seg(q, 0.55, 0.9), // the stone brightens as the camera passes the table
-      "--ivory": seg(q, 0.78, 1),
+      "--ivory": fade,
     });
   });
 
   return (
-    <section ref={root} data-header-dark className="relative bg-ink bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center lg:bg-fixed pt-20 text-on-accent motion-safe:lg:h-[260vh]">
-      <div className="relative flex h-[calc(100svh-5rem)] min-h-[34rem] items-center justify-center overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20">
-        <div className="wrap absolute inset-x-0 top-6 z-10 text-on-accent/70 [&_*]:!text-on-accent/70" style={{ opacity: "var(--copy, 1)" }}>{crumbs}</div>
+    <section ref={root} data-header-dark className={`relative bg-ink bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center text-on-accent lg:bg-fixed ${className}`}>
+      {/* Full screen, behind the see-through header, so it dissolves straight into the full-screen choice. */}
+      <div className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden pt-20 motion-safe:lg:sticky motion-safe:lg:top-0">
+        {crumbs && <div className="wrap absolute inset-x-0 top-26 z-10 text-on-accent/70 [&_*]:!text-on-accent/70" style={{ opacity: "var(--copy, 1)" }}>{crumbs}</div>}
 
         {/* The stone: revealed by the light on load; its scale and turn follow the scroll. */}
         <div
@@ -59,7 +71,7 @@ export function Opening({ cutout, title, line, scroll, crumbs }: { cutout: strin
           <span className="block h-8 w-px bg-champagne/70" />
         </p>
 
-        <span aria-hidden className="pointer-events-none absolute inset-0 bg-ivory" style={{ opacity: "var(--ivory, 0)" }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ opacity: "var(--ivory, 0)" }}>{fadeTo}</div>
       </div>
     </section>
   );

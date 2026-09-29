@@ -1,16 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { seg, setVars, useScrub } from "./useScrub";
 
 /**
  * Chapter 02. An exhibition print of today's stone opens from a framed mat to a full-bleed image
  * while the headline gives way to a two-column text with a line from 1970 to today.
  * No archive photographs exist in the export, so nothing here pretends to be historical.
+ * It opens the About page, so its column heading is the page's h1.
  */
-export function Heritage({ photo, t }: {
+export function Heritage({ photo, t, crumbs }: {
   photo: string;
+  crumbs?: ReactNode;
   t: { rooted: string; since: string; heritage: string[]; then: string; now: string; nowPlace: string; founded: string; caption: string };
 }) {
   const root = useRef<HTMLElement>(null);
@@ -26,8 +28,9 @@ export function Heritage({ photo, t }: {
   });
 
   return (
-    <section ref={root} className="grain relative bg-ivory bg-[url(/brand/bg-about-heritage.webp)] bg-[length:100%_auto] bg-top bg-no-repeat lg:bg-cover lg:bg-fixed lg:bg-center motion-safe:lg:h-[280vh]">
+    <section ref={root} className="grain relative bg-ivory pt-20 bg-[url(/brand/bg-about-heritage.webp)] bg-[length:100%_auto] bg-top bg-no-repeat lg:bg-cover lg:bg-fixed lg:bg-center motion-safe:lg:h-[280vh]">
       <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)]">
+        {crumbs && <div className="wrap relative z-20 pt-6 lg:absolute lg:inset-x-0 lg:top-0">{crumbs}</div>}
         {/* Headline, centred, before the frame opens. */}
         <div aria-hidden className="pointer-events-none absolute inset-0 z-10 hidden items-center justify-center lg:flex" style={{ opacity: "var(--head, 0)" }}>
           <p className="text-center font-display text-8xl leading-none" style={{ transform: "translateY(calc((1 - var(--head, 0)) * -6vh))" }}>{t.rooted}</p>
@@ -46,10 +49,11 @@ export function Heritage({ photo, t }: {
         {/* Two-column text and the line from then to now. */}
         <div className="wrap relative py-16 lg:grid lg:h-full lg:grid-cols-[1fr_1fr] lg:items-center lg:py-0" style={{ opacity: "var(--cols, 1)" }}>
           <div className="max-w-md lg:pr-10" style={{ transform: "translateY(calc((1 - var(--cols, 1)) * 3rem))" }}>
-            <h2 className="font-display text-[2.75rem] leading-[1.05] sm:text-6xl">
-              <span className="block lg:hidden">{t.rooted}</span>
+            {/* The page's heading. On desktop "Rooted in Antwerp." is shown large (centred, above) first. */}
+            <h1 className="font-display text-[2.75rem] leading-[1.05] sm:text-6xl">
+              <span className="block lg:sr-only">{t.rooted}</span>
               <span className="block text-burgundy">{t.since}</span>
-            </h2>
+            </h1>
             <div className="mt-8 space-y-4 text-lg">
               {t.heritage.map((h) => <p key={h}>{h}</p>)}
             </div>
