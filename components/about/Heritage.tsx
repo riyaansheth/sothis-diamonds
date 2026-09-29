@@ -28,8 +28,8 @@ export function Heritage({ photo, t, crumbs }: {
   });
 
   return (
-    <section ref={root} className="theme-light grain relative bg-ivory pt-20 bg-[url(/brand/bg-about-heritage.webp)] bg-[length:100%_auto] bg-top bg-no-repeat lg:bg-cover lg:bg-fixed lg:bg-center motion-safe:lg:h-[280vh]">
-      <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)]">
+    <section ref={root} className="grain relative bg-[#1a0f10] bg-[url(/brand/bg-about-heritage-dark.webp)] bg-cover bg-center pt-20 lg:bg-none motion-safe:lg:h-[280vh]">
+      <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)] lg:bg-[url(/brand/bg-about-heritage-dark.webp)] lg:bg-cover lg:bg-center">
         {crumbs && <div className="wrap relative z-20 pt-6 lg:absolute lg:inset-x-0 lg:top-0">{crumbs}</div>}
         {/* Headline, centred, before the frame opens. */}
         <div aria-hidden className="pointer-events-none absolute inset-0 z-10 hidden items-center justify-center lg:flex" style={{ opacity: "var(--head, 0)" }}>
