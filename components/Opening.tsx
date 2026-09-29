@@ -48,7 +48,7 @@ export function Opening({ cutout, title, line, scroll, crumbs, className = "" }:
     <section ref={root} data-header-dark className={`pointer-events-none relative z-10 text-on-accent ${className}`}>
       {/* Full screen, behind the see-through header, so it dissolves straight into the full-screen choice. */}
       <div
-        className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-ink bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20 motion-safe:lg:sticky motion-safe:lg:top-0"
+        className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20 motion-safe:lg:sticky motion-safe:lg:top-0"
         style={{ opacity: "calc(1 - var(--ivory, 0))", willChange: "opacity" }}
       >
         {crumbs && <div className="wrap absolute inset-x-0 top-26 z-10 text-on-accent/70 [&_*]:!text-on-accent/70" style={{ opacity: "var(--copy, 1)" }}>{crumbs}</div>}

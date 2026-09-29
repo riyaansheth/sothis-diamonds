@@ -162,7 +162,7 @@ export function ShopBrowser({ items, t, card }: { items: ShopItem[]; t: T; card:
     <div className="grid gap-12 lg:grid-cols-[16rem_1fr]">
       <aside aria-label={t.filtersTitle} className="hidden lg:block">{panel}</aside>
 
-      <dialog ref={drawer} aria-label={t.filtersTitle} className="ml-auto mr-0 h-dvh max-h-none w-[min(24rem,90vw)] bg-ivory p-6 text-ink backdrop:bg-ink/30">
+      <dialog ref={drawer} aria-label={t.filtersTitle} className="ml-auto mr-0 h-dvh max-h-none w-[min(24rem,90vw)] bg-ivory p-6 text-ink backdrop:bg-black/30">
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl">{t.filtersTitle}</h2>
           <button type="button" onClick={() => drawer.current?.close()} className="text-sm">{t.close}</button>

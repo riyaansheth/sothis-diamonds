@@ -32,7 +32,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
     <header
       // Frosted ivory glass on every page, so each page's colours show through it; fully clear where asked.
       data-mode={mode}
-      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-500 ${mode === "glass" ? "border-b border-ivory/40 bg-ivory/55 backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-transparent"} ${mode === "clear-dark" ? "text-on-accent [&_.nav-cta]:text-on-accent" : ""}`}
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-500 ${mode === "glass" ? "border-b border-line/60 bg-ivory/80 backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-transparent"} ${mode === "clear-dark" ? "text-on-accent [&_.nav-cta]:text-on-accent" : ""}`}
     >
       <div className="wrap grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-2">
         <div className="flex items-center gap-4 sm:gap-6">
@@ -59,7 +59,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </div>
 
         <Link href={href("/")} className="shrink-0" aria-label={site.name}>
-          <Logo className="h-8 w-auto sm:h-11" light={mode === "clear-dark"} />
+          <Logo className="h-8 w-auto sm:h-11" />
         </Link>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
@@ -176,8 +176,8 @@ export function LanguageLinks({ lang, label }: { lang: Locale; label: string }) 
   );
 }
 
-/** The Sothis logo (burgundy lettering, gold mark). */
-export function Logo({ className, alt = "", light = false }: { className: string; alt?: string; light?: boolean }) {
-  // eslint-disable-next-line @next/next/no-img-element -- vector logo from the old site; `light` = white lettering for dark backgrounds
-  return <img src={light ? "/brand/logo.svg" : "/brand/logo-burgundy.svg"} alt={alt} width={170} height={45} className={className} />;
+/** The Sothis logo (gold mark; white lettering by default, burgundy with onLight). */
+export function Logo({ className, alt = "", onLight = false }: { className: string; alt?: string; onLight?: boolean }) {
+  // eslint-disable-next-line @next/next/no-img-element -- vector logo from the old site: white lettering on the obsidian site, burgundy on light surfaces
+  return <img src={onLight ? "/brand/logo-burgundy.svg" : "/brand/logo.svg"} alt={alt} width={170} height={45} className={className} />;
 }

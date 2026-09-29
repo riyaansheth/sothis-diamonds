@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* Client palette: Warm Ivory, Champagne Gold, Deep Burgundy, Soft Platinum (+ ink and a readable platinum) */
-  --color-ivory: #f4f0e8; /* page ground, product + editorial sections */
-  --color-ivory-deep: #eae3d6; /* raised sections */
-  --color-burgundy: #511f2a; /* signature accent for text: links, italic hero words, outlines */
-  --color-burgundy-2: #6b2a38; /* burgundy hover / pressed */
+  /* Obsidian palette (site-wide). Token names are kept from the original light palette, so every
+     component follows: "ivory" is now the page ground, "ink" the text. Sections on light photo
+     backdrops use .theme-light (below) to get the original light values back. */
+  --color-ivory: #141416; /* page ground: obsidian */
+  --color-ivory-deep: #1d1d21; /* raised sections, cards */
+  --color-burgundy: #d6a3ae; /* accent text: links, italic words, outlines (burgundy lifted to read on dark) */
+  --color-burgundy-2: #e8c2ca; /* accent hover */
   --color-wine: #511f2a; /* burgundy as a fill: primary buttons, badges, the closing block */
   --color-wine-2: #6b2a38; /* wine hover */
-  --color-on-accent: #f4f0e8; /* text on wine: always ivory, in both themes */
-  --color-champagne: #b8a27a; /* decorative only: hairlines, numerals, loader bar, stamp. Never text. */
-  --color-platinum: #a5a29d; /* non-text only: dividers, details */
-  --color-platinum-2: #63605b; /* small secondary text */
-  --color-ink: #241519; /* body text + headings */
-  --color-line: #ddd5c7; /* default borders */
+  --color-on-accent: #f4f0e8; /* text on wine: always ivory */
+  --color-champagne: #b8a27a; /* decorative only: hairlines, numerals, loader bar. Never text. */
+  --color-platinum: #6f6c68; /* non-text only: dividers, details */
+  --color-platinum-2: #a8a39b; /* small secondary text */
+  --color-ink: #efe9df; /* body text + headings */
+  --color-line: #313037; /* default borders */
 
   --font-display: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
   --font-sans: var(--font-manrope), system-ui, sans-serif;
@@ -30,8 +32,23 @@
 }
 
 
+/* The original light palette, for sections that sit on light photo backdrops (silk, Antwerp print,
+   light product surfaces). Redefining the tokens re-colours everything inside. */
+.theme-light {
+  --color-ivory: #f4f0e8;
+  --color-ivory-deep: #eae3d6;
+  --color-burgundy: #511f2a;
+  --color-burgundy-2: #6b2a38;
+  --color-platinum: #a5a29d;
+  --color-platinum-2: #63605b;
+  --color-ink: #241519;
+  --color-line: #ddd5c7;
+  color: var(--color-ink);
+}
+
 @layer base {
   html {
+    color-scheme: dark;
     background-color: var(--color-ivory);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.32 0 0 0 0 0.22 0 0 0 0 0.2 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     color: var(--color-ink);
@@ -116,7 +133,7 @@
     padding: 0 1rem;
     border-radius: 0;
     border: 1px solid var(--color-line);
-    background: color-mix(in srgb, var(--color-ivory) 50%, white);
+    background: color-mix(in srgb, var(--color-ivory) 88%, white);
     color: var(--color-ink);
   }
   .field:focus-visible {

@@ -62,7 +62,7 @@ export function HomeChoice({ sell, buy, sellAfter, buyInstead, change, shopHref,
   return (
     <>
       {/* Pulled up under the opening's last (pinned) screen, which fades away to reveal it (desktop). */}
-      <section ref={choice} data-open={open ? "" : undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
+      <section ref={choice} data-open={open ? "" : undefined} className="home-choice theme-light relative motion-safe:lg:-mt-[100svh]">
         <div className="paths flex flex-col md:flex-row">
           <Link href={shopHref} className={`${panel} home-buy`} tabIndex={open ? -1 : undefined} aria-hidden={open}>
             <span aria-hidden className="paths-bg bg-[url(/brand/bg-buy.webp)]" />

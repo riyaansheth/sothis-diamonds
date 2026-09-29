@@ -13,7 +13,7 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", displa
 
 export const generateStaticParams = () => locales.map((lang) => ({ lang }));
 
-export const viewport: Viewport = { themeColor: "#f4f0e8" };
+export const viewport: Viewport = { themeColor: "#141416" };
 
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
   const { lang } = await params;

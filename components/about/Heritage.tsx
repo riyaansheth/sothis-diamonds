@@ -28,7 +28,7 @@ export function Heritage({ photo, t, crumbs }: {
   });
 
   return (
-    <section ref={root} className="grain relative bg-ivory pt-20 bg-[url(/brand/bg-about-heritage.webp)] bg-[length:100%_auto] bg-top bg-no-repeat lg:bg-cover lg:bg-fixed lg:bg-center motion-safe:lg:h-[280vh]">
+    <section ref={root} className="theme-light grain relative bg-ivory pt-20 bg-[url(/brand/bg-about-heritage.webp)] bg-[length:100%_auto] bg-top bg-no-repeat lg:bg-cover lg:bg-fixed lg:bg-center motion-safe:lg:h-[280vh]">
       <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)]">
         {crumbs && <div className="wrap relative z-20 pt-6 lg:absolute lg:inset-x-0 lg:top-0">{crumbs}</div>}
         {/* Headline, centred, before the frame opens. */}

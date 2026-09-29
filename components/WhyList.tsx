@@ -106,7 +106,7 @@ export function WhyList({ items, stones, view }: { items: string[][]; stones: Wh
               </div>
             ))}
           </div>
-          <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-6 bg-gradient-to-b from-ink/45 to-transparent p-8 pb-24 text-on-accent">
+          <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-6 bg-gradient-to-b from-black/50 to-transparent p-8 pb-24 text-on-accent">
             <p key={active} className="why-caption font-display text-2xl">{stones[active]?.name}</p>
             <Link href={stones[active]?.href ?? "#"} className="border-b border-champagne pb-0.5 text-sm">{view}</Link>
           </div>

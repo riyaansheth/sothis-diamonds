@@ -24,7 +24,7 @@ export function NewChapter({ inspected, worn, t }: { inspected: string; worn: st
     <section ref={root} className="relative bg-ivory motion-safe:lg:h-[240vh]" aria-labelledby="chapter-title">
       <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)]">
         {/* Inspection: the ring on a measured surface. */}
-        <div aria-hidden className="relative aspect-square bg-[#e9e3d9] lg:absolute lg:inset-0 lg:aspect-auto">
+        <div aria-hidden className="theme-light relative aspect-square bg-[#e9e3d9] lg:absolute lg:inset-0 lg:aspect-auto">
           <span className="anatomy-grid absolute inset-0" />
           <div className="absolute inset-[18%] lg:inset-[22%_34%]">
             <Image src={inspected} alt="" fill sizes="40vw" className="object-contain mix-blend-multiply" />

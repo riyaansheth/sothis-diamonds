@@ -39,7 +39,7 @@ export function ProductGallery({ slides, name, t }: { slides: Slide[]; name: str
               >
                 <Image src={s.kind === "video" ? (s.poster ?? s.src) : s.src} alt="" fill sizes="80px" className="object-cover" />
                 {s.kind === "video" && (
-                  <span className="absolute inset-0 grid place-items-center bg-ink/25">
+                  <span className="absolute inset-0 grid place-items-center bg-black/30">
                     <svg viewBox="0 0 24 24" className="size-6 fill-on-accent" aria-hidden><path d="M8 5v14l11-7z" /></svg>
                   </span>
                 )}
@@ -49,7 +49,7 @@ export function ProductGallery({ slides, name, t }: { slides: Slide[]; name: str
         </ul>
       )}
 
-      <dialog ref={box} aria-label={name} onClick={(e) => e.target === box.current && box.current.close()} className="m-auto size-[min(90vw,90vh)] max-h-none max-w-none bg-ivory p-0 backdrop:bg-ink/60">
+      <dialog ref={box} aria-label={name} onClick={(e) => e.target === box.current && box.current.close()} className="m-auto size-[min(90vw,90vh)] max-h-none max-w-none bg-ivory p-0 backdrop:bg-black/60">
         <div className="relative size-full">{view(cur, true)}</div>
         <button type="button" onClick={() => box.current?.close()} className="absolute right-3 top-3 bg-ivory/80 px-3 py-1.5 text-sm">{t.close}</button>
       </dialog>

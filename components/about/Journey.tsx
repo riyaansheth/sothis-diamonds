@@ -17,7 +17,7 @@ type T = { title: string; stage: string; stages: string[][]; photoAdded: string;
 const w = (a: number, b: number) => `clamp(0, (var(--q, 1) - ${a}) / ${b - a}, 1)`;
 
 function Frame({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`relative size-full overflow-hidden ${className}`}>{children}</div>;
+  return <div className={`theme-light relative size-full overflow-hidden ${className}`}>{children}</div>;
 }
 
 /** Each stage's picture. Everything is driven by --q, so a static --q: 1 shows its final frame. */

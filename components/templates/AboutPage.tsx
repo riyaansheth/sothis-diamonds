@@ -70,7 +70,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
       <NewChapter inspected={mediaUrl(ring.image!)} worn={mediaUrl(ring.gallery[0])} t={{ title: a.chapterTitle, body: a.chapterBody, inspection: a.inspection }} />
 
       {/* Two paths, in the language of the homepage's Sell / Buy split. */}
-      <section aria-label={`${a.sellTitle}, ${a.buyTitle}`}>
+      <section aria-label={`${a.sellTitle}, ${a.buyTitle}`} className="theme-light">
         <div className="paths flex min-h-[70vh] flex-col md:flex-row">
           {(
             [
