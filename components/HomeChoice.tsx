@@ -114,10 +114,10 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
         )}
       </section>
 
-      <div ref={buyRef} id="buy-journey" className="home-journey scroll-mt-20" data-open={open === "buy" ? "" : undefined}>
+      <div ref={buyRef} id="buy-journey" className="home-journey" data-open={open === "buy" ? "" : undefined}>
         <div className="min-h-0">{buyJourney}</div>
       </div>
-      <div ref={sellRef} id="sell-journey" className="home-journey scroll-mt-20" data-open={open === "sell" ? "" : undefined}>
+      <div ref={sellRef} id="sell-journey" className="home-journey" data-open={open === "sell" ? "" : undefined}>
         <div className="min-h-0">{sellJourney}</div>
       </div>
     </>

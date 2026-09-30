@@ -11,8 +11,7 @@ const smooth = (x: number) => x * x * (3 - 2 * x);
 
 /**
  * Why Sothis: a pinned stone on the left, the reasons on the right. Scrolling from one reason to the
- * next morphs its stone into the next: it dissolves into light and re-forms, blended additively so
- * the picture never dims or looks see-through. Hovering or focusing a reason morphs to its stone.
+ * next crossfades quietly to its photo. Hovering or focusing a reason morphs to its stone.
  */
 export function WhyList({ items, stones, view }: { items: string[][]; stones: WhyStone[]; view: string }) {
   const [active, setActive] = useState(0);
@@ -51,12 +50,12 @@ export function WhyList({ items, stones, view }: { items: string[][]; stones: Wh
 
       layers.current.forEach((el, i) => {
         if (!el) return;
-        const w = clamp01(1 - Math.abs(pos - i)); // this stone's share of the picture
-        const m = 1 - w; // how far it has dissolved
+        // A quiet crossfade: photos already passed stay underneath at full strength, and the next one
+        // fades in over them with a barely-there settle in scale (no dimming, blur or flash).
+        const w = clamp01(pos - i + 1);
         el.style.opacity = String(w);
         el.style.visibility = w > 0 ? "visible" : "hidden";
-        el.style.filter = m > 0.001 ? `blur(${(m * 22).toFixed(1)}px) brightness(${(1 + m * 0.55).toFixed(2)}) saturate(${(1 - m * 0.3).toFixed(2)})` : "";
-        el.style.transform = `scale(${(1 + m * 0.1).toFixed(3)})`;
+        el.style.transform = `scale(${(1 + (1 - w) * 0.025).toFixed(4)})`;
       });
       const now = Math.round(pos);
       if (now !== last) setActive((last = now));
@@ -84,15 +83,14 @@ export function WhyList({ items, stones, view }: { items: string[][]; stones: Wh
     <div ref={root} className="grid lg:grid-cols-2">
       <div className="relative hidden lg:block">
         <div className="sticky top-20 h-[calc(100dvh-5rem)] overflow-hidden bg-ivory-deep">
-          {/* Isolated so the additive blend mixes the stones with each other, not with the page. */}
-          <div className="absolute inset-0 isolate">
+                    <div className="absolute inset-0 isolate">
             {stones.map((s, i) => (
               <div
                 key={s.src}
                 ref={(el) => {
                   layers.current[i] = el;
                 }}
-                className="absolute inset-0 mix-blend-plus-lighter will-change-[opacity,filter,transform]"
+                className="absolute inset-0 will-change-[opacity,transform]"
                 style={{ opacity: i === 0 ? 1 : 0, visibility: i === 0 ? "visible" : "hidden" }}
               >
                 {/* The photos are only 1024 px, so the stone is shown near its real size (sharp), feathered

@@ -81,6 +81,19 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   const sellJourney = (
     <>
+    {/* 4. How selling works: pinned numeral, steps scroll past */}
+    <section className="steps-section border-y border-line">
+      <div className="wrap">
+        <StepsScroller
+          steps={t.steps.items}
+          stage={stage}
+          stepLabel={t.steps.stepOf}
+          heading={<RevealHeading lines={[t.steps.title]} className="text-4xl sm:text-5xl" />}
+          action={<Link href={href("/sell-diamond/")} className="btn btn-inverse">{t.steps.cta}</Link>}
+        />
+      </div>
+    </section>
+
     {/* 3. Sell with confidence: what we buy. Heading pinned on the left, numbered categories on the right. */}
     <section className="wrap grid gap-14 py-28 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-36">
       <div className="lg:sticky lg:top-32 lg:self-start">
@@ -104,19 +117,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </li>
         ))}
       </ol>
-    </section>
-
-    {/* 4. How selling works: pinned numeral, steps scroll past */}
-    <section className="steps-section border-y border-line">
-      <div className="wrap">
-        <StepsScroller
-          steps={t.steps.items}
-          stage={stage}
-          stepLabel={t.steps.stepOf}
-          heading={<RevealHeading lines={[t.steps.title]} className="text-4xl sm:text-5xl" />}
-          action={<Link href={href("/sell-diamond/")} className="btn btn-inverse">{t.steps.cta}</Link>}
-        />
-      </div>
     </section>
 
     {/* 5. Quick valuation */}
