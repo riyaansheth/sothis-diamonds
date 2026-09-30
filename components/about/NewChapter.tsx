@@ -21,16 +21,19 @@ export function NewChapter({ inspected, worn, t }: { inspected: string; worn: st
   });
 
   return (
-    <section ref={root} className="relative bg-ivory motion-safe:lg:h-[240vh]" aria-labelledby="chapter-title">
+    <section ref={root} className="burgundy-tint-strong relative motion-safe:lg:h-[240vh]" aria-labelledby="chapter-title">
       <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)]">
         {/* Inspection: the ring on a measured surface. */}
-        <div aria-hidden className="theme-light relative aspect-square bg-[#e9e3d9] lg:absolute lg:inset-0 lg:aspect-auto">
-          <span className="anatomy-grid absolute inset-0" />
-          <div className="absolute inset-[18%] lg:inset-[22%_34%]">
-            <Image src={inspected} alt="" fill sizes="40vw" className="object-contain mix-blend-multiply" />
+        <div aria-hidden className="relative aspect-square lg:absolute lg:inset-0 lg:aspect-auto">
+          <span className="anatomy-grid anatomy-grid-light absolute inset-0" />
+          {/* The product photo has a white ground, so it sits on a pale inspection plate. */}
+          <div className="absolute left-1/2 top-1/2 aspect-square w-[64%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#efe9df] lg:opacity-[calc(1-var(--light,0))] shadow-[0_0_120px_rgb(120_30_50/0.45)] lg:w-[min(34vw,70vh)]">
+            <div className="absolute inset-[16%]">
+              <Image src={inspected} alt="" fill sizes="40vw" className="object-contain mix-blend-multiply" />
+            </div>
           </div>
-          <span className="absolute left-1/2 top-[14%] h-[72%] w-px bg-ink/15" />
-          <span className="absolute left-[14%] top-1/2 h-px w-[72%] bg-ink/15" />
+          <span className="absolute left-1/2 top-[14%] h-[72%] w-px bg-white/10" />
+          <span className="absolute left-[14%] top-1/2 h-px w-[72%] bg-white/10" />
           <p className="absolute left-6 top-6 text-xs font-semibold uppercase tracking-[0.14em] text-platinum-2">{t.inspection}</p>
         </div>
 
@@ -43,9 +46,9 @@ export function NewChapter({ inspected, worn, t }: { inspected: string; worn: st
           </div>
         </div>
 
-        <div className="wrap relative flex py-16 lg:h-full lg:items-center lg:justify-end lg:py-0 lg:pl-[62%]" style={{ opacity: "var(--copy, 1)" }}>
-          <div className="min-w-0 max-w-md lg:bg-ivory/85 lg:p-8 lg:backdrop-blur-sm" style={{ transform: "translateY(calc((1 - var(--copy, 1)) * 2rem))" }}>
-            <h2 id="chapter-title" className="font-display text-[2.75rem] leading-[1.05] sm:text-6xl lg:text-[2.9rem]">{t.title}</h2>
+        <div className="wrap relative flex py-16 lg:absolute lg:inset-y-0 lg:left-[60%] lg:right-0 lg:mx-0 lg:max-w-none lg:items-center lg:px-12 lg:py-0 xl:px-16" style={{ opacity: "var(--copy, 1)" }}>
+          <div className="min-w-0 max-w-md" style={{ transform: "translateY(calc((1 - var(--copy, 1)) * 2rem))" }}>
+            <h2 id="chapter-title" className="font-display text-[2.75rem] leading-[1.05] sm:text-6xl lg:text-[2.4rem] xl:text-[2.9rem]">{t.title}</h2>
             <p className="mt-6 text-lg text-platinum-2">{t.body}</p>
           </div>
         </div>

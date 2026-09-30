@@ -76,9 +76,9 @@ export function Anatomy({ cutout, facts, values, t }: {
   });
 
   return (
-    <section ref={root} className="anatomy relative overflow-x-clip bg-ivory motion-safe:lg:h-[340vh]" aria-labelledby="anatomy-title">
+    <section ref={root} className="anatomy burgundy-tint relative overflow-x-clip motion-safe:lg:h-[340vh]" aria-labelledby="anatomy-title">
       <div className="relative motion-safe:lg:sticky motion-safe:lg:top-20 lg:h-[calc(100vh-5rem)] lg:overflow-hidden">
-        <span aria-hidden className="anatomy-grid pointer-events-none absolute inset-0" />
+        <span aria-hidden className="anatomy-grid anatomy-grid-light pointer-events-none absolute inset-0" />
         <div className="wrap relative grid gap-12 py-24 lg:h-full lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)_minmax(0,19rem)] lg:items-center lg:gap-10 lg:py-0">
           <div>
             <h2 id="anatomy-title" className="text-[2.75rem] leading-[1.05] sm:text-6xl">{t.title}</h2>
