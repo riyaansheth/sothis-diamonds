@@ -45,7 +45,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
         values={[at.cut ?? "", at.color ?? "", at.clarity ?? "", `${at.carat} ct`, at.lab ?? "", a.inPerson, a.onTheDay]}
         t={{ title: a.anatomyTitle, body: fill(a.anatomyBody), factors: a.factors, table: a.table, crown: a.crown, pavilion: a.pavilion, depth: a.depth, diameter: a.diameter }}
       />
-      <NewChapter inspected={mediaUrl(ring.image!)} worn={mediaUrl(ring.gallery[0])} t={{ title: a.chapterTitle, body: a.chapterBody, inspection: a.inspection }} />
+      <NewChapter inspected="/brand/ring-cutout.webp" worn={mediaUrl(ring.gallery[0])} t={{ title: a.chapterTitle, body: a.chapterBody, inspection: a.inspection }} />
 
       {/* Two paths, in the language of the homepage's Sell / Buy split. */}
       <section aria-label={`${a.sellTitle}, ${a.buyTitle}`}>

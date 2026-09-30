@@ -47,8 +47,8 @@ function trackProgress(onChange: (p: number) => void) {
 
 /**
  * The homepage's opening frame: black, a burgundy glow, one brilliant revealed by a narrow light,
- * the logo, and a loading bar that fills with real loading progress. On exit the dark dissolves and
- * the stone stays put, handing over to the opening's own stone underneath.
+ * the logo, and a loading bar that fills with real loading progress. On exit the dark and the stone
+ * dissolve together into the photograph, whose stone sits exactly where this one was.
  */
 export function Loader({ t }: { t: Dictionary["loader"] }) {
   const [phase, setPhase] = useState<"loading" | "leaving" | "done">(() => (played || arrivedByNavigation() ? "done" : "loading"));
@@ -73,7 +73,11 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
       const target = document.querySelector<HTMLElement>("[data-opening-stone]");
       const r = target?.getBoundingClientRect();
       if (!r || !r.width || !stage.current) return;
-      Object.assign(stage.current.style, { left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px`, translate: "none" });
+      // The brilliant fills about 65% of the loader's image; the target box is the stone in the photo.
+      const size = r.width / 0.65;
+      const left = r.left + r.width / 2 - size / 2;
+      const top = r.top + r.height / 2 - size / 2;
+      Object.assign(stage.current.style, { left: `${left}px`, top: `${top}px`, width: `${size}px`, height: `${size}px`, translate: "none" });
     };
     place();
     window.addEventListener("resize", place);

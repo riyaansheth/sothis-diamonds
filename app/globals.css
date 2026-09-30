@@ -571,9 +571,10 @@ html[data-loader] .opening-light {
     opacity 0.45s ease,
     transform 0.45s ease;
 }
+/* The stone dissolves with the dark, into the photographed stone underneath: never over the photo. */
 .loader[data-leaving] .loader-stage {
   opacity: 0;
-  transition: opacity 0.35s ease 0.7s;
+  transition: opacity 0.9s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -766,8 +767,8 @@ html[data-loader] .opening-light {
 /* 06: the worn ring is revealed by light opening from the centre (desktop). */
 @media (min-width: 1024px) {
   .new-chapter-reveal {
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--light, 1) * 130% - 22%), transparent calc(var(--light, 1) * 130%));
-    mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--light, 1) * 130% - 22%), transparent calc(var(--light, 1) * 130%));
+    -webkit-mask-image: radial-gradient(circle at var(--ring-x, 50%) var(--ring-y, 50%), #000 calc(var(--light, 1) * 130% - 22%), transparent calc(var(--light, 1) * 130%));
+    mask-image: radial-gradient(circle at var(--ring-x, 50%) var(--ring-y, 50%), #000 calc(var(--light, 1) * 130% - 22%), transparent calc(var(--light, 1) * 130%));
   }
 }
 
