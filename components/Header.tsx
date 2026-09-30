@@ -11,7 +11,7 @@ import { useStore } from "./Store";
 
 const icon = "size-5 stroke-current fill-none [stroke-width:1.5]";
 
-export function Header({ lang, t, sellLines, buyLine }: { lang: Locale; t: Dictionary["nav"]; sellLines: string[]; buyLine: string }) {
+export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   const menu = useRef<HTMLDialogElement>(null);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
@@ -68,7 +68,7 @@ export function Header({ lang, t, sellLines, buyLine }: { lang: Locale; t: Dicti
         </div>
       </div>
 
-      <SiteMenu dialog={menu} lang={lang} t={t} sellLines={sellLines} buyLine={buyLine} />
+      <SiteMenu dialog={menu} lang={lang} t={t} />
     </header>
   );
 }

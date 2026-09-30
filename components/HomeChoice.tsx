@@ -96,7 +96,7 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
       {/* Pulled up under the opening's last (pinned) screen, which fades away to reveal it (desktop). */}
       <section ref={choice} data-open={open ?? undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
         <div className="paths flex flex-col md:flex-row">
-          {half("buy", buy, "bg-[url(/brand/bg-buy-burgundy.webp)]", { cut: "asscher", color: "#d4b9cb" })}
+          {half("buy", buy, "bg-[url(/brand/bg-buy-burgundy.webp)]", { cut: "asscher", color: "#ffffff" })}
           {half("sell", sell, "bg-[url(/brand/bg-sell-black.webp)]", { cut: "round", color: "#ffffff" })}
         </div>
         {/* The band keeps a way to the other journey, and back to the choice. */}

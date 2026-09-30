@@ -45,6 +45,41 @@ const lensAt = new THREE.Vector3();
 const IVORY = "#f7f2ea";
 const BURGUNDY = "#511f2a";
 
+/** A tileable suede surface: dense fine fibres with a faint directional brush, grey so it tints the colour. */
+function suedeTexture() {
+  const size = 256;
+  const c = document.createElement("canvas");
+  c.width = c.height = size;
+  const g = c.getContext("2d")!;
+  const img = g.createImageData(size, size);
+  let seed = 7;
+  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  for (let i = 0; i < size * size; i++) {
+    const v = 175 + rand() * 80; // fine grain
+    img.data.set([v, v, v, 255], i * 4);
+  }
+  g.putImageData(img, 0, 0);
+  // Brushed nap: many short, soft strokes in roughly one direction.
+  g.globalAlpha = 0.07;
+  for (let i = 0; i < 1400; i++) {
+    const x = rand() * size;
+    const y = rand() * size;
+    const len = 3 + rand() * 7;
+    g.strokeStyle = rand() > 0.5 ? "#ffffff" : "#8a8a8a";
+    g.lineWidth = 0.6;
+    g.beginPath();
+    g.moveTo(x, y);
+    g.lineTo(x + len * 0.9, y + len * 0.35);
+    g.stroke();
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(3, 3);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 4;
+  return tex;
+}
+
 function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
   data: StageData;
   progress: MutableRefObject<number>;
@@ -203,14 +238,29 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
     clearcoat: 0.16,
     clearcoatRoughness: 0.72,
   }), []);
+  // Suede: fine, slightly brushed fibres (colour variation + bump), fully matte, with the soft sheen
+  // suede nap shows at grazing angles.
+  const suede = useMemo(() => suedeTexture(), []);
   const lining = useMemo(() => new THREE.MeshPhysicalMaterial({
     color: BURGUNDY,
-    roughness: 0.92,
-    sheen: 0.7,
-    sheenColor: new THREE.Color("#8a4555"),
-    sheenRoughness: 0.86,
-  }), []);
-  const liningDark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#351018", roughness: 1 }), []);
+    map: suede,
+    bumpMap: suede,
+    bumpScale: 1.2,
+    roughness: 1,
+    sheen: 0.55,
+    sheenColor: new THREE.Color("#7a3446"),
+    sheenRoughness: 0.5,
+  }), [suede]);
+  const liningDark = useMemo(() => new THREE.MeshPhysicalMaterial({
+    color: "#351018",
+    map: suede,
+    bumpMap: suede,
+    bumpScale: 1.2,
+    roughness: 1,
+    sheen: 0.45,
+    sheenColor: new THREE.Color("#5a2230"),
+    sheenRoughness: 0.5,
+  }), [suede]);
   const hardware = useMemo(() => new THREE.MeshStandardMaterial({ color: "#aa8a50", metalness: 0.82, roughness: 0.3 }), []);
 
   return (
