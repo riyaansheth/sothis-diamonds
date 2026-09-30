@@ -48,7 +48,7 @@ function trackProgress(onChange: (p: number) => void) {
 /**
  * The homepage's opening frame: black, a burgundy glow, one brilliant revealed by a narrow light,
  * the logo, and a loading bar that fills with real loading progress. On exit the dark and the stone
- * dissolve together into the photograph, whose stone sits exactly where this one was.
+ * dissolve together into the opening underneath.
  */
 export function Loader({ t }: { t: Dictionary["loader"] }) {
   const [phase, setPhase] = useState<"loading" | "leaving" | "done">(() => (played || arrivedByNavigation() ? "done" : "loading"));
@@ -57,7 +57,6 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
   const pct = useRef<HTMLSpanElement>(null);
   const spinner = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLDivElement>(null);
-  const stage = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (played || arrivedByNavigation()) {
@@ -67,20 +66,6 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     }
     const html = document.documentElement;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Put the loader's stone exactly over the opening's stone box.
-    const place = () => {
-      const target = document.querySelector<HTMLElement>("[data-opening-stone]");
-      const r = target?.getBoundingClientRect();
-      if (!r || !r.width || !stage.current) return;
-      // The brilliant fills about 65% of the loader's image; the target box is the stone in the photo.
-      const size = r.width / 0.65;
-      const left = r.left + r.width / 2 - size / 2;
-      const top = r.top + r.height / 2 - size / 2;
-      Object.assign(stage.current.style, { left: `${left}px`, top: `${top}px`, width: `${size}px`, height: `${size}px`, translate: "none" });
-    };
-    place();
-    window.addEventListener("resize", place);
 
     const blocked = [...document.querySelectorAll("header, footer, main > *")].filter((el) => !el.contains(overlay.current));
     blocked.forEach((el) => el.setAttribute("inert", ""));
@@ -136,7 +121,6 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(timer);
-      window.removeEventListener("resize", place);
       blocked.forEach((el) => el.removeAttribute("inert"));
     };
   }, []);
@@ -158,8 +142,8 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
           <span className="loader-glow absolute inset-0" />
         </div>
 
-        {/* The stone, over the opening's stone (positioned in JS; centred until then). */}
-        <div ref={stage} aria-hidden className="loader-stage absolute left-1/2 top-1/2 aspect-square w-[min(78vw,62vh,36rem)] -translate-x-1/2 -translate-y-1/2">
+        {/* The stone, centred at its own size. */}
+        <div aria-hidden className="loader-stage absolute left-1/2 top-1/2 aspect-square w-[min(78vw,62vh,36rem)] -translate-x-1/2 -translate-y-1/2">
           <div className="loader-stone absolute inset-0">
             <div ref={spinner} className="absolute inset-0 will-change-transform">
               <Image src={STONE} alt="" fill priority sizes={STONE_SIZES} className="object-contain" />
