@@ -22,7 +22,7 @@ const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
 /**
- * "How buying works": the lilac asscher turns at the centre while each step's scene is scrubbed by
+ * "How buying works": a white asscher turns at the centre while each step's scene is scrubbed by
  * scroll (progress 0..6 from StepsScroller). Scenes are plain HTML/SVG overlays, written to the DOM
  * directly each frame, so scrolling never re-renders React.
  */
@@ -77,7 +77,7 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
     <div ref={root} className="buy-stage relative size-full select-none">
       <div data-stone className="absolute inset-[8%] will-change-transform">
         <span aria-hidden className="absolute inset-[12%] rounded-full bg-[radial-gradient(closest-side,rgb(84_23_43/0.55),transparent)] blur-2xl" />
-        <Diamond3DLazy cut="asscher" color="#d4b9cb" className="absolute inset-0" />
+        <Diamond3DLazy cut="asscher" color="#ffffff" className="absolute inset-0" />
       </div>
 
       <div aria-hidden className="pointer-events-none absolute inset-0 text-sm">

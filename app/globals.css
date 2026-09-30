@@ -543,12 +543,12 @@ html[data-loader] .opening-light {
     transform: translateY(10px);
   }
 }
-.loader-segments > span {
-  background: rgb(244 240 236 / 0.16);
-  transition: background-color 0.5s ease;
+.loader-track {
+  background: rgb(244 240 236 / 0.14);
 }
-.loader-segments > span[data-on] {
-  background: rgb(244 240 236 / 0.9);
+.loader-fill {
+  background: linear-gradient(90deg, rgb(244 240 236 / 0.55), #f4f0ec);
+  box-shadow: 0 0 10px rgb(244 240 236 / 0.45);
 }
 /* Exit: the dark, logo and progress dissolve; the stone stays until the opening's is visible under it. */
 .loader[data-leaving] {
@@ -1036,14 +1036,15 @@ html.js .home-journey:not([data-open]) {
 }
 
 /* How buying works: obsidian with a burgundy glow behind the stone (Sell has the velvet). */
-.buy-steps {
+/* The burgundy tint runs the full height of the section (a horizontal wash, so it doesn't fade out as
+   the section scrolls); the stone keeps its own glow. */
+.buy-steps,
+.burgundy-tint {
   --color-line: rgb(244 240 232 / 0.16);
-  background:
-    radial-gradient(ellipse 45% 55% at 25% 55%, rgb(84 23 43 / 0.45), transparent 70%),
-    #0b0709;
+  background: linear-gradient(90deg, #2c0b14 0%, #1e0810 45%, #13070b 100%);
 }
 .buy-steps .steps-pin {
-  background-color: #0b0709;
+  background-color: #2a0b13;
 }
 @media (min-width: 1024px) {
   .buy-steps .steps-pin {

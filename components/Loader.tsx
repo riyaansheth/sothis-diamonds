@@ -11,7 +11,6 @@ const STONE_SIZES = "(min-width: 1024px) 60vw, 100vw"; // same as the opening, s
 
 const REVEAL_MS = 2300; // the choreography; exits as soon as both this and the real loading are done
 const MAX_MS = 8000; // never hold the page longer than this, even if an asset fails
-const SEGMENTS = 6;
 
 // Runs while the HTML is parsed. Marks the page as having a loader (the opening then skips its own
 // stone reveal, so there's one opening, not two) and releases it after 9 s if the app's JS never runs.
@@ -47,12 +46,14 @@ function trackProgress(onChange: (p: number) => void) {
 
 /**
  * The homepage's opening frame: black, a burgundy glow, one brilliant revealed by a narrow light,
- * the logo, and six segments that fill with real loading progress. On exit the dark dissolves and
+ * the logo, and a loading bar that fills with real loading progress. On exit the dark dissolves and
  * the stone stays put, handing over to the opening's own stone underneath.
  */
 export function Loader({ t }: { t: Dictionary["loader"] }) {
   const [phase, setPhase] = useState<"loading" | "leaving" | "done">(() => (played || arrivedByNavigation() ? "done" : "loading"));
-  const [filled, setFilled] = useState(0);
+  const [announced, setAnnounced] = useState(0); // for screen readers, in quarters
+  const fill = useRef<HTMLSpanElement>(null);
+  const pct = useRef<HTMLSpanElement>(null);
   const overlay = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
 
@@ -79,6 +80,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     blocked.forEach((el) => el.setAttribute("inert", ""));
 
     let real = 0;
+    let shown = 0;
     let last = -1;
     let raf = 0;
     let timer = 0;
@@ -96,9 +98,15 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     const frame = (now: number) => {
       const elapsed = now - start;
       if (elapsed > MAX_MS) real = 1;
-      const n = Math.floor(Math.min(1, real) * SEGMENTS + 1e-6);
-      if (n !== last) setFilled((last = n));
-      if (real >= 1 && elapsed >= (reduce ? 400 : REVEAL_MS)) return leave();
+      // The bar follows real progress, paced so it never outruns the reveal, and eases between values.
+      const target = Math.min(real, reduce ? 1 : elapsed / REVEAL_MS);
+      shown += (target - shown) * (reduce ? 1 : 0.12);
+      if (target - shown < 0.002) shown = target;
+      fill.current?.style.setProperty("transform", `scaleX(${shown.toFixed(4)})`);
+      if (pct.current) pct.current.textContent = `${Math.round(shown * 100)}%`;
+      const quarter = Math.floor(shown * 4) * 25;
+      if (quarter !== last) setAnnounced((last = quarter));
+      if (real >= 1 && shown >= 0.999) return leave();
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
@@ -121,7 +129,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
         <style>{".loader{display:none}.hero-title .reveal-line>span,.hero-after,.opening-title span span,.opening-line,.opening-scroll{animation-play-state:running!important}"}</style>
       </noscript>
       <div ref={overlay} role="status" aria-live="polite" data-leaving={leaving ? "" : undefined} className="loader fixed inset-0 z-[100] overflow-hidden">
-        <span className="sr-only">{t.status.replace("{n}", String(Math.round((filled / SEGMENTS) * 100)))}</span>
+        <span className="sr-only">{t.status.replace("{n}", String(announced))}</span>
 
         {/* The dark: obsidian with a burgundy glow gathering at the centre. Dissolves on exit. */}
         <div aria-hidden className="loader-dark absolute inset-0 bg-[#090709]">
@@ -143,10 +151,12 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
         <div aria-hidden className="loader-foot absolute inset-x-0 bottom-[9vh] flex flex-col items-center">
           {/* eslint-disable-next-line @next/next/no-img-element -- vector logo, white lettering */}
           <img src="/brand/logo.svg" alt="" width={170} height={45} className="loader-logo h-9 w-auto sm:h-11" />
-          <div className="loader-segments mt-7 flex gap-2">
-            {Array.from({ length: SEGMENTS }, (_, i) => (
-              <span key={i} data-on={i < filled ? "" : undefined} className="h-px w-7 sm:w-9" />
-            ))}
+          {/* The loading bar: a hairline track, a white fill with a soft leading glow, and the percentage. */}
+          <div className="loader-segments mt-8 flex w-56 items-center gap-4 sm:w-72">
+            <span className="loader-track relative h-[2px] flex-1 overflow-hidden rounded-full">
+              <span ref={fill} className="loader-fill absolute inset-0 origin-left rounded-full" style={{ transform: "scaleX(0)" }} />
+            </span>
+            <span ref={pct} className="w-10 text-right text-xs tabular-nums text-[#f4f0ec]/70">0%</span>
           </div>
         </div>
       </div>

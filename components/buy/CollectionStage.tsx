@@ -97,8 +97,27 @@ export function CollectionStage({ items, total, shopHref, line, t, card }: {
   const pick = (f: Filter) => {
     setFilter(f);
     setDealt((n) => n + 1);
-    setActive(0);
   };
+
+  // Start on the third piece, so there are cards either side of the focus (or the last, if fewer).
+  // The journey is hidden until Buy is chosen, so wait until the rail has a real width.
+  useEffect(() => {
+    const ul = rail.current;
+    if (!ul) return;
+    let done = false;
+    const centre = () => {
+      if (done || !ul.clientWidth) return;
+      done = true;
+      const start = Math.min(2, ul.children.length - 1);
+      const li = ul.children[start] as HTMLElement | undefined;
+      if (!li) return;
+      ul.scrollLeft = li.offsetLeft + li.offsetWidth / 2 - ul.clientWidth / 2;
+      setActive(start);
+    };
+    const ro = new ResizeObserver(centre);
+    ro.observe(ul);
+    return () => ro.disconnect();
+  }, [dealt]);
   const pad = (n: number) => String(n).padStart(2, "0");
 
   const chips: [Filter, string][] = [["all", t.all], ["diamonds", t.diamonds], ["jewellery", t.jewellery], ...shapes.map((s): [Filter, string] => [s, s])];

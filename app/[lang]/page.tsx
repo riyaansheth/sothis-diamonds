@@ -72,7 +72,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   // Testimonials, shared by both journeys.
   const testimonials = (
-    <section className="border-y border-line bg-[#4a1520] bg-[url(/brand/bg-quotes-burgundy.webp)] bg-cover bg-center">
+    <section className="burgundy-tint border-y border-line">
       <div className="wrap py-28 lg:py-40">
         <h2 className="sr-only">{t.reviews.title}</h2>
         <Quotes items={t.reviews.items} label={t.reviews.choose} />
