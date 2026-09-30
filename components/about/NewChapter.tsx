@@ -10,7 +10,7 @@ const WORN = { x: 0.4875, y: 0.4, w: 0.0825, posX: 0.45, posY: 0.4 }; // the sto
 const INSET = 0.16; // the product photo's inset inside the plate
 
 /**
- * Chapter 06. The same ring, first on the inspection surface, then worn. As the visitor scrolls, the
+ * The same ring, first on the inspection surface, then worn. As the visitor scrolls, the
  * plate carries the ring left onto the hand in the worn photograph, which opens around it, and the
  * plate dissolves so the ring is simply being worn. Both are the shop's own photographs of one piece;
  * nothing claims to document a restoration.

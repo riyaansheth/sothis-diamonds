@@ -7,6 +7,7 @@ import { Quotes, RevealHeading, StepsScroller } from "@/components/Motion";
 import type { Crop } from "@/components/CroppedImage";
 import { HomeChoice } from "@/components/HomeChoice";
 import { Opening } from "@/components/Opening";
+import { NewChapter } from "@/components/about/NewChapter";
 import { WhyList } from "@/components/WhyList";
 import { CollectionStage } from "@/components/buy/CollectionStage";
 import { CountUp } from "@/components/buy/CountUp";
@@ -204,6 +205,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const buyJourney = (
     <>
       <CollectionStage items={railItems} total={forSale.length} shopHref={href("/shop/")} line={t.paths.buy[1]} t={b} card={t.stones} />
+      {/* The ring from inspection to worn: moved here from the About page. */}
+      <NewChapter inspected="/brand/ring-cutout.webp" worn={mediaUrl(productBySku("SCP01").gallery[0])} t={{ title: t.about.chapterTitle, body: t.about.chapterBody, inspection: t.about.inspection }} />
 
       <ShapeTiles shapes={shapeCounts} shopHref={href("/shop/")} t={{ title: b.shapesTitle, line: b.shapesLine, inStock: b.inStock }} />
 

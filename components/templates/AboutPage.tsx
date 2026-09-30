@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Anatomy } from "@/components/about/Anatomy";
 import { Heritage } from "@/components/about/Heritage";
 import { Loupe } from "@/components/about/Loupe";
-import { NewChapter } from "@/components/about/NewChapter";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { mediaUrl, productBySku } from "@/lib/products";
@@ -13,7 +12,6 @@ import { site } from "@/lib/site";
 const STONE = "E-398-248F-1B"; // Round 7.06 ct, F, SI2, IGI: studio photo, cut-out and video in the export
 const STUDIO = "media/2026/09/choir-studio/round-7.06ct-F-SI2.png";
 const CUTOUT = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
-const RING = "SCP01"; // cushion yellow diamond ring: on white, and worn
 
 /** One optimised URL for images that must be pixel-identical in two places (the loupe and its lens). */
 const optimised = (src: string) => `/_next/image?url=${encodeURIComponent(src)}&w=1920&q=75`;
@@ -22,7 +20,6 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
   const t = getDictionary(lang);
   const a = t.about;
   const stone = productBySku(STONE);
-  const ring = productBySku(RING);
   const s = stone.specs;
   const num = (k: string) => Number.parseFloat(s[k] ?? "");
   const [d1, d2] = (s.Measurements ?? "").match(/[\d.]+/g) ?? [];
@@ -45,7 +42,6 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
         values={[at.cut ?? "", at.color ?? "", at.clarity ?? "", `${at.carat} ct`, at.lab ?? "", a.inPerson, a.onTheDay]}
         t={{ title: a.anatomyTitle, body: fill(a.anatomyBody), factors: a.factors, table: a.table, crown: a.crown, pavilion: a.pavilion, depth: a.depth, diameter: a.diameter }}
       />
-      <NewChapter inspected="/brand/ring-cutout.webp" worn={mediaUrl(ring.gallery[0])} t={{ title: a.chapterTitle, body: a.chapterBody, inspection: a.inspection }} />
 
       {/* Two paths, in the language of the homepage's Sell / Buy split. */}
       <section aria-label={`${a.sellTitle}, ${a.buyTitle}`}>
