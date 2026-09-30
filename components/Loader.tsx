@@ -14,7 +14,8 @@ const MAX_MS = 8000; // never hold the page longer than this, even if an asset f
 
 // Runs while the HTML is parsed. Marks the page as having a loader (the opening then skips its own
 // stone reveal, so there's one opening, not two) and releases it after 9 s if the app's JS never runs.
-const BOOT = `window.__sothisBoot=1;document.documentElement.dataset.loader="";setTimeout(function(){document.documentElement.dataset.loaded=""},9000)`;
+// Also starts the page at the top (no restored scroll position), since scrolling is locked until release.
+const BOOT = `window.__sothisBoot=1;history.scrollRestoration="manual";scrollTo(0,0);document.documentElement.dataset.loader="";setTimeout(function(){document.documentElement.dataset.loaded=""},9000)`;
 
 // The loader plays once per full page load of the homepage. Its boot script only runs when it arrives
 // in server HTML (a real page load), never on client-side navigation, so its flag tells the two apart.

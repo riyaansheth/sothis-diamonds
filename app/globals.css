@@ -475,6 +475,13 @@ html:not([data-loaded]) :is(.hero-title .reveal-line > span, .hero-after, .openi
 [data-inview]:not([data-shown]) :is(.hero-title .reveal-line > span, .hero-after) {
   animation-play-state: paused;
 }
+/* No scrolling (wheel, touch, keys, scrollbar) until the loading screen has released the page. */
+html[data-loader]:not([data-loaded]),
+html[data-loader]:not([data-loaded]) body {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
 html[data-loader] .opening-stone {
   animation: none;
 }
