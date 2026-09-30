@@ -562,7 +562,7 @@ html[data-loader] .opening-light {
 }
 .loader[data-leaving] .loader-dark {
   opacity: 0;
-  transition: opacity 0.9s ease;
+  transition: opacity 0.8s ease 0.25s;
 }
 .loader[data-leaving] .loader-foot {
   opacity: 0;
@@ -571,10 +571,14 @@ html[data-loader] .opening-light {
     opacity 0.45s ease,
     transform 0.45s ease;
 }
-/* The stone dissolves with the dark, into the photographed stone underneath: never over the photo. */
+/* On exit the stone glides onto the photographed stone (its offset and scale are set in JS) while the
+   dark dissolves around it, then gives way to the photograph. */
 .loader[data-leaving] .loader-stage {
   opacity: 0;
-  transition: opacity 0.9s ease;
+  transform: translate(var(--to-x, 0px), var(--to-y, 0px)) scale(var(--to-s, 1));
+  transition:
+    transform 1s cubic-bezier(0.65, 0, 0.25, 1),
+    opacity 0.35s ease 0.95s;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1137,12 +1141,13 @@ html[data-opening] body {
   overflow: hidden;
   overscroll-behavior: none;
 }
-/* The opening photo (a square, cover-fitted, so --s is its rendered side). The camera dives toward
-   the stone between the fingers, and a hole the size of the stone opens onto the choice. */
+/* The opening photo (1555 x 1012, cover-fitted, so --s is its rendered width). The stone sits at
+   52.4% / 52.6% of it and is 17% of its width. The camera dives toward the stone between the
+   fingers, and a hole the size of the stone opens onto the choice. */
 .opening-layer {
-  --s: max(100vw, 100svh);
-  --cx: calc(50% + var(--s) * 0.0104);
-  --cy: calc(50% - var(--s) * 0.0096);
+  --s: max(100vw, calc(100svh / 0.6508));
+  --cx: calc(50% + var(--s) * 0.0241);
+  --cy: calc(50% + var(--s) * 0.0167);
 }
 .opening-backdrop {
   transform: scale(var(--zoom, 1));
@@ -1153,5 +1158,5 @@ html[data-opening] body {
 [data-opening-stone] {
   left: var(--cx);
   top: var(--cy);
-  width: calc(var(--s) * 0.311);
+  width: calc(var(--s) * 0.1698);
 }

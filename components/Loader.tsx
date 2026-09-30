@@ -47,8 +47,8 @@ function trackProgress(onChange: (p: number) => void) {
 
 /**
  * The homepage's opening frame: black, a burgundy glow, one brilliant revealed by a narrow light,
- * the logo, and a loading bar that fills with real loading progress. On exit the dark and the stone
- * dissolve together into the opening underneath.
+ * the logo, and a loading bar that fills with real loading progress. On exit the dark dissolves
+ * while the stone glides onto the stone in the opening photograph, then gives way to it.
  */
 export function Loader({ t }: { t: Dictionary["loader"] }) {
   const [phase, setPhase] = useState<"loading" | "leaving" | "done">(() => (played || arrivedByNavigation() ? "done" : "loading"));
@@ -57,6 +57,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
   const pct = useRef<HTMLSpanElement>(null);
   const spinner = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (played || arrivedByNavigation()) {
@@ -84,9 +85,17 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     const leave = () => {
       played = true;
       blocked.forEach((el) => el.removeAttribute("inert"));
+      // Where the photographed stone is: the loader's brilliant fills about 65% of its image.
+      const to = document.querySelector("[data-opening-stone]")?.getBoundingClientRect();
+      const from = stage.current?.getBoundingClientRect();
+      if (to?.width && from?.width && !reduce) {
+        stage.current!.style.setProperty("--to-x", `${(to.left + to.width / 2 - (from.left + from.width / 2)).toFixed(1)}px`);
+        stage.current!.style.setProperty("--to-y", `${(to.top + to.height / 2 - (from.top + from.height / 2)).toFixed(1)}px`);
+        stage.current!.style.setProperty("--to-s", (to.width / (from.width * 0.65)).toFixed(4));
+      }
       html.dataset.loaded = ""; // the headline and the rest of the opening start now
       setPhase("leaving");
-      timer = window.setTimeout(() => setPhase("done"), reduce ? 300 : 1100);
+      timer = window.setTimeout(() => setPhase("done"), reduce ? 300 : 1400);
     };
 
     const frame = (now: number) => {
@@ -143,7 +152,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
         </div>
 
         {/* The stone, centred at its own size. */}
-        <div aria-hidden className="loader-stage absolute left-1/2 top-1/2 aspect-square w-[min(78vw,62vh,36rem)] -translate-x-1/2 -translate-y-1/2">
+        <div ref={stage} aria-hidden className="loader-stage absolute left-1/2 top-1/2 aspect-square w-[min(78vw,62vh,36rem)] -translate-x-1/2 -translate-y-1/2">
           <div className="loader-stone absolute inset-0">
             <div ref={spinner} className="absolute inset-0 will-change-transform">
               <Image src={STONE} alt="" fill priority sizes={STONE_SIZES} className="object-contain" />

@@ -278,7 +278,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       {/* The homepage opens on the Sell / Buy choice; choosing Sell reveals the selling journey below.
           The buying sections (collection rail, gallery) return with the buying journey. */}
       <Opening
-        photo="/brand/opening-hand.webp"
+        photo="/brand/opening-held.webp"
         title={t.about.title}
         line={t.home.openingLine}
         scroll={t.about.scroll}
