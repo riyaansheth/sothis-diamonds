@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Anatomy } from "@/components/about/Anatomy";
 import { Heritage } from "@/components/about/Heritage";
+import { Journey } from "@/components/about/Journey";
 import { Loupe } from "@/components/about/Loupe";
 import { NewChapter } from "@/components/about/NewChapter";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
@@ -14,6 +15,8 @@ const STONE = "E-398-248F-1B"; // Round 7.06 ct, F, SI2, IGI: studio photo, cut-
 const STUDIO = "media/2026/09/choir-studio/round-7.06ct-F-SI2.png";
 const CUTOUT = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
 const RING = "SCP01"; // cushion yellow diamond ring: on white, and worn
+const SUBMITTED = "media/2025/10/14-1.jpg"; // a round diamond ring on white
+const BOXED = "media/2025/10/334f201a-db9d-4582-9b3c-e9091242500c.png"; // the old about page's image
 
 /** One optimised URL for images that must be pixel-identical in two places (the loupe and its lens). */
 const optimised = (src: string) => `/_next/image?url=${encodeURIComponent(src)}&w=1920&q=75`;
@@ -30,6 +33,7 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
   const at = stone.attributes;
   const fill = (x: string) =>
     x.replace("{founded}", String(site.founded)).replace("{carat}", at.carat ?? "").replace("{colour}", at.color ?? "").replace("{clarity}", at.clarity ?? "").replace("{lab}", at.lab ?? "");
+  const [colourName, clarityName] = [a.factors[1][0], a.factors[2][0]];
 
   return (
     <div>
@@ -44,6 +48,24 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
         facts={{ table: num("Table %"), crown: num("Crown Height"), crownAngle: num("Crown Angle"), pavilion: num("Pavilion Depth"), pavilionAngle: num("Pavilion Angle"), depth: num("Depth %"), diameter }}
         values={[at.cut ?? "", at.color ?? "", at.clarity ?? "", `${at.carat} ct`, at.lab ?? "", a.inPerson, a.onTheDay]}
         t={{ title: a.anatomyTitle, body: fill(a.anatomyBody), factors: a.factors, table: a.table, crown: a.crown, pavilion: a.pavilion, depth: a.depth, diameter: a.diameter }}
+      />
+      <Journey
+        media={{
+          submit: mediaUrl(SUBMITTED),
+          stone: optimised(mediaUrl(STUDIO)),
+          boxed: mediaUrl(BOXED),
+          cutout: mediaUrl(CUTOUT),
+          doc: [
+            [a.documentItem, `${at.shape} ${at.carat} ct`],
+            [colourName, at.color ?? ""],
+            [clarityName, at.clarity ?? ""],
+            [a.documentReport, at.lab ?? ""],
+          ],
+        }}
+        t={{
+          title: a.journeyTitle, stage: a.stage, stages: a.stages, photoAdded: a.photoAdded, document: a.document, documentOffer: a.documentOffer, documentNote: a.documentNote,
+          confidence: a.confidence, diameter: a.diameter, table: a.table, measure: `${a.diameter} ${diameter}`, tablePct: `${a.table} ${num("Table %")}%`,
+        }}
       />
       <NewChapter inspected={mediaUrl(ring.image!)} worn={mediaUrl(ring.gallery[0])} t={{ title: a.chapterTitle, body: a.chapterBody, inspection: a.inspection }} />
 
