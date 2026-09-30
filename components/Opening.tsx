@@ -28,7 +28,6 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
     let state: "shown" | "playing" | "gone" = "shown";
     let raf = 0;
     let quietUntil = 0; // swallow the tail of a gesture (trackpad momentum) after a transition
-    let lastScroll = 0;
 
     // t: 0 = the opening at rest, 1 = fully dissolved into the choice. The stone is the window: a hole
     // the size of the stone opens in the backdrop, the facets dissolve, and the choice is seen through
@@ -89,20 +88,50 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
 
     // Only once the loading screen has released the page.
     const ready = () => html.hasAttribute("data-loaded");
-    const atTop = () => window.scrollY <= 1 && performance.now() - lastScroll > 400;
 
+    // A deliberate gesture, not a twitch: wheel movement adds up (and fades away if it pauses), and the
+    // transition starts once it passes a threshold. Going back only counts movement made while the page
+    // is already resting at the top, so scrolling up through the page just stops there first.
+    let intent = 0;
+    let intentAt = 0;
+    let topSince = window.scrollY <= 1 ? performance.now() : Infinity;
+    const FORWARD = 40;
+    const BACK = 120;
+    const addIntent = (dy: number) => {
+      const now = performance.now();
+      if (now - intentAt > 350 || Math.sign(dy) !== Math.sign(intent)) intent = 0;
+      intentAt = now;
+      intent += dy;
+    };
+
+    // A new gesture starts after a short pause in wheel input (trackpad momentum has no pauses).
+    let lastWheel = 0;
+    let gestureStart = 0;
     const onWheel = (e: WheelEvent) => {
+      const t = performance.now();
+      if (t - lastWheel > 220) gestureStart = t;
+      lastWheel = t;
       if (state === "playing" || performance.now() < quietUntil) {
         e.preventDefault();
         return;
       }
       if (!ready()) return;
-      if (state === "shown" && e.deltaY > 0) {
+      if (state === "shown") {
         e.preventDefault();
-        play(1);
-      } else if (state === "gone" && e.deltaY < 0 && atTop()) {
-        e.preventDefault();
-        play(-1);
+        if (e.deltaY > 0) {
+          addIntent(e.deltaY);
+          if (intent >= FORWARD) {
+            intent = 0;
+            play(1);
+          }
+        }
+      } else if (state === "gone" && e.deltaY < 0 && window.scrollY <= 1 && gestureStart > topSince) {
+        addIntent(e.deltaY);
+        if (-intent >= BACK) {
+          intent = 0;
+          e.preventDefault();
+          play(-1);
+        }
       }
     };
     let touchY: number | null = null;
@@ -113,7 +142,7 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
       if (state === "shown" && dy < -30) {
         touchY = null;
         play(1);
-      } else if (state === "gone" && dy > 40 && atTop()) {
+      } else if (state === "gone" && dy > 60 && window.scrollY <= 1 && performance.now() - topSince > 350) {
         touchY = null;
         play(-1);
       }
@@ -130,7 +159,9 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
         play(-1);
       }
     };
-    const onScroll = () => (lastScroll = performance.now());
+    const onScroll = () => {
+      topSince = window.scrollY <= 1 ? Math.min(topSince, performance.now()) : Infinity;
+    };
     const onCue = () => ready() && state === "shown" && play(1);
 
     window.addEventListener("wheel", onWheel, { passive: false });
