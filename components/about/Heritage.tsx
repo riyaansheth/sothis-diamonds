@@ -28,8 +28,11 @@ export function Heritage({ photo, t, crumbs }: {
   });
 
   return (
-    <section ref={root} className="grain relative bg-[#1a0f10] bg-[url(/brand/bg-about-antwerp.webp)] bg-cover bg-center pt-20 lg:bg-none lg:pt-0 motion-safe:lg:h-[280vh]">
-      <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-0 lg:h-screen lg:bg-[url(/brand/bg-about-antwerp.webp)] lg:bg-cover lg:bg-center lg:pt-20">
+    <section ref={root} className="grain relative bg-[#1a0f10] motion-safe:lg:h-[280vh]">
+      <div className="relative overflow-hidden pt-20 motion-safe:lg:sticky motion-safe:lg:top-0 lg:h-screen">
+        {/* Antwerp, sharp; a blurred, darker copy fades in with the text so it reads over the city. */}
+        <span aria-hidden className="absolute inset-0 bg-[url(/brand/bg-about-antwerp.webp)] bg-cover bg-center" />
+        <span aria-hidden className="absolute -inset-8 bg-[url(/brand/bg-about-antwerp.webp)] bg-cover bg-center blur-[14px] brightness-[0.6]" style={{ opacity: "var(--cols, 1)" }} />
         {crumbs && <div className="wrap relative z-20 pt-6 lg:absolute lg:inset-x-0 lg:top-20">{crumbs}</div>}
         {/* Headline above the print, before the frame opens. */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[17%] z-10 hidden justify-center lg:flex" style={{ opacity: "var(--head, 0)" }}>
