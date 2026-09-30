@@ -12,10 +12,10 @@ const REDUCED_MS = 300;
  * The homepage opening, as a scene rather than a scrolled section. It covers the screen (html.js only;
  * without JS it's a normal first section) and holds the page still. The first downward gesture (wheel,
  * swipe, keys, or the scroll cue) plays the whole transition on its own clock: the camera dives into
- * the stone and its light dissolves into the Buy | Sell choice, which is already in place underneath,
+ * the stone held in the photo and its light dissolves into the Buy | Sell choice, which is already in place underneath,
  * so nothing slides. Scrolling up at the very top of the page plays it back in reverse.
  */
-export function Opening({ cutout, title, line, scroll }: { cutout: string; title: string; line: string; scroll: string }) {
+export function Opening({ photo, title, line, scroll }: { photo: string; title: string; line: string; scroll: string }) {
   const root = useRef<HTMLElement>(null);
   const cue = useRef<HTMLButtonElement>(null);
 
@@ -24,7 +24,7 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
     const html = document.documentElement;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
-    const maxZoom = narrow ? 2 : 3.5; // 3x on phones, 4.5x on larger screens
+    const maxZoom = narrow ? 1.8 : 2.5; // the photo is 1254px square: much closer and it blurs
     let state: "shown" | "playing" | "gone" = "shown";
     let raf = 0;
     let quietUntil = 0; // swallow the tail of a gesture (trackpad momentum) after a transition
@@ -35,12 +35,12 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
     const stoneEl = el.querySelector<HTMLElement>("[data-opening-stone]")!;
     const paint = (t: number) => {
       const zoom = reduce ? 1 : 1 + Math.pow(clamp01(t / 0.85), 1.6) * maxZoom;
-      const radius = (stoneEl.offsetWidth / 2) * 0.64; // the brilliant fills about 64% of its image
+      const radius = stoneEl.offsetWidth / 2; // the stone box is the stone in the photo
       const open = reduce ? t : clamp01((t - 0.3) / 0.7);
-      const hole = open > 0 ? radius * zoom * (0.9 + open * 2.2) : -60; // negative: no hole at all
+      // In the backdrop's own (zoomed) space, so it grows with the camera. Negative: no hole at all.
+      const hole = open > 0 ? radius * (0.9 + open * 2.2) : -60;
       setVars(el, {
         "--zoom": zoom,
-        "--turn": reduce ? 0 : seg(t, 0, 0.75) * 28,
         "--copy": 1 - seg(t, 0, 0.15),
         "--light": reduce ? 0 : seg(t, 0.2, 0.5),
         "--gem": 1 - clamp01((t - 0.3) / 0.45), // the facets dissolve, leaving the view through the stone
@@ -186,22 +186,20 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
 
   return (
     <section ref={root} data-state="shown" className="opening-layer relative text-on-accent">
-      <div className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden pt-20" style={{ opacity: "calc(1 - var(--fade, 0))" }}>
-        {/* The backdrop, with a soft-edged hole that opens where the stone is. */}
-        <span aria-hidden className="opening-backdrop absolute inset-0 bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center" />
-        {/* The stone: revealed by the light on load; the dive scales and turns it. */}
+      <div className="relative h-[100svh] min-h-[34rem] overflow-hidden" style={{ opacity: "calc(1 - var(--fade, 0))" }}>
+        {/* The photo, zoomed toward the stone, with a soft-edged hole that opens where the stone is. */}
+        <div aria-hidden className="opening-backdrop absolute inset-0 bg-[#2a0d14] will-change-transform">
+          <Image src={photo} alt="" fill priority unoptimized className="object-cover" />
+          <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" />
+        </div>
+        {/* The stone's box, over the stone in the photo: the loader lands here, and the dive brightens it. */}
         <div
           data-opening-stone
-          className="relative aspect-square w-[min(78vw,62vh,36rem)] will-change-transform"
-          style={{ transform: "scale(var(--zoom, 1)) rotate(calc(var(--turn, 0) * 1deg))" }}
+          className="pointer-events-none absolute aspect-square -translate-x-1/2 -translate-y-1/2"
+          style={{ scale: "var(--zoom, 1)" }}
         >
-          <div className="opening-stone absolute inset-0" style={{ opacity: "var(--gem, 1)" }}>
-            {/* Larger source than it's shown at, so it stays crisp as the camera moves in. */}
-            <Image src={cutout} alt="" fill priority sizes="(min-width: 1024px) 60vw, 100vw" className="object-contain" />
-          </div>
-          {/* Brightening as an opacity layer (cheap) rather than an animated filter on a scaled image. */}
-          <span aria-hidden className="pointer-events-none absolute inset-[2%] rounded-full bg-[radial-gradient(closest-side,rgb(255_252_244/0.9),rgb(255_252_244/0.35)_70%,transparent)]" style={{ opacity: "calc(var(--light, 0) * 0.8 * var(--gem, 1))" }} />
-          <span aria-hidden className="opening-light pointer-events-none absolute -inset-[20%]" />
+          <span aria-hidden className="absolute inset-[-10%] rounded-full bg-[radial-gradient(closest-side,rgb(255_252_244/0.9),rgb(255_252_244/0.35)_70%,transparent)]" style={{ opacity: "calc(var(--light, 0) * 0.8 * var(--gem, 1))" }} />
+          <span aria-hidden className="opening-light absolute -inset-[20%] rounded-full" />
         </div>
 
         <div className="absolute inset-x-0 bottom-0" style={{ opacity: "var(--copy, 1)" }}>

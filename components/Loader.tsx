@@ -34,7 +34,7 @@ function trackProgress(onChange: (p: number) => void) {
         });
   parts.push([0.2, document.fonts?.ready ?? Promise.resolve()]);
   parts.push([0.1, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
-  parts.push([0.3, settled(document.querySelector<HTMLImageElement>(".opening-stone img"))]);
+  parts.push([0.3, settled(document.querySelector<HTMLImageElement>(".opening-backdrop img"))]);
   parts.push([0.4, document.readyState === "complete" ? Promise.resolve() : new Promise((r) => window.addEventListener("load", r, { once: true }))]);
   let done = 0;
   parts.forEach(([w, p]) =>
@@ -70,7 +70,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
 
     // Put the loader's stone exactly over the opening's stone box.
     const place = () => {
-      const target = document.querySelector<HTMLElement>(".opening-stone")?.parentElement;
+      const target = document.querySelector<HTMLElement>("[data-opening-stone]");
       const r = target?.getBoundingClientRect();
       if (!r || !r.width || !stage.current) return;
       Object.assign(stage.current.style, { left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px`, translate: "none" });

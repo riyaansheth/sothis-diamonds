@@ -39,7 +39,6 @@ const HOME_CROPS: Record<string, Crop> = {
 const DEFAULT_CROP: Crop = { cx: 0.5, cy: 0.46, d: 0.5 };
 
 // The opening stone: studio cut-out of the round 7.06 ct F SI2 (E-398-248F-1B), as on the About page.
-const OPENING_STONE = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
 // Why Sothis: hands at work with a stone, one photo per reason (gemmologists, transparent
 // valuations, top offers, insured pickup, fast, certified stones for sale).
 const WHY_PHOTOS = [3, 1, 5, 6, 2, 4];
@@ -279,7 +278,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       {/* The homepage opens on the Sell / Buy choice; choosing Sell reveals the selling journey below.
           The buying sections (collection rail, gallery) return with the buying journey. */}
       <Opening
-        cutout={mediaUrl(OPENING_STONE)}
+        photo="/brand/opening-hand.webp"
         title={t.about.title}
         line={t.home.openingLine}
         scroll={t.about.scroll}

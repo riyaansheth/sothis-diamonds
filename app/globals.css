@@ -484,9 +484,6 @@ html[data-loader]:not([data-loaded]) body {
   overscroll-behavior: none;
   touch-action: none;
 }
-html[data-loader] .opening-stone {
-  animation: none;
-}
 html[data-loader] .opening-light {
   display: none;
 }
@@ -600,23 +597,7 @@ html[data-loader] .opening-light {
    About: "The Sothis story". Scroll-driven values arrive as CSS variables (components/about).
    --------------------------------------------------------------------------------------------- */
 
-/* 01: the stone in shadow, revealed by a narrow studio light; the headline rises word by word. */
-.opening-stone {
-  animation: stone-reveal 2.8s cubic-bezier(0.3, 0.6, 0.2, 1) 0.2s both;
-}
-@keyframes stone-reveal {
-  from {
-    filter: brightness(0.06) contrast(1.3);
-    transform: rotate(-13deg) scale(0.96);
-  }
-  60% {
-    filter: brightness(0.75) contrast(1.1);
-  }
-  to {
-    filter: none;
-    transform: none;
-  }
-}
+/* 01: a narrow studio light passes over the stone; the headline rises word by word. */
 .opening-light {
   background: linear-gradient(105deg, transparent 44%, rgb(255 246 228 / 0.28) 50%, transparent 56%);
   animation: light-pass 2.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
@@ -800,7 +781,6 @@ html[data-loader] .opening-light {
   .loader-light {
     display: none;
   }
-  .opening-stone,
   .opening-light,
   .opening-title span span,
   .opening-line,
@@ -1156,7 +1136,21 @@ html[data-opening] body {
   overflow: hidden;
   overscroll-behavior: none;
 }
+/* The opening photo (a square, cover-fitted, so --s is its rendered side). The camera dives toward
+   the stone between the fingers, and a hole the size of the stone opens onto the choice. */
+.opening-layer {
+  --s: max(100vw, 100svh);
+  --cx: calc(50% + var(--s) * 0.0104);
+  --cy: calc(50% - var(--s) * 0.0096);
+}
 .opening-backdrop {
-  -webkit-mask-image: radial-gradient(circle at 50% calc(50% + 2.5rem), transparent var(--hole, 0px), #000 calc(var(--hole, 0px) + 40px));
-  mask-image: radial-gradient(circle at 50% calc(50% + 2.5rem), transparent var(--hole, 0px), #000 calc(var(--hole, 0px) + 40px));
+  transform: scale(var(--zoom, 1));
+  transform-origin: var(--cx) var(--cy);
+  -webkit-mask-image: radial-gradient(circle at var(--cx) var(--cy), transparent var(--hole, 0px), #000 calc(var(--hole, 0px) + 40px));
+  mask-image: radial-gradient(circle at var(--cx) var(--cy), transparent var(--hole, 0px), #000 calc(var(--hole, 0px) + 40px));
+}
+[data-opening-stone] {
+  left: var(--cx);
+  top: var(--cy);
+  width: calc(var(--s) * 0.311);
 }
