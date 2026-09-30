@@ -93,7 +93,7 @@ export function Loupe({ src, t }: {
   };
 
   return (
-    <section className="relative bg-ivory-deep py-24 lg:py-32" aria-labelledby="loupe-title">
+    <section className="relative bg-[#120a0a] bg-[url(/brand/bg-loupe.webp)] bg-cover bg-center py-24 lg:py-32" aria-labelledby="loupe-title">
       <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,18rem)_1fr] lg:gap-12">
         <div className="lg:pt-10">
           <h2 id="loupe-title" className="text-[2.75rem] leading-[1.05] sm:text-6xl">{t.title}</h2>
