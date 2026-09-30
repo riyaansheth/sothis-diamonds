@@ -1142,3 +1142,7 @@ html[data-opening] body {
   overflow: hidden;
   overscroll-behavior: none;
 }
+.opening-backdrop {
+  -webkit-mask-image: radial-gradient(circle at 50% calc(50% + 2.5rem), transparent var(--hole, 0px), #000 calc(var(--hole, 0px) + 40px));
+  mask-image: radial-gradient(circle at 50% calc(50% + 2.5rem), transparent var(--hole, 0px), #000 calc(var(--hole, 0px) + 40px));
+}

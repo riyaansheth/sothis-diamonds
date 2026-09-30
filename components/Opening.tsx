@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { seg, setVars } from "./about/useScrub";
+import { clamp01, seg, setVars } from "./about/useScrub";
 
-const DIVE_MS = 1400;
-const BACK_MS = 1200;
+const DIVE_MS = 1800;
+const BACK_MS = 1400;
 const REDUCED_MS = 300;
 
 /**
@@ -30,18 +30,26 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
     let quietUntil = 0; // swallow the tail of a gesture (trackpad momentum) after a transition
     let lastScroll = 0;
 
-    // t: 0 = the opening at rest, 1 = fully dissolved into the choice.
+    // t: 0 = the opening at rest, 1 = fully dissolved into the choice. The stone is the window: a hole
+    // the size of the stone opens in the backdrop, the facets dissolve, and the choice is seen through
+    // it as the camera keeps moving in until it fills the screen.
+    const stoneEl = el.querySelector<HTMLElement>("[data-opening-stone]")!;
     const paint = (t: number) => {
-      const fade = reduce ? t : seg(t, 0.43, 0.93);
+      const zoom = reduce ? 1 : 1 + Math.pow(clamp01(t / 0.85), 1.6) * maxZoom;
+      const radius = (stoneEl.offsetWidth / 2) * 0.64; // the brilliant fills about 64% of its image
+      const open = reduce ? t : clamp01((t - 0.3) / 0.7);
+      const hole = open > 0 ? radius * zoom * (0.9 + open * 2.2) : -60; // negative: no hole at all
       setVars(el, {
-        "--zoom": reduce ? 1 : 1 + Math.pow(seg(t, 0, 0.64), 2) * maxZoom,
-        "--turn": reduce ? 0 : seg(t, 0, 0.64) * 28,
+        "--zoom": zoom,
+        "--turn": reduce ? 0 : seg(t, 0, 0.75) * 28,
         "--copy": 1 - seg(t, 0, 0.15),
-        "--light": reduce ? 0 : seg(t, 0.3, 0.6),
-        "--fade": fade,
+        "--light": reduce ? 0 : seg(t, 0.2, 0.5),
+        "--gem": 1 - clamp01((t - 0.3) / 0.45), // the facets dissolve, leaving the view through the stone
+        "--hole": `${hole.toFixed(1)}px`,
+        "--fade": clamp01((t - 0.95) / 0.05),
       });
-      // The 3D stones underneath stay paused while fully covered.
-      html.toggleAttribute("data-covered", fade < 0.02);
+      // The 3D stones underneath stay paused while nothing of them can be seen.
+      html.toggleAttribute("data-covered", open < 0.01);
     };
 
     const lock = (on: boolean) => html.toggleAttribute("data-opening", on);
@@ -59,7 +67,7 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
       const start = performance.now();
       const step = (now: number) => {
         const k = Math.min(1, (now - start) / ms);
-        const eased = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        const eased = k * k * (3 - 2 * k); // gentle ease, so every stage of the dive is seen
         paint(from + dir * eased);
         if (k < 1) {
           raf = requestAnimationFrame(step);
@@ -147,21 +155,21 @@ export function Opening({ cutout, title, line, scroll }: { cutout: string; title
 
   return (
     <section ref={root} data-state="shown" className="opening-layer relative text-on-accent">
-      <div
-        className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20"
-        style={{ opacity: "calc(1 - var(--fade, 0))", willChange: "opacity" }}
-      >
+      <div className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden pt-20" style={{ opacity: "calc(1 - var(--fade, 0))" }}>
+        {/* The backdrop, with a soft-edged hole that opens where the stone is. */}
+        <span aria-hidden className="opening-backdrop absolute inset-0 bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center" />
         {/* The stone: revealed by the light on load; the dive scales and turns it. */}
         <div
+          data-opening-stone
           className="relative aspect-square w-[min(78vw,62vh,36rem)] will-change-transform"
           style={{ transform: "scale(var(--zoom, 1)) rotate(calc(var(--turn, 0) * 1deg))" }}
         >
-          <div className="opening-stone absolute inset-0">
+          <div className="opening-stone absolute inset-0" style={{ opacity: "var(--gem, 1)" }}>
             {/* Larger source than it's shown at, so it stays crisp as the camera moves in. */}
             <Image src={cutout} alt="" fill priority sizes="(min-width: 1024px) 60vw, 100vw" className="object-contain" />
           </div>
           {/* Brightening as an opacity layer (cheap) rather than an animated filter on a scaled image. */}
-          <span aria-hidden className="pointer-events-none absolute inset-[2%] rounded-full bg-[radial-gradient(closest-side,rgb(255_252_244/0.9),rgb(255_252_244/0.35)_70%,transparent)]" style={{ opacity: "calc(var(--light, 0) * 0.8)" }} />
+          <span aria-hidden className="pointer-events-none absolute inset-[2%] rounded-full bg-[radial-gradient(closest-side,rgb(255_252_244/0.9),rgb(255_252_244/0.35)_70%,transparent)]" style={{ opacity: "calc(var(--light, 0) * 0.8 * var(--gem, 1))" }} />
           <span aria-hidden className="opening-light pointer-events-none absolute -inset-[20%]" />
         </div>
 
