@@ -204,11 +204,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   const buyJourney = (
     <>
-      <CollectionStage items={railItems} total={forSale.length} shopHref={href("/shop/")} line={t.paths.buy[1]} t={b} card={t.stones} />
+      <ShapeTiles shapes={shapeCounts} shopHref={href("/shop/")} t={{ title: b.shapesTitle, line: b.shapesLine, inStock: b.inStock }} />
       {/* The ring from inspection to worn: moved here from the About page. */}
       <NewChapter inspected="/brand/ring-cutout.webp" worn={mediaUrl(productBySku("SCP01").gallery[0])} t={{ title: t.about.chapterTitle, body: t.about.chapterBody, inspection: t.about.inspection }} />
 
-      <ShapeTiles shapes={shapeCounts} shopHref={href("/shop/")} t={{ title: b.shapesTitle, line: b.shapesLine, inStock: b.inStock }} />
+      <CollectionStage items={railItems} total={forSale.length} shopHref={href("/shop/")} line={t.paths.buy[1]} t={b} card={t.stones} />
 
       {/* How buying works: the lilac asscher acts out each step, scrubbed by scroll. */}
       <section className="buy-steps border-y border-line">
