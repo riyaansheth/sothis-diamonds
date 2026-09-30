@@ -5,16 +5,16 @@ import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
-import { site, telHref } from "@/lib/site";
-import { CurrencySwitch, useStore } from "./Store";
+import { site } from "@/lib/site";
+import { SiteMenu } from "./SiteMenu";
+import { useStore } from "./Store";
 
 const icon = "size-5 stroke-current fill-none [stroke-width:1.5]";
 
-export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
+export function Header({ lang, t, sellLines, buyLine }: { lang: Locale; t: Dictionary["nav"]; sellLines: string[]; buyLine: string }) {
   const menu = useRef<HTMLDialogElement>(null);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
-  const close = () => menu.current?.close();
 
   return (
     <header
@@ -68,44 +68,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </div>
       </div>
 
-      <dialog
-        ref={menu}
-        aria-label={t.menu}
-        className="m-0 h-dvh max-h-none w-screen max-w-none bg-ivory text-ink backdrop:bg-ivory"
-      >
-        <div className="wrap flex min-h-full flex-col py-6">
-          <div className="flex h-14 items-center justify-between">
-            <Logo className="h-9 w-auto sm:h-11" alt={site.name} />
-            <button type="button" onClick={close} className="px-2 py-2 text-sm font-semibold hover:text-burgundy">
-              {t.close}
-            </button>
-          </div>
-
-          <div className="grid flex-1 gap-10 py-12 md:grid-cols-3" onClick={(e) => (e.target as HTMLElement).closest("a") && close()}>
-            <MenuGroup title={t.sellToUs} links={t.sellLinks} href={href} large />
-            <MenuGroup title={t.buyFromUs} links={t.buyLinks} href={href} large />
-            <div className="space-y-10">
-              <MenuGroup title={t.resources} links={t.resourceLinks} href={href} />
-              <ul className="space-y-2 font-display text-2xl">
-                <li><Link href={href("/about-sothis-diamonds/")} className="hover:text-burgundy">{t.about}</Link></li>
-                <li><Link href={href("/contact-us/")} className="hover:text-burgundy">{t.contact}</Link></li>
-                <li><Link href={href("/blog/")} className="hover:text-burgundy">{t.blog}</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-x-12 gap-y-6 border-t border-line pt-6 text-sm text-platinum-2">
-            <address className="not-italic">
-              <a href={`mailto:${site.email}`} className="block hover:text-ink">{site.email}</a>
-              {site.phones.map((p) => (
-                <a key={p} href={telHref(p)} className="block hover:text-ink">{p}</a>
-              ))}
-            </address>
-            <LanguageLinks lang={lang} label={t.language} />
-            <CurrencySwitch label={t.currency} />
-          </div>
-        </div>
-      </dialog>
+      <SiteMenu dialog={menu} lang={lang} t={t} sellLines={sellLines} buyLine={buyLine} />
     </header>
   );
 }
@@ -118,21 +81,6 @@ function IconLink({ href, label, count, className = "grid", children }: { href: 
         <span className="absolute right-0.5 top-0.5 grid size-4 place-items-center rounded-full bg-wine text-[0.625rem] font-bold text-on-accent">{count}</span>
       ) : null}
     </Link>
-  );
-}
-
-function MenuGroup({ title, links, href, large }: { title: string; links: string[][]; href: (p: string) => string; large?: boolean }) {
-  return (
-    <div>
-      <h2 className="mb-4 font-sans text-sm font-semibold text-platinum-2">{title}</h2>
-      <ul className={large ? "space-y-2 font-display text-3xl" : "space-y-1.5"}>
-        {links.map(([label, path]) => (
-          <li key={path}>
-            <Link href={href(path)} className="hover:text-burgundy">{label}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 

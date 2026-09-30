@@ -57,7 +57,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
       <body>
         {/* Marks the page as JS-capable before paint, so JS-only hiding (e.g. the homepage's Sell journey) never flashes. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-        <Header lang={lang} t={t.nav} />
+        <Header lang={lang} t={t.nav} sellLines={t.sell.categories.map((c) => c[1])} buyLine={t.paths.buy[1]} />
         <main>{children}</main>
         <Footer lang={lang} t={t} />
         <CookieBanner t={t.cookies} policyHref={localePath(lang, "/cookie-policy-sothis-diamonds/")} />
