@@ -79,7 +79,7 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
         <span aria-hidden className="paths-sheen" />
         <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
-          <Diamond3DLazy cut={stone.cut} color={stone.color} className="pointer-events-none absolute inset-0" />
+          <Diamond3DLazy cut={stone.cut} color={stone.color} className="absolute inset-[12%]" />
         </div>
         <span className="relative font-display text-6xl leading-none sm:text-8xl">{s.title}</span>
         <span className="relative mt-4 grid max-w-sm text-ink/80">

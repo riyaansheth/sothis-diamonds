@@ -2,7 +2,7 @@
 
 import { MeshRefractionMaterial } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { ConvexGeometry } from "three/examples/jsm/geometries/ConvexGeometry.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -75,14 +75,30 @@ export function useStudioEnv() {
 /** Tells the loader a 3D stone has drawn its first frame (it waits for these on the homepage). */
 export const STONE_READY = "sothis:stone-ready";
 
-function Stone({ cut, color, spin }: { cut: Cut; color: string; spin: boolean }) {
+/** Pointer state shared between the DOM handlers and the render loop (no React state per move). */
+type Control = { rx: number; ry: number; vy: number; boost: number; dragging: boolean };
+
+function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: boolean; control: () => Control }) {
   const mesh = useRef<THREE.Mesh>(null);
   const announced = useRef(false);
   const env = useStudioEnv();
   const geometry = useMemo(() => (cut === "round" ? roundBrilliant() : asscher()), [cut]);
+  const auto = useRef(0);
 
   useFrame((_, dt) => {
-    if (spin && mesh.current) mesh.current.rotation.y += dt * 0.35;
+    const c = control();
+    if (spin) auto.current += dt * 0.35;
+    if (!c.dragging) {
+      c.ry += c.vy * dt; // a flick keeps turning, then slows
+      c.vy *= Math.pow(0.08, dt);
+      c.rx *= Math.pow(0.2, dt); // tilt eases back
+    }
+    c.boost *= Math.pow(0.05, dt); // a click spins it round, then settles
+    auto.current += c.boost * dt;
+    if (mesh.current) {
+      mesh.current.rotation.y = 0.3 + auto.current + c.ry;
+      mesh.current.rotation.x = 0.62 + c.rx;
+    }
     if (!announced.current) {
       announced.current = true;
       window.dispatchEvent(new Event(STONE_READY));
@@ -97,7 +113,8 @@ function Stone({ cut, color, spin }: { cut: Cut; color: string; spin: boolean })
 }
 
 /**
- * A real-time rendered diamond that turns slowly. Only renders while on screen and not covered
+ * A real-time rendered diamond that turns slowly. Drag to turn it (a flick keeps it spinning); click
+ * to spin it. Clicks on the stone don't reach whatever it sits in. Only renders while on screen and not covered
  * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
  * visitors who prefer reduced motion.
  */
@@ -105,6 +122,11 @@ export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: 
   const box = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [spin] = useState(() => typeof window === "undefined" || !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  const ctl = useRef<Control>({ rx: 0, ry: 0, vy: 0, boost: 0, dragging: false });
+  const drag = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
+  const getControl = useCallback(() => ctl.current, []);
+  const [touched, setTouched] = useState(false); // keep rendering while interacting, even with reduced motion
 
   const [covered, setCovered] = useState(() => typeof document !== "undefined" && document.documentElement.hasAttribute("data-covered"));
 
@@ -121,15 +143,51 @@ export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: 
   }, []);
 
   return (
-    <div ref={box} className={className}>
+    <div
+      ref={box}
+      className={`${className ?? ""} cursor-grab touch-pan-y active:cursor-grabbing`}
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        drag.current = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false };
+        ctl.current.dragging = true;
+        ctl.current.vy = 0;
+        setTouched(true);
+      }}
+      onPointerMove={(e) => {
+        const d = drag.current;
+        if (!d) return;
+        const dx = e.clientX - d.x;
+        const dy = e.clientY - d.y;
+        if (Math.abs(dx) + Math.abs(dy) > 4) d.moved = true;
+        const now = performance.now();
+        const c = ctl.current;
+        c.ry += dx * 0.012;
+        c.rx = Math.max(-0.8, Math.min(0.8, c.rx + dy * 0.008));
+        c.vy = (dx * 0.012) / Math.max(0.008, (now - d.t) / 1000);
+        Object.assign(d, { x: e.clientX, y: e.clientY, t: now });
+      }}
+      onPointerUp={() => {
+        ctl.current.dragging = false;
+        if (drag.current && !drag.current.moved) ctl.current.boost = 9; // a click spins it
+        drag.current = null;
+      }}
+      onPointerCancel={() => {
+        ctl.current.dragging = false;
+        drag.current = null;
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+      }}
+    >
       <Canvas
-        frameloop={visible && spin && !covered ? "always" : "demand"}
+        frameloop={visible && (spin || touched) && !covered ? "always" : "demand"}
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5.6], fov: 32 }}
         gl={{ antialias: true, alpha: true }}
         aria-hidden
       >
-        <Stone cut={cut} color={color} spin={spin} />
+        <Stone cut={cut} color={color} spin={spin} control={getControl} />
       </Canvas>
     </div>
   );

@@ -55,6 +55,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
   const [announced, setAnnounced] = useState(0); // for screen readers, in quarters
   const fill = useRef<HTMLSpanElement>(null);
   const pct = useRef<HTMLSpanElement>(null);
+  const spinner = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
 
@@ -82,6 +83,9 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
 
     let real = 0;
     let shown = 0;
+    let angle = 0; // the stone turns until loading reaches 100%, then settles upright to match the opening
+    let settleFrom = -1;
+    let lastT = performance.now();
     let last = -1;
     let raf = 0;
     let timer = 0;
@@ -107,7 +111,20 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
       if (pct.current) pct.current.textContent = `${Math.round(shown * 100)}%`;
       const quarter = Math.floor(shown * 4) * 25;
       if (quarter !== last) setAnnounced((last = quarter));
-      if (real >= 1 && shown >= 0.999) return leave();
+      const dt = Math.min(0.05, (now - lastT) / 1000);
+      lastT = now;
+      if (!reduce) {
+        if (shown < 0.999) {
+          angle += dt * 90; // a quarter turn a second while loading
+        } else {
+          if (settleFrom < 0) settleFrom = Math.ceil(angle / 360) * 360; // finish the current turn
+          angle += (settleFrom - angle) * 0.14;
+          if (settleFrom - angle < 0.5) angle = settleFrom;
+        }
+        spinner.current?.style.setProperty("transform", `rotate(${angle.toFixed(2)}deg)`);
+      }
+      const settled = reduce || (settleFrom >= 0 && angle === settleFrom);
+      if (real >= 1 && shown >= 0.999 && settled) return leave();
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
@@ -140,7 +157,9 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
         {/* The stone, over the opening's stone (positioned in JS; centred until then). */}
         <div ref={stage} aria-hidden className="loader-stage absolute left-1/2 top-1/2 aspect-square w-[min(78vw,62vh,36rem)] -translate-x-1/2 -translate-y-1/2">
           <div className="loader-stone absolute inset-0">
-            <Image src={STONE} alt="" fill priority sizes={STONE_SIZES} className="object-contain" />
+            <div ref={spinner} className="absolute inset-0 will-change-transform">
+              <Image src={STONE} alt="" fill priority sizes={STONE_SIZES} className="object-contain" />
+            </div>
           </div>
           {/* A narrow studio light crossing the stone, clipped to the brilliant (18%–82% of the image). */}
           <span className="loader-light absolute inset-[17.5%] overflow-hidden rounded-full">
