@@ -20,7 +20,8 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
 
   return (
     <>
-      <section className="wrap grid gap-14 pb-24 pt-32 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
+      <section className="burgundy-tint">
+      <div className="wrap grid gap-14 pb-24 pt-32 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Breadcrumbs items={crumbs} />
           <RevealHeading lines={[page.title]} as="h1" className="mt-8 text-5xl sm:text-6xl" />
@@ -41,9 +42,10 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
             <ValuationForm t={t.form} lang={lang} fixedType={kind === "general" ? undefined : kind} />
           </Suspense>
         </div>
+      </div>
       </section>
 
-      <section className="border-y border-line bg-ivory-deep">
+      <section className="burgundy-tint border-y border-line">
         <div className="wrap py-20">
           <h2 className="text-3xl sm:text-4xl">{s.stepsTitle}</h2>
           <ol className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
