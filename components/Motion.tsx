@@ -57,13 +57,14 @@ const BuyStage = dynamic(() => import("./buy/BuyStage"), { ssr: false });
  * "How selling works": a pinned 3D stage that acts out each step, scrubbed by scroll, beside the step
  * texts. Progress (0..6) lives in a ref so scrolling never re-renders React; only the active step does.
  */
-export function StepsScroller({ steps, heading, action, stage, buyStage, stepLabel }: {
+export function StepsScroller({ steps, heading, action, stage, buyStage, stepLabel, compact = false }: {
   steps: string[][];
   heading: ReactNode;
   action: ReactNode;
   stage?: StageData; // "How selling works"
   buyStage?: BuyStageData; // "How buying works"
   stepLabel: string;
+  compact?: boolean; // short steps: the whole section passes in about two screens of scrolling
 }) {
   const [active, setActive] = useState(0);
   const [near, setNear] = useState(false);
@@ -126,12 +127,12 @@ export function StepsScroller({ steps, heading, action, stage, buyStage, stepLab
 
       <div>
         <div className="pt-16 lg:hidden">{heading}</div>
-        <ol ref={list} className="pb-[35vh] pt-[30vh] lg:pb-[50vh] lg:pt-[50vh]">
+        <ol ref={list} className={compact ? "pb-[20vh] pt-[30vh] lg:pb-[35vh] lg:pt-[50vh]" : "pb-[35vh] pt-[30vh] lg:pb-[50vh] lg:pt-[50vh]"}>
           {steps.map(([title, body], i) => (
             <li
               key={title}
               data-on={i === active ? "" : undefined}
-              className="step-item flex min-h-[60vh] flex-col justify-center border-t border-line py-12 lg:min-h-[70vh]"
+              className={`step-item flex flex-col justify-center border-t border-line ${compact ? "min-h-[20vh] py-6 lg:min-h-[18vh]" : "min-h-[60vh] py-12 lg:min-h-[70vh]"}`}
             >
               <h3 className="text-2xl sm:text-3xl">{title}</h3>
               <p className="mt-3 max-w-sm text-platinum-2">{body}</p>

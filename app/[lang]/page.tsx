@@ -219,6 +219,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               report: [["Lab", ra.lab!], ["Carat", `${ra.carat} ct`], ["Colour", ra.color!], ["Clarity", ra.clarity!]],
               scene: b.scene,
             }}
+            compact
             stepLabel={t.steps.stepOf}
             heading={<RevealHeading lines={[b.stepsTitle]} className="text-4xl sm:text-5xl" />}
             action={<Link href={href("/shop/")} className="btn btn-inverse">{b.stepsCta}</Link>}
@@ -226,37 +227,32 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {/* Why buy from Sothis: the Sell list's pattern, mirrored (list left, heading right). */}
-      <section className="wrap grid gap-14 py-28 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-20 lg:py-36">
-        <ol className="sell-list order-2 border-t border-line lg:order-1">
+      {/* Why buy from Sothis: the heading, then the reasons in a plain grid. */}
+      <section className="wrap py-24 lg:py-32">
+        <RevealHeading lines={[b.whyTitle]} className="text-4xl sm:text-5xl" />
+        <ul className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
           {b.why.map(([title, body], i) => (
-            <li key={title} className="sell-row grid grid-cols-[2.5rem_1fr] items-baseline gap-x-4 border-b border-line py-7 sm:grid-cols-[3.5rem_1fr] sm:gap-x-6 sm:py-8">
-              <span className="font-display text-lg text-platinum-2 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-              <span>
-                <span className="sell-name block font-display text-3xl sm:text-4xl">{title}</span>
-                <span className="mt-2 block max-w-md text-sm text-platinum-2">
-                  {i === 0 ? (
-                    // The counts come from the data and count up as the row comes into view.
-                    body.split(/(\{gia\}|\{hrd\}|\{igi\})/).map((part, k) => {
-                      const key = part.slice(1, -1) as keyof typeof labs;
-                      return part.startsWith("{") ? <CountUp key={k} value={labs[key]} /> : part;
-                    })
-                  ) : i === 3 ? (
-                    <>
-                      {body}{" "}
-                      <Link href={href("/refund_returns/")} className="underline underline-offset-4">{b.returnsLink}</Link>
-                    </>
-                  ) : (
-                    body
-                  )}
-                </span>
-              </span>
+            <li key={title} className="border-t border-line pt-6">
+              <h3 className="font-display text-2xl lg:text-xl xl:text-2xl">{title}</h3>
+              <p className="mt-2 max-w-sm text-sm text-platinum-2">
+                {i === 0 ? (
+                  // The counts come from the data and count up as they come into view.
+                  body.split(/(\{gia\}|\{hrd\}|\{igi\})/).map((part, k) => {
+                    const key = part.slice(1, -1) as keyof typeof labs;
+                    return part.startsWith("{") ? <CountUp key={k} value={labs[key]} /> : part;
+                  })
+                ) : i === 3 ? (
+                  <>
+                    {body}{" "}
+                    <Link href={href("/refund_returns/")} className="underline underline-offset-4">{b.returnsLink}</Link>
+                  </>
+                ) : (
+                  body
+                )}
+              </p>
             </li>
           ))}
-        </ol>
-        <div className="order-1 lg:sticky lg:top-32 lg:order-2 lg:self-start">
-          <RevealHeading lines={[b.whyTitle]} className="text-4xl sm:text-6xl" />
-        </div>
+        </ul>
       </section>
 
       {testimonials}
