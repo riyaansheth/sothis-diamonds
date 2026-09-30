@@ -28,8 +28,8 @@ export function Heritage({ photo, t, crumbs }: {
   });
 
   return (
-    <section ref={root} className="grain relative bg-[#1a0f10] bg-[url(/brand/bg-about-heritage-dark.webp)] bg-cover bg-center pt-20 lg:bg-none lg:pt-0 motion-safe:lg:h-[280vh]">
-      <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-0 lg:h-screen lg:bg-[url(/brand/bg-about-heritage-dark.webp)] lg:bg-cover lg:bg-center lg:pt-20">
+    <section ref={root} className="grain relative bg-[#1a0f10] bg-[url(/brand/bg-about-antwerp.webp)] bg-cover bg-center pt-20 lg:bg-none lg:pt-0 motion-safe:lg:h-[280vh]">
+      <div className="relative overflow-hidden motion-safe:lg:sticky motion-safe:lg:top-0 lg:h-screen lg:bg-[url(/brand/bg-about-antwerp.webp)] lg:bg-cover lg:bg-center lg:pt-20">
         {crumbs && <div className="wrap relative z-20 pt-6 lg:absolute lg:inset-x-0 lg:top-20">{crumbs}</div>}
         {/* Headline above the print, before the frame opens. */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[17%] z-10 hidden justify-center lg:flex" style={{ opacity: "var(--head, 0)" }}>
@@ -41,7 +41,7 @@ export function Heritage({ photo, t, crumbs }: {
           <div className="relative aspect-[4/5] overflow-hidden lg:aspect-auto lg:size-full">
             <Image src={photo} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" />
           </div>
-          <figcaption className="heritage-cap mt-3 max-w-sm text-xs text-platinum-2 lg:absolute lg:-bottom-8 lg:left-[14px] lg:mt-0">
+          <figcaption className="heritage-cap mt-3 max-w-sm text-xs text-platinum-2 [text-shadow:0_1px_6px_#000,0_0_2px_#000] lg:absolute lg:-bottom-8 lg:left-[14px] lg:mt-0">
             {t.caption}
           </figcaption>
         </figure>
