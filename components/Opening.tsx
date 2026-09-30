@@ -1,57 +1,157 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, type ReactNode } from "react";
-import { seg, setVars, useScrub } from "./about/useScrub";
+import { useEffect, useRef } from "react";
+import { seg, setVars } from "./about/useScrub";
+
+const DIVE_MS = 1400;
+const BACK_MS = 1200;
+const REDUCED_MS = 300;
 
 /**
- * The homepage opening. The stone sits in shadow; a narrow studio light reveals it on load. Scrolling
- * moves the camera into the stone until its facets fill the screen, then the whole opening fades away
- * to reveal what follows. The next section is pulled up underneath its last screen (see the homepage),
- * so what appears is the real thing, not a copy. `className` sets the pinned scroll length.
+ * The homepage opening, as a scene rather than a scrolled section. It covers the screen (html.js only;
+ * without JS it's a normal first section) and holds the page still. The first downward gesture (wheel,
+ * swipe, keys, or the scroll cue) plays the whole transition on its own clock: the camera dives into
+ * the stone and its light dissolves into the Buy | Sell choice, which is already in place underneath,
+ * so nothing slides. Scrolling up at the very top of the page plays it back in reverse.
  */
-export function Opening({ cutout, title, line, scroll, crumbs, className = "" }: {
-  cutout: string;
-  title: string;
-  line: string;
-  scroll: string;
-  crumbs?: ReactNode;
-  className?: string;
-}) {
+export function Opening({ cutout, title, line, scroll }: { cutout: string; title: string; line: string; scroll: string }) {
   const root = useRef<HTMLElement>(null);
+  const cue = useRef<HTMLButtonElement>(null);
 
-  const last = useRef(-1);
-  useEffect(() => () => document.documentElement.removeAttribute("data-covered"), []);
+  useEffect(() => {
+    const el = root.current!;
+    const html = document.documentElement;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const narrow = window.matchMedia("(max-width: 767px)").matches;
+    const maxZoom = narrow ? 2 : 3.5; // 3x on phones, 4.5x on larger screens
+    let state: "shown" | "playing" | "gone" = "shown";
+    let raf = 0;
+    let quietUntil = 0; // swallow the tail of a gesture (trackpad momentum) after a transition
+    let lastScroll = 0;
 
-  // Only transform and opacity change while scrolling (both GPU-composited), and only when the
-  // progress has actually moved, so each frame is cheap.
-  useScrub(root, (p, pinned) => {
-    const q = pinned ? p : 0;
-    // While the opening fully covers what's under it, pause the 3D stones there (they'd render unseen).
-    // Set every tick (cheap), so it can't be left stale.
-    document.documentElement.toggleAttribute("data-covered", pinned && q < 0.72);
-    if (Math.abs(q - last.current) < 0.0005) return;
-    last.current = q;
-    const fade = seg(q, 0.72, 1);
-    setVars(root.current, {
-      "--zoom": 1 + Math.pow(seg(q, 0.08, 0.85), 2) * 3.5, // approaches, then passes into the stone (up to 4.5x)
-      "--turn": seg(q, 0, 0.9) * 28,
-      "--copy": 1 - seg(q, 0.02, 0.22),
-      "--light": seg(q, 0.45, 0.8), // the stone brightens as the camera passes the table
-      "--ivory": fade,
-    });
-  });
+    // t: 0 = the opening at rest, 1 = fully dissolved into the choice.
+    const paint = (t: number) => {
+      const fade = reduce ? t : seg(t, 0.43, 0.93);
+      setVars(el, {
+        "--zoom": reduce ? 1 : 1 + Math.pow(seg(t, 0, 0.64), 2) * maxZoom,
+        "--turn": reduce ? 0 : seg(t, 0, 0.64) * 28,
+        "--copy": 1 - seg(t, 0, 0.15),
+        "--light": reduce ? 0 : seg(t, 0.3, 0.6),
+        "--fade": fade,
+      });
+      // The 3D stones underneath stay paused while fully covered.
+      html.toggleAttribute("data-covered", fade < 0.02);
+    };
+
+    const lock = (on: boolean) => html.toggleAttribute("data-opening", on);
+    paint(0);
+    lock(true);
+
+    const play = (dir: 1 | -1) => {
+      if (state === "playing") return;
+      const from = dir === 1 ? 0 : 1;
+      const ms = reduce ? REDUCED_MS : dir === 1 ? DIVE_MS : BACK_MS;
+      state = "playing";
+      lock(true);
+      el.dataset.state = "playing";
+      if (dir === -1) window.scrollTo(0, 0);
+      const start = performance.now();
+      const step = (now: number) => {
+        const k = Math.min(1, (now - start) / ms);
+        const eased = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        paint(from + dir * eased);
+        if (k < 1) {
+          raf = requestAnimationFrame(step);
+          return;
+        }
+        quietUntil = performance.now() + 350;
+        if (dir === 1) {
+          window.scrollTo(0, 0);
+          state = "gone";
+          el.dataset.state = "gone";
+          lock(false);
+        } else {
+          state = "shown";
+          el.dataset.state = "shown";
+        }
+      };
+      raf = requestAnimationFrame(step);
+    };
+
+    // Only once the loading screen has released the page.
+    const ready = () => html.hasAttribute("data-loaded");
+    const atTop = () => window.scrollY <= 1 && performance.now() - lastScroll > 400;
+
+    const onWheel = (e: WheelEvent) => {
+      if (state === "playing" || performance.now() < quietUntil) {
+        e.preventDefault();
+        return;
+      }
+      if (!ready()) return;
+      if (state === "shown" && e.deltaY > 0) {
+        e.preventDefault();
+        play(1);
+      } else if (state === "gone" && e.deltaY < 0 && atTop()) {
+        e.preventDefault();
+        play(-1);
+      }
+    };
+    let touchY: number | null = null;
+    const onTouchStart = (e: TouchEvent) => (touchY = e.touches[0].clientY);
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchY === null || !ready() || state === "playing") return;
+      const dy = e.touches[0].clientY - touchY;
+      if (state === "shown" && dy < -30) {
+        touchY = null;
+        play(1);
+      } else if (state === "gone" && dy > 40 && atTop()) {
+        touchY = null;
+        play(-1);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (!ready() || state === "playing" || (e.target as HTMLElement)?.closest?.("input, textarea, select, dialog")) return;
+      const down = ["PageDown", "ArrowDown", " ", "End"].includes(e.key);
+      const up = ["PageUp", "ArrowUp", "Home"].includes(e.key);
+      if (state === "shown" && down) {
+        e.preventDefault();
+        play(1);
+      } else if (state === "gone" && up && window.scrollY <= 1) {
+        e.preventDefault();
+        play(-1);
+      }
+    };
+    const onScroll = () => (lastScroll = performance.now());
+    const onCue = () => ready() && state === "shown" && play(1);
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const button = cue.current;
+    button?.addEventListener("click", onCue);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", onScroll);
+      button?.removeEventListener("click", onCue);
+      lock(false);
+      html.removeAttribute("data-covered");
+    };
+  }, []);
 
   return (
-    <section ref={root} className={`pointer-events-none relative z-10 text-on-accent ${className}`}>
-      {/* Full screen, behind the see-through header, so it dissolves straight into the full-screen choice. */}
+    <section ref={root} data-state="shown" className="opening-layer relative text-on-accent">
       <div
-        className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20 motion-safe:lg:sticky motion-safe:lg:top-0"
-        style={{ opacity: "calc(1 - var(--ivory, 0))", willChange: "opacity" }}
+        className="relative flex h-[100svh] min-h-[34rem] items-center justify-center overflow-hidden bg-[#2a0d14] bg-[url(/brand/bg-about-opening.webp)] bg-cover bg-center pt-20"
+        style={{ opacity: "calc(1 - var(--fade, 0))", willChange: "opacity" }}
       >
-        {crumbs && <div className="wrap absolute inset-x-0 top-26 z-10 text-on-accent/70 [&_*]:!text-on-accent/70" style={{ opacity: "var(--copy, 1)" }}>{crumbs}</div>}
-
-        {/* The stone: revealed by the light on load; its scale and turn follow the scroll. */}
+        {/* The stone: revealed by the light on load; the dive scales and turns it. */}
         <div
           className="relative aspect-square w-[min(78vw,62vh,36rem)] will-change-transform"
           style={{ transform: "scale(var(--zoom, 1)) rotate(calc(var(--turn, 0) * 1deg))" }}
@@ -78,11 +178,15 @@ export function Opening({ cutout, title, line, scroll, crumbs, className = "" }:
           </div>
         </div>
 
-        <p aria-hidden className="opening-scroll absolute bottom-4 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-on-accent/60 lg:flex" style={{ opacity: "var(--copy, 1)" }}>
+        <button
+          ref={cue}
+          type="button"
+          className="opening-scroll absolute bottom-4 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-on-accent/60 hover:text-on-accent lg:flex"
+          style={{ opacity: "var(--copy, 1)" }}
+        >
           {scroll}
-          <span className="block h-8 w-px bg-champagne/70" />
-        </p>
-
+          <span aria-hidden className="block h-8 w-px bg-champagne/70" />
+        </button>
       </div>
     </section>
   );

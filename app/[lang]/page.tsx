@@ -283,7 +283,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         title={t.about.title}
         line={t.home.openingLine}
         scroll={t.about.scroll}
-        className="motion-safe:lg:h-[200vh]"
       />
       <HomeChoice
         buy={{ title: t.paths.buy[0], body: t.paths.buy[1], cta: t.home.buyCta, after: t.home.buyAfter }}

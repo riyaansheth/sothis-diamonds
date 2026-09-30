@@ -1125,3 +1125,20 @@ html.js .home-journey:not([data-open]) {
   }
 }
 
+
+/* Homepage opening as a scene: with JS it is a fixed layer over the choice and the page is held
+   still until its transition has played; without JS it is simply the first section. */
+html.js .opening-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+}
+html.js .opening-layer[data-state="gone"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+html[data-opening],
+html[data-opening] body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}

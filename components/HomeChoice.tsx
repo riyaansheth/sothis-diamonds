@@ -93,8 +93,8 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
 
   return (
     <>
-      {/* Pulled up under the opening's last (pinned) screen, which fades away to reveal it (desktop). */}
-      <section ref={choice} data-open={open ?? undefined} className="home-choice relative motion-safe:lg:-mt-[100svh]">
+      {/* Sits under the opening (a fixed layer with JS), which dissolves to reveal it in place. */}
+      <section ref={choice} data-open={open ?? undefined} className="home-choice relative">
         <div className="paths flex flex-col md:flex-row">
           {half("buy", buy, "bg-[url(/brand/bg-buy-burgundy.webp)]", { cut: "asscher", color: "#ffffff" })}
           {half("sell", sell, "bg-[url(/brand/bg-sell-black.webp)]", { cut: "round", color: "#ffffff" })}
