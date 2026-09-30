@@ -655,7 +655,7 @@ html[data-loader] .opening-light {
 @media (min-width: 1024px) {
   .heritage-frame {
     left: calc(39vw + (47vw - 39vw) * var(--e, 1));
-    top: calc(31% + (-6% - 31%) * var(--e, 1));
+    top: calc(36% + (-6% - 36%) * var(--e, 1));
     width: calc(22vw + (60vw - 22vw) * var(--e, 1));
     height: calc(50% + (112% - 50%) * var(--e, 1));
     padding: calc(14px * (1 - var(--e, 1)));
