@@ -1054,8 +1054,8 @@ html.js .home-journey:not([data-open]) {
 .burgundy-tint-strong {
   --color-line: rgb(244 240 232 / 0.18);
   background:
-    radial-gradient(ellipse 70% 60% at 50% 45%, rgb(122 28 50 / 0.55), transparent 70%),
-    linear-gradient(90deg, #4a1120 0%, #320a16 50%, #1c060d 100%);
+    radial-gradient(ellipse 70% 60% at 50% 45%, rgb(110 26 46 / 0.18), transparent 70%),
+    linear-gradient(90deg, #300c16 0%, #1f0810 50%, #13070b 100%);
 }
 .anatomy-grid-light {
   background-image:
