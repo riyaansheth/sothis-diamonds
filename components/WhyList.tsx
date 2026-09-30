@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CroppedImage, type Crop } from "./CroppedImage";
 
-export type WhyStone = { src: string; name: string; href: string; crop?: Crop };
+export type WhyStone = { src: string; name?: string; href?: string; crop?: Crop };
 
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 const smooth = (x: number) => x * x * (3 - 2 * x);
@@ -97,19 +97,28 @@ export function WhyList({ items, stones, view }: { items: string[][]; stones: Wh
               >
                 {/* The photos are only 1024 px, so the stone is shown near its real size (sharp), feathered
                     into a deliberately blurred, colour-matched backdrop made from the same photo. */}
-                <div aria-hidden className="absolute inset-0 scale-110 blur-2xl">
-                  <CroppedImage src={s.src} crop={s.crop} sizes="20vw" />
-                </div>
-                <div className="absolute left-1/2 top-1/2 aspect-square w-[min(78%,34rem)] -translate-x-1/2 -translate-y-1/2 [mask-image:radial-gradient(closest-side,#000_72%,transparent)]">
-                  <CroppedImage src={s.src} crop={s.crop} sizes="34rem" />
-                </div>
+                {s.crop ? (
+                  <>
+                    {/* Low-resolution product photos: shown near their real size over a blurred copy. */}
+                    <div aria-hidden className="absolute inset-0 scale-110 blur-2xl">
+                      <CroppedImage src={s.src} crop={s.crop} sizes="20vw" />
+                    </div>
+                    <div className="absolute left-1/2 top-1/2 aspect-square w-[min(78%,34rem)] -translate-x-1/2 -translate-y-1/2 [mask-image:radial-gradient(closest-side,#000_72%,transparent)]">
+                      <CroppedImage src={s.src} crop={s.crop} sizes="34rem" />
+                    </div>
+                  </>
+                ) : (
+                  <CroppedImage src={s.src} sizes="50vw" />
+                )}
               </div>
             ))}
           </div>
-          <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-6 bg-gradient-to-b from-black/50 to-transparent p-8 pb-24 text-on-accent">
-            <p key={active} className="why-caption font-display text-2xl">{stones[active]?.name}</p>
-            <Link href={stones[active]?.href ?? "#"} className="border-b border-white/70 pb-0.5 text-sm">{view}</Link>
-          </div>
+          {stones[active]?.href && (
+            <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-6 bg-gradient-to-b from-black/50 to-transparent p-8 pb-24 text-on-accent">
+              <p key={active} className="why-caption font-display text-2xl">{stones[active]?.name}</p>
+              <Link href={stones[active].href!} className="border-b border-white/70 pb-0.5 text-sm">{view}</Link>
+            </div>
+          )}
         </div>
       </div>
 

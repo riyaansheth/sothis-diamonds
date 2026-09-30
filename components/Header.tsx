@@ -45,9 +45,10 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
           </Link>
         </div>
 
-        <Link href={href("/")} className="shrink-0" aria-label={site.name}>
+        {/* A plain link: a full page load, so the homepage always starts fresh (loader, opening, choice). */}
+        <a href={href("/")} className="shrink-0" aria-label={site.name}>
           <Logo className="h-8 w-auto sm:h-11" />
-        </Link>
+        </a>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
           <Link href={href("/sell-diamond/")} className="hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">

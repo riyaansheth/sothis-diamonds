@@ -12,7 +12,8 @@ export function ShopPage({ lang, title, filter, crumbs }: { lang: Locale; title:
   const items: ShopItem[] = allProducts.filter(filter).map((p) => ({ ...p, href: productPath(p, lang) }));
 
   return (
-    <section className="wrap pb-28 pt-32">
+    <section className="burgundy-tint">
+    <div className="wrap pb-28 pt-32">
       <Breadcrumbs items={crumbs} />
       <header className="mt-8 max-w-2xl">
         <RevealHeading lines={[title]} as="h1" className="text-5xl sm:text-6xl" />
@@ -31,6 +32,7 @@ export function ShopPage({ lang, title, filter, crumbs }: { lang: Locale; title:
           </div>
         )}
       </div>
+    </div>
     </section>
   );
 }

@@ -12,7 +12,7 @@ import { CollectionStage } from "@/components/buy/CollectionStage";
 import { CountUp } from "@/components/buy/CountUp";
 import { ShapeTiles } from "@/components/buy/ShapeTiles";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
-import { allProducts, displayName, inStockDiamonds, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
+import { allProducts, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 
 // Homepage crops: a square around each stone that stops above its certificate card (and clear of the
 // filename and sparkle marks). Measured by eye from the photos; product pages show the full photo.
@@ -40,6 +40,9 @@ const DEFAULT_CROP: Crop = { cx: 0.5, cy: 0.46, d: 0.5 };
 
 // The opening stone: studio cut-out of the round 7.06 ct F SI2 (E-398-248F-1B), as on the About page.
 const OPENING_STONE = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
+// Why Sothis: hands at work with a stone, one photo per reason (gemmologists, transparent
+// valuations, top offers, insured pickup, fast, certified stones for sale).
+const WHY_PHOTOS = [3, 1, 5, 6, 2, 4];
 const STEPS_STONE = "S-1976"; // RD 1.09ct F IF (IGI): the stone that acts out "How selling works"
 const STORY_PIECE = "SCP01"; // Cushion yellow diamond ring, photographed on white
 
@@ -50,10 +53,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const href = (path: string) => localePath(lang, path);
   const productHref = (p: Product) => productPath(p, lang);
 
-  const collection = inStockDiamonds()
-    .filter((p) => p.image)
-    .sort((a, b) => (b.price ?? 0) - (a.price ?? 0))
-    .slice(0, 10);
   const story = productBySku(STORY_PIECE);
   const stepsStone = productBySku(STEPS_STONE);
   const pct = (k: string) => Number.parseFloat(stepsStone.specs[k] ?? "");
@@ -154,7 +153,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <WhyList
           items={t.why.items}
           view={t.stones.viewStone}
-          stones={collection.slice(-6).map((p) => ({ src: mediaUrl(p.image!), name: displayName(p), href: productHref(p), crop: HOME_CROPS[p.sku] }))}
+          stones={WHY_PHOTOS.map((n) => ({ src: `/brand/why/why-${n}.webp` }))}
         />
       </div>
     </section>
