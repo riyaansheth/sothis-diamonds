@@ -911,39 +911,6 @@ html.js .home-journey:not([data-open]) {
   }
 }
 
-/* Sell with confidence: the hovered or focused category comes forward, the others step back. */
-.sell-name,
-.sell-arrow {
-  transition:
-    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
-    opacity 0.4s ease,
-    color 0.4s ease;
-}
-.sell-arrow {
-  opacity: 0.35;
-  transform: translateX(-8px);
-}
-.sell-row {
-  transition: opacity 0.4s ease;
-}
-.sell-list:has(.sell-row:is(:hover, :focus-visible)) .sell-row:not(:is(:hover, :focus-visible)) {
-  opacity: 0.4;
-}
-.sell-row:is(:hover, :focus-visible) .sell-name {
-  color: #ffffff;
-  transform: translateX(8px);
-}
-.sell-row:is(:hover, :focus-visible) .sell-arrow {
-  opacity: 1;
-  transform: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .sell-name,
-  .sell-arrow {
-    transform: none !important;
-  }
-}
-
 /* ---------------------------------------------------------------------------------------------
    Buy journey (homepage)
    --------------------------------------------------------------------------------------------- */

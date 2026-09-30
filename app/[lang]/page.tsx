@@ -94,29 +94,30 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </div>
     </section>
 
-    {/* 3. Sell with confidence: what we buy. Heading pinned on the left, numbered categories on the right. */}
-    <section className="wrap grid gap-14 py-28 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:py-36">
-      <div className="lg:sticky lg:top-32 lg:self-start">
-        <RevealHeading lines={[t.sell.title]} className="text-4xl sm:text-6xl" />
-        <p className="mt-6 max-w-md text-platinum-2">{t.sell.body}</p>
-        <Link href={href("/sell-your-diamond/")} className="btn btn-primary mt-10">{t.hero.primary}</Link>
+    {/* 3. Sell with confidence: what we buy. Heading and intro, then the categories in a plain row of links. */}
+    <section className="wrap py-24 lg:py-32">
+      <div className="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <RevealHeading lines={[t.sell.title]} className="text-4xl sm:text-5xl" />
+          <p className="mt-5 max-w-xl text-platinum-2">{t.sell.body}</p>
+        </div>
+        <Link href={href("/sell-your-diamond/")} className="btn btn-primary">{t.hero.primary}</Link>
       </div>
-      <ol className="sell-list border-t border-line">
-        {t.sell.categories.map(([name, desc, path], i) => (
-          <li key={path} className="border-b border-line">
-            <Link href={href(path)} className="sell-row group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 py-7 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-x-6 sm:py-8">
-              <span className="font-display text-lg text-platinum-2 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-              <span>
-                <span className="sell-name block font-display text-3xl sm:text-4xl">{name}</span>
-                <span className="mt-2 block max-w-md text-sm text-platinum-2">{desc}</span>
+      <ul className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+        {t.sell.categories.map(([name, desc, path]) => (
+          <li key={path} className="border-t border-line">
+            <Link href={href(path)} className="group block pt-6">
+              <span className="flex items-start justify-between gap-3 font-display text-2xl lg:text-xl xl:text-2xl">
+                {name}
+                <svg viewBox="0 0 24 24" aria-hidden className="mt-2 size-5 shrink-0 fill-none stroke-current transition-transform [stroke-width:1.2] group-hover:translate-x-1">
+                  <path d="M4 12h15M13 6l6 6-6 6" />
+                </svg>
               </span>
-              <svg viewBox="0 0 24 24" aria-hidden className="sell-arrow size-6 self-center fill-none stroke-current [stroke-width:1.2]">
-                <path d="M4 12h15M13 6l6 6-6 6" />
-              </svg>
+              <span className="mt-2 block max-w-sm text-sm text-platinum-2">{desc}</span>
             </Link>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
 
     {/* 5. Quick valuation */}
