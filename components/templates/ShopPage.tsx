@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { RevealHeading } from "@/components/Motion";
-import { ShopBrowser, type ShopItem } from "@/components/ShopBrowser";
+import { ShopBrowser, ShopBrowserDefault, type ShopItem } from "@/components/ShopBrowser";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { allProducts, productPath, type Product } from "@/lib/products";
 
@@ -22,7 +22,7 @@ export function ShopPage({ lang, title, filter, crumbs }: { lang: Locale; title:
 
       <div className="mt-14">
         {items.length ? (
-          <Suspense>
+          <Suspense fallback={<ShopBrowserDefault items={items} t={t.shop} card={t.stones} />}>
             <ShopBrowser items={items} t={t.shop} card={t.stones} />
           </Suspense>
         ) : (

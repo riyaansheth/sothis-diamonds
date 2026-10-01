@@ -1,6 +1,6 @@
 export const en = {
   meta: {
-    title: "Sell & Buy Diamonds in Antwerp | Sothis Diamonds",
+    title: "Diamond Buyer Antwerp: Sell & Buy Diamonds | Sothis",
     description:
       "Sell your diamonds, coloured stones, watches and jewellery to Antwerp specialists. Free valuation, no commission, fully insured pickup. Shop certified diamonds online.",
   },

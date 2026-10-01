@@ -24,9 +24,24 @@ const list = (v: string | null) => (v ? v.split(",").filter(Boolean) : []);
  * Filters, sort and pagination for the shop, categories and tags. All state lives in the URL
  * (?shape=Round,Pear&carat=1-3&sort=price-asc&page=2), so results can be shared and survive "back".
  */
-export function ShopBrowser({ items, t, card }: { items: ShopItem[]; t: T; card: Dictionary["stones"] }) {
+type Props = { items: ShopItem[]; t: T; card: Dictionary["stones"] };
+
+export function ShopBrowser(props: Props) {
+  return <ShopView {...props} params={useSearchParams()} />;
+}
+
+/** The listing in its default state (no filters, first page), rendered on the server so the HTML
+ *  carries the product links and the client render that follows doesn't move anything. */
+export function ShopBrowserDefault(props: Props) {
+  return <ShopView {...props} params={NO_PARAMS} />;
+}
+
+const NO_PARAMS = new URLSearchParams();
+// Filter values from links are matched loosely (/shop/?shape=heart, old WordPress values).
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+function ShopView({ items, t, card, params }: Props & { params: URLSearchParams }) {
   const pathname = usePathname();
-  const params = useSearchParams();
   const { currency } = useStore();
   const drawer = useRef<HTMLDialogElement>(null);
 
@@ -65,12 +80,14 @@ export function ShopBrowser({ items, t, card }: { items: ShopItem[]; t: T; card:
     };
   }, [items]);
 
+  const pick = (key: "shape" | "color" | "clarity" | "cut" | "lab") =>
+    list(params.get(key)).map((v) => (key === "color" && norm(v).startsWith("fancy") ? "fancy" : options[key].find((o) => norm(o) === norm(v)) ?? v));
   const filters = {
-    shape: list(params.get("shape")),
-    color: list(params.get("color")),
-    clarity: list(params.get("clarity")),
-    cut: list(params.get("cut")),
-    lab: list(params.get("lab")),
+    shape: pick("shape"),
+    color: pick("color"),
+    clarity: pick("clarity"),
+    cut: pick("cut"),
+    lab: pick("lab"),
     carat: params.get("carat")?.split("-").map(Number) ?? null,
     price: params.get("price")?.split("-").map(Number) ?? null,
     stock: params.get("stock") === "1",
@@ -195,9 +212,9 @@ export function ShopBrowser({ items, t, card }: { items: ShopItem[]; t: T; card:
 
         {shown.length ? (
           <ul className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
-            {shown.map((p) => (
+            {shown.map((p, i) => (
               <li key={p.id}>
-                <ProductCard product={p} href={p.href} t={card} />
+                <ProductCard product={p} href={p.href} t={card} priority={i < 3} />
               </li>
             ))}
           </ul>
@@ -211,18 +228,20 @@ export function ShopBrowser({ items, t, card }: { items: ShopItem[]; t: T; card:
         {pages > 1 && (
           <nav aria-label={t.pagination} className="mt-16 flex flex-wrap justify-center gap-2">
             {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
-              <button
+              // Real links, so crawlers can reach every page of products; clicks stay in-page.
+              <a
                 key={n}
-                type="button"
+                href={n === 1 ? pathname : `${pathname}?page=${n}`}
                 aria-current={n === Math.min(page, pages) ? "page" : undefined}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   set({ page: n === 1 ? null : String(n) });
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
                 className="grid size-11 place-items-center border border-line text-sm hover:border-burgundy aria-[current=page]:border-burgundy aria-[current=page]:bg-wine aria-[current=page]:text-on-accent"
               >
                 {n}
-              </button>
+              </a>
             ))}
           </nav>
         )}

@@ -13,7 +13,8 @@ import { CalculatorPage } from "@/components/templates/CalculatorPage";
 import { SellPage } from "@/components/templates/SellPage";
 import { STORE_PAGES, StorePage } from "@/components/templates/StorePage";
 import { ShopPage } from "@/components/templates/ShopPage";
-import { allProducts, displayName } from "@/lib/products";
+import { allProducts, displayName, mediaUrl } from "@/lib/products";
+import { PAGE_META, docMeta, indexable, productImage, productMeta } from "@/lib/seo";
 import { allRoutes, alternates, href, resolve, type Route } from "@/lib/routes";
 
 // Every old URL (pages, posts, products, categories, tags) in every language, resolved from the export.
@@ -54,8 +55,10 @@ function titleFor(route: Route) {
     }
     case "product_cat":
       return termBySlug("product_cat", route.slug)?.name.replace("Jewelery", "Jewellery");
-    case "product_tag":
-      return termBySlug("product_tag", route.slug)?.name;
+    case "product_tag": {
+      const name = termBySlug("product_tag", route.slug)?.name;
+      return name === "RD" ? "Round" : name; // the old site's shorthand for round brilliants
+    }
     case "category":
       return termBySlug("category", route.slug)?.name;
   }
@@ -67,12 +70,37 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/[...slug]"
   if (!found) return {};
   const { route } = found;
   const seo = seoForUrl(href("en", route)) ?? {};
-  const title = seo.title || `${titleFor(route) ?? ""} | Sothis Diamonds`;
+  let title = seo.title || `${titleFor(route) ?? ""} | Sothis Diamonds`;
+  let description = seo.description;
+  let image: string | undefined;
+
+  if (route.kind === "page" && PAGE_META[route.slug]) ({ title, description } = PAGE_META[route.slug]);
+  if (route.kind === "product") {
+    const p = allProducts.find((x) => x.slug === route.slug);
+    if (p) {
+      ({ title, description } = productMeta(p));
+      image = productImage(p);
+    }
+  }
+  if (route.kind === "post" || (route.kind === "page" && GUIDES.includes(route.slug))) {
+    const doc = route.kind === "post" ? postBySlug(route.slug) : pageBySlug(route.slug);
+    if (doc) {
+      description ||= docMeta(doc).description;
+      if (doc.featured_image) image = mediaUrl(doc.featured_image);
+    }
+  }
+  if (route.kind === "product_cat" || route.kind === "product_tag") {
+    description ||= `${titleFor(route)}: certified diamonds and fine jewellery from our Antwerp inventory, with insured shipping and 14-day returns.`;
+  }
+
+  image ??= "/brand/og-default.jpg";
   return {
-    title,
-    description: seo.description,
+    title: { absolute: title },
+    description,
     alternates: { canonical: href(found.lang, route), languages: { ...alternates(route), "x-default": href("en", route) } },
-    robots: seo.noindex ? { index: false } : undefined,
+    robots: seo.noindex || !indexable(route) ? { index: false } : undefined,
+    openGraph: { siteName: "Sothis Diamonds", type: route.kind === "post" ? "article" : "website", locale: found.lang, title, description, url: href(found.lang, route), images: [image] },
+    twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }
 

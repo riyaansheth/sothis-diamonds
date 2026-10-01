@@ -8,8 +8,8 @@ export type Crop = { cx: number; cy: number; d: number };
  * around a chosen point. Used on the homepage to keep the stone and leave out the certificate card,
  * filename and watermark the old product photos carry. Without a crop it's a plain cover image.
  */
-export function CroppedImage({ src, alt = "", crop, sizes, className = "" }: { src: string; alt?: string; crop?: Crop; sizes: string; className?: string }) {
-  if (!crop) return <Image src={src} alt={alt} fill sizes={sizes} className={`object-cover ${className}`} />;
+export function CroppedImage({ src, alt = "", crop, sizes, className = "", priority }: { src: string; alt?: string; crop?: Crop; sizes: string; className?: string; priority?: boolean }) {
+  if (!crop) return <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={`object-cover ${className}`} />;
   // The photo is scaled so the window covers the parent; container units size it to the parent.
   const side = `calc(max(100cqw, 100cqh) / ${crop.d})`;
   return (
@@ -18,7 +18,7 @@ export function CroppedImage({ src, alt = "", crop, sizes, className = "" }: { s
         className={`absolute ${className}`}
         style={{ width: side, height: side, left: `calc(50cqw - ${side} * ${crop.cx})`, top: `calc(50cqh - ${side} * ${crop.cy})` }}
       >
-        <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       </div>
     </div>
   );

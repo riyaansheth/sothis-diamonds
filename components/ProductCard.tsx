@@ -11,7 +11,7 @@ import { StoneVideo } from "./StoneVideo";
 
 type T = Dictionary["stones"];
 
-export function ProductCard({ product: p, href, t, crop }: { product: Product; href: string; t: T; crop?: Crop }) {
+export function ProductCard({ product: p, href, t, crop, priority }: { product: Product; href: string; t: T; crop?: Crop; priority?: boolean }) {
   const quick = useRef<HTMLDialogElement>(null);
   // The quick view's video and photo only exist while it's open; otherwise every card on a page
   // would download (and autoplay) its stone video in a hidden dialog.
@@ -24,7 +24,7 @@ export function ProductCard({ product: p, href, t, crop }: { product: Product; h
   return (
     <article className="group flex flex-col">
       <div className="relative aspect-square overflow-hidden rounded-sm bg-ivory-deep ring-1 ring-line">
-        {p.image && <CroppedImage src={mediaUrl(p.image)} alt={name} crop={crop} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />}
+        {p.image && <CroppedImage src={mediaUrl(p.image)} alt={name} crop={crop} priority={priority} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />}
         {p.video && (
           <StoneVideo src={mediaUrl(p.video)} playOnHover className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         )}

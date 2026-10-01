@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       canonical: localePath(lang, "/"),
       languages: { ...Object.fromEntries(locales.map((l) => [l, localePath(l, "/")])), "x-default": "/" },
     },
-    openGraph: { siteName: site.name, type: "website", locale: lang },
+    openGraph: { siteName: site.name, type: "website", locale: lang, images: ["/brand/og-default.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/brand/og-default.jpg"] },
   };
 }
 
