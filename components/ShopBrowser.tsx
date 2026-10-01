@@ -231,7 +231,8 @@ function ShopView({ items, t, card, params }: Props & { params: URLSearchParams 
               // Real links, so crawlers can reach every page of products; clicks stay in-page.
               <a
                 key={n}
-                href={n === 1 ? pathname : `${pathname}?page=${n}`}
+                // Relative: on the server the path is the internal /en/... one.
+                href={n === 1 ? "./" : `?page=${n}`}
                 aria-current={n === Math.min(page, pages) ? "page" : undefined}
                 onClick={(e) => {
                   e.preventDefault();
