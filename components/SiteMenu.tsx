@@ -15,7 +15,7 @@ export function SiteMenu({ dialog, lang, t }: { dialog: RefObject<HTMLDialogElem
 
   const column = (title: string, links: string[][]) => (
     <div>
-      <h2 className="font-sans text-sm text-platinum-2">{title}</h2>
+      <p className="font-sans text-sm text-platinum-2">{title}</p>
       <ul className="mt-4 space-y-2.5">
         {links.map(([label, path]) => (
           <li key={path}>

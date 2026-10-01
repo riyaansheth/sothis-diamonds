@@ -32,10 +32,11 @@ function trackProgress(onChange: (p: number) => void) {
           el.addEventListener("load", r, { once: true });
           el.addEventListener("error", r, { once: true }); // a failed image counts as done
         });
-  parts.push([0.2, document.fonts?.ready ?? Promise.resolve()]);
-  parts.push([0.1, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
-  parts.push([0.3, settled(document.querySelector<HTMLImageElement>(".opening-backdrop img"))]);
-  parts.push([0.4, document.readyState === "complete" ? Promise.resolve() : new Promise((r) => window.addEventListener("load", r, { once: true }))]);
+  // Only what the first screen shows: waiting for window "load" would also wait for every image
+  // further down the page, holding visitors (and crawlers' renders) on the loader for seconds.
+  parts.push([0.3, document.fonts?.ready ?? Promise.resolve()]);
+  parts.push([0.2, settled(document.querySelector<HTMLImageElement>('header img[src*="logo"]'))]);
+  parts.push([0.5, settled(document.querySelector<HTMLImageElement>(".opening-backdrop img"))]);
   let done = 0;
   parts.forEach(([w, p]) =>
     p.then(() => {
@@ -166,8 +167,8 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
 
         {/* Logo and progress, below the stone. */}
         <div aria-hidden className="loader-foot absolute inset-x-0 bottom-[9vh] flex flex-col items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element -- vector logo, white lettering */}
-          <img src="/brand/logo.svg" alt="" width={170} height={45} className="loader-logo h-9 w-auto sm:h-11" />
+          {/* eslint-disable-next-line @next/next/no-img-element -- pre-rendered logo, white lettering */}
+          <img src="/brand/logo.webp" alt="" width={170} height={45} className="loader-logo h-9 w-auto sm:h-11" />
           {/* The loading bar: a hairline track, a white fill with a soft leading glow, and the percentage. */}
           <div className="loader-segments mt-8 flex w-56 items-center gap-4 sm:w-72">
             <span className="loader-track relative h-[2px] flex-1 overflow-hidden rounded-full">

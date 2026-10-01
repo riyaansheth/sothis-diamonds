@@ -6,6 +6,8 @@ import { ProductGallery, type Slide } from "@/components/ProductGallery";
 import { Price } from "@/components/Store";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { allProducts, displayName, mediaUrl, productPath, type Product } from "@/lib/products";
+import { termBySlug } from "@/lib/content";
+import { href } from "@/lib/routes";
 import { site } from "@/lib/site";
 
 const num = (v?: string) => Number.parseFloat(v ?? "");
@@ -56,6 +58,9 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
   const tp = t.product;
   const name = displayName(p);
   const isDiamond = p.categories.includes("Diamonds");
+  // The shape's own listing (the old site's shape tags), so every stone links to its shape hub.
+  const shapeSlug = p.attributes.shape === "Round" ? "rd" : p.attributes.shape?.toLowerCase();
+  const shapeHref = shapeSlug && termBySlug("product_tag", shapeSlug) ? href(lang, { kind: "product_tag", slug: shapeSlug }) : undefined;
   const catPath = localePath(lang, isDiamond ? "/product-category/diamonds/" : "/product-category/jewelery/");
 
   const slides: Slide[] = [
@@ -134,7 +139,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
                     {rows.map(([k, v]) => (
                       <div key={k} className="grid grid-cols-[9rem_1fr] gap-4 py-2.5">
                         <dt className="text-platinum-2">{k}</dt>
-                        <dd>{v}</dd>
+                        <dd>{k === "Shape" && shapeHref ? <Link href={shapeHref} className="underline underline-offset-4 hover:text-burgundy">{v}</Link> : v}</dd>
                       </div>
                     ))}
                   </dl>

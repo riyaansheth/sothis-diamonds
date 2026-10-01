@@ -187,9 +187,19 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   // The Buy journey: facts from the shipping and returns policies and the product data.
   const b = t.buy;
   const forSale = allProducts.filter((p) => p.in_stock && p.image);
+  // All jewellery, then the three most valuable stones of each shape: enough for every filter, and
+  // a page a third the weight of the full collection ("Browse all" links to the shop for the rest).
+  const perShape = new Map<string, number>();
   const railItems = [
     ...forSale.filter((p) => !p.categories.includes("Diamonds")),
-    ...forSale.filter((p) => p.categories.includes("Diamonds")).sort((x, y) => (y.price ?? 0) - (x.price ?? 0)),
+    ...forSale
+      .filter((p) => p.categories.includes("Diamonds"))
+      .sort((x, y) => (y.price ?? 0) - (x.price ?? 0))
+      .filter((p) => {
+        const shape = p.attributes.shape ?? "";
+        perShape.set(shape, (perShape.get(shape) ?? 0) + 1);
+        return perShape.get(shape)! <= 3;
+      }),
   ].map((p) => ({ product: p, href: productHref(p), crop: p.categories.includes("Diamonds") ? (HOME_CROPS[p.sku] ?? DEFAULT_CROP) : undefined }));
   const count = (f: (p: Product) => boolean) => forSale.filter(f).length;
   const shapeCounts = Object.entries(

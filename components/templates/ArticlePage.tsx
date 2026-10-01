@@ -8,8 +8,16 @@ import { parseArticle, readingMinutes, text, type Article } from "@/lib/article"
 import { pageBySlug, posts, type Doc } from "@/lib/content";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { mediaUrl } from "@/lib/products";
-import { href } from "@/lib/routes";
+import { href, localiseLinks } from "@/lib/routes";
 import { site } from "@/lib/site";
+
+// Old link targets in post bodies (the same moves are 301s in next.config.ts).
+const MOVED: Record<string, string> = {
+  "/diamond-valuation/": "/diamond-valuation-calculator/",
+  "/diamond-selling-scams-red-flags/": "/diamond-selling-scams-red-flags-fake-payments-and-pressure-tactics/",
+  "/best-place-to-sell-a-diamond/": "/where-to-sell-diamond-belgium/",
+  "/diamond-fluorescence-polish-symmetry-value/": "/how-to-read-verify-diamond-grading-report/",
+};
 
 /** The long-form selling guides (old SEO pages). They get the valuation form right after the quick answer. */
 export const GUIDES = [
@@ -21,6 +29,23 @@ export const GUIDES = [
   "sell-loose-diamond",
   "sell-diamond-jewellery",
 ];
+
+// Words that say nothing about a post's topic.
+const STOP = new Set(["a", "an", "and", "the", "to", "of", "in", "for", "your", "you", "how", "what", "is", "vs", "when", "with", "or", "can", "do", "it", "2", "sell", "selling", "diamond", "diamonds", "guide", "2026", "are", "are", "does", "should", "from", "on", "by", "at", "it", "its", "my", "get"]);
+const topicWords = (d: Doc) => new Set(`${d.slug} ${d.title}`.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)));
+// Stable, per-pair tie-break, so posts that match equally well share the related slots.
+const pairHash = (a: string, b: string) => [...`${a}|${b}`].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7);
+
+/** The three posts closest in topic (shared slug words), so each post links to its own cluster. */
+function relatedPosts(doc: Doc) {
+  const mine = topicWords(doc);
+  return posts
+    .filter((p) => p.slug !== doc.slug)
+    .map((p) => ({ p, score: [...topicWords(p)].filter((w) => mine.has(w)).length }))
+    .sort((x, y) => y.score - x.score || pairHash(doc.slug, x.p.slug) - pairHash(doc.slug, y.p.slug))
+    .slice(0, 3)
+    .map((x) => x.p);
+}
 
 export function postSummary(p: Doc, lang: Locale): PostSummary {
   const t = getDictionary(lang).blog;
@@ -38,13 +63,10 @@ export function postSummary(p: Doc, lang: Locale): PostSummary {
 export function ArticlePage({ doc, lang, crumbs, kind }: { doc: Doc; lang: Locale; crumbs: Crumb[]; kind: "guide" | "post" }) {
   const t = getDictionary(lang);
   const b = t.blog;
-  const a = parseArticle(doc.content_html);
+  const a = parseArticle(localiseLinks(doc.content_html, lang, MOVED));
   const hero = kind === "post" && doc.featured_image ? mediaUrl(doc.featured_image) : a.hero;
 
-  const related =
-    kind === "post"
-      ? posts.filter((p) => p.slug !== doc.slug && p.categories.some((c) => doc.categories.includes(c))).slice(0, 3).map((p) => postSummary(p, lang))
-      : [];
+  const related = kind === "post" ? relatedPosts(doc).map((p) => postSummary(p, lang)) : [];
   const guides = kind === "guide" ? GUIDES.filter((g) => g !== doc.slug).map((g) => pageBySlug(g)).filter((g): g is Doc => Boolean(g)) : [];
 
   const jsonLd = [

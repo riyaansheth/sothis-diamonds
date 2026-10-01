@@ -102,3 +102,17 @@ export function allRoutes({ withAliases = false } = {}) {
 
 /** The same item in every language, for hreflang alternates. */
 export const alternates = (route: Route) => Object.fromEntries(locales.map((l) => [l, href(l, route)])) as Record<Locale, string>;
+
+/**
+ * Links inside imported post bodies are absolute English URLs (https://sothisdiamonds.com/slug/,
+ * sometimes with tracking parameters). Make them relative, in the reader's language, and send old
+ * slugs straight to where they live now, so readers and crawlers skip the redirect.
+ */
+export function localiseLinks(html: string, lang: Locale, moved: Record<string, string> = {}) {
+  return html.replace(/href="https?:\/\/(?:www\.)?sothisdiamonds\.com(\/[^"?#]*)?(?:\?[^"#]*)?(#[^"]*)?"/g, (_, path = "/", hash = "") => {
+    const target = moved[path] ?? path;
+    const found = resolve("en", target.split("/").filter(Boolean));
+    if (!found) return `href="${target}${hash}"`;
+    return `href="${href(lang, found.route)}${hash}"`;
+  });
+}

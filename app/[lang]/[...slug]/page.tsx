@@ -46,7 +46,7 @@ function load(lang: string, slug: string[]) {
 function titleFor(route: Route) {
   switch (route.kind) {
     case "page":
-      return pageBySlug(route.slug)?.title;
+      return pageBySlug(route.slug)?.title.replace(/\s*[–-]\s*Sothis Diamonds$/, "");
     case "post":
       return postBySlug(route.slug)?.title;
     case "product": {
@@ -57,7 +57,8 @@ function titleFor(route: Route) {
       return termBySlug("product_cat", route.slug)?.name.replace("Jewelery", "Jewellery");
     case "product_tag": {
       const name = termBySlug("product_tag", route.slug)?.name;
-      return name === "RD" ? "Round" : name; // the old site's shorthand for round brilliants
+      if (name === "RD") return "Round"; // the old site's shorthand for round brilliants
+      return name && /^[A-Z]+$/.test(name) ? name[0] + name.slice(1).toLowerCase() : name; // PEAR -> Pear
     }
     case "category":
       return termBySlug("category", route.slug)?.name;
@@ -88,6 +89,22 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/[...slug]"
       description ||= docMeta(doc).description;
       if (doc.featured_image) image = mediaUrl(doc.featured_image);
     }
+  }
+  // Legal and other plain pages: describe them from their own text.
+  if (route.kind === "page" && !description) {
+    const doc = pageBySlug(route.slug);
+    if (doc) description = docMeta(doc).description;
+  }
+  // A "-2" copy whose imported SEO title and description belong to the original post: use its own.
+  if (route.kind === "post" && route.slug.endsWith("-2") && seo.title && posts.some((p) => p.slug !== route.slug && p.seo?.title === seo.title)) {
+    const doc = postBySlug(route.slug)!;
+    title = doc.title;
+    description = docMeta({ ...doc, seo: {}, excerpt: "" }).description;
+  }
+  if (route.kind === "product_tag" && indexable(route)) {
+    const name = (titleFor(route) ?? "").replace(/\s*Color$/i, "");
+    title = `${name}${/diamonds?$/i.test(name) ? "" : " Diamonds"} in Antwerp | Sothis Diamonds`;
+    description = `${name} diamonds from our Antwerp inventory, each with its grading report, insured shipping and 14-day returns.`;
   }
   if (route.kind === "product_cat" || route.kind === "product_tag") {
     description ||= `${titleFor(route)}: certified diamonds and fine jewellery from our Antwerp inventory, with insured shipping and 14-day returns.`;

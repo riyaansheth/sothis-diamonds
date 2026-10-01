@@ -6,10 +6,21 @@ import { PostCard, type PostSummary } from "./PostCard";
 
 const PER_PAGE = 9;
 
+type Props = { items: PostSummary[]; lang: string; t: { prev: string; next: string; page: string; empty: string } };
+
 /** The post grid, paginated by ?page= so pages can be linked and "back" works. */
-export function BlogGrid({ items, lang, t }: { items: PostSummary[]; lang: string; t: { prev: string; next: string; page: string; empty: string } }) {
+export function BlogGrid(props: Props) {
+  return <BlogGridView {...props} requested={Number(useSearchParams().get("page")) || 1} />;
+}
+
+/** The first page, rendered on the server so the HTML carries the post links. */
+export function BlogGridFirstPage(props: Props) {
+  return <BlogGridView {...props} requested={1} />;
+}
+
+function BlogGridView({ items, lang, t, requested }: Props & { requested: number }) {
   const pages = Math.max(1, Math.ceil(items.length / PER_PAGE));
-  const page = Math.min(pages, Math.max(1, Number(useSearchParams().get("page")) || 1));
+  const page = Math.min(pages, Math.max(1, requested));
   const shown = items.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   const to = (n: number) => (n === 1 ? "?" : `?page=${n}`);
 

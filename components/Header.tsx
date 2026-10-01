@@ -114,6 +114,6 @@ export function LanguageLinks({ lang, label }: { lang: Locale; label: string }) 
 
 /** The Sothis logo (gold mark; white lettering by default, burgundy with onLight). */
 export function Logo({ className, alt = "", onLight = false }: { className: string; alt?: string; onLight?: boolean }) {
-  // eslint-disable-next-line @next/next/no-img-element -- vector logo from the old site: white lettering on the obsidian site, burgundy on light surfaces
-  return <img src={onLight ? "/brand/logo-burgundy.svg" : "/brand/logo.svg"} alt={alt} width={170} height={45} className={className} />;
+  // eslint-disable-next-line @next/next/no-img-element -- pre-rendered logo (white lettering on the obsidian site, burgundy on light surfaces); fixed size, no optimiser needed
+  return <img src={onLight ? "/brand/logo-burgundy.webp" : "/brand/logo.webp"} alt={alt} width={170} height={45} className={className} />;
 }

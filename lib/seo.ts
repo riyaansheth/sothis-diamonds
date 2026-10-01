@@ -70,6 +70,11 @@ export function productSeoName(p: Product) {
   return [a.shape, `${a.carat} ct`, a.color, a.clarity, a.lab, "Diamond"].filter(Boolean).join(" ");
 }
 
+// Two listings with the same grades (e.g. a matched pair) get their SKU in the title to stay distinct.
+const nameCounts = new Map<string, number>();
+for (const p of allProducts) nameCounts.set(productSeoName(p), (nameCounts.get(productSeoName(p)) ?? 0) + 1);
+const uniqueName = (p: Product) => (nameCounts.get(productSeoName(p))! > 1 ? `${productSeoName(p)} (${p.sku})` : productSeoName(p));
+
 export function productMeta(p: Product) {
   const price = p.price ? `$${Math.round(p.price).toLocaleString("en-US")}` : null;
   if (isDiamond(p)) {
@@ -77,7 +82,7 @@ export function productMeta(p: Product) {
     const facts = [a.cut && `${a.cut} cut`, p.specs.Measurements && `${p.specs.Measurements} mm`].filter(Boolean).join(", ");
     const stock = p.in_stock ? "In stock in Antwerp" : "Sold";
     return {
-      title: `${productSeoName(p)} | ${BRAND}`,
+      title: `${uniqueName(p)} | ${BRAND}`,
       description: clip(`${productSeoName(p)}${facts ? `: ${facts}` : ""}. ${[price, stock].filter(Boolean).join(", ")}. Certified, insured shipping and 14-day returns.`),
     };
   }
@@ -112,6 +117,7 @@ export function listingCount(route: Route) {
 
 export function indexable(route: Route) {
   if (route.kind === "page") return !PRIVATE_PAGES.has(route.slug);
+  if (route.kind === "category") return route.slug !== "diamonds"; // 301s to the diamonds shop category
   if (route.kind === "product_cat") return listingCount(route) > 0;
   if (route.kind === "product_tag") return HUB_TAGS.test(route.slug) && listingCount(route) >= MIN_LISTING;
   return true;

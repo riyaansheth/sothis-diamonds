@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { BlogGrid } from "@/components/BlogGrid";
+import { BlogGrid, BlogGridFirstPage } from "@/components/BlogGrid";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { PostCard } from "@/components/PostCard";
 import { RevealHeading } from "@/components/Motion";
@@ -38,7 +38,7 @@ export function BlogPage({ lang, crumbs, category }: { lang: Locale; crumbs: Cru
         </div>
       )}
       <div className="mt-20">
-        <Suspense>
+        <Suspense fallback={<BlogGridFirstPage items={rest.map((p) => postSummary(p!, lang))} lang={lang} t={t} />}>
           <BlogGrid items={rest.map((p) => postSummary(p!, lang))} lang={lang} t={t} />
         </Suspense>
       </div>
