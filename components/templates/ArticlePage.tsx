@@ -9,6 +9,8 @@ import { pageBySlug, posts, type Doc } from "@/lib/content";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { mediaUrl } from "@/lib/products";
 import { href, localiseLinks } from "@/lib/routes";
+import { absolute, articleSchema } from "@/lib/schema";
+import { docMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 // Old link targets in post bodies (the same moves are 301s in next.config.ts).
@@ -70,20 +72,21 @@ export function ArticlePage({ doc, lang, crumbs, kind }: { doc: Doc; lang: Local
   const guides = kind === "guide" ? GUIDES.filter((g) => g !== doc.slug).map((g) => pageBySlug(g)).filter((g): g is Doc => Boolean(g)) : [];
 
   const jsonLd = [
-    kind === "post" && {
-      "@context": "https://schema.org",
-      "@type": "Article",
+    articleSchema({
       headline: doc.title,
-      datePublished: doc.date,
-      dateModified: doc.modified,
-      image: hero ? `${site.url}${hero}` : undefined,
-      author: { "@type": "Organization", name: site.name },
-      publisher: { "@type": "Organization", name: site.name },
-    },
+      url: `${site.url}${crumbs.at(-1)!.href}`,
+      date: doc.date,
+      modified: doc.modified,
+      image: hero ? absolute(hero) : undefined,
+      description: docMeta(doc).description,
+      lang,
+      post: kind === "post",
+    }),
     a.faq && {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: a.faq.items.map(([q, ans]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: text(ans) } })),
+      // Questions without the article's own numbering ("1. What is…").
+      mainEntity: a.faq.items.map(([q, ans]) => ({ "@type": "Question", name: q.replace(/^\s*\d+[.)]\s*/, ""), acceptedAnswer: { "@type": "Answer", text: text(ans) } })),
     },
   ].filter(Boolean);
 

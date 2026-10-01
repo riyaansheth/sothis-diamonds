@@ -12,6 +12,12 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
   const s = t.sellPage;
   const page = s.pages[kind];
 
+  const stepsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: s.stepsTitle,
+    step: t.steps.items.map(([name, text], i) => ({ "@type": "HowToStep", position: i + 1, name, text })),
+  };
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -98,6 +104,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
           </div>
         </div>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stepsJsonLd) }} />
       </section>
     </>
   );

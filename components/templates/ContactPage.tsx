@@ -3,6 +3,7 @@ import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { ContactForm } from "@/components/ContactForm";
 import { RevealHeading } from "@/components/Motion";
 import { getDictionary, type Locale } from "@/lib/i18n";
+import { ORG_ID } from "@/lib/schema";
 import { site, telHref } from "@/lib/site";
 
 export function ContactPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
@@ -11,15 +12,8 @@ export function ContactPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] })
   const a = site.address;
   const block = "border-t border-line pt-5";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "JewelryStore",
-    name: site.name,
-    url: site.url,
-    email: site.email,
-    telephone: site.phones[0],
-    address: { "@type": "PostalAddress", streetAddress: a.street, postalCode: a.postcode, addressLocality: a.city, addressCountry: "BE" },
-  };
+  // The business itself is described once, site-wide (lib/schema.ts); this page just points at it.
+  const jsonLd = { "@context": "https://schema.org", "@type": "ContactPage", name: c.title, about: { "@id": ORG_ID } };
 
   return (
     <section className="wrap grid gap-16 pb-28 pt-32 lg:grid-cols-[1fr_1.2fr] lg:gap-24">

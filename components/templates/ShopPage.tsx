@@ -5,6 +5,8 @@ import { RevealHeading } from "@/components/Motion";
 import { ShopBrowser, ShopBrowserDefault, type ShopItem } from "@/components/ShopBrowser";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { allProducts, productPath, type Product } from "@/lib/products";
+import { itemList } from "@/lib/schema";
+import { site } from "@/lib/site";
 
 /** The shop, a product category or a product tag: same browser, different starting set. */
 export function ShopPage({ lang, title, filter, crumbs }: { lang: Locale; title: string; filter: (p: Product) => boolean; crumbs: Crumb[] }) {
@@ -33,6 +35,9 @@ export function ShopPage({ lang, title, filter, crumbs }: { lang: Locale; title:
         )}
       </div>
     </div>
+    {items.length > 0 && (
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList(title, items.map((p) => `${site.url}${p.href}`))) }} />
+    )}
     </section>
   );
 }

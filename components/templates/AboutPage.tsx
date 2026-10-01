@@ -5,6 +5,7 @@ import { Loupe } from "@/components/about/Loupe";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { mediaUrl, productBySku } from "@/lib/products";
+import { ORG_ID } from "@/lib/schema";
 import { site } from "@/lib/site";
 
 // "The Sothis story": one real stone followed through six chapters. Every figure shown comes from
@@ -28,8 +29,11 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
   const fill = (x: string) =>
     x.replace("{founded}", String(site.founded)).replace("{carat}", at.carat ?? "").replace("{colour}", at.color ?? "").replace("{clarity}", at.clarity ?? "").replace("{lab}", at.lab ?? "");
 
+  const jsonLd = { "@context": "https://schema.org", "@type": "AboutPage", name: a.title, mainEntity: { "@id": ORG_ID } };
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Heritage
         crumbs={<Breadcrumbs items={crumbs} />}
         photo={mediaUrl(STUDIO)}

@@ -15,7 +15,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   },
   "sell-your-diamond": {
     title: "Request a Free Diamond Valuation | Sothis Diamonds",
-    description: "Tell us about your diamond, ring, watch or jewellery and get a free, no-obligation valuation from our Antwerp specialists, usually within one working day.",
+    description: "Tell us about your diamond, ring, watch or jewellery and get a free, no-obligation valuation and a clear offer from our Antwerp specialists.",
   },
   "sell-watches": {
     title: "Sell Your Rolex or Luxury Watch in Antwerp | Sothis",
@@ -93,7 +93,15 @@ export function productMeta(p: Product) {
   };
 }
 
-export const productImage = (p: Product) => (p.image ? mediaUrl(p.image) : undefined);
+/** Placeholder renders from the old site (AI-generated, not the actual stone). Kept off structured data
+ *  and share previews, where an image is taken to be a photo of the item; shown on the page until
+ *  the client supplies real photos. */
+export const realPhoto = (p: Product) => (p.image && !/Gemini_Generated_Image/i.test(p.image) ? p.image : null);
+
+export const productImage = (p: Product) => {
+  const photo = realPhoto(p);
+  return photo ? mediaUrl(photo) : undefined;
+};
 
 export function docMeta(doc: Doc) {
   const text = doc.seo?.description || plain(doc.excerpt || doc.content_html);

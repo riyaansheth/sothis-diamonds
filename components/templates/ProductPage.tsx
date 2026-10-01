@@ -8,6 +8,8 @@ import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { allProducts, displayName, mediaUrl, productPath, type Product } from "@/lib/products";
 import { termBySlug } from "@/lib/content";
 import { href } from "@/lib/routes";
+import { productSchema } from "@/lib/schema";
+import { productMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 const num = (v?: string) => Number.parseFloat(v ?? "");
@@ -75,21 +77,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
     .slice(0, 8)
     .map(({ x }) => x);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: p.title,
-    sku: p.sku,
-    image: p.image ? `${site.url}/${p.image}` : undefined,
-    brand: { "@type": "Brand", name: site.name },
-    offers: p.price && {
-      "@type": "Offer",
-      price: p.price,
-      priceCurrency: "USD",
-      availability: p.in_stock ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
-      url: `${site.url}${productPath(p, lang)}`,
-    },
-  };
+  const jsonLd = productSchema(p, `${site.url}${productPath(p, lang)}`, productMeta(p).description);
 
   return (
     <article className="wrap pb-28 pt-32">

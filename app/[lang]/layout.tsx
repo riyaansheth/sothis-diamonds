@@ -5,6 +5,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getDictionary, hasLocale, localePath, locales } from "@/lib/i18n";
+import { businessGraph } from "@/lib/schema";
 import { site } from "@/lib/site";
 import "../globals.css";
 
@@ -32,21 +33,6 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   };
 }
 
-const businessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "JewelryStore",
-  name: site.name,
-  url: site.url,
-  email: site.email,
-  telephone: site.phones,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    postalCode: site.address.postcode,
-    addressLocality: site.address.city,
-    addressCountry: "BE",
-  },
-};
 
 export default async function LangLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
@@ -62,7 +48,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
         <main>{children}</main>
         <Footer lang={lang} t={t} />
         <CookieBanner t={t.cookies} policyHref={localePath(lang, "/cookie-policy-sothis-diamonds/")} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessGraph(lang)) }} />
       </body>
     </html>
   );
