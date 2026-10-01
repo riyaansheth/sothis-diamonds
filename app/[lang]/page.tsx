@@ -284,6 +284,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
+      {/* The Buy | Sell backgrounds are CSS backgrounds (found late) and the page's largest paint: fetch them early. */}
+      <link rel="preload" as="image" href="/brand/bg-buy-burgundy.webp" fetchPriority="high" />
+      <link rel="preload" as="image" href="/brand/bg-sell-black.webp" fetchPriority="high" />
       <Loader t={t.loader} />
       {/* The homepage opens on the Sell / Buy choice; choosing Sell reveals the selling journey below.
           The buying sections (collection rail, gallery) return with the buying journey. */}
