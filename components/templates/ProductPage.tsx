@@ -80,6 +80,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
   const jsonLd = productSchema(p, `${site.url}${productPath(p, lang)}`, productMeta(p).description);
 
   return (
+    <div className="burgundy-tint">
     <article className="wrap pb-28 pt-32">
       <Breadcrumbs
         items={[
@@ -162,5 +163,6 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </article>
+    </div>
   );
 }
