@@ -24,7 +24,11 @@ export function ProductCard({ product: p, href, t, crop, priority }: { product: 
   return (
     <article className="group flex flex-col">
       <div className="relative aspect-square overflow-hidden rounded-sm bg-ivory-deep ring-1 ring-line">
-        {p.image && <CroppedImage src={mediaUrl(p.image)} alt={name} crop={crop} priority={priority} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />}
+        {p.image ? (
+          <CroppedImage src={mediaUrl(p.image)} alt={name} crop={crop} priority={priority} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />
+        ) : (
+          !p.video && <p className="absolute inset-0 grid place-items-center text-sm text-platinum-2">{t.noPhoto}</p>
+        )}
         {p.video && (
           <StoneVideo src={mediaUrl(p.video)} playOnHover className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         )}

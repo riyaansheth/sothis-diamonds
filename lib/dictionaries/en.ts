@@ -169,6 +169,7 @@ export const en = {
     submit: "Continue",
   },
   stones: {
+    noPhoto: "Photo on request",
     title: "The collection",
     body: "Diamonds from our current inventory in Antwerp.",
     prev: "Previous stones",
@@ -408,6 +409,7 @@ export const en = {
     error: "Something went wrong. Please try again, or email us at {email}.",
   },
   product: {
+    noPhoto: "Photos and video of this stone on request.",
     breadcrumbHome: "Home",
     breadcrumbShop: "Shop",
     enquire: "Enquire about this stone",

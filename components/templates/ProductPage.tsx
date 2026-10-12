@@ -23,7 +23,7 @@ function specGroups(p: Product, t: ReturnType<typeof getDictionary>["product"]) 
   const rows = (pairs: [string, string | undefined][]) => pairs.filter((r): r is [string, string] => Boolean(r[1]));
   return [
     [t.groups.grading, rows([["Carat", a.carat && `${a.carat} ct`], ["Shape", a.shape], ["Colour", a.color], ["Clarity", a.clarity], ["Cut", a.cut], ["Polish", a.polish], ["Symmetry", a.symmetry], ["Fluorescence", a.fluorescence]])],
-    [t.groups.report, rows([["Lab", a.lab], ["Comment", s["Cert comment"]], ["Key to symbols", s["Key to symbols"]], ["Laser inscription", s["Laser Inscription"]]])],
+    [t.groups.report, rows([["Lab", a.lab], ["Report number", s["Report number"]], ["Comment", s["Cert comment"]], ["Key to symbols", s["Key to symbols"]], ["Laser inscription", s["Laser Inscription"]]])],
     [t.groups.measurements, rows([["Measurements", s.Measurements && `${s.Measurements.replace(/\s*X\s*/g, " × ")} mm`], ["Depth", s["Depth %"] && `${s["Depth %"]}%`], ["Table", s["Table %"] && `${s["Table %"]}%`], ["Crown", [s["Crown Height"] && `${s["Crown Height"]}%`, s["Crown Angle"] && `${s["Crown Angle"]}°`].filter(Boolean).join(", ")], ["Pavilion", [s["Pavilion Depth"] && `${s["Pavilion Depth"]}%`, s["Pavilion Angle"] && `${s["Pavilion Angle"]}°`].filter(Boolean).join(", ")], ["Girdle", girdle], ["Culet", s["Culet Size"]]])],
     [t.groups.appearance, rows([["Eye clean", s["Eye Clean"]], ["Shade", s.Shade], ["Milky", s.Milky], ["Black inclusions", s["Black Inclusion"]]])],
   ].filter(([, r]) => r.length) as [string, [string, string][]][];
@@ -92,7 +92,17 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
       />
 
       <div className="mt-10 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
-        <ProductGallery slides={slides} name={name} t={tp} />
+        {slides.length ? (
+          <ProductGallery slides={slides} name={name} t={tp} />
+        ) : (
+          // New stones arrive before their photos: an honest placeholder rather than an empty frame.
+          <div className="grid aspect-square place-items-center bg-ivory-deep p-10 text-center ring-1 ring-line">
+            <div>
+              <p className="font-display text-3xl">{name}</p>
+              <p className="mt-3 text-sm text-platinum-2">{tp.noPhoto}</p>
+            </div>
+          </div>
+        )}
 
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="text-sm text-platinum-2">{tp.reference} {p.sku}</p>
@@ -128,7 +138,16 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
                     {rows.map(([k, v]) => (
                       <div key={k} className="grid grid-cols-[9rem_1fr] gap-4 py-2.5">
                         <dt className="text-platinum-2">{k}</dt>
-                        <dd>{k === "Shape" && shapeHref ? <Link href={shapeHref} className="underline underline-offset-4 hover:text-burgundy">{v}</Link> : v}</dd>
+                        <dd>
+                          {k === "Shape" && shapeHref ? (
+                            <Link href={shapeHref} className="underline underline-offset-4 hover:text-burgundy">{v}</Link>
+                          ) : k === "Report number" && p.attributes.lab === "GIA" ? (
+                            // GIA's own Report Check, so buyers can verify the grading themselves.
+                            <a href={`https://www.gia.edu/report-check?reportno=${encodeURIComponent(v)}`} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-burgundy">{v}</a>
+                          ) : (
+                            v
+                          )}
+                        </dd>
                       </div>
                     ))}
                   </dl>

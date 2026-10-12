@@ -87,6 +87,7 @@ export function productSchema(p: Product, url: string, description?: string) {
       prop("Symmetry", a.symmetry),
       prop("Fluorescence", a.fluorescence),
       prop("Grading lab", a.lab),
+      prop("Grading report number", s["Report number"]),
       prop("Measurements", s.Measurements && `${s.Measurements} mm`),
     ].filter(Boolean),
     offers: p.price
