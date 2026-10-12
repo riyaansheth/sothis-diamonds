@@ -16,7 +16,8 @@ const page = (slug: string) => {
 
 export function GET() {
   const stones = inStockDiamonds();
-  const labs = ["GIA", "HRD", "IGI"].map((l) => `${stones.filter((p) => p.attributes.lab === l).length} ${l}`).join(", ");
+  const certified = stones.filter((p) => p.attributes.lab);
+  const labs = ["GIA", "HRD", "IGI"].map((l) => `${certified.filter((p) => p.attributes.lab === l).length} ${l}`).join(", ");
   const guides = [...posts]
     .sort((a, b) => b.date.localeCompare(a.date))
     .map((p) => `- [${p.title}](${url(href("en", { kind: "post", slug: p.slug }))}): ${docMeta(p).description}`);
@@ -29,7 +30,7 @@ Key facts:
 - Address: ${site.address.street}, ${site.address.postcode} ${site.address.city}, Belgium
 - Contact: ${site.email}, ${site.phones.join(", ")}
 - Selling to Sothis: free, no-obligation valuation by gemmologists; clear offer; no commission
-- Buying from Sothis: ${stones.length} certified diamonds in stock (${labs} grading reports) plus fine jewellery
+- Buying from Sothis: ${stones.length} diamonds in stock, ${certified.length} with grading reports (${labs}), plus fine jewellery
 - Payment methods: Bancontact, iDEAL, Visa, Mastercard, bank transfer
 - Delivery: insured and tracked (DHL Express, FedEx, UPS) to Europe (3–7 business days), the US and Canada (5–10), Australia (7–12)
 - Returns: 14 days from delivery, unworn and with certificates; refunds within 7–10 business days
