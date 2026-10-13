@@ -123,8 +123,8 @@ export const en = {
     closingSecondary: "Ask about a stone",
   },
   paths: {
-    sell: ["Secondhand pieces", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],
-    buy: ["New diamonds", "Certified diamonds and fine jewellery from our Antwerp inventory.", "Explore the collection"],
+    sell: ["Pre-owned", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],
+    buy: ["New", "Certified diamonds and fine jewellery from our Antwerp inventory.", "Explore the collection"],
   },
   sell: {
     title: "Sell with confidence",
