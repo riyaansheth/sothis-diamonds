@@ -81,7 +81,7 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
           <Diamond3DLazy cut={stone.cut} color={stone.color} className="absolute inset-[12%]" />
         </div>
-        <span className="relative font-display text-6xl leading-none sm:text-8xl">{s.title}</span>
+        <span className="relative font-display text-[clamp(3rem,6vw,6rem)] leading-[0.95]">{s.title}</span>
         <span className="relative mt-4 grid max-w-sm text-ink/80">
           <span className="home-before col-start-1 row-start-1">{s.body}</span>
           <span className="home-after col-start-1 row-start-1">{s.after}</span>
