@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
+import { Faq } from "@/components/Faq";
 import { RevealHeading } from "@/components/Motion";
 import { ValuationForm, type ItemType } from "@/components/ValuationForm";
 import { getDictionary, type Locale } from "@/lib/i18n";
@@ -17,11 +18,6 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
     "@type": "HowTo",
     name: s.stepsTitle,
     step: t.steps.items.map(([name, text], i) => ({ "@type": "HowToStep", position: i + 1, name, text })),
-  };
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: s.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
   };
 
   return (
@@ -89,21 +85,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
       </section>
 
       <section className="border-t border-line">
-        <div className="wrap max-w-4xl py-24">
-          <h2 className="text-3xl sm:text-4xl">{s.faqTitle}</h2>
-          <div className="mt-10 divide-y divide-line border-y border-line">
-            {s.faq.map(([q, a]) => (
-              <details key={q} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-xl">
-                  {q}
-                  <span aria-hidden className="text-white transition-transform group-open:rotate-45">+</span>
-                </summary>
-                <p className="mt-3 max-w-2xl text-platinum-2">{a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        <Faq title={s.faqTitle} items={s.faq} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stepsJsonLd) }} />
       </section>
     </>

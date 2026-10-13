@@ -111,6 +111,13 @@ export const en = {
       ["Your currency", "See every price in US dollars or euros."],
     ],
     returnsLink: "Read the returns policy",
+    faqTitle: "Questions",
+    faq: [
+      ["Are your diamonds natural?", "Yes. We only sell natural diamonds. We don't sell lab-grown diamonds or simulants."],
+      ["Are your diamonds certified?", "Most are graded by GIA, HRD or IGI. The report number is on each stone's page, and GIA reports can be checked on GIA's website."],
+      ["What metals is your jewellery made in?", "18k gold and platinum. We don't use silver or copper."],
+      ["Can I return a piece?", "Yes. Unworn pieces can be returned within 14 days."],
+    ],
     closingTitle: "Found a stone you love?",
     closingPrimary: "Explore the collection",
     closingSecondary: "Ask about a stone",
@@ -321,6 +328,8 @@ export const en = {
       ["When do I get paid?", "After your piece arrives and our experts have inspected and verified it, payment goes directly to your account. There are no commissions."],
       ["Do I need a certificate?", "No. A GIA, IGI or HRD report helps, but we also buy diamonds and jewellery without one."],
       ["What if I don't accept the offer?", "Nothing happens. The offer is without obligation."],
+      ["Do you buy lab-grown diamonds?", "No. We only buy natural diamonds."],
+      ["Do you buy silver jewellery?", "No. We buy gold and platinum jewellery, not silver or copper pieces."],
     ],
   },
   calculator: {

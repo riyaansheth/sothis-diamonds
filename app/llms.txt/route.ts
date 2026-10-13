@@ -31,6 +31,8 @@ Key facts:
 - Contact: ${site.email}, ${site.phones.join(", ")}
 - Selling to Sothis: free, no-obligation valuation by gemmologists; clear offer; no commission
 - Buying from Sothis: ${stones.length} diamonds in stock, ${certified.length} with grading reports (${labs}), plus fine jewellery
+- Natural diamonds only: no lab-grown diamonds or simulants, bought or sold
+- Jewellery metals: 18k gold and platinum; no silver or copper
 - Payment methods: Bancontact, iDEAL, Visa, Mastercard, bank transfer
 - Delivery: insured and tracked (DHL Express, FedEx, UPS) to Europe (3–7 business days), the US and Canada (5–10), Australia (7–12)
 - Returns: 14 days from delivery, unworn and with certificates; refunds within 7–10 business days

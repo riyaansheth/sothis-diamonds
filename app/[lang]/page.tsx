@@ -5,6 +5,7 @@ import { Newsletter, QuickValuation } from "@/components/Forms";
 import { Loader } from "@/components/Loader";
 import { Quotes, RevealHeading, StepsScroller } from "@/components/Motion";
 import type { Crop } from "@/components/CroppedImage";
+import { Faq } from "@/components/Faq";
 import { HomeChoice } from "@/components/HomeChoice";
 import { Opening } from "@/components/Opening";
 import { NewChapter } from "@/components/about/NewChapter";
@@ -265,6 +266,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           ))}
         </ul>
       </section>
+
+      <section className="border-t border-line"><Faq title={b.faqTitle} items={b.faq} /></section>
 
       {testimonials}
 
