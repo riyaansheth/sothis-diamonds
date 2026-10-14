@@ -338,7 +338,7 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
                 <p className="font-display text-xl">{c.summary}</p>
                 <div className="mx-auto mt-4 w-40 xl:w-full">
-                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} grades={COLOURS} empty={t.previewEmpty} />
+                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} grades={COLOURS} />
                 </div>
                 {fields.some((f) => values[f.name]) && (
                   <dl className="mt-4 space-y-2 text-sm">

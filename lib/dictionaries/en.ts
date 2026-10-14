@@ -371,7 +371,6 @@ export const en = {
     back: "Back",
     stoneColourHint: "Pick the colour closest to your stone, especially for fancy colour diamonds and coloured gems.",
     clearColour: "Clear colour",
-    previewEmpty: "Choose a shape and your stone appears here.",
     submit: "Request my valuation",
     sending: "Sending…",
     required: "Required",

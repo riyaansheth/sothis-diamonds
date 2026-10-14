@@ -37,7 +37,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
               </li>
             ))}
           </ul>
-          <StoneStage empty={t.form.previewEmpty} unknown={t.form.fields.unknown} />
+          <StoneStage unknown={t.form.fields.unknown} />
         </div>
 
         <div id="valuation" className="bg-ivory-deep p-6 sm:p-10">
