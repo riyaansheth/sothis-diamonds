@@ -9,7 +9,6 @@ export const site = {
   founded: 1970,
   // TODO(client): opening hours aren't on the old site. Shown on the contact page once set.
   hours: null as string | null,
-  tawkId: "68e53f3be9dc6219554ac132/1j6vp97nq",
   // Prices are stored in USD (old site's base currency); EUR rate taken from the old currency switcher.
   // ponytail: fixed rate, switch to a live ECB rate before launch.
   eurPerUsd: 0.8665,
