@@ -1,4 +1,4 @@
-// The two journeys from the homepage choice, each on its own page: New (/new/) and Pre-owned (/pre-owned/).
+// The two journeys from the homepage choice, each on its own page: Buy from us (/new/) and Sell to us (/pre-owned/).
 
 import Image from "next/image";
 import Link from "next/link";
@@ -39,7 +39,7 @@ function Testimonials({ lang }: { lang: Locale }) {
   );
 }
 
-/** Pre-owned: how selling works, what we buy, quick valuation, story, why Sothis, newsletter. */
+/** Sell to us: how selling works, what we buy, quick valuation, story, why Sothis, newsletter. */
 export function SellJourney({ lang }: { lang: Locale }) {
   const t = getDictionary(lang);
   const href = (path: string) => localePath(lang, path);
@@ -165,7 +165,7 @@ export function SellJourney({ lang }: { lang: Locale }) {
   );
 }
 
-/** New: shapes, the ring, the collection, how buying works, why buy, FAQ. */
+/** Buy from us: shapes, the ring, the collection, how buying works, why buy, FAQ. */
 export function BuyJourney({ lang }: { lang: Locale }) {
   const t = getDictionary(lang);
   const href = (path: string) => localePath(lang, path);

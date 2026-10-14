@@ -4,7 +4,7 @@ import { Loader } from "@/components/Loader";
 import { Opening } from "@/components/Opening";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 
-// The homepage is the opening and the New | Pre-owned choice; each side leads to its own page.
+// The homepage is the opening and the Buy from us | Sell to us choice; each side leads to its own page.
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
@@ -12,7 +12,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      {/* The New | Pre-owned backgrounds are CSS backgrounds (found late) and the page's largest paint: fetch them early. */}
+      {/* The two halves' backgrounds are CSS backgrounds (found late) and the page's largest paint: fetch them early. */}
       <link rel="preload" as="image" href="/brand/bg-buy-burgundy.webp" fetchPriority="high" />
       <link rel="preload" as="image" href="/brand/bg-sell-black.webp" fetchPriority="high" />
       <Loader t={t.loader} />

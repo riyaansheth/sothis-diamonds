@@ -9,7 +9,7 @@ import { Diamond3DLazy } from "./Diamond3DLazy";
 type Side = { title: string; body: string; cta: string; after: string; href: string };
 
 /**
- * The homepage opens on the New / Pre-owned choice (New left, Pre-owned right); each side is a link
+ * The homepage opens on the Buy from us / Sell to us choice (buy left, sell right); each side is a link
  * to its own page. On a plain click the chosen half widens and collapses into a band first, the same
  * band its page opens with, so the page change reads as one movement.
  */

@@ -69,11 +69,11 @@ export const en = {
   // The two journey pages behind the homepage choice.
   journeys: {
     buy: {
-      title: "New Certified Diamonds & Fine Jewellery | Sothis Diamonds",
+      title: "Buy Certified Diamonds & Fine Jewellery | Sothis Diamonds",
       description: "Certified natural diamonds and fine jewellery from our Antwerp inventory. GIA, HRD and IGI reports, insured shipping and 14-day returns.",
     },
     sell: {
-      title: "Sell Pre-owned Diamonds & Jewellery in Antwerp | Sothis Diamonds",
+      title: "Sell Your Diamonds & Jewellery in Antwerp | Sothis Diamonds",
       description: "Sell diamonds, coloured stones, watches and jewellery to Antwerp specialists. Free valuation, no commission, fully insured pickup.",
     },
   },
@@ -133,8 +133,8 @@ export const en = {
     closingSecondary: "Ask about a stone",
   },
   paths: {
-    sell: ["Pre-owned", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],
-    buy: ["New", "Certified diamonds and fine jewellery from our Antwerp inventory.", "Explore the collection"],
+    sell: ["Sell to us", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],
+    buy: ["Buy from us", "Certified diamonds and fine jewellery from our Antwerp inventory.", "Explore the collection"],
   },
   sell: {
     title: "Sell with confidence",
