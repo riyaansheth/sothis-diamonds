@@ -18,10 +18,10 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
 
   return (
     <header
-      // One header for every page: fully transparent, white text over the dark site. Same width as the page (wrap).
+      // One header for every page: fully transparent, white text over the dark site. Runs edge to edge.
       className="fixed inset-x-0 top-0 z-40 bg-transparent"
     >
-      <div className="wrap grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-2">
+      <div className="grid h-20 w-full grid-cols-[1fr_auto_1fr] items-center gap-2 px-[clamp(1rem,3vw,3rem)]">
         <div className="flex items-center gap-4 sm:gap-6">
           <button type="button" onClick={() => menu.current?.showModal()} className="flex items-center gap-2 py-2 text-sm tracking-[0.04em] hover:text-burgundy">
             <svg viewBox="0 0 24 24" className={icon} aria-hidden><path d="M4 8h16M4 16h16" /></svg>
@@ -51,6 +51,9 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </a>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
+          <Link href={href("/contact-us/")} className="hidden py-2 text-sm tracking-[0.04em] hover:text-burgundy lg:block">
+            {t.contact}
+          </Link>
           <Link href={href("/sell-diamond/")} className="hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
             {t.sell}
           </Link>
