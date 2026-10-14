@@ -55,6 +55,12 @@ function Proportions({ p, t }: { p: Product; t: ReturnType<typeof getDictionary>
   );
 }
 
+// Each lab's public report check. HRD's needs a MyHRD login, so its numbers stay plain text.
+const REPORT_CHECK: Record<string, (n: string) => string> = {
+  GIA: (n) => `https://www.gia.edu/report-check?reportno=${encodeURIComponent(n)}`,
+  IGI: (n) => `https://www.igi.org/verify-your-report/?r=${encodeURIComponent(n)}`,
+};
+
 export function ProductPage({ product: p, lang }: { product: Product; lang: Locale }) {
   const t = getDictionary(lang);
   const tp = t.product;
@@ -141,9 +147,9 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
                         <dd>
                           {k === "Shape" && shapeHref ? (
                             <Link href={shapeHref} className="underline underline-offset-4 hover:text-burgundy">{v}</Link>
-                          ) : k === "Report number" && p.attributes.lab === "GIA" ? (
-                            // GIA's own Report Check, so buyers can verify the grading themselves.
-                            <a href={`https://www.gia.edu/report-check?reportno=${encodeURIComponent(v)}`} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-burgundy">{v}</a>
+                          ) : k === "Report number" && REPORT_CHECK[p.attributes.lab ?? ""] ? (
+                            // The lab's own report check, so buyers can verify the grading themselves.
+                            <a href={REPORT_CHECK[p.attributes.lab!](v)} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-burgundy">{v}</a>
                           ) : (
                             v
                           )}

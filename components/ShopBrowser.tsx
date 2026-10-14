@@ -110,8 +110,8 @@ function ShopView({ items, t, card, params }: Props & { params: URLSearchParams 
       return true;
     });
     const by: Record<(typeof SORTS)[number], (a: Product, b: Product) => number> = {
-      // Jewellery first, then diamonds (the order of the Shop menu).
-      default: (a, b) => Number(a.categories.includes("Diamonds")) - Number(b.categories.includes("Diamonds")),
+      // Jewellery first, then diamonds (the order of the Shop menu); within each, pieces with a video first.
+      default: (a, b) => Number(a.categories.includes("Diamonds")) - Number(b.categories.includes("Diamonds")) || Number(!a.video) - Number(!b.video),
       popularity: (a, b) => (b.sales ?? 0) - (a.sales ?? 0),
       newest: (a, b) => b.created.localeCompare(a.created),
       "price-asc": (a, b) => (a.price ?? 0) - (b.price ?? 0),
