@@ -16,29 +16,11 @@ import { ShapeTiles } from "@/components/buy/ShapeTiles";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 import { allProducts, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 
-// Homepage crops: a square around each stone that stops above its certificate card (and clear of the
-// filename and sparkle marks). Measured by eye from the photos; product pages show the full photo.
-// Stones without an entry use DEFAULT_CROP below.
-const HOME_CROPS: Record<string, Crop> = {
-  "S-1880": { cx: 0.5, cy: 0.45, d: 0.44 },
-  "S-1695": { cx: 0.5, cy: 0.42, d: 0.72 },
-  "E-400-VN-4": { cx: 0.5, cy: 0.45, d: 0.8 },
-  "FCRA-PSTK-86": { cx: 0.5, cy: 0.45, d: 0.58 },
-  "S-1870": { cx: 0.5, cy: 0.5, d: 0.52 },
-  "S-2001": { cx: 0.5, cy: 0.47, d: 0.5 },
-  "S-1888": { cx: 0.445, cy: 0.5, d: 0.3 },
-  "S-1887": { cx: 0.45, cy: 0.46, d: 0.44 },
-  "E-397-244A-3A": { cx: 0.5, cy: 0.47, d: 0.8 },
-  "S-1865": { cx: 0.5, cy: 0.49, d: 0.6 },
-  "E-398-248F-1B": { cx: 0.5, cy: 0.5, d: 0.34 }, // stops left of the IGI card (x 0.68)
-  "S-1807": { cx: 0.25, cy: 0.5, d: 0.44 }, // card sits right beside the stone
-  "S-1975": { cx: 0.5, cy: 0.46, d: 0.58 },
-  "S-1976": { cx: 0.5, cy: 0.46, d: 0.6 },
-  "S-1889": { cx: 0.5, cy: 0.46, d: 0.58 },
-};
-// Every other studio photo: stone centred, certificate card in the lower right. The middle half keeps
-// the stone and leaves the card out (checked against every in-stock photo).
-const DEFAULT_CROP: Crop = { cx: 0.5, cy: 0.46, d: 0.5 };
+// Homepage crops: the studio images on silk get a centred square around the stone; real photos a
+// tighter square that stops above their certificate card. Product pages show the full photo.
+const STUDIO_CROP: Crop = { cx: 0.5, cy: 0.5, d: 0.62 };
+const PHOTO_CROP: Crop = { cx: 0.5, cy: 0.46, d: 0.5 };
+const cropFor = (p: Product) => (/Gemini_Generated_Image/.test(p.image ?? "") ? STUDIO_CROP : PHOTO_CROP);
 
 // The opening stone: studio cut-out of the round 7.06 ct F SI2 (E-398-248F-1B), as on the About page.
 // Why Sothis: hands at work with a stone, one photo per reason (gemmologists, transparent
@@ -201,7 +183,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         perShape.set(shape, (perShape.get(shape) ?? 0) + 1);
         return perShape.get(shape)! <= 3;
       }),
-  ].map((p) => ({ product: p, href: productHref(p), crop: p.categories.includes("Diamonds") ? (HOME_CROPS[p.sku] ?? DEFAULT_CROP) : undefined }));
+  ].map((p) => ({ product: p, href: productHref(p), crop: p.categories.includes("Diamonds") ? cropFor(p) : undefined }));
   const count = (f: (p: Product) => boolean) => forSale.filter(f).length;
   const shapeCounts = Object.entries(
     forSale.reduce<Record<string, number>>((acc, p) => {
