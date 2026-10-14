@@ -24,7 +24,7 @@ const cropFor = (p: Product) => (/Gemini_Generated_Image/.test(p.image ?? "") ? 
 // valuations, top offers, insured pickup, fast, certified stones for sale).
 const WHY_PHOTOS = [3, 1, 5, 6, 2, 4];
 const STEPS_STONE = "S-1976"; // RD 1.09ct F IF (IGI): the stone that acts out "How selling works"
-const STORY_PIECE = "SCP01"; // Cushion yellow diamond ring, photographed on white
+const STORY_PIECE = "SCP01"; // Cushion yellow diamond ring, photographed on burgundy silk
 
 /** Testimonials, shared by both journeys. */
 function Testimonials({ lang }: { lang: Locale }) {
@@ -110,10 +110,11 @@ export function SellJourney({ lang }: { lang: Locale }) {
     </section>
 
     {/* 7. Our story */}
-    <section className="wrap grid items-center gap-14 py-28 lg:grid-cols-2 lg:gap-24 lg:py-40">
+    <section className="burgundy-tint">
+    <div className="wrap grid items-center gap-14 py-28 lg:grid-cols-2 lg:gap-24 lg:py-40">
       {story.image && (
-        <div className="relative aspect-[4/5] overflow-hidden bg-ivory-deep">
-          <Image src={mediaUrl(story.image)} alt={story.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-contain p-12" />
+        <div className="relative aspect-square overflow-hidden rounded-sm">
+          <Image src={mediaUrl(story.image)} alt={story.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
         </div>
       )}
       <div className="max-w-xl">
@@ -123,6 +124,7 @@ export function SellJourney({ lang }: { lang: Locale }) {
         ))}
         <Link href={href("/about-sothis-diamonds/")} className="btn btn-secondary mt-10">{t.story.cta}</Link>
       </div>
+    </div>
     </section>
 
     {/* 8. Why Sothis: pinned stone, reasons scroll past (see WhyList). */}
