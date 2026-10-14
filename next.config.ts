@@ -20,6 +20,8 @@ const SHOP = { fr: "boutique", nl: "winkelen", de: "shop", it: "negozio", es: "t
 const nextConfig: NextConfig = {
   // Keep the old site's URLs exactly: every path ends in a slash (/sell-diamond/), as Google has them indexed.
   trailingSlash: true,
+  // deploy.sh builds into a separate folder and swaps it in, so the running site never serves a half-built one.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   images: {
     qualities: [75],
     // Smaller files for the same quality; each size is encoded once, then served from cache.
