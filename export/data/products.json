@@ -8905,10 +8905,10 @@
     "seo": {}
   },
   {
-    "id": 30353,
-    "sku": "SKS01",
-    "slug": "green-cascade-set",
-    "title": "Green Cascade Set",
+    "id": 30358,
+    "sku": "SKR01",
+    "slug": "ruby-eternity-band",
+    "title": "Ruby Eternity Band",
     "status": "publish",
     "price": null,
     "regular_price": null,
@@ -8923,14 +8923,44 @@
     "tags": [],
     "attributes": {},
     "specs": {},
-    "image": "media/2026/10/green-cascade-set.jpg",
+    "image": "media/2026/10/ruby-eternity-band.jpg",
     "gallery": [],
     "video": null,
-    "short_description": "<ul>\n<li><p>A matching <strong>cuff watch, ring and drop earrings</strong></p></li>\n<li><p>Sweeping white gold sprays set with <strong>pavé diamonds</strong>, tipped with green cabochon stones</p></li>\n<li><p>Mother-of-pearl watch dial framed in diamonds</p></li>\n</ul>",
-    "created": "2026-10-14 11:30:00",
-    "modified": "2026-10-14 11:30:00",
+    "short_description": "<ul>\n<li><p>White metal band set with a row of <strong>oval rubies</strong></p></li>\n<li><p>Edged on both sides with round brilliant diamonds</p></li>\n<li><p>Flexible, articulated links</p></li>\n</ul>",
+    "created": "2026-10-14 16:30:00",
+    "modified": "2026-10-14 16:30:00",
     "slugs": {
-      "en": "green-cascade-set"
+      "en": "ruby-eternity-band"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30359,
+    "sku": "SKR02",
+    "slug": "sapphire-diamond-band",
+    "title": "Sapphire and Diamond Band",
+    "status": "publish",
+    "price": null,
+    "regular_price": null,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/sapphire-diamond-band.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>White metal band alternating <strong>oval blue sapphires</strong> with pairs of round brilliant diamonds</p></li>\n<li><p>Sapphires in four-claw settings, diamonds in square links</p></li>\n<li><p>Flexible, articulated links</p></li>\n</ul>",
+    "created": "2026-10-14 16:31:00",
+    "modified": "2026-10-14 16:31:00",
+    "slugs": {
+      "en": "sapphire-diamond-band"
     },
     "seo": {}
   }
