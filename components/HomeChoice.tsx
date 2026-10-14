@@ -67,7 +67,7 @@ export function HomeChoice({ sell, buy }: { sell: Side; buy: Side }) {
         aria-hidden={hidden || undefined}
         tabIndex={hidden ? -1 : undefined}
         data-role={open === side ? "chosen" : hidden ? "other" : undefined}
-        className={`${panel} home-${side} ${side === "sell" ? "md:border-l md:border-l-champagne/60" : ""}`}
+        className={`${panel} home-${side}`}
       >
         <span aria-hidden className={`paths-bg ${bg}`} />
         <span aria-hidden className="paths-sheen" />

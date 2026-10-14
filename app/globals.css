@@ -839,7 +839,6 @@ html[data-returning] :is(.loader-light, .loader-foot) {
 }
 .home-choice [data-role="chosen"] {
   flex-grow: 1;
-  border-left-color: transparent;
   cursor: default;
   justify-content: center;
   padding-top: 7rem; /* clears the header, which sits over the band */
