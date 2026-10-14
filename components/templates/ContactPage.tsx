@@ -16,7 +16,8 @@ export function ContactPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] })
   const jsonLd = { "@context": "https://schema.org", "@type": "ContactPage", name: c.title, about: { "@id": ORG_ID } };
 
   return (
-    <section className="wrap grid gap-16 pb-28 pt-32 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
+    <section className="burgundy-tint">
+    <div className="wrap grid gap-16 pb-28 pt-32 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
       <div>
         <Breadcrumbs items={crumbs} />
         <RevealHeading lines={[c.title]} as="h1" className="mt-8 text-5xl sm:text-6xl" />
@@ -56,6 +57,7 @@ export function ContactPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] })
         </Suspense>
       </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    </div>
     </section>
   );
 }
