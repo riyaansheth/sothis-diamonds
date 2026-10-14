@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
     // doesn't change under the same name; if one ever does, rename it or clear .next/cache/images.
     minimumCacheTTL: 31 * DAY,
     // Product media carries a version (lib/products.ts MEDIA_VERSION); everything else, no query.
-    localPatterns: [{ pathname: "/media/**", search: "?v=2" }, { pathname: "/**", search: "" }],
+    localPatterns: [{ pathname: "/media/**", search: "?v=3" }, { pathname: "/**", search: "" }],
   },
   async redirects() {
     // Leftovers from the old theme (demo portfolio, internal slider/CMS blocks): gone for good.
