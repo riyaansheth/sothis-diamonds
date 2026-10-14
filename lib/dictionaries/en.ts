@@ -65,7 +65,17 @@ export const en = {
     buyAfter: "Here’s how buying from us works.",
     buyInstead: ["Buying instead?", "See the collection"] as [string, string],
     sellInstead: ["Selling instead?", "See how selling works"] as [string, string],
-    change: "Change",
+  },
+  // The two journey pages behind the homepage choice.
+  journeys: {
+    buy: {
+      title: "New Certified Diamonds & Fine Jewellery | Sothis Diamonds",
+      description: "Certified natural diamonds and fine jewellery from our Antwerp inventory. GIA, HRD and IGI reports, insured shipping and 14-day returns.",
+    },
+    sell: {
+      title: "Sell Pre-owned Diamonds & Jewellery in Antwerp | Sothis Diamonds",
+      description: "Sell diamonds, coloured stones, watches and jewellery to Antwerp specialists. Free valuation, no commission, fully insured pickup.",
+    },
   },
   // The Buy journey on the homepage. Facts come from the shipping and returns policies and the product data.
   buy: {

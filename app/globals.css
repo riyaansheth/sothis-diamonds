@@ -812,9 +812,8 @@ html[data-returning] :is(.loader-light, .loader-foot) {
   }
 }
 
-/* Homepage choice. The journeys are hidden until chosen, but only once JS has marked the page
-   (html.js, set before paint), so without JS everything shows. The chosen half takes the width and
-   collapses into its band; the other folds away. */
+/* Homepage choice. Each half links to its journey page; on click the chosen half takes the width and
+   collapses into a band (the one its page opens with, .journey-band), and the other folds away. */
 .home-choice .paths {
   min-height: 100dvh;
   transition: min-height 1s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -865,15 +864,6 @@ html[data-returning] :is(.loader-light, .loader-foot) {
   opacity: 1;
   transition-delay: 0.3s;
 }
-.home-instead {
-  animation: fade-in 0.6s ease 0.4s both;
-}
-html.js .home-journey:not([data-open]) {
-  display: none;
-}
-.home-journey[data-open] {
-  animation: fade-in 0.8s ease both;
-}
 /* The band: a clean strip of silk. The stone lifts, then fades (it only floats oddly in a band); a
    high-quality copy of the silk and a whisper of grain avoid banding; the band fades into the page. */
 .home-choice .paths-window {
@@ -901,7 +891,25 @@ html.js .home-journey:not([data-open]) {
 .home-choice [data-role="chosen"] .paths-sheen {
   display: none;
 }
-.home-choice [data-role="chosen"]::after {
+/* The band a journey page opens with: matches the homepage's chosen half, so the change of page is seamless. */
+.journey-band {
+  min-height: max(16rem, 32vh);
+}
+.journey-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: center 78% / cover;
+}
+.journey-band-buy::before {
+  background-image: url("/brand/bg-buy-burgundy-hq.webp");
+}
+.journey-band-sell::before {
+  background-image: url("/brand/bg-sell-black-hq.webp");
+}
+.home-choice [data-role="chosen"]::after,
+.journey-band::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -920,14 +928,10 @@ html.js .home-journey:not([data-open]) {
   .home-cta {
     transition: none !important;
   }
-  .home-journey[data-open],
-  .home-instead {
-    animation: none;
-  }
 }
 
 /* ---------------------------------------------------------------------------------------------
-   Buy journey (homepage)
+   Buy journey (/new/)
    --------------------------------------------------------------------------------------------- */
 
 /* The collection: burgundy velvet at the top melting into obsidian; it settles as it comes in. */

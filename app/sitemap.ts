@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { pageBySlug, postBySlug, posts, termBySlug } from "@/lib/content";
-import { locales } from "@/lib/i18n";
+import { localePath, locales } from "@/lib/i18n";
 import { allProducts } from "@/lib/products";
 import { allRoutes, alternates, type Route } from "@/lib/routes";
 import { indexable } from "@/lib/seo";
@@ -25,6 +25,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const home = Object.fromEntries(locales.map((l) => [l, `${site.url}${l === "en" ? "/" : `/${l}/`}`]));
   const homeAlt = { ...home, "x-default": home.en };
   const entries: MetadataRoute.Sitemap = locales.map((l) => ({ url: home[l], alternates: { languages: homeAlt } }));
+  // The two journey pages behind the homepage choice.
+  for (const path of ["/new/", "/pre-owned/"]) {
+    const alt = Object.fromEntries(locales.map((l) => [l, `${site.url}${localePath(l, path)}`]));
+    for (const l of locales) entries.push({ url: alt[l], alternates: { languages: { ...alt, "x-default": alt.en } } });
+  }
   for (const { lang, route } of allRoutes()) {
     if (route.kind === "category" && !hasPosts(route.slug)) continue; // redirects to the blog
     if (!indexable(route)) continue;
