@@ -8785,6 +8785,36 @@
     "seo": {}
   },
   {
+    "id": 30354,
+    "sku": "SKB01",
+    "slug": "snake-wrap-bracelet",
+    "title": "Snake Wrap Bracelet",
+    "status": "publish",
+    "price": null,
+    "regular_price": null,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/snake-wrap-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold bracelet shaped like a serpent, its scales in polished, graduated links</p></li>\n<li><p>Head set with <strong>three red gemstones</strong></p></li>\n<li><p>Flexible coil that wraps once around the wrist</p></li>\n</ul>",
+    "created": "2026-10-14 16:10:00",
+    "modified": "2026-10-14 16:10:00",
+    "slugs": {
+      "en": "snake-wrap-bracelet"
+    },
+    "seo": {}
+  },
+  {
     "id": 30353,
     "sku": "SKS01",
     "slug": "green-cascade-set",
