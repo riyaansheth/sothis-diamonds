@@ -33,7 +33,6 @@ function fieldsFor(type: ItemType, t: T, c?: C): Field[] {
     // The calculator: a guided, visual version of the diamond questions.
     return [
       { name: "carat", kind: "number", required: true },
-      { name: "origin", kind: "chips", options: withUnknown(c.origins), label: c.origin },
       { name: "shape", kind: "chips", options: SHAPES },
       { name: "colour", kind: "chips", options: withUnknown(COLOURS) },
       { name: "clarity", kind: "chips", options: withUnknown(CLARITY) },

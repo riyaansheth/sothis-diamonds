@@ -349,8 +349,6 @@ export const en = {
     submit: "Get my expert-reviewed valuation",
     summary: "Your stone",
     articleTitle: "How diamonds are valued",
-    origin: "Natural or lab-grown",
-    origins: ["Natural", "Lab-grown"],
     cut: "Cut grade",
     cuts: ["Excellent", "Very good", "Good", "Fair", "Poor"],
     condition: "Condition",
@@ -406,7 +404,7 @@ export const en = {
     choices: {
       report: ["GIA", "IGI", "HRD", "Other", "None"],
       boxPapers: ["Box and papers", "Box only", "Papers only", "Neither"],
-      metal: ["Yellow gold", "White gold", "Rose gold", "Platinum", "Silver", "Other"],
+      metal: ["Yellow gold", "White gold", "Rose gold", "Platinum", "Other"],
       piece: ["Ring", "Necklace", "Bracelet", "Earrings", "Brooch", "Other"],
     },
     photos: "Photos",
