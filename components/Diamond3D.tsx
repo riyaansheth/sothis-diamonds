@@ -124,7 +124,7 @@ function Stone({ cut, color, spin, control, geometry: custom, tilt, size }: { cu
 
 /**
  * A real-time rendered diamond that turns slowly and leans toward the cursor (or the phone's tilt). Drag to turn it (a flick keeps it spinning); click
- * to spin it. Clicks on the stone don't reach whatever it sits in. Only renders while on screen and not covered
+ * to spin it. A drag never reaches whatever the stone sits in, but a plain click does (inside a link, it follows it). Only renders while on screen and not covered
  * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
  * visitors who prefer reduced motion.
  */
@@ -144,6 +144,7 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
 
   const ctl = useRef<Control>({ rx: 0, ry: 0, vy: 0, boost: 0, dragging: false });
   const drag = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
+  const dragged = useRef(false); // the last press was a drag: swallow the click it ends in
   const getControl = useCallback(() => ctl.current, []);
   const [touched, setTouched] = useState(false); // keep rendering while interacting, even with reduced motion
 
@@ -188,6 +189,7 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
       }}
       onPointerUp={() => {
         ctl.current.dragging = false;
+        dragged.current = Boolean(drag.current?.moved);
         if (drag.current && !drag.current.moved) ctl.current.boost = 9; // a click spins it
         drag.current = null;
       }}
@@ -196,6 +198,7 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
         drag.current = null;
       }}
       onClick={(e) => {
+        if (!dragged.current) return;
         e.stopPropagation();
         e.preventDefault();
       }}
