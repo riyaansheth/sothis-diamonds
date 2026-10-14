@@ -79,11 +79,13 @@ export const STONE_READY = "sothis:stone-ready";
 /** Pointer state shared between the DOM handlers and the render loop (no React state per move). */
 type Control = { rx: number; ry: number; vy: number; boost: number; dragging: boolean };
 
-function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: boolean; control: () => Control }) {
+function Stone({ cut, color, spin, control, geometry: custom, tilt, size }: { cut: Cut; color: string; spin: boolean; control: () => Control; geometry?: THREE.BufferGeometry; tilt: number; size: number }) {
   const mesh = useRef<THREE.Mesh>(null);
   const announced = useRef(false);
   const env = useStudioEnv();
-  const geometry = useMemo(() => (cut === "round" ? roundBrilliant() : asscher()), [cut]);
+  const builtIn = useMemo(() => (cut === "round" ? roundBrilliant() : asscher()), [cut]);
+  const geometry = custom ?? builtIn;
+  const scale = useRef(size); // eases to a new size
   const auto = useRef(0);
   const lean = useRef({ x: 0, y: 0 }); // eased toward the light, so the sparkle follows it
 
@@ -100,9 +102,11 @@ function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: b
     const ease = 1 - Math.pow(0.02, dt);
     lean.current.x += (light.x - lean.current.x) * ease;
     lean.current.y += (light.y - lean.current.y) * ease;
+    scale.current += (size - scale.current) * (1 - Math.pow(0.01, dt));
     if (mesh.current) {
       mesh.current.rotation.y = 0.3 + auto.current + c.ry + lean.current.x * 0.22;
-      mesh.current.rotation.x = 0.62 + c.rx + lean.current.y * 0.14;
+      mesh.current.rotation.x = tilt + c.rx + lean.current.y * 0.14;
+      mesh.current.scale.setScalar(scale.current);
     }
     if (!announced.current) {
       announced.current = true;
@@ -111,7 +115,8 @@ function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: b
   });
 
   return (
-    <mesh ref={mesh} geometry={geometry} rotation={[0.62, 0.3, 0.08]}>
+    // Keyed by geometry: the refraction material builds its ray-tracing data once per mesh.
+    <mesh key={geometry.uuid} ref={mesh} geometry={geometry} rotation={[tilt, 0.3, 0.08]}>
       <MeshRefractionMaterial envMap={env} color={color} bounces={3} ior={2.42} fresnel={1} aberrationStrength={0.012} fastChroma toneMapped={false} />
     </mesh>
   );
@@ -123,7 +128,16 @@ function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: b
  * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
  * visitors who prefer reduced motion.
  */
-export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: Cut; color?: string; className?: string }) {
+export default function Diamond3D({ cut = "round", color = "#ffffff", className, geometry, tilt = 0.62, size = 1 }: {
+  cut?: Cut;
+  color?: string;
+  className?: string;
+  /** Any closed stone mesh, girdle radius about 1 (overrides `cut`). */
+  geometry?: THREE.BufferGeometry;
+  /** Forward tilt in radians: 0.62 shows the crown, about 1 shows the outline face-up. */
+  tilt?: number;
+  size?: number;
+}) {
   const box = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [spin] = useState(() => typeof window === "undefined" || !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -193,7 +207,7 @@ export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: 
         gl={{ antialias: true, alpha: true }}
         aria-hidden
       >
-        <Stone cut={cut} color={color} spin={spin} control={getControl} />
+        <Stone cut={cut} color={color} spin={spin} control={getControl} geometry={geometry} tilt={tilt} size={size} />
       </Canvas>
     </div>
   );

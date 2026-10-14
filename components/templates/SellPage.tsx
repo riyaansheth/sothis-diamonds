@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { Faq } from "@/components/Faq";
 import { RevealHeading } from "@/components/Motion";
+import { StoneStage } from "@/components/StonePreview";
 import { ValuationForm, type ItemType } from "@/components/ValuationForm";
 import { getDictionary, type Locale } from "@/lib/i18n";
 
@@ -36,6 +37,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
               </li>
             ))}
           </ul>
+          <StoneStage empty={t.form.previewEmpty} unknown={t.form.fields.unknown} />
         </div>
 
         <div id="valuation" className="bg-ivory-deep p-6 sm:p-10">

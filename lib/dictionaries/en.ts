@@ -361,7 +361,6 @@ export const en = {
     steps: ["Your piece", "Details", "Photos", "Your details"],
     next: "Continue",
     back: "Back",
-    preview: "Your stone",
     stoneColourHint: "Pick the colour closest to your stone, especially for fancy colour diamonds and coloured gems.",
     clearColour: "Clear colour",
     previewEmpty: "Choose a shape and your stone appears here.",

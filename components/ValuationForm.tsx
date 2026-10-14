@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { site } from "@/lib/site";
 import { ColourPicker } from "./ColourPicker";
-import { StonePreview } from "./StonePreview";
+import { announceStone, StonePreview } from "./StonePreview";
 
 export type ItemType = "diamond" | "coloured" | "watch" | "antique" | "other";
 type T = Dictionary["form"];
@@ -149,6 +149,12 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
     if (quick.type && !fixedType) setStep(1);
   }, [params, fixedType]);
 
+  // Sell pages show the stone being described beside the form (StoneStage).
+  useEffect(() => {
+    if (c) return; // the calculator shows it in its own summary
+    announceStone(type === "diamond" || type === "coloured" ? { shape: values.shape, carat: values.carat, colour: values.colour, hue: values.stoneColour, grades: COLOURS } : null);
+  }, [c, type, values.shape, values.carat, values.colour, values.stoneColour]);
+
   const set = (name: string, value: string) => {
     const next = { ...values, [name]: value };
     setValues(next);
@@ -267,20 +273,6 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
 
         {step === 1 && type && (
           <div className={c ? "grid gap-10 xl:grid-cols-[1fr_15rem]" : ""}>
-            {!c && type === "diamond" && (
-              // The sell pages' form column is narrow: the stone sits in a band above the fields.
-              <div aria-hidden className="mb-8 flex items-center gap-6 border border-line bg-ivory px-5 py-3">
-                <div className="w-28 shrink-0 sm:w-36">
-                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
-                </div>
-                <div>
-                  <p className="font-display text-2xl">{t.preview}</p>
-                  <p className="mt-1 text-sm text-platinum-2">
-                    {[values.carat && `${values.carat} ct`, values.shape, values.colour, values.clarity].filter((v) => v && v !== t.fields.unknown).join(", ")}
-                  </p>
-                </div>
-              </div>
-            )}
             <div className="grid gap-5 sm:grid-cols-2">
               {fields.map((f) =>
                 f.kind === "colour" ? (
@@ -347,7 +339,7 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
                 <p className="font-display text-xl">{c.summary}</p>
                 <div className="mx-auto mt-4 w-40 xl:w-full">
-                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
+                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} grades={COLOURS} empty={t.previewEmpty} />
                 </div>
                 {fields.some((f) => values[f.name]) && (
                   <dl className="mt-4 space-y-2 text-sm">
