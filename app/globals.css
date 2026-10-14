@@ -1019,6 +1019,18 @@ html[data-returning] :is(.loader-light, .loader-foot) {
 /* The burgundy tint runs the full height of the section (a horizontal wash, so it doesn't fade out as
    the section scrolls); the stone keeps its own glow. */
 .buy-steps,
+/* The header: clear at the top of a page, a dark blurred bar once scrolled (set by Header). */
+.site-header {
+  transition:
+    background-color 0.35s ease,
+    backdrop-filter 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.site-header[data-scrolled] {
+  background-color: rgb(19 7 11 / 0.82);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 1px 0 rgb(244 240 232 / 0.08);
+}
 .burgundy-tint {
   --color-line: rgb(244 240 232 / 0.16);
   background: linear-gradient(90deg, #2c0b14 0%, #1e0810 45%, #13070b 100%);

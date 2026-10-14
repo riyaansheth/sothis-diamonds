@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
@@ -13,13 +13,23 @@ const icon = "size-5 stroke-current fill-none [stroke-width:1.5]";
 
 export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   const menu = useRef<HTMLDialogElement>(null);
+  const bar = useRef<HTMLElement>(null);
+
+  // Once the page scrolls, the bar gets a dark backdrop so content passing under it stays legible.
+  useEffect(() => {
+    const on = () => bar.current?.toggleAttribute("data-scrolled", scrollY > 24);
+    on();
+    addEventListener("scroll", on, { passive: true });
+    return () => removeEventListener("scroll", on);
+  }, []);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
 
   return (
     <header
-      // One header for every page: fully transparent, white text over the dark site. Runs edge to edge.
-      className="fixed inset-x-0 top-0 z-40 bg-transparent"
+      ref={bar}
+      // One header for every page: transparent at the top, white text over the dark site; edge to edge.
+      className="site-header fixed inset-x-0 top-0 z-40"
     >
       <div className="grid h-20 w-full grid-cols-[1fr_auto_1fr] items-center gap-2 px-[clamp(1rem,3vw,3rem)]">
         <div className="flex items-center gap-4 sm:gap-6">
