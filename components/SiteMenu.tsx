@@ -15,11 +15,11 @@ export function SiteMenu({ dialog, lang, t }: { dialog: RefObject<HTMLDialogElem
 
   const column = (title: string, links: string[][]) => (
     <div>
-      <p className="font-sans text-sm text-platinum-2">{title}</p>
-      <ul className="mt-4 space-y-2.5">
+      <p className="font-sans text-lg">{title}</p>
+      <ul className="mt-3 space-y-2">
         {links.map(([label, path]) => (
           <li key={path}>
-            <Link href={href(path)} className="text-lg hover:underline hover:underline-offset-4">{label}</Link>
+            <Link href={href(path)} className="text-sm text-platinum-2 hover:text-ink hover:underline hover:underline-offset-4">{label}</Link>
           </li>
         ))}
       </ul>
