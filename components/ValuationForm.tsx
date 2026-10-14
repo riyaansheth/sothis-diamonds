@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { site } from "@/lib/site";
+import { StonePreview } from "./StonePreview";
 
 export type ItemType = "diamond" | "coloured" | "watch" | "antique" | "other";
 type T = Dictionary["form"];
@@ -262,7 +263,7 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
         )}
 
         {step === 1 && type && (
-          <div className={c ? "grid gap-10 xl:grid-cols-[1fr_15rem]" : ""}>
+          <div className={c || type === "diamond" ? "grid gap-10 xl:grid-cols-[1fr_15rem]" : ""}>
             <div className="grid gap-5 sm:grid-cols-2">
               {fields.map((f) =>
                 f.kind === "chips" ? (
@@ -317,10 +318,13 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               </div>
             </div>
 
-            {c && (
+            {(c || type === "diamond") && (
               <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
-                <p className="font-display text-xl">{c.summary}</p>
-                {fields.some((f) => values[f.name]) ? (
+                <p className="font-display text-xl">{c?.summary ?? t.preview}</p>
+                <div className="mx-auto mt-4 w-40 xl:w-full">
+                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
+                </div>
+                {c && fields.some((f) => values[f.name]) && (
                   <dl className="mt-4 space-y-2 text-sm">
                     {fields.filter((f) => values[f.name]).map((f) => (
                       <div key={f.name} className="flex justify-between gap-4 border-b border-line pb-2">
@@ -329,8 +333,6 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
                       </div>
                     ))}
                   </dl>
-                ) : (
-                  <p className="mt-3 text-sm text-platinum-2">{c.summaryEmpty}</p>
                 )}
               </aside>
             )}

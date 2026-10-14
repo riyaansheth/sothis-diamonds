@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { light, startLight } from "@/lib/light";
 import { Diamond3DLazy } from "./Diamond3DLazy";
 
 type Side = { title: string; body: string; cta: string; after: string };
@@ -34,6 +35,35 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
   useEffect(() => {
     if (open) window.dispatchEvent(new Event("resize"));
   }, [open]);
+
+  // A soft glow on the silk that follows the light (cursor or tilt), eased, only while the split is on screen.
+  useEffect(() => {
+    const section = choice.current;
+    if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    startLight();
+    const halves = [...section.querySelectorAll<HTMLElement>(".paths > button")];
+    const at = { x: innerWidth / 2, y: innerHeight * 0.35 };
+    let raf = 0;
+    const frame = () => {
+      at.x += ((light.x + 1) / 2 * innerWidth - at.x) * 0.06;
+      at.y += ((light.y + 1) / 2 * innerHeight - at.y) * 0.06;
+      for (const h of halves) {
+        const r = h.getBoundingClientRect();
+        h.style.setProperty("--gx", `${(at.x - r.left).toFixed(0)}px`);
+        h.style.setProperty("--gy", `${(at.y - r.top).toFixed(0)}px`);
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    const io = new IntersectionObserver(([e]) => {
+      cancelAnimationFrame(raf);
+      if (e.isIntersecting) raf = requestAnimationFrame(frame);
+    });
+    io.observe(section);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -77,6 +107,7 @@ export function HomeChoice({ sell, buy, instead, change, buyJourney, sellJourney
       >
         <span aria-hidden className={`paths-bg ${bg}`} />
         <span aria-hidden className="paths-sheen" />
+        <span aria-hidden className="paths-glow" />
         <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
           <Diamond3DLazy cut={stone.cut} color={stone.color} className="absolute inset-[12%]" />

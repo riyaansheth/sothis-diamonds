@@ -7,15 +7,18 @@ import type { Dictionary } from "@/lib/dictionaries/en";
 // The homepage opening's stone: the loader reveals this exact image in the exact place the opening
 // shows it, then dissolves the dark around it, so the loader stone becomes the homepage stone.
 const STONE = "/media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
+const VISITED = "sothis-visited";
 const STONE_SIZES = "(min-width: 1024px) 60vw, 100vw"; // same as the opening, so it's the same file
 
 const REVEAL_MS = 2300; // the choreography; exits as soon as both this and the real loading are done
+const RETURN_MS = 500; // returning visitors: no spin, the stone settles straight onto the photo
 const MAX_MS = 8000; // never hold the page longer than this, even if an asset fails
 
 // Runs while the HTML is parsed. Marks the page as having a loader (the opening then skips its own
 // stone reveal, so there's one opening, not two) and releases it after 9 s if the app's JS never runs.
-// Also starts the page at the top (no restored scroll position), since scrolling is locked until release.
-const BOOT = `window.__sothisBoot=1;history.scrollRestoration="manual";scrollTo(0,0);document.documentElement.dataset.loader="";setTimeout(function(){document.documentElement.dataset.loaded=""},9000)`;
+// Also starts the page at the top (no restored scroll position), since scrolling is locked until release,
+// and marks returning visitors (html[data-returning]) before the first paint, for the short version.
+const BOOT = `try{localStorage.getItem("${VISITED}")==="1"&&(document.documentElement.dataset.returning="")}catch(e){}window.__sothisBoot=1;history.scrollRestoration="manual";scrollTo(0,0);document.documentElement.dataset.loader="";setTimeout(function(){document.documentElement.dataset.loaded=""},9000)`;
 
 // The loader plays once per full page load of the homepage. Its boot script only runs when it arrives
 // in server HTML (a real page load), never on client-side navigation, so its flag tells the two apart.
@@ -68,6 +71,8 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
     }
     const html = document.documentElement;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const returning = html.hasAttribute("data-returning");
+    const reveal = returning ? RETURN_MS : REVEAL_MS;
 
     const blocked = [...document.querySelectorAll("header, footer, main > *")].filter((el) => !el.contains(overlay.current));
     blocked.forEach((el) => el.setAttribute("inert", ""));
@@ -85,6 +90,9 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
 
     const leave = () => {
       played = true;
+      try {
+        localStorage.setItem(VISITED, "1");
+      } catch {}
       blocked.forEach((el) => el.removeAttribute("inert"));
       // Where the photographed stone is: the loader's brilliant fills about 65% of its image.
       const to = document.querySelector("[data-opening-stone]")?.getBoundingClientRect();
@@ -103,7 +111,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
       const elapsed = now - start;
       if (elapsed > MAX_MS) real = 1;
       // The bar follows real progress, paced so it never outruns the reveal, and eases between values.
-      const target = Math.min(real, reduce ? 1 : elapsed / REVEAL_MS);
+      const target = Math.min(real, reduce ? 1 : elapsed / reveal);
       shown += (target - shown) * (reduce ? 1 : 0.12);
       if (target - shown < 0.002) shown = target;
       fill.current?.style.setProperty("transform", `scaleX(${shown.toFixed(4)})`);
@@ -114,7 +122,7 @@ export function Loader({ t }: { t: Dictionary["loader"] }) {
       lastT = now;
       if (!reduce) {
         if (shown < 0.999) {
-          angle += dt * 90; // a quarter turn a second while loading
+          if (!returning) angle += dt * 90; // a quarter turn a second while loading
         } else {
           if (settleFrom < 0) settleFrom = Math.ceil(angle / 360) * 360; // finish the current turn
           angle += (settleFrom - angle) * 0.14;

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { ConvexGeometry } from "three/examples/jsm/geometries/ConvexGeometry.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { light, startLight } from "@/lib/light";
 
 export type Cut = "round" | "asscher";
 
@@ -84,6 +85,7 @@ function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: b
   const env = useStudioEnv();
   const geometry = useMemo(() => (cut === "round" ? roundBrilliant() : asscher()), [cut]);
   const auto = useRef(0);
+  const lean = useRef({ x: 0, y: 0 }); // eased toward the light, so the sparkle follows it
 
   useFrame((_, dt) => {
     const c = control();
@@ -95,9 +97,12 @@ function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: b
     }
     c.boost *= Math.pow(0.05, dt); // a click spins it round, then settles
     auto.current += c.boost * dt;
+    const ease = 1 - Math.pow(0.02, dt);
+    lean.current.x += (light.x - lean.current.x) * ease;
+    lean.current.y += (light.y - lean.current.y) * ease;
     if (mesh.current) {
-      mesh.current.rotation.y = 0.3 + auto.current + c.ry;
-      mesh.current.rotation.x = 0.62 + c.rx;
+      mesh.current.rotation.y = 0.3 + auto.current + c.ry + lean.current.x * 0.22;
+      mesh.current.rotation.x = 0.62 + c.rx + lean.current.y * 0.14;
     }
     if (!announced.current) {
       announced.current = true;
@@ -113,7 +118,7 @@ function Stone({ cut, color, spin, control }: { cut: Cut; color: string; spin: b
 }
 
 /**
- * A real-time rendered diamond that turns slowly. Drag to turn it (a flick keeps it spinning); click
+ * A real-time rendered diamond that turns slowly and leans toward the cursor (or the phone's tilt). Drag to turn it (a flick keeps it spinning); click
  * to spin it. Clicks on the stone don't reach whatever it sits in. Only renders while on screen and not covered
  * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
  * visitors who prefer reduced motion.
@@ -131,6 +136,7 @@ export default function Diamond3D({ cut, color = "#ffffff", className }: { cut: 
   const [covered, setCovered] = useState(() => typeof document !== "undefined" && document.documentElement.hasAttribute("data-covered"));
 
   useEffect(() => {
+    startLight();
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: "100px" });
     if (box.current) io.observe(box.current);
     const html = document.documentElement;

@@ -338,6 +338,14 @@
   transform: translateX(-110%);
   pointer-events: none;
 }
+/* Soft studio light on the silk, placed by HomeChoice from the cursor or the phone's tilt. */
+.paths-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle 30rem at var(--gx, 50%) var(--gy, 35%), rgb(255 238 228 / 0.14), transparent 70%);
+}
 .paths > :is(a, button) {
   isolation: isolate;
 }
@@ -555,6 +563,13 @@ html[data-loader] .opening-light {
 .loader-fill {
   background: linear-gradient(90deg, rgb(244 240 236 / 0.55), #f4f0ec);
   box-shadow: 0 0 10px rgb(244 240 236 / 0.45);
+}
+/* Returning visitors: the stone fades up in half a second, unlit and without the logo and bar. */
+html[data-returning] .loader-stone {
+  animation: loader-fade 0.45s ease both;
+}
+html[data-returning] :is(.loader-light, .loader-foot) {
+  display: none;
 }
 /* Exit: the dark, logo and progress dissolve; the stone stays until the opening's is visible under it. */
 .loader[data-leaving] {
@@ -1126,4 +1141,42 @@ html[data-opening] body {
   left: var(--cx);
   top: var(--cy);
   width: calc(var(--s) * 0.1698);
+}
+
+/* Valuation form: the visitor's stone builds as they describe it (StonePreview). The outline draws
+   itself, then the body and facets fill in; size and tint ease to each new answer. */
+.stone-size {
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.stone-outline {
+  fill: none;
+  stroke: var(--color-champagne);
+  stroke-width: 0.8;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: stone-draw 1s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+}
+.stone-body {
+  transition: fill 0.6s ease;
+  animation: fade-in 0.6s ease 0.55s both;
+}
+.stone-facets {
+  fill: none;
+  stroke: rgb(36 21 25 / 0.16);
+  stroke-width: 0.5;
+  animation: fade-in 0.6s ease 0.8s both;
+}
+.stone-speck {
+  fill: rgb(36 21 25 / 0.5);
+  stroke: none;
+}
+@keyframes stone-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stone-outline {
+    stroke-dashoffset: 0;
+  }
 }
