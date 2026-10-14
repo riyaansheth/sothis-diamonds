@@ -8845,6 +8845,66 @@
     "seo": {}
   },
   {
+    "id": 30356,
+    "sku": "SKB03",
+    "slug": "beaded-snake-bracelet",
+    "title": "Beaded Snake Bracelet",
+    "status": "publish",
+    "price": null,
+    "regular_price": null,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/beaded-snake-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold serpent of beaded links that coils three times around the wrist</p></li>\n<li><p>Head and tail <strong>pavé-set with round brilliant diamonds</strong></p></li>\n<li><p>Black stone eyes</p></li>\n</ul>",
+    "created": "2026-10-14 16:20:00",
+    "modified": "2026-10-14 16:20:00",
+    "slugs": {
+      "en": "beaded-snake-bracelet"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30357,
+    "sku": "SKB04",
+    "slug": "diamond-scale-snake-bracelet",
+    "title": "Diamond Scale Snake Bracelet",
+    "status": "publish",
+    "price": null,
+    "regular_price": null,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/diamond-scale-snake-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold serpent that wraps once around the wrist</p></li>\n<li><p>Scales and head <strong>set with round brilliant diamonds</strong>, graduating in size</p></li>\n<li><p>Flexible, openwork links</p></li>\n</ul>",
+    "created": "2026-10-14 16:21:00",
+    "modified": "2026-10-14 16:21:00",
+    "slugs": {
+      "en": "diamond-scale-snake-bracelet"
+    },
+    "seo": {}
+  },
+  {
     "id": 30353,
     "sku": "SKS01",
     "slug": "green-cascade-set",
