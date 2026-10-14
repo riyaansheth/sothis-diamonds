@@ -128,7 +128,7 @@ export function SellJourney({ lang }: { lang: Locale }) {
     </section>
 
     {/* 8. Why Sothis: pinned stone, reasons scroll past (see WhyList). */}
-    <section className="burgundy-tint border-t border-line">
+    <section className="why-section border-t border-line">
       <div className="wrap pt-28 lg:pt-36">
         <RevealHeading lines={[t.why.title]} className="text-4xl sm:text-6xl" />
       </div>

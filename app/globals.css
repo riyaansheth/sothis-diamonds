@@ -414,8 +414,9 @@
   }
 }
 
-/* The selling journey stays pinned over a quiet field of ivory silk. */
-.steps-section {
+/* The selling journey stays pinned over burgundy velvet; Why Sothis sits on the same velvet. */
+.steps-section,
+.why-section {
   --color-line: rgb(244 240 232 / 0.18);
   background-color: #1e0509;
   background-image: url("/brand/bg-steps-velvet-dark.webp");
@@ -424,7 +425,8 @@
   color: var(--color-on-accent);
 }
 @media (min-width: 768px) {
-  .steps-section {
+  .steps-section,
+  .why-section {
     background-attachment: fixed;
   }
 }
