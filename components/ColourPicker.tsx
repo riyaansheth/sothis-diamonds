@@ -9,14 +9,28 @@ import { hexToHsv, hsvToHex, type Hsv } from "@/lib/colour";
 const clamp = (n: number) => Math.max(0, Math.min(1, n));
 
 export function ColourPicker({ value, onChange, label, clear }: { value: string; onChange: (hex: string) => void; label: string; clear: string }) {
-  const [hsv, setHsv] = useState<Hsv>(() => hexToHsv(value) ?? { h: 45, s: 0.6, v: 0.9 });
+  // Starts white, with a grey square: colour appears only once a hue is chosen (or a colour was saved).
+  const [hsv, setHsv] = useState<Hsv>(() => hexToHsv(value) ?? { h: 0, s: 0, v: 1 });
+  const [hueChosen, setHueChosen] = useState(() => Boolean(hexToHsv(value)?.s));
+  const pickHue = (h: number) => {
+    setHueChosen(true);
+    pick({ h, s: hsv.s || 1, v: hsv.s ? hsv.v : 1 }); // from white, jump to the full colour
+  };
   const [hexText, setHexText] = useState(value);
 
   // A draft restored after mount, or a cleared value, updates the picker.
   useEffect(() => {
     const parsed = hexToHsv(value);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- follow the form's value
-    if (parsed && value.toLowerCase() !== hsvToHex(hsv)) setHsv(parsed);
+    /* eslint-disable react-hooks/set-state-in-effect -- follow the form's value */
+    if (parsed && value.toLowerCase() !== hsvToHex(hsv)) {
+      setHsv(parsed);
+      if (parsed.s) setHueChosen(true);
+    }
+    if (!value) {
+      setHsv({ h: 0, s: 0, v: 1 }); // cleared: back to white
+      setHueChosen(false);
+    }
+    /* eslint-enable react-hooks/set-state-in-effect */
     setHexText(value);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only when the value changes from outside
   }, [value]);
@@ -66,7 +80,7 @@ export function ColourPicker({ value, onChange, label, clear }: { value: string;
         onPointerDown={drag((x, y) => pick({ ...hsv, s: x, v: 1 - y }))}
         onKeyDown={(e) => keys(e, (d) => pick({ ...hsv, s: clamp(hsv.s + d) }), (d) => pick({ ...hsv, v: clamp(hsv.v - d) }))}
         className="relative aspect-[4/3] cursor-crosshair touch-none rounded-sm ring-1 ring-line focus-visible:outline-2 focus-visible:outline-offset-2"
-        style={{ background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, hsl(${hsv.h} 100% 50%))` }}
+        style={{ background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, ${hueChosen ? `hsl(${hsv.h} 100% 50%)` : "#fff"})` }}
       >
         <span
           aria-hidden
@@ -81,12 +95,12 @@ export function ColourPicker({ value, onChange, label, clear }: { value: string;
         aria-valuemin={0}
         aria-valuemax={360}
         aria-valuenow={Math.round(hsv.h)}
-        onPointerDown={drag((_, y) => pick({ ...hsv, h: y * 360 }))}
-        onKeyDown={(e) => keys(e, () => {}, (d) => pick({ ...hsv, h: (hsv.h + d * 360 + 360) % 360 }))}
+        onPointerDown={drag((_, y) => pickHue(y * 360))}
+        onKeyDown={(e) => keys(e, () => {}, (d) => pickHue((hsv.h + d * 360 + 360) % 360))}
         className="relative cursor-ns-resize touch-none rounded-sm ring-1 ring-line focus-visible:outline-2 focus-visible:outline-offset-2"
         style={{ background: "linear-gradient(to bottom, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)" }}
       >
-        <span aria-hidden className="pointer-events-none absolute -inset-x-1 h-1.5 -translate-y-1/2 rounded-sm border border-white bg-black/20 shadow" style={{ top: `${(hsv.h / 360) * 100}%` }} />
+        <span aria-hidden className="pointer-events-none absolute -inset-x-1 h-1.5 -translate-y-1/2 rounded-sm border border-white bg-black/20 shadow" style={{ top: `${(hsv.h / 360) * 100}%`, opacity: hueChosen ? 1 : 0 }} />
       </div>
 
       <div className="col-span-2 flex items-center gap-3">
