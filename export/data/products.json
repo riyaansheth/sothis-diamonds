@@ -8815,6 +8815,36 @@
     "seo": {}
   },
   {
+    "id": 30355,
+    "sku": "SKB02",
+    "slug": "pave-snake-bracelet",
+    "title": "Pavé Snake Bracelet",
+    "status": "publish",
+    "price": null,
+    "regular_price": null,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-snake-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold serpent that wraps twice around the wrist</p></li>\n<li><p>Scales <strong>pavé-set with round brilliant diamonds</strong></p></li>\n<li><p>Head set with a single large pink gemstone</p></li>\n</ul>",
+    "created": "2026-10-14 16:15:00",
+    "modified": "2026-10-14 16:15:00",
+    "slugs": {
+      "en": "pave-snake-bracelet"
+    },
+    "seo": {}
+  },
+  {
     "id": 30353,
     "sku": "SKS01",
     "slug": "green-cascade-set",
