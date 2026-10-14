@@ -72,8 +72,6 @@ export function HomeChoice({ sell, buy }: { sell: Side; buy: Side }) {
         <span aria-hidden className={`paths-bg ${bg}`} />
         <span aria-hidden className="paths-sheen" />
         <span aria-hidden className="paths-glow" />
-        {/* Fades this half's silk toward the seam (behind the text), so the two meet without a line. */}
-        <span aria-hidden className="paths-edge" />
         <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
           <Diamond3DLazy cut={stone.cut} color={stone.color} className="absolute inset-[12%]" />

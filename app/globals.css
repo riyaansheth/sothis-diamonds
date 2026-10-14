@@ -837,44 +837,6 @@ html[data-returning] :is(.loader-light, .loader-foot) {
 .home-choice[data-open] .paths {
   min-height: max(16rem, 32vh);
 }
-/* The seam between the halves: each half fades toward the colour in between at its inner edge (the
-   bottom/top edges on phones, where the halves stack), behind its text. Gone once a half is chosen. */
-.paths-edge {
-  position: absolute;
-  inset-inline: 0;
-  z-index: -1;
-  height: 18vh;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-.home-buy .paths-edge {
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent, rgb(30 9 14 / 0.9));
-}
-.home-sell .paths-edge {
-  top: 0;
-  background: linear-gradient(to top, transparent, rgb(30 9 14 / 0.9));
-}
-@media (min-width: 768px) {
-  .paths-edge {
-    inset-inline: auto;
-    top: 0;
-    bottom: 0;
-    width: 14vw;
-    height: auto;
-  }
-  .home-buy .paths-edge {
-    right: 0;
-    background: linear-gradient(to right, transparent, rgb(30 9 14 / 0.92));
-  }
-  .home-sell .paths-edge {
-    left: 0;
-    background: linear-gradient(to left, transparent, rgb(30 9 14 / 0.92));
-  }
-}
-.home-choice[data-open] .paths-edge {
-  opacity: 0;
-}
 .home-choice [data-role="chosen"] {
   flex-grow: 1;
   cursor: default;
