@@ -114,10 +114,11 @@ function brightness(f: Facet, i: number, lx: number, ly: number) {
   return Math.max(0.02, Math.min(1, 0.02 + 0.9 * Math.max(0, toward) ** 3 + 0.5 * scatter ** 2 * (f.depth === 2 ? 1 : 0.7)));
 }
 
-export function StonePreview({ shape, carat, colour, clarity, grades, empty }: {
+export function StonePreview({ shape, carat, colour, hue, clarity, grades, empty }: {
   shape?: string;
   carat?: string;
   colour?: string;
+  hue?: string; // a picked colour (hex) wins over the grade's tint
   clarity?: string;
   grades: string[];
   empty: string;
@@ -155,7 +156,7 @@ export function StonePreview({ shape, carat, colour, clarity, grades, empty }: {
   // Size grows with the cube root of the weight (its diameter), within the frame.
   const scale = ct > 0 ? Math.min(1.12, Math.max(0.55, 0.5 + 0.24 * Math.cbrt(ct))) : 0.8;
   const specks = !clarity ? 0 : /^I\d/.test(clarity) ? 5 : /^SI/.test(clarity) ? 2 : 0;
-  const colourFill = tint(colour, grades);
+  const colourFill = hue || tint(colour, grades);
 
   return (
     <div className="stone-preview relative grid aspect-square place-items-center">

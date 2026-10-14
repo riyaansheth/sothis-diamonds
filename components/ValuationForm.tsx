@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { site } from "@/lib/site";
+import { ColourPicker } from "./ColourPicker";
 import { StonePreview } from "./StonePreview";
 
 export type ItemType = "diamond" | "coloured" | "watch" | "antique" | "other";
@@ -22,7 +23,7 @@ const CLARITY = ["FL", "IF", "VVS1", "VVS2", "VS1", "VS2", "SI1", "SI2", "I1", "
 // Europe first (where the buying happens), then a few major markets.
 const COUNTRIES = ["BE", "NL", "FR", "DE", "LU", "GB", "CH", "IT", "ES", "PT", "AT", "IE", "DK", "SE", "NO", "FI", "PL", "CZ", "GR", "MC", "US", "CA", "AE", "IN", "IL", "HK", "SG", "AU"];
 
-type Field = { name: string; kind: "text" | "number" | "select" | "textarea" | "chips"; options?: string[]; required?: boolean; label?: string };
+type Field = { name: string; kind: "text" | "number" | "select" | "textarea" | "chips" | "colour"; options?: string[]; required?: boolean; label?: string };
 
 /** The details asked for each kind of item. Watches never ask for a carat weight. */
 function fieldsFor(type: ItemType, t: T, c?: C): Field[] {
@@ -49,6 +50,7 @@ function fieldsFor(type: ItemType, t: T, c?: C): Field[] {
         { name: "colour", kind: "select", options: withUnknown(COLOURS) },
         { name: "clarity", kind: "select", options: withUnknown(CLARITY) },
         { name: "report", kind: "select", options: t.choices.report },
+        { name: "stoneColour", kind: "colour" },
       ];
     case "coloured":
       return [
@@ -56,6 +58,7 @@ function fieldsFor(type: ItemType, t: T, c?: C): Field[] {
         { name: "carat", kind: "number" },
         { name: "origin", kind: "text" },
         { name: "report", kind: "select", options: t.choices.report },
+        { name: "stoneColour", kind: "colour" },
       ];
     case "watch":
       return [
@@ -268,7 +271,7 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               // The sell pages' form column is narrow: the stone sits in a band above the fields.
               <div aria-hidden className="mb-8 flex items-center gap-6 border border-line bg-ivory px-5 py-3">
                 <div className="w-28 shrink-0 sm:w-36">
-                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
+                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
                 </div>
                 <div>
                   <p className="font-display text-2xl">{t.preview}</p>
@@ -280,7 +283,15 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
             )}
             <div className="grid gap-5 sm:grid-cols-2">
               {fields.map((f) =>
-                f.kind === "chips" ? (
+                f.kind === "colour" ? (
+                  <fieldset key={f.name} className="sm:col-span-2">
+                    <legend className="mb-2 text-sm text-platinum-2">
+                      {labelOf(f)} <span className="text-platinum-2/70">({t.optional})</span>
+                    </legend>
+                    <p className="mb-3 text-xs text-platinum-2">{t.stoneColourHint}</p>
+                    <ColourPicker value={values[f.name] ?? ""} onChange={(hex) => set(f.name, hex)} label={labelOf(f)} clear={t.clearColour} />
+                  </fieldset>
+                ) : f.kind === "chips" ? (
                   <fieldset key={f.name} className="sm:col-span-2">
                     <legend className="mb-2 text-sm text-platinum-2">{labelOf(f)}</legend>
                     {f.name === "colour" && c && (
@@ -336,7 +347,7 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
                 <p className="font-display text-xl">{c.summary}</p>
                 <div className="mx-auto mt-4 w-40 xl:w-full">
-                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
+                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} clarity={values.clarity} grades={COLOURS} empty={t.previewEmpty} />
                 </div>
                 {fields.some((f) => values[f.name]) && (
                   <dl className="mt-4 space-y-2 text-sm">
