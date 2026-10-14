@@ -8783,5 +8783,35 @@
       "en": "snake-coil-watch"
     },
     "seo": {}
+  },
+  {
+    "id": 30353,
+    "sku": "SKS01",
+    "slug": "green-cascade-set",
+    "title": "Green Cascade Set",
+    "status": "publish",
+    "price": null,
+    "regular_price": null,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/green-cascade-set.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>A matching <strong>cuff watch, ring and drop earrings</strong></p></li>\n<li><p>Sweeping white gold sprays set with <strong>pavé diamonds</strong>, tipped with green cabochon stones</p></li>\n<li><p>Mother-of-pearl watch dial framed in diamonds</p></li>\n</ul>",
+    "created": "2026-10-14 11:30:00",
+    "modified": "2026-10-14 11:30:00",
+    "slugs": {
+      "en": "green-cascade-set"
+    },
+    "seo": {}
   }
 ]
