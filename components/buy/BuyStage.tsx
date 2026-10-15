@@ -59,14 +59,15 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
     return () => cancelAnimationFrame(raf);
   }, [progress]);
 
+  // The report as a certificate strip under the stone: four grades side by side, champagne hairlines.
   const card = (label: string) => (
-    <div className="w-44 bg-ivory-deep/90 p-4 text-left ring-1 ring-line backdrop-blur-sm">
-      <p className="text-xs text-platinum-2">{label}</p>
-      <dl className="mt-2 space-y-1 text-sm">
+    <div className="border-y border-champagne/50 bg-[linear-gradient(180deg,rgb(81_31_42/0.55),rgb(15_15_17/0.75))] px-2 pb-3 pt-2.5 text-center backdrop-blur-md">
+      <p className="text-[11px] tracking-[0.08em] text-platinum-2">{label}</p>
+      <dl className="mt-1.5 flex divide-x divide-champagne/25">
         {data.report.map(([k, v]) => (
-          <div key={k} className="flex justify-between gap-3">
-            <dt className="text-platinum-2">{k}</dt>
-            <dd className="font-display italic">{v}</dd>
+          <div key={k} className="flex flex-col-reverse px-2.5 sm:px-5">
+            <dt className="mt-0.5 text-[11px] text-platinum-2">{k}</dt>
+            <dd className="font-display text-lg whitespace-nowrap sm:text-2xl">{v}</dd>
           </div>
         ))}
       </dl>
@@ -81,9 +82,9 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
       </div>
 
       <div aria-hidden className="pointer-events-none absolute inset-0 text-sm">
-        {/* 1. Choose: the report card slides in, joined to the stone by a hairline. */}
-        <div data-scene="0" className="absolute right-0 top-[18%] flex items-center opacity-0" style={{ transform: "translateX(calc((1 - var(--l, 1)) * 24px))" }}>
-          <span className="h-px w-10 origin-right bg-ink/50" style={{ transform: "scaleX(var(--l, 1))" }} />
+        {/* 1. Choose: the report rises under the stone, joined to it by a hairline. */}
+        <div data-scene="0" className="absolute inset-x-0 bottom-[2%] flex flex-col items-center opacity-0" style={{ transform: "translateY(calc((1 - var(--l, 1)) * 16px))" }}>
+          <span className="h-8 w-px origin-bottom bg-champagne/60" style={{ transform: "scaleY(var(--l, 1))" }} />
           {card(s.report)}
         </div>
 
@@ -113,8 +114,8 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
           <p className="mt-3 text-center font-display text-lg italic">{s.insured}</p>
         </div>
 
-        {/* 5. Papers: the report returns and docks beside the stone. */}
-        <div data-scene="4" className="absolute left-0 top-[22%] opacity-0" style={{ transform: "translateX(calc((1 - var(--l, 1)) * -24px))" }}>
+        {/* 5. Papers: the report returns under the stone. */}
+        <div data-scene="4" className="absolute inset-x-0 bottom-[2%] flex justify-center opacity-0" style={{ transform: "translateY(calc((1 - var(--l, 1)) * 16px))" }}>
           {card(s.papers)}
         </div>
 
