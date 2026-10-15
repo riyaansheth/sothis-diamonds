@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Anatomy } from "@/components/about/Anatomy";
 import { Heritage } from "@/components/about/Heritage";
 import { Loupe } from "@/components/about/Loupe";
-import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
+import type { Crumb } from "@/components/Breadcrumbs";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { mediaUrl, productBySku } from "@/lib/products";
 import { ORG_ID } from "@/lib/schema";
@@ -17,7 +17,7 @@ const CUTOUT = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png
 /** One optimised URL for images that must be pixel-identical in two places (the loupe and its lens). */
 const optimised = (src: string) => `/_next/image?url=${encodeURIComponent(src)}&w=1920&q=75`;
 
-export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
+export function AboutPage({ lang }: { lang: Locale; crumbs?: Crumb[] }) {
   const t = getDictionary(lang);
   const a = t.about;
   const stone = productBySku(STONE);
@@ -35,7 +35,6 @@ export function AboutPage({ lang, crumbs }: { lang: Locale; crumbs: Crumb[] }) {
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Heritage
-        crumbs={<Breadcrumbs items={crumbs} />}
         photo={mediaUrl(STUDIO)}
         t={{ rooted: a.rooted, since: fill(a.since), heritage: a.heritage.map(fill), then: a.then, now: a.now, nowPlace: a.nowPlace, founded: String(site.founded), caption: fill(a.stoneCaption) }}
       />
