@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
@@ -24,6 +24,24 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   }, []);
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
+
+  // The logo leads back to the journey the visitor chose (Buy from us or Sell to us), remembered for the
+  // visit; from that journey's own page, or before choosing, it goes to the homepage choice.
+  const pathname = usePathname();
+  const router = useRouter();
+  const journeys = [href("/new/"), href("/pre-owned/")];
+  useEffect(() => {
+    if (journeys.includes(pathname)) try { sessionStorage.setItem("journey", pathname); } catch {}
+  }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+  const toJourney = (e: React.MouseEvent) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    let j: string | null = null;
+    try { j = sessionStorage.getItem("journey"); } catch {}
+    if (j && journeys.includes(j) && j !== pathname) {
+      e.preventDefault();
+      router.push(j);
+    }
+  };
 
   return (
     <header
@@ -56,7 +74,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </div>
 
         {/* A plain link: a full page load, so the homepage always starts fresh (loader, opening, choice). */}
-        <a href={href("/")} className="shrink-0" aria-label={site.name}>
+        <a href={href("/")} onClick={toJourney} className="shrink-0" aria-label={site.name}>
           <Logo className="h-8 w-auto sm:h-11" />
         </a>
 

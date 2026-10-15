@@ -4,7 +4,7 @@ import { Faq } from "@/components/Faq";
 import { RevealHeading } from "@/components/Motion";
 import { StoneStage } from "@/components/StonePreview";
 import { ValuationForm, type ItemType } from "@/components/ValuationForm";
-import { getDictionary, type Locale } from "@/lib/i18n";
+import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 
 type PageKey = ItemType | "general";
 
@@ -87,7 +87,7 @@ export function SellPage({ lang, kind, crumbs }: { lang: Locale; kind: PageKey; 
       </section>
 
       <section className="border-t border-line">
-        <Faq title={s.faqTitle} items={s.faq} />
+        <Faq title={s.faqTitle} items={s.faq} more={{ text: s.faqMore, label: s.faqContact, href: localePath(lang, "/contact-us/") }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stepsJsonLd) }} />
       </section>
     </>

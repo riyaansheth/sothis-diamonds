@@ -227,7 +227,7 @@ export function BuyJourney({ lang }: { lang: Locale }) {
       </section>
 
       {/* Why buy from Sothis: the heading, then the reasons in a plain grid. */}
-      <section className="wrap py-24 lg:py-32">
+      <section className="wrap pt-24 pb-16 lg:pt-32 lg:pb-20">
         <RevealHeading lines={[b.whyTitle]} className="text-4xl sm:text-5xl" />
         <ul className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
           {b.why.map(([title, body], i) => (
@@ -254,7 +254,7 @@ export function BuyJourney({ lang }: { lang: Locale }) {
         </ul>
       </section>
 
-      <section className="border-t border-line"><Faq title={b.faqTitle} items={b.faq} /></section>
+      <section className="border-t border-line"><Faq title={b.faqTitle} items={b.faq} more={{ text: b.faqMore, label: b.faqContact, href: href("/contact-us/") }} /></section>
 
       <Testimonials lang={lang} />
 
