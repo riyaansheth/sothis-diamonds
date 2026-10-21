@@ -350,11 +350,13 @@
   isolation: isolate;
 }
 .paths > :is(a, button):hover .paths-bg,
+.paths > :is(a, button)[data-hover] .paths-bg,
 .paths > :is(a, button):focus-visible .paths-bg {
   transform: scale(1.1);
   filter: saturate(1.1) brightness(1.04);
 }
 .paths > :is(a, button):hover .paths-sheen,
+.paths > :is(a, button)[data-hover] .paths-sheen,
 .paths > :is(a, button):focus-visible .paths-sheen {
   transform: translateX(110%);
   transition: transform 1.4s cubic-bezier(0.3, 0.6, 0.2, 1);
@@ -372,6 +374,7 @@
   transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .paths > :is(a, button):hover .paths-window,
+.paths > :is(a, button)[data-hover] .paths-window,
 .paths > :is(a, button):focus-visible .paths-window {
   transform: scale(1.08);
 }

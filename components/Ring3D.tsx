@@ -181,6 +181,6 @@ function RingModel({ stone }: { stone: string }) {
 }
 
 /** The ring, turning and leaning toward the light like the diamonds; drag to turn it. */
-export default function Ring3D({ stone = "#ffffff", className }: { stone?: string; className?: string }) {
-  return <Diamond3D model={<RingModel stone={stone} />} tilt={0.42} size={1.0} className={className} />;
+export default function Ring3D({ stone = "#ffffff", className, active }: { stone?: string; className?: string; active?: boolean }) {
+  return <Diamond3D model={<RingModel stone={stone} />} tilt={0.42} size={1.0} active={active} className={className} />;
 }

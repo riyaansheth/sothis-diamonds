@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Diamond3DLazy, Ring3DLazy } from "./Diamond3DLazy";
+import { PieceSlot } from "./PieceLayer";
 import type { Side } from "./HomeChoice";
 
 type Half = Omit<Side, "piece" | "after">;
@@ -69,10 +69,10 @@ export function KindChoice({ band, piece, sides }: {
         })}
       </div>
 
-      {/* The piece, on the seam between Buy and Sell. Clicking it just spins it. */}
-      <div aria-hidden onClick={(e) => e.stopPropagation()} className="kind-piece">
+      {/* The piece, on the seam between Buy and Sell (drawn by PieceLayer, carried over from the homepage). */}
+      <div aria-hidden className="kind-piece">
         <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
-        {"ring" in piece ? <Ring3DLazy stone={piece.ring} className="absolute inset-[6%]" /> : <Diamond3DLazy cut={piece.cut} color={piece.color} className="absolute inset-[12%]" />}
+        <PieceSlot piece={piece} className={"ring" in piece ? "absolute inset-[6%]" : "absolute inset-[12%]"} />
       </div>
     </section>
   );

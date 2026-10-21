@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { light, startLight } from "@/lib/light";
-import { Diamond3DLazy, Ring3DLazy } from "./Diamond3DLazy";
+import { PieceSlot } from "./PieceLayer";
 
 /** One half: its silk (burgundy "buy" or black "sell") and what floats over it (a stone, or the ring). */
 export type Side = {
@@ -81,10 +81,10 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
         <span aria-hidden className={`paths-bg ${s.silk === "buy" ? "bg-[url(/brand/bg-buy-burgundy.webp)]" : "bg-[url(/brand/bg-sell-black.webp)]"}`} />
         <span aria-hidden className="paths-sheen" />
         <span aria-hidden className="paths-glow" />
-        {/* Clicking the stone just spins it; only the rest of the half opens the page. */}
-        <div aria-hidden onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
+        {/* The piece itself is drawn by PieceLayer over this slot, so it carries on to the next page. */}
+        <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
-          {"ring" in s.piece ? <Ring3DLazy stone={s.piece.ring} className="absolute inset-[6%]" /> : <Diamond3DLazy cut={s.piece.cut} color={s.piece.color} className="absolute inset-[12%]" />}
+          <PieceSlot piece={s.piece} className={"ring" in s.piece ? "absolute inset-[6%]" : "absolute inset-[12%]"} />
         </div>
         <span className="relative font-display text-[clamp(3rem,7.5vw,6rem)] leading-none whitespace-nowrap">{s.title}</span>
         <span className="relative mt-4 grid max-w-sm text-ink/80">

@@ -129,7 +129,7 @@ function Stone({ cut, color, spin, control, geometry: custom, model, tilt, size 
  * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
  * visitors who prefer reduced motion.
  */
-export default function Diamond3D({ cut = "round", color = "#ffffff", className, geometry, model, tilt = 0.62, size = 1 }: {
+export default function Diamond3D({ cut = "round", color = "#ffffff", className, geometry, model, tilt = 0.62, size = 1, active = true }: {
   cut?: Cut;
   color?: string;
   className?: string;
@@ -140,6 +140,8 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
   /** Forward tilt in radians: 0.62 shows the crown, about 1 shows the outline face-up. */
   tilt?: number;
   size?: number;
+  /** False while nothing shows it (a kept-alive piece between pages): it stops rendering. */
+  active?: boolean;
 }) {
   const box = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -207,7 +209,7 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
       }}
     >
       <Canvas
-        frameloop={visible && (spin || touched) && !covered ? "always" : "demand"}
+        frameloop={active && visible && (spin || touched) && !covered ? "always" : "demand"}
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5.6], fov: 32 }}
         gl={{ antialias: true, alpha: true }}
