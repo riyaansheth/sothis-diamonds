@@ -14,6 +14,7 @@ export type Product = {
   image: string | null;
   gallery: string[];
   video: string | null;
+  report_photo?: boolean; // the photo carries the stone's grading card
   created: string;
   slugs?: Partial<Record<"en" | "fr" | "nl" | "de" | "it" | "es", string>>;
   tags?: string[];
