@@ -13,7 +13,7 @@ import { CollectionStage } from "@/components/buy/CollectionStage";
 import { CountUp } from "@/components/buy/CountUp";
 import { ShapeTiles } from "@/components/buy/ShapeTiles";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
-import { allProducts, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
+import { allProducts, displayName, mediaUrl, productBySku, productPath, type Product } from "@/lib/products";
 import { jewelleryType } from "@/lib/shapes";
 
 export type Kind = "diamond" | "jewellery";
@@ -128,11 +128,14 @@ export function SellJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
     {/* 7. Our story */}
     <section className="burgundy-tint">
     <div className="wrap grid items-center gap-14 py-28 lg:grid-cols-2 lg:gap-24 lg:py-40">
-      {story.image && (
-        <div className="relative aspect-square overflow-hidden rounded-sm">
-          <Image src={mediaUrl(story.image)} alt={story.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
-        </div>
-      )}
+      <div className="relative aspect-square overflow-hidden rounded-sm">
+        {/* Selling a diamond: the shop's photograph of S-1973, a 1.04 ct round; selling jewellery: the Promise ring. */}
+        {kind === "diamond" ? (
+          <Image src="/brand/diamond-story.webp" alt={displayName(productBySku("S-1973"))} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+        ) : (
+          <Image src={mediaUrl(story.image!)} alt={story.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+        )}
+      </div>
       <div className="max-w-xl">
         <RevealHeading lines={[t.story.title]} className="text-4xl sm:text-5xl" />
         {t.story.body.map((p) => (
