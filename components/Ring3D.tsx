@@ -171,10 +171,10 @@ function RingModel({ stone }: { stone: string }) {
     <group position={[0, -0.34, 0]}>
       <primitive object={group} />
       <instancedMesh ref={melee} args={[small, undefined, stones.length]}>
-        <MeshRefractionMaterial envMap={env} color="#ffffff" bounces={2} ior={2.42} fresnel={1} aberrationStrength={0.01} fastChroma toneMapped={false} />
+        <MeshRefractionMaterial envMap={env} color="#ffffff" bounces={1} ior={2.42} fresnel={1} aberrationStrength={0.01} fastChroma toneMapped={false} />
       </instancedMesh>
       <mesh geometry={emerald} position={[0, GIRDLE, 0]} scale={S}>
-        <MeshRefractionMaterial envMap={env} color={stone} bounces={3} ior={2.42} fresnel={1} aberrationStrength={0.012} fastChroma toneMapped={false} />
+        <MeshRefractionMaterial envMap={env} color={stone} bounces={2} ior={2.42} fresnel={1} aberrationStrength={0.012} fastChroma toneMapped={false} />
       </mesh>
     </group>
   );

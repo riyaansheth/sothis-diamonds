@@ -31,17 +31,16 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
     const section = choice.current;
     if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     startLight();
-    const halves = [...section.querySelectorAll<HTMLElement>(".paths > a")];
+    const halves = [...section.querySelectorAll<HTMLElement>(".paths > a")].map((h) => ({ h, glow: h.querySelector<HTMLElement>(".paths-glow")! }));
     const at = { x: innerWidth / 2, y: innerHeight * 0.35 };
     let raf = 0;
     const frame = () => {
       at.x += ((light.x + 1) / 2 * innerWidth - at.x) * 0.06;
       at.y += ((light.y + 1) / 2 * innerHeight - at.y) * 0.06;
-      for (const h of halves) {
-        const r = h.getBoundingClientRect();
-        h.style.setProperty("--gx", `${(at.x - r.left).toFixed(0)}px`);
-        h.style.setProperty("--gy", `${(at.y - r.top).toFixed(0)}px`);
-      }
+      const rects = halves.map(({ h }) => h.getBoundingClientRect()); // all reads, then all writes
+      halves.forEach(({ glow }, i) => {
+        glow.style.transform = `translate(${(at.x - rects[i].left).toFixed(0)}px, ${(at.y - rects[i].top).toFixed(0)}px)`;
+      });
       raf = requestAnimationFrame(frame);
     };
     const io = new IntersectionObserver(([e]) => {

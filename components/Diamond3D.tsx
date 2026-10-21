@@ -210,7 +210,7 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
     >
       <Canvas
         frameloop={active && visible && (spin || touched) && !covered ? "always" : "demand"}
-        dpr={[1, 2]}
+        dpr={[1, 1.75]}
         camera={{ position: [0, 0, 5.6], fov: 32 }}
         gl={{ antialias: true, alpha: true }}
         // Size from the layout box, not the on-screen one: a CSS scale on a parent (hover zoom, the
