@@ -82,3 +82,4 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 *.swp
+export/media-backups/

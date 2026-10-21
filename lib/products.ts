@@ -34,7 +34,7 @@ export const allProducts = products;
 const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_URL ?? "";
 /** Old-site media path ("media/2025/09/x.png") -> URL. Local: /media/..., later a CDN via NEXT_PUBLIC_MEDIA_URL. */
 // Bump MEDIA_VERSION when photos are replaced under the same names, so browsers drop their cached copies.
-const MEDIA_VERSION = "?v=3";
+const MEDIA_VERSION = "?v=4";
 export const mediaUrl = (path: string) => `${MEDIA_BASE}/${path}${MEDIA_VERSION}`;
 
 export const productBySku = (sku: string) => {
