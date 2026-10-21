@@ -10,11 +10,11 @@ import { getDictionary, hasLocale, localePath, locales, type Locale } from "@/li
 
 export const KIND_PATH: Record<Kind, string> = { diamond: "/diamonds/", jewellery: "/jewellery/" };
 
-// What floats over each half. The jewellery halves show the Promise ring; the black one carries its
-// yellow diamond, the same ring as the homepage's Jewellery half, so the change of page is seamless.
+// What floats over each half. The jewellery halves show the emerald-cut halo ring, the same ring as the
+// homepage's Jewellery half, so the change of page is seamless.
 const PIECES: Record<Kind, [Side["piece"], Side["piece"]]> = {
   diamond: [{ cut: "asscher", color: "#ffffff" }, { cut: "round", color: "#ffffff" }],
-  jewellery: [{ ring: "#ffffff" }, { ring: "#ffd23f" }],
+  jewellery: [{ ring: "#ffffff" }, { ring: "#ffffff" }],
 };
 export const HOME_PIECES: Record<Kind, Side["piece"]> = { diamond: PIECES.diamond[0], jewellery: PIECES.jewellery[1] };
 

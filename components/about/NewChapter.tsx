@@ -2,11 +2,16 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { Diamond3DLazy } from "../Diamond3DLazy";
 import { seg, setVars, useScrub } from "./useScrub";
 
-// Where things sit in the two photographs (both 2000px squares), as fractions of the image.
-const CUT = { x: 0.485, y: 0.385, w: 0.29 }; // the centre stone in the product photo
-const WORN = { x: 0.4875, y: 0.4, w: 0.0825, posX: 0.45, posY: 0.4 }; // the stone on the hand; object-position
+type At = { x: number; y: number; w: number };
+type Worn = At & { posX: number; posY: number };
+// Where things sit in the two photographs (both squares), as fractions of the image.
+const CUT: At = { x: 0.485, y: 0.385, w: 0.29 }; // the centre stone in the product photo
+const WORN: Worn = { x: 0.4875, y: 0.4, w: 0.0825, posX: 0.45, posY: 0.4 }; // the stone on the hand; object-position
+// Without an inspected photo, a 3D round diamond sits on the surface (the Buy diamonds page).
+const STONE: At = { x: 0.5, y: 0.5, w: 0.62 };
 const INSET = 0.16; // the product photo's inset inside the plate
 
 /**
@@ -15,7 +20,8 @@ const INSET = 0.16; // the product photo's inset inside the plate
  * plate dissolves so the ring is simply being worn. Both are the shop's own photographs of one piece;
  * nothing claims to document a restoration.
  */
-export function NewChapter({ inspected, worn, t }: { inspected: string; worn: string; t: { title: string; body: string; inspection: string } }) {
+export function NewChapter({ inspected, worn, wornAt = WORN, t }: { inspected?: string; worn: string; wornAt?: Worn; t: { title: string; body: string; inspection: string } }) {
+  const cut = inspected ? CUT : STONE;
   const root = useRef<HTMLElement>(null);
 
   useScrub(root, (p, pinned) => {
@@ -32,10 +38,10 @@ export function NewChapter({ inspected, worn, t }: { inspected: string; worn: st
     const H = stage.offsetHeight;
     const P = plate.offsetWidth;
     const inner = P * (1 - 2 * INSET);
-    const from = { x: W / 2 - P / 2 + P * INSET + CUT.x * inner, y: H / 2 - P / 2 + P * INSET + CUT.y * inner, w: CUT.w * inner };
+    const from = { x: W / 2 - P / 2 + P * INSET + cut.x * inner, y: H / 2 - P / 2 + P * INSET + cut.y * inner, w: cut.w * inner };
     const box = W * 0.6; // the worn photo's width; it is cover-fitted
     const side = Math.max(box, H);
-    const to = { x: (box - side) * WORN.posX + WORN.x * side, y: (H - side) * WORN.posY + WORN.y * side, w: WORN.w * side };
+    const to = { x: (box - side) * wornAt.posX + wornAt.x * side, y: (H - side) * wornAt.posY + wornAt.y * side, w: wornAt.w * side };
     const f = seg(p, 0.05, 0.42);
     setVars(el, {
       "--fly-x": `${((to.x - from.x) * f).toFixed(1)}px`,
@@ -60,12 +66,16 @@ export function NewChapter({ inspected, worn, t }: { inspected: string; worn: st
             className="absolute left-1/2 top-1/2 z-10 aspect-square w-[64%] -translate-x-1/2 -translate-y-1/2 lg:w-[min(34vw,70vh)]"
             style={{
               opacity: "var(--plate, 1)",
-              transformOrigin: `${(INSET + CUT.x * (1 - 2 * INSET)) * 100}% ${(INSET + CUT.y * (1 - 2 * INSET)) * 100}%`,
+              transformOrigin: `${(INSET + cut.x * (1 - 2 * INSET)) * 100}% ${(INSET + cut.y * (1 - 2 * INSET)) * 100}%`,
               transform: "translate(var(--fly-x, 0px), var(--fly-y, 0px)) scale(var(--fly-s, 1))",
             }}
           >
             <div className="absolute inset-[16%]">
-              <Image src={inspected} alt="" fill unoptimized className="object-contain drop-shadow-[0_20px_30px_rgb(0_0_0/0.45)]" />
+              {inspected ? (
+                <Image src={inspected} alt="" fill unoptimized className="object-contain drop-shadow-[0_20px_30px_rgb(0_0_0/0.45)]" />
+              ) : (
+                <Diamond3DLazy cut="round" color="#ffffff" className="absolute inset-0" />
+              )}
             </div>
           </div>
           <p className="absolute left-6 top-24 text-xs font-semibold uppercase tracking-[0.14em] text-platinum-2">{t.inspection}</p>
@@ -73,7 +83,7 @@ export function NewChapter({ inspected, worn, t }: { inspected: string; worn: st
 
         {/* Presentation: the same ring, worn, opening around the stone as the plate arrives on it. */}
         <div className="new-chapter-reveal relative aspect-[4/5] overflow-hidden sm:aspect-[16/10] lg:absolute lg:inset-y-0 lg:left-0 lg:right-[40%] lg:aspect-auto">
-          <Image src={worn} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" style={{ objectPosition: `${WORN.posX * 100}% ${WORN.posY * 100}%` }} />
+          <Image src={worn} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" style={{ objectPosition: `${wornAt.posX * 100}% ${wornAt.posY * 100}%` }} />
           {/* Keeps the header legible where it sits over the photograph. */}
           <span aria-hidden className="absolute inset-x-0 top-0 hidden h-32 bg-gradient-to-b from-black/45 to-transparent lg:block" />
         </div>

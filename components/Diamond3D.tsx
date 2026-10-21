@@ -211,6 +211,9 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5.6], fov: 32 }}
         gl={{ antialias: true, alpha: true }}
+        // Size from the layout box, not the on-screen one: a CSS scale on a parent (hover zoom, the
+        // inspection plate flying) would otherwise be applied twice and crop the stone.
+        resize={{ offsetSize: true }}
         aria-hidden
       >
         <Stone cut={cut} color={color} spin={spin} control={getControl} geometry={geometry} model={model} tilt={tilt} size={size} />

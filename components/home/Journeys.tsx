@@ -230,7 +230,12 @@ export function BuyJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
         t={{ title: kind === "diamond" ? b.shapesTitle : j.typesTitle, line: kind === "diamond" ? b.shapesLine : j.typesLine, inStock: b.inStock }}
       />
       {/* The ring from inspection to worn: moved here from the About page. */}
-      <NewChapter inspected="/brand/ring-cutout.webp" worn={mediaUrl(productBySku("SCP01").gallery[0])} t={{ title: t.about.chapterTitle, body: t.about.chapterBody, inspection: t.about.inspection }} />
+      {kind === "diamond" ? (
+        // A diamond on the inspection surface, landing on the shop's photograph of S-1975 (2 ct G round).
+        <NewChapter worn="/brand/diamond-on-silk.webp" wornAt={{ x: 0.5, y: 0.508, w: 0.44, posX: 0.5, posY: 0.5 }} t={{ title: b.chapterTitle, body: b.chapterBody, inspection: t.about.inspection }} />
+      ) : (
+        <NewChapter inspected="/brand/ring-cutout.webp" worn={mediaUrl(productBySku("SCP01").gallery[0])} t={{ title: t.about.chapterTitle, body: t.about.chapterBody, inspection: t.about.inspection }} />
+      )}
 
       <CollectionStage items={railItems} total={forSale.length} shopHref={shop} line={t.journeys[kind].buy.body} t={b} card={t.stones} />
 
@@ -242,7 +247,7 @@ export function BuyJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
             buyStage={
               kind === "diamond"
                 ? { report: [["Lab", ra.lab!], ["Carat", `${ra.carat} ct`], ["Colour", ra.color!], ["Clarity", ra.clarity!]], scene: b.scene }
-                : { report: j.piece as [string, string][], scene: { ...b.scene, ...j.scene }, ring: true }
+                : { report: j.ring as [string, string][], scene: { ...b.scene, ...j.scene }, ring: true }
             }
             compact
             stepLabel={t.steps.stepOf}

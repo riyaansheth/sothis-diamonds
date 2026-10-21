@@ -16,7 +16,7 @@ export type BuyStageData = {
     papers: string;
     days: string;
   };
-  ring?: boolean; // the Promise ring acts out the steps instead of the stone (Buy jewellery)
+  ring?: boolean; // the halo ring acts out the steps instead of the stone (Buy jewellery)
 };
 
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));

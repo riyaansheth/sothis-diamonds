@@ -122,6 +122,8 @@ export const en = {
     browseAll: "Browse all {n} pieces",
     prev: "Previous pieces",
     next: "Next pieces",
+    chapterTitle: "Every diamond is inspected before it’s yours.",
+    chapterBody: "Graded by GIA, HRD or IGI, then examined again by our gemmologists in Antwerp.",
     shapesTitle: "Shop by shape",
     shapesLine: "Every shape we have in stock, with how many.",
     inStock: "{n} in stock",
@@ -188,7 +190,8 @@ export const en = {
         ["Arrives with its papers", "Any certificates for its stones travel with the piece."],
         ["14-day returns", "Unworn pieces in their original condition, with packaging and certificates, can be returned within 14 days."],
       ],
-      piece: [["Metal", "Platinum or gold"], ["Centre", "5 ct cushion"], ["Colour", "Y–Z"], ["Sides", "Heart diamonds"]],
+      piece: [["Metal", "Platinum or gold"], ["Centre", "5 ct cushion"], ["Colour", "Y–Z"], ["Sides", "Heart diamonds"]], // the Promise ring, photographed
+      ring: [["Metal", "Platinum"], ["Centre", "Emerald cut"], ["Halo", "Round diamonds"], ["Band", "Pavé"]], // the 3D halo ring
       scene: { report: "The piece", ask: "Ask about this piece" },
       why: [
         ["Natural diamonds", "Every diamond we set is natural, never lab-grown or a simulant."],
