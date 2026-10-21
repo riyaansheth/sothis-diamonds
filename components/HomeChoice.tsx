@@ -18,12 +18,10 @@ export type Side = {
 };
 
 /**
- * A split choice, each half a link to its own page: Diamond | Jewellery on the homepage, then Buy | Sell
- * inside each. On a plain click the chosen half widens, and either collapses into the band its page
- * opens with (`band`), or keeps the whole screen when its page opens on another split, where the other
- * half grows back in (`enter`), so each change of page reads as one movement.
+ * The homepage choice, Diamond | Jewellery, each half a link to its own page. On a plain click the chosen
+ * half widens to the whole screen, which is exactly how its page (KindChoice) begins, before settling.
  */
-export function HomeChoice({ sides, band = false, enter }: { sides: [Side, Side]; band?: boolean; enter?: 0 | 1 }) {
+export function HomeChoice({ sides }: { sides: [Side, Side] }) {
   const [open, setOpen] = useState<null | 0 | 1>(null);
   const choice = useRef<HTMLElement>(null);
   const router = useRouter();
@@ -78,7 +76,6 @@ export function HomeChoice({ sides, band = false, enter }: { sides: [Side, Side]
         aria-hidden={hidden || undefined}
         tabIndex={hidden ? -1 : undefined}
         data-role={open === side ? "chosen" : hidden ? "other" : undefined}
-        data-enter={enter === side ? "" : undefined}
         className={`${panel} home-${s.silk}`}
       >
         <span aria-hidden className={`paths-bg ${s.silk === "buy" ? "bg-[url(/brand/bg-buy-burgundy.webp)]" : "bg-[url(/brand/bg-sell-black.webp)]"}`} />
@@ -89,7 +86,7 @@ export function HomeChoice({ sides, band = false, enter }: { sides: [Side, Side]
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
           {"ring" in s.piece ? <Ring3DLazy stone={s.piece.ring} className="absolute inset-[6%]" /> : <Diamond3DLazy cut={s.piece.cut} color={s.piece.color} className="absolute inset-[12%]" />}
         </div>
-        <span className={`relative font-display leading-none whitespace-nowrap ${band ? "text-[clamp(2.5rem,4.6vw,4.75rem)]" : "text-[clamp(3rem,7.5vw,6rem)]"}`}>{s.title}</span>
+        <span className="relative font-display text-[clamp(3rem,7.5vw,6rem)] leading-none whitespace-nowrap">{s.title}</span>
         <span className="relative mt-4 grid max-w-sm text-ink/80">
           <span className={s.after ? "home-before col-start-1 row-start-1" : "col-start-1 row-start-1"}>{s.body}</span>
           {s.after && <span className="home-after col-start-1 row-start-1">{s.after}</span>}
@@ -101,7 +98,7 @@ export function HomeChoice({ sides, band = false, enter }: { sides: [Side, Side]
 
   return (
     // Sits under the opening (a fixed layer with JS), which dissolves to reveal it in place.
-    <section ref={choice} data-open={open ?? undefined} data-band={band ? "" : undefined} className="home-choice relative">
+    <section ref={choice} data-open={open ?? undefined} className="home-choice relative">
       <div className="paths flex flex-col md:flex-row">
         {half(0)}
         {half(1)}

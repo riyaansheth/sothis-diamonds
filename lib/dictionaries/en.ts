@@ -73,6 +73,7 @@ export const en = {
       title: "Diamond",
       body: "Buy or sell diamonds",
       cta: "Explore diamonds",
+      instead: "Looking for jewellery?",
       metaTitle: "Diamonds: Buy or Sell in Antwerp | Sothis Diamonds",
       description: "Buy certified natural diamonds or sell yours to Antwerp specialists. Free valuation, no commission, insured shipping.",
       buy: {
@@ -94,6 +95,7 @@ export const en = {
       title: "Jewellery",
       body: "Buy or sell jewellery",
       cta: "Explore jewellery",
+      instead: "Looking for loose diamonds?",
       metaTitle: "Jewellery: Buy or Sell in Antwerp | Sothis Diamonds",
       description: "Buy fine jewellery set with natural diamonds and gemstones, or sell your jewellery, watches and antique pieces. Free valuation, no commission.",
       buy: {
