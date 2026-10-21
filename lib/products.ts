@@ -38,8 +38,9 @@ const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_URL ?? "";
 const MEDIA_VERSION = "?v=4";
 export const mediaUrl = (path: string) => `${MEDIA_BASE}/${path}${MEDIA_VERSION}`;
 
+// Any product, listed or not: the About story keeps its stone after it leaves the shop.
 export const productBySku = (sku: string) => {
-  const product = products.find((p) => p.sku === sku);
+  const product = (data as unknown as Product[]).find((p) => p.sku === sku);
   if (!product) throw new Error(`Product ${sku} not found in export/data/products.json`);
   return product;
 };
