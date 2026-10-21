@@ -120,7 +120,10 @@ export function CollectionStage({ items, total, shopHref, line, t, card }: {
   }, [dealt]);
   const pad = (n: number) => String(n).padStart(2, "0");
 
-  const chips: [Filter, string][] = [["all", t.all], ["diamonds", t.diamonds], ["jewellery", t.jewellery], ...shapes.map((s): [Filter, string] => [s, s])];
+  // Diamonds | Jewellery only when the rail holds both; no chips at all when there is nothing to choose.
+  const mixed = new Set(items.map((i) => i.product.categories.includes("Diamonds"))).size > 1;
+  const kinds: [Filter, string][] = mixed ? [["diamonds", t.diamonds], ["jewellery", t.jewellery]] : [];
+  const chips: [Filter, string][] = [["all", t.all], ...kinds, ...shapes.map((s): [Filter, string] => [s, s])];
 
   return (
     <section ref={root} data-shown={shown ? "" : undefined} className="buy-collection relative overflow-hidden py-28 lg:py-36" aria-labelledby="buy-collection-title">
@@ -129,7 +132,7 @@ export function CollectionStage({ items, total, shopHref, line, t, card }: {
         <h2 id="buy-collection-title" className="text-4xl sm:text-6xl">{t.collectionTitle}</h2>
         <p className="mt-5 max-w-xl text-platinum-2">{line}</p>
 
-        <div role="radiogroup" aria-label={t.filterLabel} className="mt-10 flex flex-wrap gap-2">
+        {chips.length > 1 && <div role="radiogroup" aria-label={t.filterLabel} className="mt-10 flex flex-wrap gap-2">
           {chips.map(([value, label]) => (
             <button
               key={value}
@@ -142,7 +145,7 @@ export function CollectionStage({ items, total, shopHref, line, t, card }: {
               {label}
             </button>
           ))}
-        </div>
+        </div>}
       </div>
 
       <ul

@@ -4,6 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useMemo, useRef, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import type { Product } from "@/lib/products";
+import { jewelleryType } from "@/lib/shapes";
 import { site } from "@/lib/site";
 import { ProductCard } from "./ProductCard";
 import { useStore } from "./Store";
@@ -71,6 +72,7 @@ function ShopView({ items, t, card, params }: Props & { params: URLSearchParams 
     const prices = items.map((p) => p.price ?? 0).filter(Boolean);
     return {
       shape: uniq((p) => p.attributes.shape),
+      type: uniq(jewelleryType),
       color: [...uniq((p) => (isFancy(p) ? undefined : p.attributes.color), WHITE), ...(items.some(isFancy) ? ["fancy"] : [])],
       clarity: uniq((p) => p.attributes.clarity, CLARITY),
       cut: uniq((p) => p.attributes.cut),
@@ -80,10 +82,11 @@ function ShopView({ items, t, card, params }: Props & { params: URLSearchParams 
     };
   }, [items]);
 
-  const pick = (key: "shape" | "color" | "clarity" | "cut" | "lab") =>
+  const pick = (key: "shape" | "type" | "color" | "clarity" | "cut" | "lab") =>
     list(params.get(key)).map((v) => (key === "color" && norm(v).startsWith("fancy") ? "fancy" : options[key].find((o) => norm(o) === norm(v)) ?? v));
   const filters = {
     shape: pick("shape"),
+    type: pick("type"),
     color: pick("color"),
     clarity: pick("clarity"),
     cut: pick("cut"),
@@ -100,6 +103,7 @@ function ShopView({ items, t, card, params }: Props & { params: URLSearchParams 
     const out = items.filter((p) => {
       const a = p.attributes;
       if (filters.shape.length && !filters.shape.includes(a.shape ?? "")) return false;
+      if (filters.type.length && !filters.type.includes(jewelleryType(p) ?? "")) return false;
       if (filters.color.length && !filters.color.some((c) => (c === "fancy" ? isFancy(p) : a.color === c))) return false;
       if (filters.clarity.length && !filters.clarity.includes(a.clarity ?? "")) return false;
       if (filters.cut.length && !filters.cut.includes(a.cut ?? "")) return false;
@@ -127,11 +131,16 @@ function ShopView({ items, t, card, params }: Props & { params: URLSearchParams 
 
   const pages = Math.max(1, Math.ceil(results.length / perPage));
   const shown = results.slice((Math.min(page, pages) - 1) * perPage, Math.min(page, pages) * perPage);
-  const active = ["shape", "color", "clarity", "cut", "lab", "carat", "price", "stock"].filter((k) => params.get(k)).length;
+  const active = ["shape", "type", "color", "clarity", "cut", "lab", "carat", "price", "stock"].filter((k) => params.get(k)).length;
   const rate = currency === "EUR" ? site.eurPerUsd : 1;
 
   const panel = (
     <div className="space-y-8">
+      {options.type.length > 0 && (
+        <Group title={t.filters.type}>
+          {options.type.map((v) => <Chip key={v} on={filters.type.includes(v)} onClick={() => toggle("type", v)}>{v}</Chip>)}
+        </Group>
+      )}
       <Group title={t.filters.shape}>
         {options.shape.map((v) => <Chip key={v} on={filters.shape.includes(v)} onClick={() => toggle("shape", v)}>{v}</Chip>)}
       </Group>

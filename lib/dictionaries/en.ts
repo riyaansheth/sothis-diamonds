@@ -13,6 +13,7 @@ export const en = {
     wishlist: "Wishlist",
     cart: "Cart",
     sellToUs: "Sell to us",
+    sellJewellery: "Sell your jewellery",
     buyFromUs: "Buy from us",
     resources: "Guides",
     about: "About",
@@ -66,15 +67,49 @@ export const en = {
     buyInstead: ["Buying instead?", "See the collection"] as [string, string],
     sellInstead: ["Selling instead?", "See how selling works"] as [string, string],
   },
-  // The two journey pages behind the homepage choice.
+  // The homepage choice (Diamond | Jewellery), then Buy | Sell inside each: four journey pages.
   journeys: {
-    buy: {
-      title: "Buy Certified Diamonds & Fine Jewellery | Sothis Diamonds",
-      description: "Certified natural diamonds and fine jewellery from our Antwerp inventory. GIA, HRD and IGI reports, insured shipping and 14-day returns.",
+    diamond: {
+      title: "Diamond",
+      body: "Buy or sell diamonds",
+      cta: "Explore diamonds",
+      metaTitle: "Diamonds: Buy or Sell in Antwerp | Sothis Diamonds",
+      description: "Buy certified natural diamonds or sell yours to Antwerp specialists. Free valuation, no commission, insured shipping.",
+      buy: {
+        title: "Buy diamonds",
+        body: "Certified natural diamonds from our Antwerp inventory.",
+        cta: "See the diamonds",
+        metaTitle: "Buy Certified Diamonds in Antwerp | Sothis Diamonds",
+        description: "Certified natural diamonds from our Antwerp inventory. GIA, HRD and IGI reports, insured shipping and 14-day returns.",
+      },
+      sell: {
+        title: "Sell your diamond",
+        body: "Diamonds and coloured stones, loose or set. Free valuation, no commission.",
+        cta: "See how selling works",
+        metaTitle: "Sell Your Diamond in Antwerp | Sothis Diamonds",
+        description: "Sell diamonds and coloured stones to Antwerp specialists. Free valuation, no commission, fully insured pickup.",
+      },
     },
-    sell: {
-      title: "Sell Your Diamonds & Jewellery in Antwerp | Sothis Diamonds",
-      description: "Sell diamonds, coloured stones, watches and jewellery to Antwerp specialists. Free valuation, no commission, fully insured pickup.",
+    jewellery: {
+      title: "Jewellery",
+      body: "Buy or sell jewellery",
+      cta: "Explore jewellery",
+      metaTitle: "Jewellery: Buy or Sell in Antwerp | Sothis Diamonds",
+      description: "Buy fine jewellery set with natural diamonds and gemstones, or sell your jewellery, watches and antique pieces. Free valuation, no commission.",
+      buy: {
+        title: "Buy jewellery",
+        body: "Fine jewellery set with natural diamonds and gemstones, from our Antwerp collection.",
+        cta: "See the jewellery",
+        metaTitle: "Buy Fine Jewellery in Antwerp | Sothis Diamonds",
+        description: "Rings and bracelets set with natural diamonds and gemstones, from our Antwerp collection. Insured shipping and 14-day returns.",
+      },
+      sell: {
+        title: "Sell your jewellery",
+        body: "Rings, necklaces, watches and antique pieces. Free valuation, no commission.",
+        cta: "See how selling works",
+        metaTitle: "Sell Your Jewellery & Watches in Antwerp | Sothis Diamonds",
+        description: "Sell rings, necklaces, bracelets, watches and antique jewellery to Antwerp specialists. Free valuation, no commission, fully insured pickup.",
+      },
     },
   },
   // The Buy journey on the homepage. Facts come from the shipping and returns policies and the product data.
@@ -141,14 +176,36 @@ export const en = {
     closingTitle: "Found a stone you love?",
     closingPrimary: "Explore the collection",
     closingSecondary: "Ask about a stone",
-  },
-  paths: {
-    sell: ["Sell to us", "Diamonds, coloured stones, watches and jewellery. Free valuation, no commission.", "Get a free valuation"],
-    buy: ["Buy from us", "Certified diamonds and fine jewellery from our Antwerp inventory.", "Explore the collection"],
+    // Buy jewellery: what differs from buying a diamond. The piece is the Promise ring (SCP01).
+    jewelleryBuy: {
+      typesTitle: "Shop by type",
+      typesLine: "Every kind of piece we have, with how many.",
+      steps: [
+        ["Choose your piece", "Each piece is listed with its metal and its stones."],
+        ["Ask us anything", "Enquire about any piece, and a gemmologist replies personally."],
+        ["Secure checkout", "Pay by Bancontact, iDEAL, Visa, Mastercard or bank transfer."],
+        ["Insured delivery", "Fully insured and tracked with DHL Express, FedEx or UPS, signed for on arrival. We deliver to Europe, the US, Canada and Australia."],
+        ["Arrives with its papers", "Any certificates for its stones travel with the piece."],
+        ["14-day returns", "Unworn pieces in their original condition, with packaging and certificates, can be returned within 14 days."],
+      ],
+      piece: [["Metal", "Platinum or gold"], ["Centre", "5 ct cushion"], ["Colour", "Y–Z"], ["Sides", "Heart diamonds"]],
+      scene: { report: "The piece", ask: "Ask about this piece" },
+      why: [
+        ["Natural diamonds", "Every diamond we set is natural, never lab-grown or a simulant."],
+        ["Gold and platinum", "Made in 18k gold and platinum, never silver or copper."],
+        ["From Antwerp", "Pieces chosen and checked in the heart of Antwerp’s diamond district."],
+        ["14-day returns", "Changed your mind? Return unworn pieces within 14 days."],
+        ["Insured to your door", "Every shipment is insured until it is signed for."],
+      ],
+      closingTitle: "Found a piece you love?",
+      closingSecondary: "Ask about a piece",
+    },
   },
   sell: {
     title: "Sell with confidence",
     body: "We buy diamonds, coloured stones, watches, antique and designer jewellery. Every piece is assessed by certified gemmologists, and you get a clear offer with no obligation.",
+    diamondBody: "We buy diamonds of any size, loose or set, certified or not, and coloured stones. Every stone is assessed by certified gemmologists, and you get a clear offer with no obligation.",
+    jewelleryBody: "We buy rings, necklaces, bracelets, earrings, watches and antique pieces. Every piece is assessed by certified gemmologists, and you get a clear offer with no obligation.",
     categories: [
       ["Diamonds", "Loose and certified diamonds of any size.", "/sell-diamond/"],
       ["Coloured stones", "Sapphires, rubies, emeralds and fancy colour diamonds.", "/sell-colored-stones/"],
@@ -295,7 +352,7 @@ export const en = {
     emptyCategory: "Nothing is listed here right now. Tell us what you're looking for and we'll source it.",
     enquire: "Enquire",
     sort: { default: "Featured", popularity: "Most popular", newest: "Newest", "price-asc": "Price: low to high", "price-desc": "Price: high to low", carat: "Carat: largest first" },
-    filters: { shape: "Shape", carat: "Carat", price: "Price", color: "Colour", fancy: "Fancy colour", clarity: "Clarity", cut: "Cut", lab: "Lab report", inStock: "In stock only" },
+    filters: { type: "Type", shape: "Shape", carat: "Carat", price: "Price", color: "Colour", fancy: "Fancy colour", clarity: "Clarity", cut: "Cut", lab: "Lab report", inStock: "In stock only" },
   },
   sellPage: {
     pages: {

@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { languageNames, locales, localePath, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { SiteMenu } from "./SiteMenu";
 import { useStore } from "./Store";
+
+const noop = () => () => {};
+const readJourney = () => {
+  try { return sessionStorage.getItem("journey"); } catch { return null; }
+};
 
 const icon = "size-5 stroke-current fill-none [stroke-width:1.5]";
 
@@ -25,14 +30,17 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
   const { cart, wishlist } = useStore();
   const href = (path: string) => localePath(lang, path);
 
-  // The logo leads back to the journey the visitor chose (Buy from us or Sell to us), remembered for the
-  // visit; from that journey's own page, or before choosing, it goes to the homepage choice.
+  // The logo leads back to the journey the visitor chose (buy or sell, diamonds or jewellery), remembered
+  // for the visit; from that journey's own page, or before choosing, it goes to the homepage choice.
   const pathname = usePathname();
   const router = useRouter();
-  const journeys = [href("/new/"), href("/pre-owned/")];
+  const journeys = ["/diamonds/", "/diamonds/buy/", "/diamonds/sell/", "/jewellery/", "/jewellery/buy/", "/jewellery/sell/"].map(href);
   useEffect(() => {
     if (journeys.includes(pathname)) try { sessionStorage.setItem("journey", pathname); } catch {}
   }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+  // In the jewellery journey (or on other pages after choosing it), the sell link is "Sell your jewellery".
+  const stored = useSyncExternalStore(noop, readJourney, () => null);
+  const jewellery = pathname.startsWith(href("/jewellery/")) || (!pathname.startsWith(href("/diamonds/")) && Boolean(stored?.startsWith(href("/jewellery/"))));
   const toJourney = (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     let j: string | null = null;
@@ -79,8 +87,8 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </a>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
-          <Link href={href("/sell-diamond/")} className="hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
-            {t.sell}
+          <Link href={href(jewellery ? "/sell-other-jewellery/" : "/sell-diamond/")} className="hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
+            {jewellery ? t.sellJewellery : t.sell}
           </Link>
           <Link href={href("/contact-us/")} className="hidden py-2 text-sm tracking-[0.04em] hover:text-burgundy lg:block">
             {t.contact}

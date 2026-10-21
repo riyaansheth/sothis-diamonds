@@ -60,7 +60,8 @@ function reach(poly: Pt[], a: number) {
 
 type Ring = { k: number; y: number; off: number }; // fraction of the outline, height, half-step offset
 
-function build(shape: string) {
+/** A closed stone mesh of any shop shape, girdle about 1, crown up. */
+export function build(shape: string) {
   const poly = OUTLINES[shape] ?? OUTLINES.Round;
   const step = shape === "Emerald" || shape === "Asscher";
   // Step cuts follow their corners (no offsets: long flat steps); brilliants use 16 alternating

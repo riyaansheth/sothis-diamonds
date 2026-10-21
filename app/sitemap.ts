@@ -25,8 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const home = Object.fromEntries(locales.map((l) => [l, `${site.url}${l === "en" ? "/" : `/${l}/`}`]));
   const homeAlt = { ...home, "x-default": home.en };
   const entries: MetadataRoute.Sitemap = locales.map((l) => ({ url: home[l], alternates: { languages: homeAlt } }));
-  // The two journey pages behind the homepage choice.
-  for (const path of ["/new/", "/pre-owned/"]) {
+  // The pages behind the homepage choice: Buy | Sell for diamonds and jewellery, and their four journeys.
+  for (const path of ["/diamonds/", "/diamonds/buy/", "/diamonds/sell/", "/jewellery/", "/jewellery/buy/", "/jewellery/sell/"]) {
     const alt = Object.fromEntries(locales.map((l) => [l, `${site.url}${localePath(l, path)}`]));
     for (const l of locales) entries.push({ url: alt[l], alternates: { languages: { ...alt, "x-default": alt.en } } });
   }

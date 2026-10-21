@@ -27,10 +27,10 @@ function useShown<T extends HTMLElement>() {
 }
 
 /** Wrapper that gets data-shown once scrolled into view; CSS holds entrance animations until then. */
-export function InView({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function InView({ children, className = "", style }: { children: ReactNode; className?: string; style?: React.CSSProperties }) {
   const ref = useShown<HTMLDivElement>();
   return (
-    <div ref={ref} data-inview className={className}>
+    <div ref={ref} data-inview className={className} style={style}>
       {children}
     </div>
   );

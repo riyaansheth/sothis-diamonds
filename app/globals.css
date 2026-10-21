@@ -836,12 +836,14 @@ html[data-returning] :is(.loader-light, .loader-foot) {
 .home-cta {
   transition: opacity 0.4s ease;
 }
-.home-choice[data-open] .paths {
+.home-choice[data-band][data-open] .paths {
   min-height: max(16rem, 32vh);
 }
 .home-choice [data-role="chosen"] {
   flex-grow: 1;
   cursor: default;
+}
+.home-choice[data-band] [data-role="chosen"] {
   justify-content: center;
   padding-top: 7rem; /* clears the header, which sits over the band */
   padding-bottom: 6rem;
@@ -873,24 +875,37 @@ html[data-returning] :is(.loader-light, .loader-foot) {
     scale 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
     transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.home-choice [data-role="chosen"] .paths-window {
+.home-choice[data-band] [data-role="chosen"] .paths-window {
   opacity: 0;
   scale: 0.8;
   transform: translateY(-12px);
   pointer-events: none;
 }
-.home-choice .home-sell[data-role="chosen"] .paths-bg {
+.home-choice[data-band] .home-sell[data-role="chosen"] .paths-bg {
   background-image: url("/brand/bg-sell-black-hq.webp");
 }
-.home-choice .home-buy[data-role="chosen"] .paths-bg {
+.home-choice[data-band] .home-buy[data-role="chosen"] .paths-bg {
   background-image: url("/brand/bg-buy-burgundy-hq.webp");
 }
-.home-choice [data-role="chosen"] .paths-bg {
+.home-choice[data-band] [data-role="chosen"] .paths-bg {
   background-position: center 78%;
   transform: none;
 }
-.home-choice [data-role="chosen"] .paths-sheen {
+.home-choice[data-band] [data-role="chosen"] .paths-sheen {
   display: none;
+}
+/* A split that follows a widened half (Diamond -> Buy | Sell): the chosen silk arrives full width and
+   the other half grows back in beside it. */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .home-choice .paths > [data-enter] {
+    animation: half-in 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+@keyframes half-in {
+  from {
+    flex-grow: 0;
+    opacity: 0;
+  }
 }
 /* The band a journey page opens with: matches the homepage's chosen half, so the change of page is seamless. */
 .journey-band {
@@ -909,7 +924,7 @@ html[data-returning] :is(.loader-light, .loader-foot) {
 .journey-band-sell::before {
   background-image: url("/brand/bg-sell-black-hq.webp");
 }
-.home-choice [data-role="chosen"]::after,
+.home-choice[data-band] [data-role="chosen"]::after,
 .journey-band::after {
   content: "";
   position: absolute;

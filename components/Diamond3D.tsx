@@ -79,8 +79,8 @@ export const STONE_READY = "sothis:stone-ready";
 /** Pointer state shared between the DOM handlers and the render loop (no React state per move). */
 type Control = { rx: number; ry: number; vy: number; boost: number; dragging: boolean };
 
-function Stone({ cut, color, spin, control, geometry: custom, tilt, size }: { cut: Cut; color: string; spin: boolean; control: () => Control; geometry?: THREE.BufferGeometry; tilt: number; size: number }) {
-  const mesh = useRef<THREE.Mesh>(null);
+function Stone({ cut, color, spin, control, geometry: custom, model, tilt, size }: { cut: Cut; color: string; spin: boolean; control: () => Control; geometry?: THREE.BufferGeometry; model?: React.ReactNode; tilt: number; size: number }) {
+  const mesh = useRef<THREE.Object3D>(null);
   const announced = useRef(false);
   const env = useStudioEnv();
   const builtIn = useMemo(() => (cut === "round" ? roundBrilliant() : asscher()), [cut]);
@@ -114,6 +114,7 @@ function Stone({ cut, color, spin, control, geometry: custom, tilt, size }: { cu
     }
   });
 
+  if (model) return <group ref={mesh} rotation={[tilt, 0.3, 0.08]}>{model}</group>;
   return (
     // Keyed by geometry: the refraction material builds its ray-tracing data once per mesh.
     <mesh key={geometry.uuid} ref={mesh} geometry={geometry} rotation={[tilt, 0.3, 0.08]}>
@@ -128,12 +129,14 @@ function Stone({ cut, color, spin, control, geometry: custom, tilt, size }: { cu
  * (html[data-covered] is set while the homepage opening sits over the stones), and stays still for
  * visitors who prefer reduced motion.
  */
-export default function Diamond3D({ cut = "round", color = "#ffffff", className, geometry, tilt = 0.62, size = 1 }: {
+export default function Diamond3D({ cut = "round", color = "#ffffff", className, geometry, model, tilt = 0.62, size = 1 }: {
   cut?: Cut;
   color?: string;
   className?: string;
   /** Any closed stone mesh, girdle radius about 1 (overrides `cut`). */
   geometry?: THREE.BufferGeometry;
+  /** A whole 3D piece (three.js scene content) in place of a single stone, e.g. a ring. */
+  model?: React.ReactNode;
   /** Forward tilt in radians: 0.62 shows the crown, about 1 shows the outline face-up. */
   tilt?: number;
   size?: number;
@@ -210,7 +213,7 @@ export default function Diamond3D({ cut = "round", color = "#ffffff", className,
         gl={{ antialias: true, alpha: true }}
         aria-hidden
       >
-        <Stone cut={cut} color={color} spin={spin} control={getControl} geometry={geometry} tilt={tilt} size={size} />
+        <Stone cut={cut} color={color} spin={spin} control={getControl} geometry={geometry} model={model} tilt={tilt} size={size} />
       </Canvas>
     </div>
   );
