@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
  * `playOnHover` it plays while the pointer is over its card (the nearest `.group`), since a link
  * laid over the video would otherwise catch the hover.
  */
-export function StoneVideo({ src, poster, className, playOnHover }: { src: string; poster?: string; className?: string; playOnHover?: boolean }) {
+export function StoneVideo({ src, poster, className, playOnHover, still }: { src: string; poster?: string; className?: string; playOnHover?: boolean; still?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -30,5 +30,6 @@ export function StoneVideo({ src, poster, className, playOnHover }: { src: strin
     };
   }, [playOnHover]);
 
-  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload={playOnHover ? "none" : "metadata"} aria-hidden className={className} />;
+  // `still`: shows its first frame until played (#t makes Safari draw it; metadata is a small download).
+  return <video ref={ref} src={still ? `${src}#t=0.1` : src} poster={poster} muted loop playsInline preload={playOnHover && !still ? "none" : "metadata"} aria-hidden className={className} />;
 }

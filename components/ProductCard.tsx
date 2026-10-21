@@ -29,9 +29,13 @@ export function ProductCard({ product: p, href, t, crop, priority }: { product: 
         ) : (
           !p.video && <p className="absolute inset-0 grid place-items-center text-sm text-platinum-2">{t.noPhoto}</p>
         )}
-        {p.video && (
-          <StoneVideo src={mediaUrl(p.video)} playOnHover className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        )}
+        {p.video &&
+          (p.image ? (
+            <StoneVideo src={mediaUrl(p.video)} playOnHover className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          ) : (
+            // No photo yet: the video itself is the picture (its first frame), and plays on hover.
+            <StoneVideo src={mediaUrl(p.video)} playOnHover still className="absolute inset-0 size-full object-cover" />
+          ))}
         <Link href={href} tabIndex={-1} aria-hidden className="absolute inset-0" />
         <WishlistButton id={p.id} t={t} />
       </div>
