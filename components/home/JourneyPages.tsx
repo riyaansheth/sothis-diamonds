@@ -45,7 +45,7 @@ export function choicePage(kind: Kind) {
           <link rel="preload" as="image" href="/brand/bg-buy-burgundy.webp" fetchPriority="high" />
           <link rel="preload" as="image" href="/brand/bg-sell-black.webp" fetchPriority="high" />
           <KindChoice
-            band={{ title: j.title, body: j.body, silk: kind === "diamond" ? "buy" : "sell", instead: j.instead, insteadLabel: t.journeys[other].cta, insteadHref: localePath(lang, KIND_PATH[other]) }}
+            band={{ title: j.title, body: j.body, cta: j.cta, silk: kind === "diamond" ? "buy" : "sell", instead: j.instead, insteadLabel: t.journeys[other].cta, insteadHref: localePath(lang, KIND_PATH[other]) }}
             piece={HOME_PIECES[kind]}
             sides={[
               { title: j.buy.title, body: j.buy.body, cta: j.buy.cta, href: localePath(lang, `${path}buy/`), silk: "buy" },

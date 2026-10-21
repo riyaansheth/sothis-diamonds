@@ -61,7 +61,7 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
     if (open !== null) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return router.push(href);
     setOpen(side);
-    window.setTimeout(() => router.push(href), 700);
+    window.setTimeout(() => router.push(href), 900); // once the widening (0.9 s) has finished: the next page starts from that frame
   };
 
   const panel = "group relative flex flex-col justify-end overflow-hidden border-line p-8 text-left sm:p-12";

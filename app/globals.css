@@ -862,6 +862,21 @@ html[data-returning] :is(.loader-light, .loader-foot) {
   opacity: 1;
   transition-delay: 0.3s;
 }
+/* The chosen half holds its hovered look (silk drawn in, stone lifted, the light gone) so the page it
+   opens can begin from exactly that frame, whether or not the pointer was on it. */
+.home-choice [data-role="chosen"] .paths-bg {
+  transform: scale(1.1);
+  filter: saturate(1.1) brightness(1.04);
+}
+.home-choice [data-role="chosen"] .paths-window {
+  transform: scale(1.08);
+}
+.home-choice .paths-glow {
+  transition: opacity 0.6s ease;
+}
+.home-choice [data-role="chosen"] .paths-glow {
+  opacity: 0;
+}
 .home-choice .paths-window {
   transition:
     opacity 0.5s ease 0.15s,
@@ -909,7 +924,10 @@ html[data-returning] :is(.loader-light, .loader-foot) {
     animation: kind-band var(--settle) backwards;
   }
   .kind-piece {
-    animation: kind-piece var(--settle) backwards;
+    animation: kind-piece-sm var(--settle) backwards;
+  }
+  .kind-band .paths-bg {
+    animation: silk-settle 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s backwards;
   }
   /* The halves are already there under the band as it lifts; only their words arrive after. */
   .kind-half > :not(.paths-bg, .paths-sheen) {
@@ -919,16 +937,37 @@ html[data-returning] :is(.loader-light, .loader-foot) {
     animation: fade-in 0.6s ease 1.2s backwards;
   }
 }
-/* Start where the homepage left off: the chosen half full screen, its piece where it floated there. */
+/* Start where the homepage left off: the chosen half full screen, its silk drawn in, its piece exactly
+   where and as large as it floated there (the homepage window: min(30rem, 34vw) wide, its centre 22% of
+   that above the middle, lifted 8%; on phones min(30rem, 80vw) wide, 6% from the top). */
 @keyframes kind-band {
   from {
     height: 100%;
   }
 }
+@keyframes silk-settle {
+  from {
+    transform: scale(1.1);
+    filter: saturate(1.1) brightness(1.04);
+  }
+}
 @keyframes kind-piece {
   from {
-    top: 40%;
-    scale: 1.45;
+    top: calc(50% - min(30rem, 34vw) * 0.22);
+    width: min(30rem, 34vw);
+    scale: 1.08;
+  }
+}
+@keyframes kind-piece-sm {
+  from {
+    top: calc(6% + min(30rem, 80vw) / 2);
+    width: min(30rem, 80vw);
+    scale: 1.08;
+  }
+}
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .kind-piece {
+    animation-name: kind-piece;
   }
 }
 /* Choosing Buy or Sell: that half takes the width and the piece steps aside before the journey opens. */

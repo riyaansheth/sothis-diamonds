@@ -15,7 +15,7 @@ type Half = Omit<Side, "piece" | "after">;
  * Choosing a half widens it and the journey page opens on its band.
  */
 export function KindChoice({ band, piece, sides }: {
-  band: { title: string; body: string; silk: "buy" | "sell"; instead: string; insteadLabel: string; insteadHref: string };
+  band: { title: string; body: string; cta: string; silk: "buy" | "sell"; instead: string; insteadLabel: string; insteadHref: string };
   piece: Side["piece"];
   sides: [Half, Half];
 }) {
@@ -34,11 +34,13 @@ export function KindChoice({ band, piece, sides }: {
 
   return (
     <section data-open={open ?? undefined} className="kind-choice">
-      <div className="kind-band relative isolate flex flex-col justify-end overflow-hidden px-8 pb-8 sm:px-12 sm:pb-10">
+      {/* Laid out exactly like the homepage half it continues (title, line, and the space its link held). */}
+      <div className="kind-band relative isolate flex flex-col justify-end overflow-hidden p-8 sm:p-12">
         <span aria-hidden className={`paths-bg ${silk(band.silk)}`} />
-        <h1 className="relative font-display text-[clamp(3rem,7.5vw,6rem)] leading-none">{band.title}</h1>
-        <p className="relative mt-3 text-ink/80">{band.body}</p>
-        <p className="kind-instead absolute right-8 bottom-8 hidden text-sm text-ink/75 sm:right-12 sm:bottom-10 md:block">
+        <h1 className="relative font-display text-[clamp(3rem,7.5vw,6rem)] leading-none whitespace-nowrap">{band.title}</h1>
+        <p className="relative mt-4 max-w-sm text-ink/80">{band.body}</p>
+        <span aria-hidden className="invisible relative mt-8 inline-block self-start border-b pb-1 text-sm tracking-[0.04em]">{band.cta}</span>
+        <p className="kind-instead absolute right-8 bottom-8 hidden text-sm text-ink/75 sm:right-12 sm:bottom-12 md:block">
           {band.instead}{" "}
           <Link href={band.insteadHref} className="border-b border-white/70 pb-0.5 hover:border-ink">{band.insteadLabel}</Link>
         </p>

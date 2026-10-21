@@ -32,15 +32,19 @@ export function PieceSlot({ piece, className }: { piece: Piece; className: strin
   return <div ref={ref} aria-hidden className={className} />;
 }
 
-/** Puts a box over its slot: same place and scale, the slot's opacity, clipped as the slot is. */
+// The box keeps one size and is scaled onto its slot: the 3D canvas never resizes (a resize clears it
+// for a frame, which showed as a blink when the piece changed page or grew).
+const BASE = 640;
+
+/** Puts a box over its slot: same place and size, the slot's opacity, clipped as the slot is. */
 function follow(box: HTMLElement, slot: HTMLElement | undefined) {
-  const w = slot?.offsetWidth ?? 0;
-  const h = slot?.offsetHeight ?? 0;
-  if (!slot || !w || !h) {
+  const r = slot?.getBoundingClientRect();
+  if (!slot || !r?.width || !r.height) {
     box.style.visibility = "hidden";
     return;
   }
-  const r = slot.getBoundingClientRect();
+  const w = BASE;
+  const h = BASE * (r.height / r.width);
   const s = r.width / w;
   let opacity = 1;
   let clip = { top: r.top, left: r.left, bottom: r.bottom, right: r.right };
