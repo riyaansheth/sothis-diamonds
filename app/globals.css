@@ -890,7 +890,7 @@ html[data-returning] :is(.loader-light, .loader-foot) {
 /* /diamonds/ and /jewellery/ (KindChoice). Arrives as the homepage's widened half, then settles: the
    half becomes a band naming the choice, Buy | Sell opens beneath, the piece glides onto their seam. */
 .kind-choice {
-  --band: max(13rem, 34vh);
+  --band: max(16rem, 38vh);
   --settle: 1.1s cubic-bezier(0.65, 0, 0.25, 1) 0.25s;
   position: relative;
   display: flex;
