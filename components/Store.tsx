@@ -14,6 +14,7 @@ export function useStore() {
   return {
     ...state,
     setCurrency: (currency: Currency) => save({ ...state, currency }),
+    clearCart: () => save({ ...state, cart: [] }),
     toggle: (list: "cart" | "wishlist" | "compare", id: number) =>
       save({ ...state, [list]: state[list].includes(id) ? state[list].filter((x) => x !== id) : [...state[list], id].slice(list === "compare" ? -4 : 0) }),
   };

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { Price, useStore } from "./Store";
 
@@ -95,11 +95,28 @@ function Address({ t, prefix, auto }: { t: T; prefix: string; auto: string }) {
   );
 }
 
+// Back from Stripe after paying: the checkout URL carries ?paid=<session>.
+const noSubscribe = () => () => {};
+const paidSession = () => new URLSearchParams(location.search).get("paid");
+
 export function CheckoutView({ items, t, links }: { items: Item[]; t: T; links: { shop: string; contact: string } }) {
-  const { cart, currency } = useStore();
+  const { cart, currency, clearCart } = useStore();
   const [same, setSame] = useState(true);
-  const [status, setStatus] = useState<"idle" | "sending" | "not-connected" | "failed">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "not-connected" | "too-large" | "failed">("idle");
+  const [limit, setLimit] = useState(0);
+  const paid = useSyncExternalStore(noSubscribe, paidSession, () => null);
+  useEffect(() => {
+    if (paid && cart.length) clearCart();
+  }, [paid]); // eslint-disable-line react-hooks/exhaustive-deps -- once, on return from Stripe
   const lines = byIds(items, cart).filter((i) => i.inStock);
+  if (paid)
+    return (
+      <div role="status" className="mt-12 max-w-xl border-l-2 border-burgundy pl-6">
+        <h2 className="text-3xl">{t.paidTitle}</h2>
+        <p className="mt-4 text-platinum-2">{t.paidBody}</p>
+        <Link href={links.shop} className="btn btn-secondary mt-8">{t.browse}</Link>
+      </div>
+    );
   if (!lines.length) return <Empty text={t.cartEmpty} cta={t.browse} href={links.shop} />;
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -110,10 +127,12 @@ export function CheckoutView({ items, t, links }: { items: Item[]; t: T; links: 
       const res = await fetch("/api/checkout/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...body, sameBilling: same, currency, items: lines.map((i) => i.id) }),
+        body: JSON.stringify({ ...body, sameBilling: same, currency, items: lines.map((i) => i.id), returnPath: location.pathname }),
       });
       const data = await res.json();
-      setStatus(data.connected === false ? "not-connected" : "failed");
+      if (data.url) return window.location.assign(data.url); // on to Stripe's payment page
+      if (data.tooLarge) setLimit(data.limit);
+      setStatus(data.connected === false ? "not-connected" : data.tooLarge ? "too-large" : "failed");
     } catch {
       setStatus("failed");
     }
@@ -157,10 +176,11 @@ export function CheckoutView({ items, t, links }: { items: Item[]; t: T; links: 
           <span className="font-semibold"><Price usd={subtotal(lines)} /></span>
         </div>
         <p className="mt-4 text-sm text-platinum-2">{t.insured}</p>
+        {currency === "USD" && <p className="mt-2 text-sm text-platinum-2">{t.inEuros}</p>}
         <button type="submit" disabled={status === "sending"} className="btn btn-primary mt-6 w-full">{status === "sending" ? t.checking : t.pay}</button>
-        {(status === "not-connected" || status === "failed") && (
+        {(status === "not-connected" || status === "too-large" || status === "failed") && (
           <div role="status" className="mt-5 border-l-2 border-burgundy pl-4 text-sm">
-            <p>{status === "not-connected" ? t.notConnected : t.failed}</p>
+            <p>{status === "not-connected" ? t.notConnected : status === "too-large" ? t.tooLarge.replace("{limit}", `€${limit.toLocaleString("en-IE")}`) : t.failed}</p>
             <Link href={links.contact} className="mt-2 inline-block font-semibold text-burgundy underline-offset-4 hover:underline">{t.contactUs}</Link>
           </div>
         )}
