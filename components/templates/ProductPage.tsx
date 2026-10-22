@@ -125,6 +125,13 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
             <div className="relative size-10"><WishlistButton id={p.id} t={t.stones} /></div>
             <CompareButton id={p.id} t={t.stones} />
           </div>
+          {/* Customisation: the contact form opens with this piece already written into the message. */}
+          <Link
+            href={`${localePath(lang, "/contact-us/")}?stone=${encodeURIComponent(p.sku)}&piece=${encodeURIComponent(name)}&customise=1`}
+            className="mt-6 inline-block border-b border-white/70 pb-0.5 text-sm hover:border-burgundy"
+          >
+            {isDiamond ? tp.customiseStone : tp.customise}
+          </Link>
 
           {p.short_description && !isDiamond && (
             <div className="prose mt-10 text-base" dangerouslySetInnerHTML={{ __html: p.short_description }} />

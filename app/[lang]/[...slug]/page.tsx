@@ -104,10 +104,10 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/[...slug]"
   if (route.kind === "product_tag" && indexable(route)) {
     const name = (titleFor(route) ?? "").replace(/\s*Color$/i, "");
     title = `${name}${/diamonds?$/i.test(name) ? "" : " Diamonds"} in Antwerp | Sothis Diamonds`;
-    description = `${name} diamonds from our Antwerp inventory, each with its grading report, insured shipping and 14-day returns.`;
+    description = `${name} diamonds from our Antwerp inventory, each with its grading report and fully insured shipping.`;
   }
   if (route.kind === "product_cat" || route.kind === "product_tag") {
-    description ||= `${titleFor(route)}: certified diamonds and fine jewellery from our Antwerp inventory, with insured shipping and 14-day returns.`;
+    description ||= `${titleFor(route)}: certified diamonds and fine jewellery from our Antwerp inventory, with fully insured shipping.`;
   }
 
   image ??= "/brand/og-default.jpg";

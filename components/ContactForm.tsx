@@ -5,9 +5,15 @@ import { useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { site } from "@/lib/site";
 
-/** Contact form; "Enquire about this stone" links here with ?stone=SKU, which prefills the message. */
+/**
+ * Contact form; "Enquire about this stone" links here with ?stone=SKU, which prefills the message, and
+ * "Customise" adds &piece=<name>&customise=1 for a customisation request.
+ */
 export function ContactForm({ t, f }: { t: Dictionary["contact"]; f: Dictionary["form"] }) {
-  const stone = useSearchParams().get("stone")?.slice(0, 40);
+  const params = useSearchParams();
+  const stone = params.get("stone")?.slice(0, 40);
+  const piece = params.get("piece")?.slice(0, 120);
+  const prefill = !stone ? "" : params.has("customise") ? t.customise.replace("{piece}", piece || stone).replace("{sku}", stone) : t.aboutStone.replace("{sku}", stone);
   const [status, setStatus] = useState<"idle" | "sending" | "preview" | "error">("idle");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -53,7 +59,7 @@ export function ContactForm({ t, f }: { t: Dictionary["contact"]; f: Dictionary[
       </fieldset>
       <label className="block sm:col-span-2">
         <span className="mb-1.5 block text-sm text-platinum-2">{t.message}</span>
-        <textarea className="field min-h-40 py-3" name="message" required maxLength={4000} defaultValue={stone ? t.aboutStone.replace("{sku}", stone) : ""} />
+        <textarea className="field min-h-40 py-3" name="message" required maxLength={4000} defaultValue={prefill} />
       </label>
       <div className="flex flex-wrap items-center gap-5 sm:col-span-2">
         <button type="submit" disabled={status === "sending"} className="btn btn-primary">{status === "sending" ? f.sending : t.submit}</button>

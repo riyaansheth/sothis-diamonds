@@ -2,10 +2,10 @@ export const site = {
   name: "Sothis Diamonds",
   url: "https://sothisdiamonds.com",
   email: "info@sothisdiamonds.com",
-  phones: ["+32 470 78 12 19", "+32 477 41 85 68"],
+  phones: ["+32 470 78 12 19"],
   address: { street: "Hoveniersstraat 2 / Bus 210", postcode: "2018", city: "Antwerpen", country: "Belgium" },
   mapUrl: "https://maps.google.com/?q=Hoveniersstraat+2,+2018+Antwerpen",
-  // The old about page says both "since 1970" and "10+ years"; confirm with the client.
+  // The family business since 1970 (Bharat Brothers); Sothis Diamonds itself since 2018.
   founded: 1970,
   // TODO(client): opening hours aren't on the old site. Shown on the contact page once set.
   hours: null as string | null,

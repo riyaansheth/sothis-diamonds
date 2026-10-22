@@ -34,8 +34,7 @@ Key facts:
 - Natural diamonds only: no lab-grown diamonds or simulants, bought or sold
 - Jewellery metals: 18k gold and platinum; no silver or copper
 - Payment methods: Bancontact, iDEAL, Visa, Mastercard, bank transfer
-- Delivery: insured and tracked (DHL Express, FedEx, UPS) to Europe (3–7 business days), the US and Canada (5–10), Australia (7–12)
-- Returns: 14 days from delivery, unworn and with certificates; refunds within 7–10 business days
+- Delivery: insured and tracked (FedEx, UPS, Malca-Amit, Ferrari Group, Brink’s) to Europe (3–7 business days), the US and Canada (5–10), Australia (7–12)
 - Languages: English, French, Dutch, German, Italian, Spanish
 
 ## Sell to Sothis

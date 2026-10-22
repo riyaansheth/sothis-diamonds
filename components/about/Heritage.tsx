@@ -13,7 +13,7 @@ import { seg, setVars, useScrub } from "./useScrub";
 export function Heritage({ photo, t, crumbs }: {
   photo: string;
   crumbs?: ReactNode;
-  t: { rooted: string; since: string; heritage: string[]; then: string; now: string; nowPlace: string; founded: string; caption: string };
+  t: { rooted: string; since: string; heritage: string[]; timeline: string[][]; caption: string };
 }) {
   const root = useRef<HTMLElement>(null);
 
@@ -62,7 +62,7 @@ export function Heritage({ photo, t, crumbs }: {
             </div>
             <ol className="relative mt-12 space-y-8 border-l border-line pl-6">
               <span aria-hidden className="absolute -left-px top-0 w-px origin-top bg-champagne" style={{ height: "100%", transform: "scaleY(var(--line, 1))" }} />
-              {[[t.founded, t.then], [t.now, t.nowPlace]].map(([when, what]) => (
+              {t.timeline.map(([when, what]) => (
                 <li key={when} className="relative">
                   <span aria-hidden className="absolute -left-[1.72rem] top-1.5 size-2 rounded-full bg-champagne" />
                   <p className="font-display text-2xl">{when}</p>

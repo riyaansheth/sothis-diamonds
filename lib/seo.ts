@@ -35,7 +35,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   },
   shop: {
     title: "Buy GIA Certified Diamonds Online | Antwerp | Sothis",
-    description: "Certified diamonds and fine jewellery from our Antwerp inventory: GIA, HRD and IGI graded stones with insured shipping and 14-day returns.",
+    description: "Certified diamonds and fine jewellery from our Antwerp inventory: GIA, HRD and IGI graded stones with fully insured shipping.",
   },
   "about-sothis-diamonds": {
     title: "About Sothis Diamonds: Antwerp Diamond Dealer",
@@ -83,7 +83,7 @@ export function productMeta(p: Product) {
     const stock = p.in_stock ? "In stock in Antwerp" : "Sold";
     return {
       title: `${uniqueName(p)} | ${BRAND}`,
-      description: clip(`${productSeoName(p)}${facts ? `: ${facts}` : ""}. ${[price, stock].filter(Boolean).join(", ")}. Certified, insured shipping and 14-day returns.`),
+      description: clip(`${productSeoName(p)}${facts ? `: ${facts}` : ""}. ${[price, stock].filter(Boolean).join(", ")}. Certified, with fully insured shipping.`),
     };
   }
   const about = p.short_description ? plain(p.short_description) : "";

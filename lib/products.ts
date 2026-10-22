@@ -45,9 +45,6 @@ export const productBySku = (sku: string) => {
   return product;
 };
 
-export const newestProducts = (count: number) =>
-  [...products].sort((a, b) => b.created.localeCompare(a.created)).slice(0, count);
-
 /** "ASSCHER 7.79ct Fancy Vivid Yellow Even VVS1 Diamond" -> "Asscher 7.79 ct" (jewellery keeps its own title). */
 export const displayName = (p: Product) =>
   p.attributes.shape && p.attributes.carat ? `${p.attributes.shape} ${p.attributes.carat} ct` : p.title;

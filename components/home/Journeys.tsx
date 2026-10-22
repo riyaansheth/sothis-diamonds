@@ -221,7 +221,7 @@ export function BuyJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
   const labs = { gia: count((p) => p.attributes.lab === "GIA"), hrd: count((p) => p.attributes.lab === "HRD"), igi: count((p) => p.attributes.lab === "IGI") };
   const ra = allProducts.find((p) => p.attributes.lab === "GIA" && p.attributes.carat && p.attributes.color && p.attributes.clarity)!.attributes;
   // Jewellery: its own questions (metals first), without the ones only about loose stones.
-  const faq = kind === "diamond" ? b.faq : [2, 0, 3, 4, 5, 6, 7, 10, 11].map((i) => b.faq[i]);
+  const faq = kind === "diamond" ? b.faq : [2, 0, 3, 4, 5, 6, 9].map((i) => b.faq[i]);
   const why = kind === "diamond" ? b.why : j.why;
 
   return (
@@ -274,11 +274,6 @@ export function BuyJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
                     const key = part.slice(1, -1) as keyof typeof labs;
                     return part.startsWith("{") ? <CountUp key={k} value={labs[key]} /> : part;
                   })
-                ) : i === 3 ? (
-                  <>
-                    {body}{" "}
-                    <Link href={href("/refund_returns/")} className="underline underline-offset-4">{b.returnsLink}</Link>
-                  </>
                 ) : (
                   body
                 )}

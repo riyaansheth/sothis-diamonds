@@ -36,7 +36,7 @@ export function AboutPage({ lang }: { lang: Locale; crumbs?: Crumb[] }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Heritage
         photo={mediaUrl(STUDIO)}
-        t={{ rooted: a.rooted, since: fill(a.since), heritage: a.heritage.map(fill), then: a.then, now: a.now, nowPlace: a.nowPlace, founded: String(site.founded), caption: fill(a.stoneCaption) }}
+        t={{ rooted: a.rooted, since: fill(a.since), heritage: a.heritage.map(fill), timeline: a.timeline, caption: fill(a.stoneCaption) }}
       />
       <Loupe src={optimised(mediaUrl(STUDIO))} t={{ title: a.loupeTitle, body: a.loupeBody, inspect: a.inspect, inspectTouch: a.inspectTouch, pointsLabel: a.pointsLabel, point: a.point, points: a.points }} />
       <Anatomy

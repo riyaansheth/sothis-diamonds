@@ -1,11 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/dictionaries/en";
 import { localePath, type Locale } from "@/lib/i18n";
-import { displayName, mediaUrl, newestProducts, productPath } from "@/lib/products";
 import { site, telHref } from "@/lib/site";
 import { LanguageLinks, Logo } from "./Header";
-import { CurrencySwitch, Price } from "./Store";
+import { CurrencySwitch } from "./Store";
 
 // Approved design, locked: same footer on every page. Rendered once in app/[lang]/layout.tsx — don't add per-page footers.
 export function Footer({ lang, t }: { lang: Locale; t: Dictionary }) {
@@ -47,23 +45,6 @@ export function Footer({ lang, t }: { lang: Locale; t: Dictionary }) {
             </nav>
           ))}
         </div>
-      </div>
-
-      <div className="wrap border-t border-line py-10">
-        <h2 className="mb-5 font-sans text-sm font-semibold">{f.recent}</h2>
-        <ul className="grid gap-6 sm:grid-cols-3">
-          {newestProducts(3).map((p) => (
-            <li key={p.id}>
-              <Link href={productPath(p, lang)} className="flex items-center gap-4 hover:text-burgundy">
-                {p.image && <Image src={mediaUrl(p.image)} alt="" width={64} height={64} className="size-16 rounded-sm bg-ivory-deep object-cover" />}
-                <span>
-                  <span className="block">{displayName(p)}</span>
-                  <span className="text-platinum-2">{p.price ? <Price usd={p.price} /> : null}</span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
 
       <div className="wrap flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-champagne py-6 text-platinum-2">

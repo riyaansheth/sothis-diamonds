@@ -120,7 +120,7 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
           {card(s.papers)}
         </div>
 
-        {/* 6. Returns: a ring of 14 marks draws around the stone. */}
+        {/* 6. Arrives perfect: a ring of marks draws around the stone (48 hours to report any damage). */}
         <div data-scene="5" className="absolute inset-[4%] opacity-0">
           <svg viewBox="-50 -50 100 100" className="size-full overflow-visible">
             <circle r="47" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="0.3" />
