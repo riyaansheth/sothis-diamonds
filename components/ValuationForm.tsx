@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
+import { MAX_BYTES, MAX_PHOTOS, PHOTO_ACCEPT, PHOTO_TYPES } from "@/lib/photos";
 import { site } from "@/lib/site";
 import { ColourPicker } from "./ColourPicker";
 import { announceStone, StonePreview } from "./StonePreview";
@@ -12,9 +13,6 @@ type T = Dictionary["form"];
 type C = Dictionary["calculator"];
 type Values = Record<string, string>;
 
-const MAX_PHOTOS = 7;
-const MAX_BYTES = 10 * 1024 * 1024;
-const PHOTO_TYPES = /\.(jpe?g|png|heic|heif|webp)$/i;
 const DRAFT = "sothis-valuation-draft";
 
 const SHAPES = ["Round", "Oval", "Pear", "Cushion", "Princess", "Emerald", "Asscher", "Radiant", "Marquise", "Heart", "Other"];
@@ -366,7 +364,7 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               }}
               className="mt-4 grid place-items-center border border-dashed border-line px-6 py-10 text-center"
             >
-              <input ref={files} type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple className="sr-only" onChange={(e) => addPhotos(e.target.files)} />
+              <input ref={files} type="file" accept={PHOTO_ACCEPT} multiple className="sr-only" onChange={(e) => addPhotos(e.target.files)} />
               <button type="button" onClick={() => files.current?.click()} className="btn btn-secondary" disabled={photos.length >= MAX_PHOTOS}>
                 {t.addPhotos} ({photos.length}/{MAX_PHOTOS})
               </button>

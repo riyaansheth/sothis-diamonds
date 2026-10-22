@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries/en";
+import { MAX_BYTES, MAX_PHOTOS, PHOTO_ACCEPT, PHOTO_TYPES } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 /**
@@ -60,6 +61,24 @@ export function ContactForm({ t, f }: { t: Dictionary["contact"]; f: Dictionary[
       <label className="block sm:col-span-2">
         <span className="mb-1.5 block text-sm text-platinum-2">{t.message}</span>
         <textarea className="field min-h-40 py-3" name="message" required maxLength={4000} defaultValue={prefill} />
+      </label>
+      {/* Optional photos, sent with the message (same limits as the valuation form). */}
+      <label className="block sm:col-span-2">
+        <span className="mb-1.5 block text-sm text-platinum-2">{f.photos} <span className="text-platinum-2/70">({f.optional})</span></span>
+        <input
+          type="file"
+          name="photos"
+          multiple
+          accept={PHOTO_ACCEPT}
+          onChange={(e) => {
+            const list = [...(e.target.files ?? [])];
+            const bad = list.length > MAX_PHOTOS ? f.tooMany : list.map((x) => (!PHOTO_TYPES.test(x.name) ? f.photoType : x.size > MAX_BYTES ? f.photoTooBig : "").replace("{name}", x.name)).find(Boolean);
+            e.target.setCustomValidity(bad ?? "");
+            e.target.reportValidity();
+          }}
+          className="block w-full border border-dashed border-line px-4 py-6 text-sm text-platinum-2 file:mr-4 file:border file:border-line file:bg-transparent file:px-4 file:py-2 file:text-sm file:text-ink hover:file:border-ink"
+        />
+        <span className="mt-1.5 block text-xs text-platinum-2">{f.photosHint}</span>
       </label>
       <div className="flex flex-wrap items-center gap-5 sm:col-span-2">
         <button type="submit" disabled={status === "sending"} className="btn btn-primary">{status === "sending" ? f.sending : t.submit}</button>

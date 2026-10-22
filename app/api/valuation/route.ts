@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
+import { checkPhotos } from "@/lib/photos";
 
 // Valuation requests from the sell pages and the calculator. Validates everything server-side.
 // Delivery (email to the gemmologists) isn't wired yet: the response says so, and the form tells the
 // visitor plainly that nothing was sent.
 
 const TYPES = new Set(["diamond", "coloured", "watch", "antique", "other"]);
-const MAX_PHOTOS = 7;
-const MAX_BYTES = 10 * 1024 * 1024;
-const PHOTO = /\.(jpe?g|png|heic|heif|webp)$/i;
 const TEXT_FIELDS = ["carat", "shape", "colour", "stoneColour", "clarity", "report", "stone", "origin", "brand", "model", "reference", "year", "boxPapers", "piece", "era", "mainStones", "hallmarks", "metal", "cut", "condition", "notes", "name", "email", "phone", "country", "contactBy", "lang", "calculator"];
 
 export async function POST(request: Request) {
@@ -27,12 +25,8 @@ export async function POST(request: Request) {
   if (!str("phone")) errors.push("phone");
   if (str("stoneColour") && !/^#[0-9a-f]{6}$/i.test(str("stoneColour"))) errors.push("stoneColour");
 
-  const photos = form.getAll("photos").filter((p): p is File => p instanceof File && p.size > 0);
-  if (photos.length > MAX_PHOTOS) errors.push("photos: too many");
-  for (const p of photos) {
-    if (p.size > MAX_BYTES) errors.push(`photos: ${p.name} too large`);
-    if (!PHOTO.test(p.name)) errors.push(`photos: ${p.name} not an image`);
-  }
+  const { photos, errors: photoErrors } = checkPhotos(form);
+  errors.push(...photoErrors);
   if (errors.length) return NextResponse.json({ error: "Invalid request.", fields: errors }, { status: 422 });
 
   const request_ = Object.fromEntries(TEXT_FIELDS.map((k) => [k, str(k, k === "notes" ? 2000 : 200)]).filter(([, v]) => v));
