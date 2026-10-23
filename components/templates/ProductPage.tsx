@@ -87,7 +87,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
 
   return (
     <div className="burgundy-tint">
-    <article className="wrap pb-28 pt-32">
+    <article className="wrap pb-28 pt-32" data-product-name={name} data-product-sku={p.sku}>
       <Breadcrumbs
         items={[
           { label: tp.breadcrumbHome, href: localePath(lang, "/") },
@@ -104,7 +104,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
           // New stones arrive before their photos: an honest placeholder rather than an empty frame.
           <div className="grid aspect-square place-items-center bg-ivory-deep p-10 text-center ring-1 ring-line">
             <div>
-              <p className="font-display text-3xl">{name}</p>
+              <p className="font-display text-3xl normal-case">{name}</p>
               <p className="mt-3 text-sm text-platinum-2">{tp.noPhoto}</p>
             </div>
           </div>
@@ -112,7 +112,7 @@ export function ProductPage({ product: p, lang }: { product: Product; lang: Loca
 
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="text-sm text-platinum-2">{tp.reference} {p.sku}</p>
-          <h1 className="mt-2 text-4xl sm:text-5xl">{name}</h1>
+          <h1 className="mt-2 text-4xl normal-case sm:text-5xl">{name}</h1>
           {isDiamond && <p className="mt-3 text-platinum-2">{[p.attributes.color, p.attributes.clarity, p.attributes.lab].filter(Boolean).join(", ")}</p>}
           <p className="mt-6 text-3xl font-semibold">{p.price ? <Price usd={p.price} /> : null}</p>
           <p className={`mt-1 text-sm ${p.in_stock ? "text-platinum-2" : "text-burgundy"}`}>{p.in_stock ? tp.inStock : tp.sold}</p>

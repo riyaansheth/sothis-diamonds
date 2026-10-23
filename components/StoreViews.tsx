@@ -36,7 +36,7 @@ function Lines({ items, t, onRemove }: { items: Item[]; t: T; onRemove?: (id: nu
         <li key={i.id} className="flex gap-5 py-5">
           <Thumb item={i} size={onRemove ? "size-24" : "size-16"} />
           <div className="min-w-0 flex-1">
-            <Link href={i.href} className="font-display text-lg hover:text-burgundy">{i.name}</Link>
+            <Link href={i.href} className="font-display text-lg normal-case hover:text-burgundy">{i.name}</Link>
             <p className="mt-1 text-sm text-platinum-2">{i.specs.slice(2, 5).map(([, v]) => v).join(", ")}</p>
             {!i.inStock && <p className="mt-1 text-sm text-burgundy">{t.unavailable}</p>}
             {onRemove && (
@@ -214,7 +214,7 @@ export function CompareView({ items, t, links }: { items: Item[]; t: T; links: {
               {stones.map((s) => (
                 <th key={s.id} scope="col" className="px-3 pb-5 text-left align-top font-normal">
                   <Thumb item={s} size="aspect-square w-full max-w-40" />
-                  <Link href={s.href} className="mt-3 block font-display text-lg hover:text-burgundy">{s.name}</Link>
+                  <Link href={s.href} className="mt-3 block font-display text-lg normal-case hover:text-burgundy">{s.name}</Link>
                   <p className="mt-1 font-semibold"><Price usd={s.price} /></p>
                   <button type="button" onClick={() => toggle("compare", s.id)} className="mt-2 text-platinum-2 underline-offset-4 hover:text-ink hover:underline">{t.remove}</button>
                 </th>

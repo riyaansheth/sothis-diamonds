@@ -41,7 +41,7 @@ export function ProductCard({ product: p, href, t, crop, priority }: { product: 
       </div>
 
       <h3 className="mt-5 text-xl">
-        <Link href={href} className="hover:text-burgundy">{name}</Link>
+        <Link href={href} className="normal-case hover:text-burgundy">{name}</Link>
       </h3>
       <Specs product={p} t={t} />
       <p className="mt-auto pt-4 text-lg font-semibold">{p.price ? <Price usd={p.price} /> : null}</p>
@@ -74,7 +74,7 @@ export function ProductCard({ product: p, href, t, crop, priority }: { product: 
             <button type="button" onClick={() => quick.current?.close()} className="self-end text-sm text-platinum-2 hover:text-ink">
               {t.close}
             </button>
-            <h3 className="mt-2 text-3xl">{name}</h3>
+            <h3 className="mt-2 text-3xl normal-case">{name}</h3>
             <Specs product={p} t={t} />
             <p className="mt-4 text-xl font-semibold">{p.price ? <Price usd={p.price} /> : null}</p>
             <div className="mt-auto flex flex-wrap gap-3 pt-8">

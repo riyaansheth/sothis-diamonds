@@ -5,6 +5,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PieceLayer } from "@/components/PieceLayer";
+import { WhatsAppChat } from "@/components/WhatsAppChat";
 import { getDictionary, hasLocale, localePath, locales } from "@/lib/i18n";
 import { businessGraph } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -48,6 +49,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
         <Header lang={lang} t={t.nav} />
         <main>{children}</main>
         <PieceLayer />
+        <WhatsAppChat t={t.whatsapp} />
         <Footer lang={lang} t={t} />
         <CookieBanner t={t.cookies} policyHref={localePath(lang, "/cookie-policy-sothis-diamonds/")} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessGraph(lang)) }} />

@@ -250,7 +250,7 @@ export function BuyJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
             buyStage={
               kind === "diamond"
                 ? { report: [["Lab", ra.lab!], ["Carat", `${ra.carat} ct`], ["Colour", ra.color!], ["Clarity", ra.clarity!]], scene: b.scene }
-                : { report: j.ring as [string, string][], scene: { ...b.scene, ...j.scene }, ring: true }
+                : { report: j.necklace as [string, string][], scene: { ...b.scene, ...j.scene }, necklace: true }
             }
             compact
             stepLabel={t.steps.stepOf}

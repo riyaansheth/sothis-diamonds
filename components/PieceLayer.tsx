@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Diamond3DLazy, Ring3DLazy } from "./Diamond3DLazy";
+import { Diamond3DLazy, Necklace3DLazy } from "./Diamond3DLazy";
 import type { Side } from "./HomeChoice";
 
 // The 3D pieces of the homepage choice and the Diamonds / Jewellery pages live in one layer in the
@@ -9,7 +9,7 @@ import type { Side } from "./HomeChoice";
 // (PieceSlot), and the same live stone moves there instead of being rebuilt (which blinked).
 
 type Piece = Side["piece"];
-const keyOf = (p: Piece) => ("ring" in p ? `ring:${p.ring}` : `${p.cut}:${p.color}`);
+const keyOf = (p: Piece) => ("necklace" in p ? `necklace:${p.necklace}` : `${p.cut}:${p.color}`);
 
 const slots = new Map<string, HTMLElement>();
 const pieces = new Map<string, Piece>();
@@ -127,8 +127,8 @@ export function PieceLayer() {
         onPointerEnter={() => half()?.setAttribute("data-hover", "")}
         onPointerLeave={() => half()?.removeAttribute("data-hover")}
       >
-        {"ring" in piece ? (
-          <Ring3DLazy stone={piece.ring} active={active} className="absolute inset-0" />
+        {"necklace" in piece ? (
+          <Necklace3DLazy stone={piece.necklace} active={active} className="absolute inset-0" />
         ) : (
           <Diamond3DLazy cut={piece.cut} color={piece.color} active={active} className="absolute inset-0" />
         )}

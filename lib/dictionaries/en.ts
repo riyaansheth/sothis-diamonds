@@ -190,7 +190,7 @@ export const en = {
         ["Arrives perfect", "If anything arrives damaged, tell us within 48 hours and we’ll replace it or refund you in full."],
       ],
       piece: [["Metal", "Platinum or gold"], ["Centre", "5 ct cushion"], ["Colour", "Y–Z"], ["Sides", "Heart diamonds"]], // the Promise ring, photographed
-      ring: [["Metal", "Platinum"], ["Centre", "Emerald cut"], ["Halo", "Round diamonds"], ["Band", "Pavé"]], // the 3D halo ring
+      necklace: [["Metal", "Platinum"], ["Pendant", "Pear diamond"], ["Halo", "Round diamonds"], ["Chain", "Cable"]], // the 3D pendant necklace
       scene: { report: "The piece", ask: "Ask about this piece" },
       why: [
         ["Natural diamonds", "Every diamond we set is natural, never lab-grown or a simulant."],
@@ -709,6 +709,15 @@ export const en = {
   },
   legal: {
     updated: "Last updated {date}",
+  },
+  whatsapp: {
+    open: "Chat On WhatsApp",
+    close: "Close",
+    title: "Chat With Us",
+    body: "Write your message and WhatsApp opens with it, ready to send. A gemmologist replies personally.",
+    placeholder: "Your message",
+    send: "Continue In WhatsApp",
+    about: "Hello, I’m interested in {name} (reference {sku}). ",
   },
   cookies: {
     text: "We use cookies to keep the site working and to understand how it’s used.",

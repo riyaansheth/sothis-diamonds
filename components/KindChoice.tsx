@@ -74,7 +74,7 @@ export function KindChoice({ band, piece, sides }: {
       {/* The piece, on the seam between Buy and Sell (drawn by PieceLayer, carried over from the homepage). */}
       <div aria-hidden className="kind-piece">
         <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
-        <PieceSlot piece={piece} className={"ring" in piece ? "absolute inset-[6%]" : "absolute inset-[12%]"} />
+        <PieceSlot piece={piece} className={"necklace" in piece ? "absolute inset-[4%]" : "absolute inset-[12%]"} />
       </div>
     </section>
   );

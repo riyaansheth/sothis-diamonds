@@ -105,8 +105,10 @@ export function ArticlePage({ doc, lang, crumbs, kind }: { doc: Doc; lang: Local
         </div>
         {a.intro && <div className="prose mt-8 max-w-[68ch] text-lg text-platinum-2" dangerouslySetInnerHTML={{ __html: a.intro }} />}
         {hero && (
-          <div className="relative mt-12 aspect-square w-full max-w-2xl overflow-hidden bg-ivory-deep">
-            <Image src={hero} alt="" fill priority sizes="(min-width: 768px) 42rem, 100vw" className="object-cover" />
+          // At the image's own shape: the guides' heroes are wide with their title set in the picture,
+          // the posts' are square, so a fixed crop cut one or the other.
+          <div className="mt-12 w-full max-w-3xl bg-ivory-deep">
+            <Image src={hero} alt="" width={0} height={0} priority sizes="(min-width: 768px) 48rem, 100vw" className="h-auto w-full" />
           </div>
         )}
       </header>

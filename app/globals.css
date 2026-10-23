@@ -1253,3 +1253,13 @@ html[data-opening] body {
   top: var(--cy);
   width: calc(var(--s) * 0.1698);
 }
+
+/* Client style: every word starts with a capital in headings, buttons, links and calls to action
+   (including the split-screen choices, which are links). Long-form text, product names (".. 1.51 ct")
+   and email addresses keep their own case. */
+:is(h1, h2, h3, h4, h5, summary, legend, a, button, .btn) {
+  text-transform: capitalize;
+}
+:is(.prose, .prose *, a[href^="mailto:"]) {
+  text-transform: none;
+}
