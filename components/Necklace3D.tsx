@@ -116,7 +116,8 @@ function NecklaceModel({ stone }: { stone: string }) {
   const melee = useRef<THREE.InstancedMesh>(null);
   useLayoutEffect(() => void (melee.current && place(melee.current, stones)), [stones]);
   return (
-    <group position={[0, -0.12, -0.25]}>
+    // Centred on its height (chain top about 1.05, pendant tip about -1.6), so nothing reaches the frame.
+    <group position={[0, 0.27, -0.25]}>
       <primitive object={group} />
       {/* The diamonds hang with the pendant: placed in its space. */}
       <group position={pendant.position}>
@@ -132,6 +133,6 @@ function NecklaceModel({ stone }: { stone: string }) {
 }
 
 /** The necklace, turning and leaning toward the light like the diamonds; drag to turn it. */
-export default function Necklace3D({ stone = "#ffffff", className, active }: { stone?: string; className?: string; active?: boolean }) {
-  return <Diamond3D model={<NecklaceModel stone={stone} />} tilt={0.12} size={1.0} active={active} className={className} />;
+export default function Necklace3D({ stone = "#ffffff", className, active, size = 1 }: { stone?: string; className?: string; active?: boolean; size?: number }) {
+  return <Diamond3D model={<NecklaceModel stone={stone} />} tilt={0.12} size={size} active={active} className={className} />;
 }

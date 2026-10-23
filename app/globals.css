@@ -1257,9 +1257,12 @@ html[data-opening] body {
 /* Client style: every word starts with a capital in headings, buttons, links and calls to action
    (including the split-screen choices, which are links). Long-form text, product names (".. 1.51 ct")
    and email addresses keep their own case. */
-:is(h1, h2, h3, h4, h5, summary, legend, a, button, .btn) {
-  text-transform: capitalize;
-}
-:is(.prose, .prose *, a[href^="mailto:"]) {
-  text-transform: none;
+@layer base {
+  /* In the base layer, so a utility (normal-case on product names) still wins. */
+  :is(h1, h2, h3, h4, h5, summary, legend, a, button, .btn) {
+    text-transform: capitalize;
+  }
+  :is(.prose, .prose *, a[href^="mailto:"]) {
+    text-transform: none;
+  }
 }

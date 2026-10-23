@@ -79,7 +79,7 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
     <div ref={root} className="buy-stage relative size-full select-none">
       <div data-stone className="absolute inset-[8%] will-change-transform">
         <span aria-hidden className="absolute inset-[12%] rounded-full bg-[radial-gradient(closest-side,rgb(84_23_43/0.55),transparent)] blur-2xl" />
-        {data.necklace ? <Necklace3DLazy className="absolute inset-0" /> : <Diamond3DLazy cut="asscher" color="#ffffff" className="absolute inset-0" />}
+        {data.necklace ? <Necklace3DLazy size={0.8} className="absolute inset-0" /> : <Diamond3DLazy cut="asscher" color="#ffffff" className="absolute inset-0" />}
       </div>
 
       <div aria-hidden className="pointer-events-none absolute inset-0 text-sm">
