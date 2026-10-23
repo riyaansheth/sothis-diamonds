@@ -22399,5 +22399,305 @@
       "en": "heart-0-83ct-l-si1-diamond"
     },
     "seo": {}
+  },
+  {
+    "id": 30584,
+    "sku": "SKN01",
+    "slug": "pave-serpent-pendant-necklace",
+    "title": "Pavé Serpent Pendant Necklace",
+    "status": "publish",
+    "price": 5800.0,
+    "regular_price": 5800.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-serpent-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>White gold chain with a coiled <strong>serpent pendant</strong></p></li>\n<li><p>Pendant set in full pavé with round brilliant diamonds</p></li>\n<li><p>Chain and pendant in 18k white gold</p></li>\n</ul>",
+    "created": "2026-10-23 15:00:00",
+    "modified": "2026-10-23 15:00:00",
+    "slugs": {
+      "en": "pave-serpent-pendant-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30585,
+    "sku": "SKN02",
+    "slug": "rose-gold-serpent-necklace",
+    "title": "Rose Gold Serpent Necklace",
+    "status": "publish",
+    "price": 13800.0,
+    "regular_price": 13800.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/rose-gold-serpent-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold collar of graduated, articulated <strong>serpent scales</strong></p></li>\n<li><p>Head and tail pavé-set with round brilliant diamonds</p></li>\n<li><p>Wraps the neck and closes at the back</p></li>\n</ul>",
+    "created": "2026-10-23 15:01:00",
+    "modified": "2026-10-23 15:01:00",
+    "slugs": {
+      "en": "rose-gold-serpent-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30586,
+    "sku": "SKN03",
+    "slug": "mother-of-pearl-fan-necklace",
+    "title": "Mother-of-Pearl Fan Necklace",
+    "status": "publish",
+    "price": 4900.0,
+    "regular_price": 4900.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/mother-of-pearl-fan-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold chain set with <strong>white mother-of-pearl</strong> fan motifs</p></li>\n<li><p>Inspired by the fan mosaics of Rome's Baths of Caracalla</p></li>\n<li><p>Short length, adjustable at the clasp</p></li>\n</ul>",
+    "created": "2026-10-23 15:02:00",
+    "modified": "2026-10-23 15:02:00",
+    "slugs": {
+      "en": "mother-of-pearl-fan-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30587,
+    "sku": "SKN04",
+    "slug": "gold-coil-necklace-diamond-studs",
+    "title": "Gold Coil Necklace with Diamond Studs",
+    "status": "publish",
+    "price": 12550.0,
+    "regular_price": 12550.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/gold-coil-necklace-diamond-studs.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Flexible yellow gold <strong>coil collar</strong>, formed without soldering</p></li>\n<li><p>Set with diamond pavé studs</p></li>\n<li><p>Holds its shape around the neck</p></li>\n</ul>",
+    "created": "2026-10-23 15:03:00",
+    "modified": "2026-10-23 15:03:00",
+    "slugs": {
+      "en": "gold-coil-necklace-diamond-studs"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30588,
+    "sku": "SKE01",
+    "slug": "pave-fan-drop-earrings",
+    "title": "Pavé Fan Drop Earrings",
+    "status": "publish",
+    "price": 8350.0,
+    "regular_price": 8350.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-fan-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold fan-shaped drops in full <strong>diamond pavé</strong></p></li>\n<li><p>A round brilliant diamond at the top of each</p></li>\n<li><p>Inspired by Roman fan mosaics</p></li>\n</ul>",
+    "created": "2026-10-23 15:04:00",
+    "modified": "2026-10-23 15:04:00",
+    "slugs": {
+      "en": "pave-fan-drop-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30589,
+    "sku": "SKE02",
+    "slug": "serpent-head-earrings",
+    "title": "Serpent Head Earrings",
+    "status": "publish",
+    "price": 8500.0,
+    "regular_price": 8500.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/serpent-coil-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Yellow gold <strong>serpent heads</strong> on flexible coiled gold</p></li>\n<li><p>Heads pavé-set with round brilliant diamonds</p></li>\n<li><p>Onyx eyes</p></li>\n</ul>",
+    "created": "2026-10-23 15:05:00",
+    "modified": "2026-10-23 15:05:00",
+    "slugs": {
+      "en": "serpent-head-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30590,
+    "sku": "SKR03",
+    "slug": "pave-serpent-ring",
+    "title": "Pavé Serpent Ring",
+    "status": "publish",
+    "price": 5900.0,
+    "regular_price": 5900.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-serpent-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold serpent that coils twice around the finger</p></li>\n<li><p>Scales set in full <strong>diamond pavé</strong></p></li>\n<li><p>Flexible, openwork links</p></li>\n</ul>",
+    "created": "2026-10-23 15:06:00",
+    "modified": "2026-10-23 15:06:00",
+    "slugs": {
+      "en": "pave-serpent-ring"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30591,
+    "sku": "SKR04",
+    "slug": "malachite-fan-ring",
+    "title": "Malachite Fan Ring",
+    "status": "publish",
+    "price": 2575.0,
+    "regular_price": 2575.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/malachite-fan-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Open rose gold ring with two <strong>malachite</strong> fan motifs</p></li>\n<li><p>Each fan framed in pavé diamonds</p></li>\n<li><p>Inspired by Roman fan mosaics</p></li>\n</ul>",
+    "created": "2026-10-23 15:07:00",
+    "modified": "2026-10-23 15:07:00",
+    "slugs": {
+      "en": "malachite-fan-ring"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30592,
+    "sku": "SKB05",
+    "slug": "white-gold-pave-serpent-bracelet",
+    "title": "White Gold Pavé Serpent Bracelet",
+    "status": "publish",
+    "price": 23350.0,
+    "regular_price": 23350.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/white-gold-pave-serpent-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>White gold serpent that wraps once around the wrist</p></li>\n<li><p>Scales and head set in full <strong>diamond pavé</strong></p></li>\n<li><p>Flexible, openwork links</p></li>\n</ul>",
+    "created": "2026-10-23 15:08:00",
+    "modified": "2026-10-23 15:08:00",
+    "slugs": {
+      "en": "white-gold-pave-serpent-bracelet"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30593,
+    "sku": "SKB06",
+    "slug": "rose-gold-serpent-bracelet",
+    "title": "Rose Gold Serpent Bracelet",
+    "status": "publish",
+    "price": 6850.0,
+    "regular_price": 6850.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/rose-gold-serpent-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Rose gold serpent that wraps once around the wrist</p></li>\n<li><p>Head and tail set with <strong>round brilliant diamonds</strong></p></li>\n<li><p>Flexible, openwork links</p></li>\n</ul>",
+    "created": "2026-10-23 15:09:00",
+    "modified": "2026-10-23 15:09:00",
+    "slugs": {
+      "en": "rose-gold-serpent-bracelet"
+    },
+    "seo": {}
   }
 ]

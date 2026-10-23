@@ -14,11 +14,14 @@ export const OUTLINES: Record<string, string> = {
   Ring: "M0,-24A30,30 0 1 1 0,36A30,30 0 1 1 0,-24ZM-9,-24L0,-38L9,-24",
   Bracelet: "M0,-24A42,24 0 1 1 0,24A42,24 0 1 1 0,-24Z",
   Watch: "M-18,-22H18V22H-18ZM-12,-22V-46M12,-22V-46M-12,22V46M12,22V46",
+  // A necklace falling from the neck to its pendant; a pair of drop earrings.
+  Necklace: "M-38,-40C-38,6 -14,24 0,24C14,24 38,6 38,-40M0,24L-8,34L0,46L8,34Z",
+  Earrings: "M-20,-40V-26M-20,-26A10,10 0 1 0 -20,-6M-20,-6L-28,12L-20,30L-12,12ZM20,-40V-26M20,-26A10,10 0 1 1 20,-6M20,-6L12,12L20,30L28,12Z",
   Heart: "M0,40C-24,22 -40,6 -40,-12C-40,-30 -20,-40 0,-24C20,-40 40,-30 40,-12C40,6 24,22 0,40Z",
 };
 
 /** A jewellery piece's kind, from its name (a band is a ring). */
 export const jewelleryType = (p: { title: string }) => {
-  const m = p.title.match(/\b(ring|band|bracelet|watch)\b/i)?.[1].toLowerCase();
-  return m ? ({ ring: "Ring", band: "Ring", bracelet: "Bracelet", watch: "Watch" } as Record<string, string>)[m] : undefined;
+  const m = p.title.match(/\b(ring|band|bracelet|watch|necklace|earrings)\b/i)?.[1].toLowerCase();
+  return m ? ({ ring: "Ring", band: "Ring", bracelet: "Bracelet", watch: "Watch", necklace: "Necklace", earrings: "Earrings" } as Record<string, string>)[m] : undefined;
 };
