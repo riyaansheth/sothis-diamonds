@@ -6,7 +6,7 @@ import * as THREE from "three";
 import Diamond3D, { roundBrilliant, useStudioEnv } from "./Diamond3D";
 
 // A platinum tennis bracelet: one line of equal round diamonds, each in its own collet with four claws,
-// hinged into a soft circle. Round, so it reads as a bracelet from every angle as it turns.
+// in a soft circle. Round, so it reads as a bracelet from every angle as it turns.
 
 const R = 1.05; // radius of the circle
 const N = 40; // stones
@@ -31,7 +31,6 @@ function useBracelet() {
     const stones: Placed = [];
     const collets: Placed = [];
     const claws: Placed = [];
-    const links: Placed = [];
     for (let i = 0; i < N; i++) {
       const a = (i / N) * Math.PI * 2;
       const out = new THREE.Vector3(Math.cos(a), 0, Math.sin(a)); // the stone faces outward
@@ -44,15 +43,9 @@ function useBracelet() {
         const side = along.clone().multiplyScalar(s).addScaledVector(Y, t).normalize();
         claws.push([p.clone().addScaledVector(side, STONE * 0.98).addScaledVector(out, 0.012), new THREE.Quaternion(), one]);
       }
-      // The hinge to the next stone, behind the gap between them.
-      const b = a + Math.PI / N;
-      const mid = new THREE.Vector3(Math.cos(b), 0, Math.sin(b));
-      const basis = new THREE.Matrix4().makeBasis(new THREE.Vector3(-Math.sin(b), 0, Math.cos(b)), Y, mid);
-      links.push([mid.multiplyScalar(R - 0.058), new THREE.Quaternion().setFromRotationMatrix(basis), one]);
     }
     group.add(place(new THREE.InstancedMesh(new THREE.TorusGeometry(STONE + 0.006, 0.009, 8, 24), platinum, N), collets));
     group.add(place(new THREE.InstancedMesh(new THREE.SphereGeometry(0.013, 8, 6), platinum, claws.length), claws));
-    group.add(place(new THREE.InstancedMesh(new THREE.BoxGeometry(0.08, 0.022, 0.016), platinum, N), links));
     return { group, stones, small: roundBrilliant() };
   }, [env]);
 }
