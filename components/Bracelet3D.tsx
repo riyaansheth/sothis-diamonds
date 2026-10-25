@@ -50,7 +50,7 @@ function useBracelet() {
   }, [env]);
 }
 
-function BraceletModel({ stone }: { stone: string }) {
+export function BraceletModel({ stone }: { stone: string }) {
   const env = useStudioEnv();
   const { group, stones, small } = useBracelet();
   const melee = useRef<THREE.InstancedMesh>(null);

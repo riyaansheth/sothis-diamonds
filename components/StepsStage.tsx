@@ -4,6 +4,7 @@ import { MeshRefractionMaterial, PresentationControls, RoundedBox, useFBO } from
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState, type MutableRefObject, type RefObject } from "react";
 import * as THREE from "three";
+import { BraceletModel } from "./Bracelet3D";
 import { roundBrilliant, useStudioEnv, type Proportions } from "./Diamond3D";
 
 // "How selling works": one stone acts out the six steps, scrubbed by scroll position (0..6).
@@ -12,6 +13,7 @@ export type StageData = {
   image: string; // the stone's photo, shown as the "captured" shot and as the no-WebGL fallback
   proportions: Proportions;
   readouts: [string, string][]; // [label, value] from the grading report
+  bracelet?: boolean; // the tennis bracelet acts out the steps instead of the stone (Sell jewellery)
   text: {
     photo: string;
     offer: string;
@@ -272,16 +274,20 @@ function Scene({ data, progress, overlayRoot, reduce, onGrab }: {
       <PresentationControls snap global={false} cursor speed={1.4} polar={[-0.5, 0.5]} azimuth={[-Infinity, Infinity]}>
         <group ref={stone}>
           <group ref={spin}>
-            <mesh
-              ref={gem}
-              geometry={geometry}
+            <group
               onPointerOver={() => (hovered.current = true)}
               onPointerOut={() => (hovered.current = false)}
               onPointerDown={onGrab}
               onClick={() => !reduce && (boost.current = 9)}
             >
-              <MeshRefractionMaterial envMap={env} bounces={3} ior={2.42} fresnel={1} aberrationStrength={0.012} fastChroma toneMapped={false} />
-            </mesh>
+              {data.bracelet ? (
+                <BraceletModel stone="#ffffff" />
+              ) : (
+                <mesh ref={gem} geometry={geometry}>
+                  <MeshRefractionMaterial envMap={env} bounces={3} ior={2.42} fresnel={1} aberrationStrength={0.012} fastChroma toneMapped={false} />
+                </mesh>
+              )}
+            </group>
           </group>
         </group>
       </PresentationControls>

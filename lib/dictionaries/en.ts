@@ -189,7 +189,6 @@ export const en = {
         ["Arrives with its papers", "Any certificates for its stones travel with the piece."],
         ["Arrives perfect", "If anything arrives damaged, tell us within 48 hours and we’ll replace it or refund you in full."],
       ],
-      piece: [["Metal", "Platinum or gold"], ["Centre", "5 ct cushion"], ["Colour", "Y–Z"], ["Sides", "Heart diamonds"]], // the Promise ring, photographed
       bracelet: [["Metal", "Platinum"], ["Stones", "40 round brilliants"], ["Setting", "Four claws each"], ["Style", "Tennis bracelet"]], // the 3D tennis bracelet
       scene: { report: "The piece", ask: "Ask about this piece" },
       why: [

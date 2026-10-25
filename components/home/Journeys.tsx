@@ -60,7 +60,7 @@ export function SellJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
   const categories = t.sell.categories.filter(([, , path]) => (kind === "diamond") === ["/sell-diamond/", "/sell-colored-stones/"].includes(path));
   const quick = { ...t.quick, items: kind === "diamond" ? t.quick.items.slice(0, 2) : t.quick.items.slice(2) };
   const stage = {
-    // The jewellery side photographs the Promise ring; the stone itself still acts out the steps.
+    // The jewellery side photographs the Promise ring; the tennis bracelet acts out the steps.
     image: `/_next/image/?url=${encodeURIComponent(mediaUrl(kind === "diamond" ? stepsStone.image! : story.image!))}&w=640&q=75`,
     proportions: { table: pct("Table %"), crown: pct("Crown Height"), pavilion: pct("Pavilion Depth") },
     readouts:
@@ -71,7 +71,8 @@ export function SellJourney({ lang, kind }: { lang: Locale; kind: Kind }) {
             [sc.clarity, stepsStone.attributes.clarity],
             [sc.report, stepsStone.attributes.lab],
           ] as [string, string][])
-        : (t.buy.jewelleryBuy.piece as [string, string][]),
+        : (t.buy.jewelleryBuy.bracelet as [string, string][]),
+    bracelet: kind === "jewellery", // the same tennis bracelet as the homepage and Buy jewellery
     text: { photo: sc.photo, offer: sc.offer, offerAmount: sc.offerAmount, noObligation: sc.noObligation, courier: sc.courier, arrived: sc.arrived, verified: sc.verified, paid: sc.paid, hint: sc.hint },
   };
 
