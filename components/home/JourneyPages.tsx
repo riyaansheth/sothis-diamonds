@@ -12,7 +12,7 @@ import { getDictionary, hasLocale, localePath, locales, type Locale } from "@/li
 export const KIND_PATH: Record<Kind, string> = { diamond: "/diamonds/", jewellery: "/jewellery/" };
 
 // What floats over each homepage half, then over the seam of its Buy | Sell page.
-export const HOME_PIECES: Record<Kind, Side["piece"]> = { diamond: { cut: "asscher", color: "#ffffff" }, jewellery: { necklace: "#ffffff" } };
+export const HOME_PIECES: Record<Kind, Side["piece"]> = { diamond: { cut: "asscher", color: "#ffffff" }, jewellery: { bracelet: "#ffffff" } };
 
 type Props = { params: Promise<{ lang: string }> };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type MutableRefObject } from "react";
-import { Diamond3DLazy, Necklace3DLazy } from "../Diamond3DLazy";
+import { Diamond3DLazy, Bracelet3DLazy } from "../Diamond3DLazy";
 
 export type BuyStageData = {
   report: [string, string][]; // [label, value] from a real in-stock stone's report
@@ -16,7 +16,7 @@ export type BuyStageData = {
     papers: string;
     days: string;
   };
-  necklace?: boolean; // the pendant necklace acts out the steps instead of the stone (Buy jewellery)
+  bracelet?: boolean; // the tennis bracelet acts out the steps instead of the stone (Buy jewellery)
 };
 
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
@@ -79,7 +79,7 @@ export default function BuyStage({ data, progress }: { data: BuyStageData; progr
     <div ref={root} className="buy-stage relative size-full select-none">
       <div data-stone className="absolute inset-[8%] will-change-transform">
         <span aria-hidden className="absolute inset-[12%] rounded-full bg-[radial-gradient(closest-side,rgb(84_23_43/0.55),transparent)] blur-2xl" />
-        {data.necklace ? <Necklace3DLazy size={0.8} className="absolute inset-0" /> : <Diamond3DLazy cut="asscher" color="#ffffff" className="absolute inset-0" />}
+        {data.bracelet ? <Bracelet3DLazy size={0.8} className="absolute inset-0" /> : <Diamond3DLazy cut="asscher" color="#ffffff" className="absolute inset-0" />}
       </div>
 
       <div aria-hidden className="pointer-events-none absolute inset-0 text-sm">

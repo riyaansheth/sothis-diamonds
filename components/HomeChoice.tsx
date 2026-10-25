@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { light, startLight } from "@/lib/light";
 import { PieceSlot } from "./PieceLayer";
 
-/** One half: its silk (burgundy "buy" or black "sell") and what floats over it (a stone, or the necklace). */
+/** One half: its silk (burgundy "buy" or black "sell") and what floats over it (a stone, or the bracelet). */
 export type Side = {
   title: string;
   body: string;
@@ -14,7 +14,7 @@ export type Side = {
   after?: string;
   href: string;
   silk: "buy" | "sell";
-  piece: { cut: "asscher" | "round"; color: string } | { necklace: string };
+  piece: { cut: "asscher" | "round"; color: string } | { bracelet: string };
 };
 
 /**
@@ -83,7 +83,7 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
         {/* The piece itself is drawn by PieceLayer over this slot, so it carries on to the next page. */}
         <div aria-hidden className="paths-window absolute left-1/2 top-[6%] isolate aspect-square w-[min(30rem,80vw)] -translate-x-1/2 md:top-1/2 md:w-[min(30rem,34vw)] md:-translate-y-[72%]">
           <div className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-[14%] rounded-full bg-[radial-gradient(closest-side,rgb(0_0_0/0.35),transparent)] blur-md" />
-          <PieceSlot piece={s.piece} className={"necklace" in s.piece ? "absolute inset-[4%]" : "absolute inset-[12%]"} />
+          <PieceSlot piece={s.piece} className={"bracelet" in s.piece ? "absolute inset-[4%]" : "absolute inset-[12%]"} />
         </div>
         <span className="relative font-display text-[clamp(3rem,7.5vw,6rem)] leading-none whitespace-nowrap">{s.title}</span>
         <span className="relative mt-4 grid max-w-sm text-ink/80">
