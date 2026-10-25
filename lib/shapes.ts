@@ -22,6 +22,6 @@ export const OUTLINES: Record<string, string> = {
 
 /** A jewellery piece's kind, from its name (a band is a ring). */
 export const jewelleryType = (p: { title: string }) => {
-  const m = p.title.match(/\b(ring|band|bracelet|watch|necklace|earrings)\b/i)?.[1].toLowerCase();
-  return m ? ({ ring: "Ring", band: "Ring", bracelet: "Bracelet", watch: "Watch", necklace: "Necklace", earrings: "Earrings" } as Record<string, string>)[m] : undefined;
+  const m = p.title.match(/\b(ring|band|bracelet|watch|necklace|pendant|earrings)\b/i)?.[1].toLowerCase();
+  return m ? ({ ring: "Ring", band: "Ring", bracelet: "Bracelet", watch: "Watch", necklace: "Necklace", pendant: "Necklace", earrings: "Earrings" } as Record<string, string>)[m] : undefined;
 };

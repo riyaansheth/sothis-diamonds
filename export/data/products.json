@@ -22699,5 +22699,485 @@
       "en": "rose-gold-serpent-bracelet"
     },
     "seo": {}
+  },
+  {
+    "id": 30594,
+    "sku": "SKN05",
+    "slug": "flexible-screw-motif-collar-necklace",
+    "title": "Flexible Screw-Motif Collar Necklace",
+    "status": "publish",
+    "price": 11800.0,
+    "regular_price": 11800.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/love-unlimited-flexible-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Flexible 18k <strong>white gold</strong> collar with fine ribbed links</p></li>\n<li><p>Set with the signature screw motif</p></li>\n<li><p>Wraps the neck in a clean, rigid-looking circle</p></li>\n</ul>",
+    "created": "2026-10-25 12:00:00",
+    "modified": "2026-10-25 12:00:00",
+    "slugs": {
+      "en": "flexible-screw-motif-collar-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30595,
+    "sku": "SKN06",
+    "slug": "diamond-clash-pendant-necklace",
+    "title": "Diamond Stud Pendant Necklace",
+    "status": "publish",
+    "price": 3975.0,
+    "regular_price": 3975.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-clash-pendant.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>18k rose gold chain with a curved bar of <strong>studs and beads</strong></p></li>\n<li><p>Set with 10 brilliant-cut diamonds, about 0.29 ct</p></li>\n<li><p>Adjustable chain, 38–41 cm</p></li>\n</ul>",
+    "created": "2026-10-25 12:01:00",
+    "modified": "2026-10-25 12:01:00",
+    "slugs": {
+      "en": "diamond-clash-pendant-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30596,
+    "sku": "SKR05",
+    "slug": "six-diamond-ribbed-band",
+    "title": "Six Diamond Ribbed Band",
+    "status": "publish",
+    "price": 4350.0,
+    "regular_price": 4350.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/six-diamond-love-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Wide 18k <strong>white gold</strong> band with vertical ribbing</p></li>\n<li><p>Six brilliant-cut diamonds set flush around the band</p></li>\n<li><p>Flexible construction for a comfortable fit</p></li>\n</ul>",
+    "created": "2026-10-25 12:02:00",
+    "modified": "2026-10-25 12:02:00",
+    "slugs": {
+      "en": "six-diamond-ribbed-band"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30597,
+    "sku": "SKR06",
+    "slug": "half-pave-tricolour-rolling-ring",
+    "title": "Half-Pavé Tricolour Rolling Ring",
+    "status": "publish",
+    "price": 4025.0,
+    "regular_price": 4025.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/half-pave-trinity-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Three interlaced bands of 18k <strong>white, yellow and rose gold</strong></p></li>\n<li><p>One band paved with 104 brilliant-cut diamonds</p></li>\n<li><p>Small model</p></li>\n</ul>",
+    "created": "2026-10-25 12:03:00",
+    "modified": "2026-10-25 12:03:00",
+    "slugs": {
+      "en": "half-pave-tricolour-rolling-ring"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30598,
+    "sku": "SKB07",
+    "slug": "ribbed-diamond-bangle-bracelet",
+    "title": "Ribbed Diamond Bangle Bracelet",
+    "status": "publish",
+    "price": 10800.0,
+    "regular_price": 10800.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/flexible-diamond-love-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Flexible 18k <strong>rose gold</strong> bangle with vertical ribbing</p></li>\n<li><p>Brilliant-cut diamonds set flush along the band</p></li>\n<li><p>Closes with a hidden clasp</p></li>\n</ul>",
+    "created": "2026-10-25 12:04:00",
+    "modified": "2026-10-25 12:04:00",
+    "slugs": {
+      "en": "ribbed-diamond-bangle-bracelet"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30599,
+    "sku": "SKB08",
+    "slug": "diamond-nail-bracelet",
+    "title": "Diamond Nail Bracelet",
+    "status": "publish",
+    "price": 3675.0,
+    "regular_price": 3675.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/reverse-set-nail-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>18k <strong>yellow gold</strong> bangle shaped like a bent nail</p></li>\n<li><p>Reverse-set with brilliant-cut diamonds along the shank</p></li>\n<li><p>Small model</p></li>\n</ul>",
+    "created": "2026-10-25 12:05:00",
+    "modified": "2026-10-25 12:05:00",
+    "slugs": {
+      "en": "diamond-nail-bracelet"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30600,
+    "sku": "SKE03",
+    "slug": "half-pave-convertible-hoop-earrings",
+    "title": "Half-Pavé Convertible Hoop Earrings",
+    "status": "publish",
+    "price": 4000.0,
+    "regular_price": 4000.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/half-pave-love-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>18k <strong>rose gold</strong> double hoops, worn as one or two</p></li>\n<li><p>Half-paved with brilliant-cut diamonds</p></li>\n<li><p>Set with the signature screw motif</p></li>\n</ul>",
+    "created": "2026-10-25 12:06:00",
+    "modified": "2026-10-25 12:06:00",
+    "slugs": {
+      "en": "half-pave-convertible-hoop-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30601,
+    "sku": "SKE04",
+    "slug": "tricolour-diamond-hoop-earrings",
+    "title": "Tricolour Diamond Hoop Earrings",
+    "status": "publish",
+    "price": 2450.0,
+    "regular_price": 2450.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/tricolour-trinity-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Three interlaced hoops of 18k <strong>white, yellow and rose gold</strong></p></li>\n<li><p>Each set with 27 brilliant-cut diamonds, 0.19 ct in total</p></li>\n<li><p>Classic rolling design</p></li>\n</ul>",
+    "created": "2026-10-25 12:07:00",
+    "modified": "2026-10-25 12:07:00",
+    "slugs": {
+      "en": "tricolour-diamond-hoop-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30602,
+    "sku": "SKR07",
+    "slug": "pave-dome-ring",
+    "title": "Pavé Dome Ring",
+    "status": "publish",
+    "price": 2685.0,
+    "regular_price": 2685.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-dome-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Wide, rounded 18k <strong>white gold</strong> band</p></li>\n<li><p>Covered in natural round brilliant diamonds</p></li>\n<li><p>Comfortable domed profile</p></li>\n</ul>",
+    "created": "2026-10-25 13:00:00",
+    "modified": "2026-10-25 13:00:00",
+    "slugs": {
+      "en": "pave-dome-ring"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30603,
+    "sku": "SKR08",
+    "slug": "star-crossover-ring",
+    "title": "Star Crossover Ring",
+    "status": "publish",
+    "price": 2165.0,
+    "regular_price": 2165.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/star-solitaire-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Three open bands of 18k <strong>yellow gold</strong></p></li>\n<li><p>Crossed by a four-pointed star set with diamonds</p></li>\n<li><p>Sculptural, statement design</p></li>\n</ul>",
+    "created": "2026-10-25 13:01:00",
+    "modified": "2026-10-25 13:01:00",
+    "slugs": {
+      "en": "star-crossover-ring"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30604,
+    "sku": "SKR09",
+    "slug": "double-star-ring",
+    "title": "Double Star Ring",
+    "status": "publish",
+    "price": 825.0,
+    "regular_price": 825.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/double-star-ring.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Two 18k <strong>rose gold</strong> bands joined by a star</p></li>\n<li><p>The star pavé-set with diamonds</p></li>\n<li><p>Stacks on its own as a pair</p></li>\n</ul>",
+    "created": "2026-10-25 13:02:00",
+    "modified": "2026-10-25 13:02:00",
+    "slugs": {
+      "en": "double-star-ring"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30605,
+    "sku": "SKN07",
+    "slug": "one-carat-solitaire-pendant",
+    "title": "One Carat Solitaire Pendant",
+    "status": "publish",
+    "price": 2190.0,
+    "regular_price": 2190.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/one-carat-solitaire-pendant.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>A <strong>1 carat</strong> round brilliant diamond</p></li>\n<li><p>Four-claw setting in 18k white gold</p></li>\n<li><p>On a fine white gold chain</p></li>\n</ul>",
+    "created": "2026-10-25 13:03:00",
+    "modified": "2026-10-25 13:03:00",
+    "slugs": {
+      "en": "one-carat-solitaire-pendant"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30606,
+    "sku": "SKE05",
+    "slug": "clover-diamond-stud-earrings",
+    "title": "Clover Diamond Stud Earrings",
+    "status": "publish",
+    "price": 1295.0,
+    "regular_price": 1295.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/clover-diamond-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>18k <strong>white gold</strong> clover motif</p></li>\n<li><p>A round diamond at the heart of each, framed in pavé</p></li>\n<li><p>Push-back fittings</p></li>\n</ul>",
+    "created": "2026-10-25 13:04:00",
+    "modified": "2026-10-25 13:04:00",
+    "slugs": {
+      "en": "clover-diamond-stud-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30607,
+    "sku": "SKE06",
+    "slug": "star-pave-stud-earrings",
+    "title": "Star Pavé Stud Earrings",
+    "status": "publish",
+    "price": 1170.0,
+    "regular_price": 1170.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/star-pave-stud-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Four-pointed stars in 18k <strong>rose gold</strong></p></li>\n<li><p>Pavé-set with diamonds, about 0.13 ct</p></li>\n<li><p>Light, everyday studs</p></li>\n</ul>",
+    "created": "2026-10-25 13:05:00",
+    "modified": "2026-10-25 13:05:00",
+    "slugs": {
+      "en": "star-pave-stud-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30608,
+    "sku": "SKB09",
+    "slug": "two-carat-riviere-bracelet",
+    "title": "Two Carat Rivière Bracelet",
+    "status": "publish",
+    "price": 3460.0,
+    "regular_price": 3460.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/two-carat-riviere-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>A line of round brilliant diamonds, <strong>2 carats</strong> in total</p></li>\n<li><p>18k white gold, each stone in its own setting</p></li>\n<li><p>Box clasp with safety catch</p></li>\n</ul>",
+    "created": "2026-10-25 13:06:00",
+    "modified": "2026-10-25 13:06:00",
+    "slugs": {
+      "en": "two-carat-riviere-bracelet"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30609,
+    "sku": "SKB10",
+    "slug": "yellow-gold-riviere-bracelet",
+    "title": "Yellow Gold Rivière Bracelet",
+    "status": "publish",
+    "price": 1035.0,
+    "regular_price": 1035.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/diamond-solitaire-chain-bracelet.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>A fine line of round brilliant diamonds</p></li>\n<li><p>Set in 18k <strong>yellow gold</strong></p></li>\n<li><p>Box clasp with safety catch</p></li>\n</ul>",
+    "created": "2026-10-25 13:07:00",
+    "modified": "2026-10-25 13:07:00",
+    "slugs": {
+      "en": "yellow-gold-riviere-bracelet"
+    },
+    "seo": {}
   }
 ]
