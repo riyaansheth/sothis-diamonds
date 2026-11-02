@@ -23419,5 +23419,245 @@
       "en": "mother-of-pearl-fan-drop-earrings"
     },
     "seo": {}
+  },
+  {
+    "id": 30618,
+    "sku": "SKN12",
+    "slug": "mother-of-pearl-clover-pendant",
+    "title": "Mother-of-Pearl Clover Pendant",
+    "status": "publish",
+    "price": 1575.0,
+    "regular_price": 1575.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/mother-of-pearl-clover-pendant.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Fine gold chain with a <strong>four-leaf clover pendant</strong></p></li>\n<li><p>White mother-of-pearl inside a beaded gold frame</p></li>\n<li><p>18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "mother-of-pearl-clover-pendant"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30619,
+    "sku": "SKN13",
+    "slug": "diamond-butterfly-pendant",
+    "title": "Diamond Butterfly Pendant",
+    "status": "publish",
+    "price": 9200.0,
+    "regular_price": 9200.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/diamond-butterfly-pendant.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>White gold chain with a <strong>butterfly pendant</strong></p></li>\n<li><p>Wings in full pavé with round and marquise-cut diamonds</p></li>\n<li><p>Diamonds DEF colour, IF to VVS clarity; 18k white gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "diamond-butterfly-pendant"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30620,
+    "sku": "SKN14",
+    "slug": "diamond-flower-pendant",
+    "title": "Diamond Flower Pendant",
+    "status": "publish",
+    "price": 5450.0,
+    "regular_price": 5450.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/diamond-flower-pendant.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Gold chain with a <strong>three-petal flower pendant</strong></p></li>\n<li><p>Petals in pavé with round brilliant diamonds</p></li>\n<li><p>Diamonds DEF colour, IF to VVS clarity; 18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "diamond-flower-pendant"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30621,
+    "sku": "SKN15",
+    "slug": "ten-clover-mother-of-pearl-necklace",
+    "title": "Ten-Clover Mother-of-Pearl Necklace",
+    "status": "publish",
+    "price": 5100.0,
+    "regular_price": 5100.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/ten-clover-mother-of-pearl-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p><strong>Ten clover motifs</strong> spaced along a gold chain</p></li>\n<li><p>White mother-of-pearl inside beaded gold frames</p></li>\n<li><p>18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "ten-clover-mother-of-pearl-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30622,
+    "sku": "SKE11",
+    "slug": "mother-of-pearl-clover-earrings",
+    "title": "Mother-of-Pearl Clover Earrings",
+    "status": "publish",
+    "price": 2375.0,
+    "regular_price": 2375.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/mother-of-pearl-clover-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p><strong>Four-leaf clover earrings</strong> in white mother-of-pearl</p></li>\n<li><p>Beaded gold frames</p></li>\n<li><p>18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "mother-of-pearl-clover-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30623,
+    "sku": "SKE12",
+    "slug": "diamond-flower-earrings",
+    "title": "Diamond Flower Earrings",
+    "status": "publish",
+    "price": 3800.0,
+    "regular_price": 3800.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/diamond-flower-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Polished gold <strong>three-petal flower earrings</strong></p></li>\n<li><p>A cluster of round brilliant diamonds at each centre</p></li>\n<li><p>Diamonds DEF colour, IF to VVS clarity; 18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "diamond-flower-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30624,
+    "sku": "SKE13",
+    "slug": "diamond-butterfly-earrings",
+    "title": "Diamond Butterfly Earrings",
+    "status": "publish",
+    "price": 16500.0,
+    "regular_price": 16500.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/diamond-butterfly-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p><strong>Butterfly earrings</strong> in full diamond pavé</p></li>\n<li><p>Round and marquise-cut diamonds</p></li>\n<li><p>Diamonds DEF colour, IF to VVS clarity; 18k white gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "diamond-butterfly-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30625,
+    "sku": "SKE14",
+    "slug": "clover-pave-hoop-earrings",
+    "title": "Clover Pavé Hoop Earrings",
+    "status": "publish",
+    "price": 8200.0,
+    "regular_price": 8200.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/clover-pave-hoop-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Wide <strong>hoop earrings</strong> with beaded gold edges</p></li>\n<li><p>A band of diamond-set clover motifs</p></li>\n<li><p>Diamonds DEF colour, IF to VVS clarity; 18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 13:00:00",
+    "modified": "2026-11-02 13:00:00",
+    "slugs": {
+      "en": "clover-pave-hoop-earrings"
+    },
+    "seo": {}
   }
 ]
