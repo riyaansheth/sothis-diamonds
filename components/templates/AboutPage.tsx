@@ -9,10 +9,10 @@ import { ORG_ID } from "@/lib/schema";
 import { site } from "@/lib/site";
 
 // "The Sothis story": one real stone followed through six chapters. Every figure shown comes from
-// its IGI report in the export; heritage wording is the old about page's ("a family passion in 1970").
-const STONE = "E-398-248F-1B"; // Round 7.06 ct, F, SI2, IGI: studio photo, cut-out and video in the export
-const STUDIO = "media/2026/09/choir-studio/round-7.06ct-F-SI2.png";
-const CUTOUT = "media/2026/09/choir-studio/round-7.06ct-F-SI2-transparent-v2.png";
+// its GIA report in the export; heritage wording is the old about page's ("a family passion in 1970").
+const STONE = "S-1889"; // Round 5.02 ct, J, SI2, GIA (the client wants a GIA stone here): studio photo and cut-out in the export
+const STUDIO = "media/2026/09/choir-studio/round-5.02ct-J-SI2.png";
+const CUTOUT = "media/2026/09/choir-studio/round-5.02ct-J-SI2-transparent-v2.png";
 
 /** One optimised URL for images that must be pixel-identical in two places (the loupe and its lens). */
 const optimised = (src: string) => `/_next/image?url=${encodeURIComponent(src)}&w=1920&q=75`;

@@ -23179,5 +23179,245 @@
       "en": "yellow-gold-riviere-bracelet"
     },
     "seo": {}
+  },
+  {
+    "id": 30610,
+    "sku": "SKN08",
+    "slug": "white-gold-ring-pendant-necklace",
+    "title": "White Gold Ring Pendant Necklace",
+    "status": "publish",
+    "price": 2975.0,
+    "regular_price": 2975.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/white-gold-ring-pendant-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Fine white gold chain with a <strong>ring-shaped pendant</strong></p></li>\n<li><p>Pendant edges set with round brilliant diamonds</p></li>\n<li><p>Chain and pendant in 18k white gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "white-gold-ring-pendant-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30611,
+    "sku": "SKN09",
+    "slug": "gold-coil-collar-necklace",
+    "title": "Gold Coil Collar Necklace",
+    "status": "publish",
+    "price": 9900.0,
+    "regular_price": 9900.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/gold-coil-collar-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Flexible <strong>coiled collar</strong> in polished gold</p></li>\n<li><p>Sits close at the base of the neck</p></li>\n<li><p>Solid 18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "gold-coil-collar-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30612,
+    "sku": "SKN10",
+    "slug": "pave-serpent-chain-necklace",
+    "title": "Pavé Serpent Chain Necklace",
+    "status": "publish",
+    "price": 5450.0,
+    "regular_price": 5450.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/pave-serpent-chain-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Gold chain with a coiled <strong>serpent pendant</strong></p></li>\n<li><p>Pendant in full pavé with round brilliant diamonds</p></li>\n<li><p>Chain and pendant in 18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "pave-serpent-chain-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30613,
+    "sku": "SKN11",
+    "slug": "rose-gold-fan-pendant-necklace",
+    "title": "Rose Gold Fan Pendant Necklace",
+    "status": "publish",
+    "price": 1975.0,
+    "regular_price": 1975.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/rose-gold-fan-pendant-necklace.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Fine rose gold chain with a <strong>fan-shaped pendant</strong></p></li>\n<li><p>Mother-of-pearl inlay with a diamond-set edge</p></li>\n<li><p>A round brilliant diamond on the chain; 18k rose gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "rose-gold-fan-pendant-necklace"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30614,
+    "sku": "SKE07",
+    "slug": "white-gold-pave-hoop-earrings",
+    "title": "White Gold Pavé Hoop Earrings",
+    "status": "publish",
+    "price": 3125.0,
+    "regular_price": 3125.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/white-gold-pave-hoop-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Wide <strong>hoop earrings</strong> with ribbed edges</p></li>\n<li><p>Edges set with round brilliant diamonds</p></li>\n<li><p>18k white gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "white-gold-pave-hoop-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30615,
+    "sku": "SKE08",
+    "slug": "serpent-hoop-earrings",
+    "title": "Serpent Hoop Earrings",
+    "status": "publish",
+    "price": 2950.0,
+    "regular_price": 2950.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/white-gold-serpent-hoop-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p><strong>Serpent hoops</strong> that wrap the earlobe</p></li>\n<li><p>Scales set with round brilliant diamonds</p></li>\n<li><p>18k white gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "serpent-hoop-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30616,
+    "sku": "SKE09",
+    "slug": "gold-coil-hoop-earrings",
+    "title": "Gold Coil Hoop Earrings",
+    "status": "publish",
+    "price": 4050.0,
+    "regular_price": 4050.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/gold-coil-hoop-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p>Chunky <strong>coiled hoop earrings</strong> in polished gold</p></li>\n<li><p>Each with a diamond-set motif at the front</p></li>\n<li><p>18k yellow gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "gold-coil-hoop-earrings"
+    },
+    "seo": {}
+  },
+  {
+    "id": 30617,
+    "sku": "SKE10",
+    "slug": "mother-of-pearl-fan-drop-earrings",
+    "title": "Mother-of-Pearl Fan Drop Earrings",
+    "status": "publish",
+    "price": 1850.0,
+    "regular_price": 1850.0,
+    "sale_price": null,
+    "currency": "USD",
+    "stock": 1,
+    "in_stock": true,
+    "sales": 0,
+    "categories": [
+      "Jewelery"
+    ],
+    "tags": [],
+    "attributes": {},
+    "specs": {},
+    "image": "media/2026/10/mother-of-pearl-fan-drop-earrings.jpg",
+    "gallery": [],
+    "video": null,
+    "short_description": "<ul>\n<li><p><strong>Fan-shaped drops</strong> in mother-of-pearl</p></li>\n<li><p>A round brilliant diamond above each fan</p></li>\n<li><p>18k rose gold</p></li>\n</ul>",
+    "created": "2026-11-02 12:00:00",
+    "modified": "2026-11-02 12:00:00",
+    "slugs": {
+      "en": "mother-of-pearl-fan-drop-earrings"
+    },
+    "seo": {}
   }
 ]

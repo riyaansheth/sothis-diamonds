@@ -23,7 +23,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   },
   "sell-colored-stones": {
     title: "Sell Sapphires, Rubies & Emeralds in Antwerp | Sothis",
-    description: "Sell sapphires, rubies, emeralds and fancy colour diamonds to Antwerp specialists. Free valuation, a clear offer and no commission.",
+    description: "Sell sapphires, rubies and emeralds to Antwerp specialists. Free valuation, a clear offer and no commission.",
   },
   "sell-other-jewellery": {
     title: "Sell Gold & Diamond Jewellery in Antwerp | Sothis",
@@ -31,7 +31,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   },
   "antique-jewellery": {
     title: "Sell Antique & Vintage Jewellery in Antwerp | Sothis",
-    description: "Sell antique and vintage jewellery, old mine and old European cut diamonds and period pieces to Antwerp specialists. Free valuation, no commission.",
+    description: "Sell signed Van Cleef & Arpels, Cartier and Bulgari pieces, antique jewellery and old cut diamonds to Antwerp specialists. Free valuation, no commission.",
   },
   shop: {
     title: "Buy GIA Certified Diamonds Online | Antwerp | Sothis",

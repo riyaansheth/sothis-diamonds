@@ -209,10 +209,10 @@ export const en = {
     jewelleryBody: "We buy rings, necklaces, bracelets, earrings, watches and antique pieces, including signed pieces by Cartier, Van Cleef & Arpels, Bulgari and Mauboussin. Every piece is assessed by certified gemmologists, and you get a clear offer with no obligation.",
     categories: [
       ["Diamonds", "Loose and certified diamonds of any size.", "/sell-diamond/"],
-      ["Coloured stones", "Sapphires, rubies, emeralds and fancy colour diamonds.", "/sell-colored-stones/"],
+      ["Coloured stones", "Sapphires, rubies and emeralds.", "/sell-colored-stones/"],
       ["Watches", "Luxury timepieces, with or without papers.", "/sell-watches/"],
-      ["Antique jewellery", "Old mine and old European cuts, period pieces.", "/antique-jewellery/"],
-      ["Other jewellery", "Rings, necklaces, bracelets, earrings and signed pieces by Cartier, Van Cleef & Arpels, Bulgari and Mauboussin.", "/sell-other-jewellery/"],
+      ["Antique jewellery", "Signed pieces by Van Cleef & Arpels, Cartier and Bulgari; old mine and old European cuts.", "/antique-jewellery/"],
+      ["Other jewellery", "Rings, necklaces, bracelets, earrings and pearls.", "/sell-other-jewellery/"],
     ],
   },
   steps: {
@@ -359,12 +359,12 @@ export const en = {
       diamond: {
         title: "Sell your diamond",
         line: "Loose or set, certified or not: a free, expert valuation from Antwerp.",
-        buys: ["Loose diamonds of any size", "Engagement and solitaire rings", "Certified stones (GIA, IGI, HRD)", "Diamonds without a certificate", "Fancy colour diamonds", "Old mine and old European cuts"],
+        buys: ["Loose diamonds of any size", "Engagement and solitaire rings", "Certified stones (GIA, IGI, HRD)", "Diamonds without a certificate", "Fancy colour diamonds", "Old mine and old European cuts", "Signed jewellery: Van Cleef & Arpels, Cartier, Bulgari"],
       },
       coloured: {
         title: "Sell your coloured stones",
-        line: "Sapphires, rubies, emeralds and fancy colour diamonds, assessed by gemmologists.",
-        buys: ["Sapphires", "Rubies", "Emeralds", "Fancy colour diamonds", "Loose coloured gemstones", "Gemstone jewellery"],
+        line: "Sapphires, rubies and emeralds, assessed by gemmologists.",
+        buys: ["Sapphires", "Rubies", "Emeralds", "Loose gemstones", "Gemstone jewellery"],
       },
       watch: {
         title: "Sell your watch",
@@ -373,18 +373,18 @@ export const en = {
       },
       antique: {
         title: "Sell your antique jewellery",
-        line: "Period pieces and old cuts, valued for their craftsmanship as well as their stones.",
-        buys: ["Victorian, Edwardian and Art Deco pieces", "Old mine and old European cut diamonds", "Signed pieces by Cartier, Van Cleef & Arpels, Bulgari and Mauboussin", "Hallmarked and estate jewellery"],
+        line: "Signed pieces and old cuts, valued for their maker and craftsmanship as well as their stones.",
+        buys: ["Signed pieces by Van Cleef & Arpels, Cartier, Bulgari and Mauboussin", "Old mine and old European cut diamonds", "Vintage and estate jewellery", "Hallmarked jewellery"],
       },
       other: {
         title: "Sell your jewellery",
-        line: "Rings, necklaces, bracelets, earrings and signed pieces by Cartier, Van Cleef & Arpels, Bulgari and Mauboussin.",
-        buys: ["Rings", "Necklaces and pendants", "Bracelets", "Earrings", "Signed pieces: Cartier, Van Cleef & Arpels, Bulgari, Mauboussin", "Pearls"],
+        line: "Rings, necklaces, bracelets, earrings and pearls: a free, expert valuation from Antwerp.",
+        buys: ["Rings", "Necklaces and pendants", "Bracelets", "Earrings", "Pearls", "Gold and platinum jewellery"],
       },
       general: {
         title: "Sell to Sothis Diamonds",
         line: "Diamonds, coloured stones, watches and jewellery: a free, no-obligation valuation.",
-        buys: ["Diamonds", "Coloured stones", "Watches", "Antique jewellery", "Other jewellery"],
+        buys: ["Diamonds", "Coloured stones", "Watches", "Antique and signed jewellery", "Other jewellery"],
       },
     },
     formTitle: "Get your free valuation",
