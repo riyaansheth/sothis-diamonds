@@ -63,7 +63,7 @@ export function KindChoice({ band, piece, sides }: {
             >
               <span aria-hidden className={`paths-bg ${silk(s.silk)}`} />
               <span aria-hidden className="paths-sheen" />
-              <span className="relative font-display text-[clamp(2.5rem,4.6vw,4.75rem)] leading-none whitespace-nowrap">{s.title}</span>
+              <span className="relative font-display text-[clamp(2.5rem,3.6vw,4rem)] leading-none whitespace-nowrap">{s.title}</span>
               <span className="relative mt-4 max-w-sm text-ink/80">{s.body}</span>
               <span className={`relative mt-8 inline-block border-b border-white/70 pb-1 text-sm tracking-[0.04em] ${side ? "self-start md:self-end" : "self-start"}`}>{s.cta}</span>
             </Link>
