@@ -87,8 +87,8 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary["nav"] }) {
         </a>
 
         <div className="flex items-center justify-end gap-2 sm:gap-5">
-          <Link href={href(jewellery ? "/sell-other-jewellery/" : "/sell-diamond/")} className="hidden border-b border-white/70 pb-0.5 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy lg:block">
-            {jewellery ? t.sellJewellery : t.sell}
+          <Link href={href(jewellery ? "/sell-other-jewellery/" : "/sell-diamond/")} className="hidden border border-white/60 px-4 py-2 text-sm tracking-[0.04em] text-burgundy transition-colors hover:border-wine hover:bg-wine hover:text-on-accent lg:block">
+            {t.valuation}
           </Link>
           <Link href={href("/contact-us/")} className="hidden py-2 text-sm tracking-[0.04em] hover:text-burgundy lg:block">
             {t.contact}

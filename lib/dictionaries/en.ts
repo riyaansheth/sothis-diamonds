@@ -14,6 +14,7 @@ export const en = {
     cart: "Cart",
     sellToUs: "Sell to us",
     sellJewellery: "Sell your jewellery",
+    valuation: "Free valuation",
     buyFromUs: "Buy from us",
     resources: "Guides",
     about: "About",
@@ -66,6 +67,9 @@ export const en = {
     buyAfter: "Here’s how buying from us works.",
     buyInstead: ["Buying instead?", "See the collection"] as [string, string],
     sellInstead: ["Selling instead?", "See how selling works"] as [string, string],
+    buy: "Buy",
+    sell: "Sell",
+    valuationCta: "Get a free valuation",
   },
   // The homepage choice (Diamond | Jewellery), then Buy | Sell inside each: four journey pages.
   journeys: {

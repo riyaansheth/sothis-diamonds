@@ -5,11 +5,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Side } from "@/components/HomeChoice";
 import { KindChoice } from "@/components/KindChoice";
-import { BuyJourney, SellJourney, type Kind } from "@/components/home/Journeys";
+import { BuyJourney, SELL_FORM, SellJourney, type Kind } from "@/components/home/Journeys";
 import { JourneyBand } from "@/components/home/JourneyBand";
 import { getDictionary, hasLocale, localePath, locales, type Locale } from "@/lib/i18n";
 
 export const KIND_PATH: Record<Kind, string> = { diamond: "/diamonds/", jewellery: "/jewellery/" };
+// Buy goes straight to the products; the /diamonds/buy/ and /jewellery/buy/ pages stay for search.
+export const SHOP_PATH: Record<Kind, string> = { diamond: "/product-category/diamonds/", jewellery: "/product-category/jewelery/" };
 
 // What floats over each homepage half, then over the seam of its Buy | Sell page.
 export const HOME_PIECES: Record<Kind, Side["piece"]> = { diamond: { cut: "asscher", color: "#ffffff" }, jewellery: { bracelet: "#ffffff" } };
@@ -48,7 +50,7 @@ export function choicePage(kind: Kind) {
             band={{ title: j.title, body: j.body, cta: j.cta, silk: kind === "diamond" ? "buy" : "sell", instead: j.instead, insteadLabel: t.journeys[other].cta, insteadHref: localePath(lang, KIND_PATH[other]) }}
             piece={HOME_PIECES[kind]}
             sides={[
-              { title: j.buy.title, body: j.buy.body, cta: j.buy.cta, href: localePath(lang, `${path}buy/`), silk: "buy" },
+              { title: j.buy.title, body: j.buy.body, cta: j.buy.cta, href: localePath(lang, SHOP_PATH[kind]), silk: "buy" },
               { title: j.sell.title, body: j.sell.body, cta: j.sell.cta, href: localePath(lang, `${path}sell/`), silk: "sell" },
             ]}
           />
@@ -80,7 +82,8 @@ export function journeyPage(kind: Kind, side: "buy" | "sell") {
             title={t.journeys[kind][side].title}
             line={side === "buy" ? t.home.buyAfter : t.home.sellAfter}
             instead={side === "buy" ? t.home.sellInstead : t.home.buyInstead}
-            insteadHref={localePath(lang, other)}
+            insteadHref={localePath(lang, side === "sell" ? other : SHOP_PATH[kind])}
+            action={side === "sell" ? [t.home.valuationCta, localePath(lang, SELL_FORM[kind])] : undefined}
           />
           {side === "buy" ? <BuyJourney lang={lang} kind={kind} /> : <SellJourney lang={lang} kind={kind} />}
         </>

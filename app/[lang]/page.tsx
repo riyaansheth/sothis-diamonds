@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import { HomeChoice, type Side } from "@/components/HomeChoice";
-import { HOME_PIECES, KIND_PATH } from "@/components/home/JourneyPages";
+import { HOME_PIECES, KIND_PATH, SHOP_PATH } from "@/components/home/JourneyPages";
 import { Loader } from "@/components/Loader";
 import { Opening } from "@/components/Opening";
 import { getDictionary, hasLocale, localePath } from "@/lib/i18n";
 
-// The homepage is the opening and the Diamond | Jewellery choice; each side leads to its own Buy | Sell page.
+// The homepage is the opening and the Diamond | Jewellery choice; each side offers Buy (the shop) and Sell (its sell journey).
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
@@ -21,7 +21,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <HomeChoice
         sides={(["diamond", "jewellery"] as const).map((k, i) => {
           const { title, body, cta } = t.journeys[k];
-          return { title, body, cta, href: localePath(lang, KIND_PATH[k]), silk: i ? "sell" : "buy", piece: HOME_PIECES[k] } as const;
+          const links: [string, string][] = [[t.home.buy, localePath(lang, SHOP_PATH[k])], [t.home.sell, localePath(lang, `${KIND_PATH[k]}sell/`)]];
+          return { title, body, cta, href: localePath(lang, KIND_PATH[k]), links, silk: i ? "sell" : "buy", piece: HOME_PIECES[k] } as const;
         }) as [Side, Side]}
       />
     </>

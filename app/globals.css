@@ -305,15 +305,15 @@
 }
 
 /* Buy / sell split: the hovered side widens. */
-.paths > :is(a, button) {
+.paths > :is(a, button, .paths-half) {
   flex: 1 1 0;
   transition: flex-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 @media (min-width: 768px) {
   /* Not on the homepage choice: its split stays centred, and a hover lost under the opening layer
      would slide the halves mid-transition. */
-  :not(.home-choice, .kind-choice) > .paths > :is(a, button):hover,
-  :not(.home-choice, .kind-choice) > .paths > :is(a, button):focus-visible {
+  :not(.home-choice, .kind-choice) > .paths > :is(a, button, .paths-half):hover,
+  :not(.home-choice, .kind-choice) > .paths > :is(a, button, .paths-half):is(:focus-visible, :has(:focus-visible)) {
     flex-grow: 1.55;
   }
 }
@@ -351,17 +351,17 @@
   transform: translate(50vw, 35vh);
   will-change: transform;
 }
-.paths > :is(a, button) {
+.paths > :is(a, button, .paths-half) {
   isolation: isolate;
 }
-.paths > :is(a, button):hover .paths-bg,
-.paths > :is(a, button)[data-hover] .paths-bg,
-.paths > :is(a, button):focus-visible .paths-bg {
+.paths > :is(a, button, .paths-half):hover .paths-bg,
+.paths > :is(a, button, .paths-half)[data-hover] .paths-bg,
+.paths > :is(a, button, .paths-half):is(:focus-visible, :has(:focus-visible)) .paths-bg {
   transform: scale(1.1);
 }
-.paths > :is(a, button):hover .paths-sheen,
-.paths > :is(a, button)[data-hover] .paths-sheen,
-.paths > :is(a, button):focus-visible .paths-sheen {
+.paths > :is(a, button, .paths-half):hover .paths-sheen,
+.paths > :is(a, button, .paths-half)[data-hover] .paths-sheen,
+.paths > :is(a, button, .paths-half):is(:focus-visible, :has(:focus-visible)) .paths-sheen {
   transform: translateX(110%);
   transition: transform 1.4s cubic-bezier(0.3, 0.6, 0.2, 1);
 }
@@ -377,9 +377,9 @@
 .paths-window {
   transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.paths > :is(a, button):hover .paths-window,
-.paths > :is(a, button)[data-hover] .paths-window,
-.paths > :is(a, button):focus-visible .paths-window {
+.paths > :is(a, button, .paths-half):hover .paths-window,
+.paths > :is(a, button, .paths-half)[data-hover] .paths-window,
+.paths > :is(a, button, .paths-half):is(:focus-visible, :has(:focus-visible)) .paths-window {
   transform: scale(1.08);
 }
 
@@ -827,11 +827,11 @@ html[data-returning] :is(.loader-light, .loader-foot) {
   min-height: 100dvh;
   transition: min-height 1s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.home-choice .paths > :is(a, button) {
+.home-choice .paths > :is(a, button, .paths-half) {
   min-height: 50dvh;
 }
 @media (min-width: 768px) {
-  .home-choice .paths > :is(a, button) {
+  .home-choice .paths > :is(a, button, .paths-half) {
     min-height: 0;
   }
 }

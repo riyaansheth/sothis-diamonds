@@ -13,13 +13,15 @@ export type Side = {
   cta: string;
   after?: string;
   href: string;
+  /** Homepage only: Buy and Sell straight from the half ([label, href]), skipping its Buy | Sell page. */
+  links?: [string, string][];
   silk: "buy" | "sell";
   piece: { cut: "asscher" | "round"; color: string } | { bracelet: string };
 };
 
 /**
- * The homepage choice, Diamond | Jewellery, each half a link to its own page. On a plain click the chosen
- * half widens to the whole screen, which is exactly how its page (KindChoice) begins, before settling.
+ * The homepage choice, Diamond | Jewellery, each half offering Buy and Sell. On a plain click the chosen
+ * half widens to the whole screen before its page opens.
  */
 export function HomeChoice({ sides }: { sides: [Side, Side] }) {
   const [open, setOpen] = useState<null | 0 | 1>(null);
@@ -31,7 +33,7 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
     const section = choice.current;
     if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     startLight();
-    const halves = [...section.querySelectorAll<HTMLElement>(".paths > a")].map((h) => ({ h, glow: h.querySelector<HTMLElement>(".paths-glow")! }));
+    const halves = [...section.querySelectorAll<HTMLElement>(".paths > *")].map((h) => ({ h, glow: h.querySelector<HTMLElement>(".paths-glow")! }));
     const at = { x: innerWidth / 2, y: innerHeight * 0.35 };
     let raf = 0;
     const frame = () => {
@@ -69,13 +71,10 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
     const s = sides[side];
     const hidden = open !== null && open !== side;
     return (
-      <Link
-        href={s.href}
-        onClick={choose(side, s.href)}
+      <div
         aria-hidden={hidden || undefined}
-        tabIndex={hidden ? -1 : undefined}
         data-role={open === side ? "chosen" : hidden ? "other" : undefined}
-        className={`${panel} home-${s.silk}`}
+        className={`${panel} paths-half home-${s.silk}`}
       >
         <span aria-hidden className={`paths-bg ${s.silk === "buy" ? "bg-[url(/brand/bg-buy-burgundy.webp)]" : "bg-[url(/brand/bg-sell-black.webp)]"}`} />
         <span aria-hidden className="paths-sheen" />
@@ -90,8 +89,14 @@ export function HomeChoice({ sides }: { sides: [Side, Side] }) {
           <span className={s.after ? "home-before col-start-1 row-start-1" : "col-start-1 row-start-1"}>{s.body}</span>
           {s.after && <span className="home-after col-start-1 row-start-1">{s.after}</span>}
         </span>
-        <span className="home-cta relative mt-8 inline-block self-start border-b border-white/70 pb-1 text-sm tracking-[0.04em] text-burgundy">{s.cta}</span>
-      </Link>
+        <span className="home-cta relative mt-6 flex gap-8">
+          {(s.links ?? [[s.cta, s.href]]).map(([label, to]) => (
+            <Link key={to} href={to} onClick={choose(side, to)} tabIndex={hidden ? -1 : undefined} className="border-b border-white/70 py-2 text-sm tracking-[0.04em] text-burgundy hover:border-burgundy">
+              {label}
+            </Link>
+          ))}
+        </span>
+      </div>
     );
   };
 

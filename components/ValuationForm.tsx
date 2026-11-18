@@ -104,12 +104,11 @@ function fromQuick(item: string | null): { type?: ItemType; piece?: string } {
 }
 
 /**
- * Four-step valuation request: item, type-specific details, up to 7 photos, contact details.
+ * One-page valuation request: item, type-specific details (mostly optional), up to 7 photos, contact details.
  * Draft (not photos) is kept in sessionStorage; posts multipart to /api/valuation/.
  */
 export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lang: string; fixedType?: ItemType; calculator?: C }) {
   const params = useSearchParams();
-  const [step, setStep] = useState(fixedType ? 1 : 0);
   const [values, setValues] = useState<Values>({});
   const [photos, setPhotos] = useState<File[]>([]);
   const [problems, setProblems] = useState<string[]>([]);
@@ -143,7 +142,6 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
     if (params.get("email")) next.email = params.get("email")!;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time restore from browser storage
     setValues(next);
-    if (quick.type && !fixedType) setStep(1);
   }, [params, fixedType]);
 
   // Sell pages show the stone being described beside the form (StoneStage).
@@ -160,22 +158,13 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
     } catch {}
   };
 
-  const goTo = (n: number) => {
-    setProblems([]);
-    setStep(n);
-    top.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   const validate = (): string[] => {
-    if (step === 0 && !type) return [t.itemType];
-    if (step === 1) return fields.filter((f) => f.required && !values[f.name]?.trim()).map(labelOf);
-    if (step === 3) {
-      const miss = (["name", "email", "phone"] as const).filter((k) => !values[k]?.trim()).map((k) => t[k]);
-      if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) miss.push(t.invalidEmail);
-      if (values.consent !== "yes") miss.push(t.consent);
-      return miss;
-    }
-    return [];
+    if (!type) return [t.itemType];
+    const miss = fields.filter((f) => f.required && !values[f.name]?.trim()).map(labelOf);
+    miss.push(...(["name", "email", "phone"] as const).filter((k) => !values[k]?.trim()).map((k) => t[k]));
+    if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) miss.push(t.invalidEmail);
+    if (values.consent !== "yes") miss.push(t.consent);
+    return miss;
   };
 
   const addPhotos = (list: FileList | null) => {
@@ -227,34 +216,17 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
     );
   }
 
-  const next = () => {
-    const miss = validate();
-    if (miss.length) return setProblems(miss);
-    goTo(step + 1);
-  };
-
   return (
     <div ref={top} className="scroll-mt-28">
-      {/* Progress */}
-      <ol className="grid grid-cols-4 gap-2 text-xs" aria-label={t.steps.join(", ")}>
-        {t.steps.map((label, i) => (
-          <li key={label} aria-current={i === step ? "step" : undefined} className={i <= step ? "text-ink" : "text-platinum-2"}>
-            <span className={`mb-2 block h-0.5 ${i <= step ? "bg-wine" : "bg-line"}`} />
-            <span className="hidden sm:inline">{label}</span>
-          </li>
-        ))}
-      </ol>
-
       <form
         noValidate
         onSubmit={(e) => {
           e.preventDefault();
-          if (step < 3) next();
-          else void submit();
+          void submit();
         }}
-        className="mt-8"
+        className="grid gap-12"
       >
-        {step === 0 && (
+        {!fixedType && (
           <fieldset>
             <legend className="font-display text-2xl">{t.itemType}</legend>
             <div className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -268,121 +240,121 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
           </fieldset>
         )}
 
-        {step === 1 && type && (
-          <div className={c ? "grid gap-10 xl:grid-cols-[1fr_15rem]" : ""}>
-            <div className="grid gap-5 sm:grid-cols-2">
-              {fields.map((f) =>
-                f.kind === "colour" ? (
-                  <fieldset key={f.name} className="sm:col-span-2">
-                    <legend className="mb-2 text-sm text-platinum-2">
-                      {labelOf(f)} <span className="text-platinum-2/70">({t.optional})</span>
-                    </legend>
-                    <p className="mb-3 text-xs text-platinum-2">{t.stoneColourHint}</p>
-                    <ColourPicker value={values[f.name] ?? ""} onChange={(hex) => set(f.name, hex)} label={labelOf(f)} clear={t.clearColour} />
-                  </fieldset>
-                ) : f.kind === "chips" ? (
-                  <fieldset key={f.name} className="sm:col-span-2">
-                    <legend className="mb-2 text-sm text-platinum-2">{labelOf(f)}</legend>
-                    {f.name === "colour" && c && (
-                      <p className="mb-2 flex flex-wrap gap-x-4 text-xs text-platinum-2">
-                        {c.colourGroups.map(([range, name]) => <span key={range}>{range}: {name}</span>)}
-                      </p>
-                    )}
-                    <div className="flex flex-wrap gap-2">
-                      {f.options!.map((o, i) => (
-                        <label key={o} title={f.name === "clarity" && c ? c.clarityHelp[o as keyof C["clarityHelp"]] : undefined} className="flex cursor-pointer items-center gap-2 border border-line px-3 py-2 text-sm has-[:checked]:border-wine has-[:checked]:bg-wine has-[:checked]:text-on-accent">
-                          <input type="radio" name={f.name} value={o} checked={values[f.name] === o} onChange={() => set(f.name, o)} className="sr-only" />
-                          {f.name === "colour" && i < 11 && (
-                            // D (white) to N–Z (light yellow), as the grades read to the eye.
-                            <span aria-hidden className="size-3 rounded-full ring-1 ring-line" style={{ background: `hsl(48 ${Math.round((i / 10) * 70)}% ${97 - i * 2}%)` }} />
-                          )}
-                          {o}
-                        </label>
-                      ))}
-                    </div>
-                    {f.name === "clarity" && c && values.clarity && c.clarityHelp[values.clarity as keyof C["clarityHelp"]] && (
-                      <p className="mt-2 text-xs text-platinum-2">{values.clarity}: {c.clarityHelp[values.clarity as keyof C["clarityHelp"]]}</p>
-                    )}
-                  </fieldset>
-                ) : (
-                  <Labeled key={f.name} label={labelOf(f)} required={f.required} t={t}>
-                    {f.kind === "select" ? (
-                      <select className="field" value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} required={f.required}>
-                        <option value="">—</option>
-                        {f.options!.map((o) => <option key={o}>{o}</option>)}
-                      </select>
-                    ) : (
-                      <input
-                        className="field"
-                        type="text"
-                        inputMode={f.kind === "number" ? "decimal" : undefined}
-                        value={values[f.name] ?? ""}
-                        onChange={(e) => set(f.name, e.target.value)}
-                        required={f.required}
-                        maxLength={120}
-                      />
-                    )}
-                  </Labeled>
-                ),
-              )}
-              <div className="sm:col-span-2">
-                <Labeled label={t.fields.notes} t={t}>
-                  <textarea className="field min-h-28 py-3" value={values.notes ?? ""} onChange={(e) => set("notes", e.target.value)} maxLength={2000} />
-                </Labeled>
-              </div>
-            </div>
-
-            {c && (
-              <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
-                <p className="font-display text-xl">{c.summary}</p>
-                <div className="mx-auto mt-4 w-40 xl:w-full">
-                  <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} grades={COLOURS} />
-                </div>
-                {fields.some((f) => values[f.name]) && (
-                  <dl className="mt-4 space-y-2 text-sm">
-                    {fields.filter((f) => values[f.name]).map((f) => (
-                      <div key={f.name} className="flex justify-between gap-4 border-b border-line pb-2">
-                        <dt className="text-platinum-2">{labelOf(f)}</dt>
-                        <dd className="text-right">{f.name === "carat" ? `${values[f.name]} ct` : values[f.name]}</dd>
+        {type && (
+          <Section title={t.steps[1]}>
+            <div className={c ? "grid gap-10 xl:grid-cols-[1fr_15rem]" : ""}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {fields.map((f) =>
+                  f.kind === "colour" ? (
+                    <fieldset key={f.name} className="sm:col-span-2">
+                      <legend className="mb-2 text-sm text-platinum-2">
+                        {labelOf(f)} <span className="text-platinum-2/70">({t.optional})</span>
+                      </legend>
+                      <p className="mb-3 text-xs text-platinum-2">{t.stoneColourHint}</p>
+                      <ColourPicker value={values[f.name] ?? ""} onChange={(hex) => set(f.name, hex)} label={labelOf(f)} clear={t.clearColour} />
+                    </fieldset>
+                  ) : f.kind === "chips" ? (
+                    <fieldset key={f.name} className="sm:col-span-2">
+                      <legend className="mb-2 text-sm text-platinum-2">{labelOf(f)}</legend>
+                      {f.name === "colour" && c && (
+                        <p className="mb-2 flex flex-wrap gap-x-4 text-xs text-platinum-2">
+                          {c.colourGroups.map(([range, name]) => <span key={range}>{range}: {name}</span>)}
+                        </p>
+                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {f.options!.map((o, i) => (
+                          <label key={o} title={f.name === "clarity" && c ? c.clarityHelp[o as keyof C["clarityHelp"]] : undefined} className="flex cursor-pointer items-center gap-2 border border-line px-3 py-2 text-sm has-[:checked]:border-wine has-[:checked]:bg-wine has-[:checked]:text-on-accent">
+                            <input type="radio" name={f.name} value={o} checked={values[f.name] === o} onChange={() => set(f.name, o)} className="sr-only" />
+                            {f.name === "colour" && i < 11 && (
+                              // D (white) to N–Z (light yellow), as the grades read to the eye.
+                              <span aria-hidden className="size-3 rounded-full ring-1 ring-line" style={{ background: `hsl(48 ${Math.round((i / 10) * 70)}% ${97 - i * 2}%)` }} />
+                            )}
+                            {o}
+                          </label>
+                        ))}
                       </div>
-                    ))}
-                  </dl>
+                      {f.name === "clarity" && c && values.clarity && c.clarityHelp[values.clarity as keyof C["clarityHelp"]] && (
+                        <p className="mt-2 text-xs text-platinum-2">{values.clarity}: {c.clarityHelp[values.clarity as keyof C["clarityHelp"]]}</p>
+                      )}
+                    </fieldset>
+                  ) : (
+                    <Labeled key={f.name} label={labelOf(f)} required={f.required} t={t}>
+                      {f.kind === "select" ? (
+                        <select className="field" value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} required={f.required}>
+                          <option value="">—</option>
+                          {f.options!.map((o) => <option key={o}>{o}</option>)}
+                        </select>
+                      ) : (
+                        <input
+                          className="field"
+                          type="text"
+                          inputMode={f.kind === "number" ? "decimal" : undefined}
+                          value={values[f.name] ?? ""}
+                          onChange={(e) => set(f.name, e.target.value)}
+                          required={f.required}
+                          maxLength={120}
+                        />
+                      )}
+                    </Labeled>
+                  ),
                 )}
-              </aside>
-            )}
-          </div>
-        )}
+                <div className="sm:col-span-2">
+                  <Labeled label={t.fields.notes} t={t}>
+                    <textarea className="field min-h-28 py-3" value={values.notes ?? ""} onChange={(e) => set("notes", e.target.value)} maxLength={2000} />
+                  </Labeled>
+                </div>
+              </div>
 
-        {step === 2 && (
-          <div>
-            <p className="text-sm text-platinum-2">{t.photosHint}</p>
-            <div
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => {
-                e.preventDefault();
-                addPhotos(e.dataTransfer.files);
-              }}
-              className="mt-4 grid place-items-center border border-dashed border-line px-6 py-10 text-center"
-            >
-              <input ref={files} type="file" accept={PHOTO_ACCEPT} multiple className="sr-only" onChange={(e) => addPhotos(e.target.files)} />
-              <button type="button" onClick={() => files.current?.click()} className="btn btn-secondary" disabled={photos.length >= MAX_PHOTOS}>
-                {t.addPhotos} ({photos.length}/{MAX_PHOTOS})
-              </button>
+              {c && (
+                <aside aria-live="polite" className="h-fit border border-line bg-ivory p-5 xl:sticky xl:top-28">
+                  <p className="font-display text-xl">{c.summary}</p>
+                  <div className="mx-auto mt-4 w-40 xl:w-full">
+                    <StonePreview shape={values.shape} carat={values.carat} colour={values.colour} hue={values.stoneColour} grades={COLOURS} />
+                  </div>
+                  {fields.some((f) => values[f.name]) && (
+                    <dl className="mt-4 space-y-2 text-sm">
+                      {fields.filter((f) => values[f.name]).map((f) => (
+                        <div key={f.name} className="flex justify-between gap-4 border-b border-line pb-2">
+                          <dt className="text-platinum-2">{labelOf(f)}</dt>
+                          <dd className="text-right">{f.name === "carat" ? `${values[f.name]} ct` : values[f.name]}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                </aside>
+              )}
             </div>
-            {photos.length > 0 && (
-              <ul className="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-7">
-                {photos.map((f, i) => (
-                  <li key={`${f.name}-${i}`} className="relative aspect-square overflow-hidden bg-ivory-deep">
-                    <Thumb file={f} />
-                    <button type="button" aria-label={`${t.removePhoto}: ${f.name}`} onClick={() => setPhotos(photos.filter((_, n) => n !== i))} className="absolute right-1 top-1 grid size-6 place-items-center bg-ivory/90 text-xs">✕</button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          </Section>
         )}
 
-        {step === 3 && (
+        <Section title={t.steps[2]}>
+          <p className="text-sm text-platinum-2">{t.photosHint}</p>
+          <div
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              addPhotos(e.dataTransfer.files);
+            }}
+            className="mt-4 grid place-items-center border border-dashed border-line px-6 py-10 text-center"
+          >
+            <input ref={files} type="file" accept={PHOTO_ACCEPT} multiple className="sr-only" onChange={(e) => addPhotos(e.target.files)} />
+            <button type="button" onClick={() => files.current?.click()} className="btn btn-secondary" disabled={photos.length >= MAX_PHOTOS}>
+              {t.addPhotos} ({photos.length}/{MAX_PHOTOS})
+            </button>
+          </div>
+          {photos.length > 0 && (
+            <ul className="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-7">
+              {photos.map((f, i) => (
+                <li key={`${f.name}-${i}`} className="relative aspect-square overflow-hidden bg-ivory-deep">
+                  <Thumb file={f} />
+                  <button type="button" aria-label={`${t.removePhoto}: ${f.name}`} onClick={() => setPhotos(photos.filter((_, n) => n !== i))} className="absolute right-1 top-1 grid size-6 place-items-center bg-ivory/90 text-xs">✕</button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Section>
+
+        <Section title={t.steps[3]}>
           <div className="grid gap-5 sm:grid-cols-2">
             <Labeled label={t.name} required t={t}><input className="field" autoComplete="name" value={values.name ?? ""} onChange={(e) => set("name", e.target.value)} maxLength={120} /></Labeled>
             <Labeled label={t.email} required t={t}><input className="field" type="email" autoComplete="email" value={values.email ?? ""} onChange={(e) => set("email", e.target.value)} maxLength={160} /></Labeled>
@@ -409,25 +381,31 @@ export function ValuationForm({ t, lang, fixedType, calculator: c }: { t: T; lan
               {t.consent}
             </label>
           </div>
-        )}
+        </Section>
 
         {problems.length > 0 && (
-          <ul role="alert" className="mt-6 space-y-1 border-l-2 border-burgundy pl-4 text-sm text-burgundy">
+          <ul role="alert" className="-mt-6 space-y-1 border-l-2 border-burgundy pl-4 text-sm text-burgundy">
             {problems.map((p) => <li key={p}>{p}</li>)}
           </ul>
         )}
-        {status === "error" && <p role="alert" className="mt-6 text-sm text-burgundy">{t.error.replace("{email}", site.email)}</p>}
+        {status === "error" && <p role="alert" className="-mt-6 text-sm text-burgundy">{t.error.replace("{email}", site.email)}</p>}
 
-        <div className="mt-8 flex items-center gap-3">
-          {step > (fixedType ? 1 : 0) && (
-            <button type="button" onClick={() => goTo(step - 1)} className="btn btn-secondary">{t.back}</button>
-          )}
+        <div>
           <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
-            {step < 3 ? t.next : status === "sending" ? t.sending : (c?.submit ?? t.submit)}
+            {status === "sending" ? t.sending : (c?.submit ?? t.submit)}
           </button>
         </div>
       </form>
     </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section>
+      <h3 className="mb-5 font-display text-2xl">{title}</h3>
+      {children}
+    </section>
   );
 }
 

@@ -20,7 +20,7 @@ export type Kind = "diamond" | "jewellery";
 const isDiamond = (p: Product) => p.categories.includes("Diamonds");
 // Where each kind is sold and bought.
 const SHOP: Record<Kind, string> = { diamond: "/product-category/diamonds/", jewellery: "/product-category/jewelery/" };
-const SELL_FORM: Record<Kind, string> = { diamond: "/sell-diamond/", jewellery: "/sell-other-jewellery/" };
+export const SELL_FORM: Record<Kind, string> = { diamond: "/sell-diamond/", jewellery: "/sell-other-jewellery/" };
 
 // Collection crops: the studio images on silk get a centred square around the stone; real photos a
 // tighter square that stops above their certificate card. Product pages show the full photo.
